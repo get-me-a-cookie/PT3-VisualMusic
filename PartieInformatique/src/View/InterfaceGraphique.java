@@ -81,11 +81,14 @@ public class InterfaceGraphique extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public InterfaceGraphique () {
-
+		
+		//Paramètrage de la fenêtre
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Visuals Music");
 		
+		
+		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
 		this.creationVisualisateur();
@@ -104,7 +107,7 @@ public class InterfaceGraphique extends JFrame {
 	 * Création du l'IG supérieur
 	 * Menu (fichier, ...)
 	 */
-	public void creationMenu() {
+	private void creationMenu() {
 		
 		//Création des éléments
 		bouton = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -128,7 +131,7 @@ public class InterfaceGraphique extends JFrame {
 	 * Création du l'IG inférieur
 	 * Bouton de navigation
 	 */
-	public void creationBouton() {
+	private void creationBouton() {
 		
 		//Création des éléments
 		bouton = new JPanel();
@@ -138,8 +141,6 @@ public class InterfaceGraphique extends JFrame {
 		
 		//Modification des éléments
 		bouton.setBackground(new Color(87, 73, 73, 50));
-		bouton.setPreferredSize(new Dimension(10, 100));
-				//Centrer les bouton verticalement
 		
 		//Ajout des éléments
 		bouton.add(bouton_play);
@@ -151,13 +152,14 @@ public class InterfaceGraphique extends JFrame {
 	 * Création du l'IG centrale
 	 * Affichage des formes
 	 */
-	public void creationVisualisateur() {
+	private void creationVisualisateur() {
 		
 		//Création des éléments
 		visualisateur = new IGAffichage();	
 		
 		//Modification des éléments
-		visualisateur.setPreferredSize(new Dimension(700,400));
+		visualisateur.setPreferredSize(
+				new Dimension(800,450)); //rapport de 16:9
 		
 		//Ajout des éléments
 		
