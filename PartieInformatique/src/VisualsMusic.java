@@ -1,6 +1,6 @@
 import View.InterfaceGraphique;
 
-public class Main {
+public class VisualsMusic {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
