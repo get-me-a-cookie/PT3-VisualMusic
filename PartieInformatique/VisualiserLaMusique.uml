@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_N6_SMO5zEemaMugWAghOSQ" name="VisualiserLaMusique">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_ORfGoO5zEemaMugWAghOSQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_XF7XwO5zEemaMugWAghOSQ" name="Utilisateur"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_iKKhQO5zEemaMugWAghOSQ" name="Logiciel VisualsMusic">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_aReGsO5zEemaMugWAghOSQ" name="Ecouter Musique">
+      <generalization xmi:type="uml:Generalization" xmi:id="_o263sO50EemaMugWAghOSQ" general="_kTtyQO50EemaMugWAghOSQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_bY1-cO5zEemaMugWAghOSQ" name="VisualiserMusique">
+      <generalization xmi:type="uml:Generalization" xmi:id="_pK48kO50EemaMugWAghOSQ" general="_kTtyQO50EemaMugWAghOSQ"/>
+      <include xmi:type="uml:Include" xmi:id="_GHo_wO51EemaMugWAghOSQ" addition="_EZrpIO51EemaMugWAghOSQ"/>
+      <include xmi:type="uml:Include" xmi:id="_GkQDQO51EemaMugWAghOSQ" addition="_FeXZQO51EemaMugWAghOSQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_E9OQgO50EemaMugWAghOSQ" name="Choisir Musique">
+      <generalization xmi:type="uml:Generalization" xmi:id="_R9HOYO50EemaMugWAghOSQ" general="_aReGsO5zEemaMugWAghOSQ"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_TSDBAO50EemaMugWAghOSQ" general="_bY1-cO5zEemaMugWAghOSQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_kTtyQO50EemaMugWAghOSQ" name="AvoirTempsMusique">
+      <include xmi:type="uml:Include" xmi:id="_4MR4IO50EemaMugWAghOSQ" addition="_pgMeMO50EemaMugWAghOSQ"/>
+      <include xmi:type="uml:Include" xmi:id="_46Lf8O50EemaMugWAghOSQ" addition="_qQeEkO50EemaMugWAghOSQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_pgMeMO50EemaMugWAghOSQ" name="Pause"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_qQeEkO50EemaMugWAghOSQ" name="ModificationTemps"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_EZrpIO51EemaMugWAghOSQ" name="2D"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_FeXZQO51EemaMugWAghOSQ" name="3D"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_G63o8O50EemaMugWAghOSQ" memberEnd="_G7Kj4u50EemaMugWAghOSQ _G7de0O50EemaMugWAghOSQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_G7Kj4O50EemaMugWAghOSQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_G7Kj4e50EemaMugWAghOSQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_G7Kj4u50EemaMugWAghOSQ" name="choisir musique" type="_E9OQgO50EemaMugWAghOSQ" association="_G63o8O50EemaMugWAghOSQ"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_G7de0O50EemaMugWAghOSQ" name="utilisateur" type="_XF7XwO5zEemaMugWAghOSQ" association="_G63o8O50EemaMugWAghOSQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_tMs6QO52EemaMugWAghOSQ" name="Controller">
+    <packagedElement xmi:type="uml:Class" xmi:id="_1_aGAO52EemaMugWAghOSQ" name="Clavier">
+      <generalization xmi:type="uml:Generalization" xmi:id="_Cz-rEO5_EemgPsYa4oxO5Q" general="_q9zZwO52EemaMugWAghOSQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zvv24O5-EemgPsYa4oxO5Q" name="keyPressed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_-XU5kO5-EemgPsYa4oxO5Q" name="e" type="_rqMsEO5-EemgPsYa4oxO5Q"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_3Bt3kO52EemaMugWAghOSQ" name="Souris">
+      <generalization xmi:type="uml:Generalization" xmi:id="_ZXDxAO8wEemjJYIjW0ZGQA" general="_q9zZwO52EemaMugWAghOSQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_d7gHcO5-EemgPsYa4oxO5Q" name="mouseClicked" visibility="package">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_l7BiwO5-EemgPsYa4oxO5Q" name="e" type="_oQpWUO5-EemgPsYa4oxO5Q"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BTWfcO53EemaMugWAghOSQ" name="BoutonLecture_Pause">
+      <generalization xmi:type="uml:Generalization" xmi:id="_X28pIO8wEemjJYIjW0ZGQA" general="_q9zZwO52EemaMugWAghOSQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_VStFoO5-EemgPsYa4oxO5Q" name="actionPerformed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_VStFoe5-EemgPsYa4oxO5Q" name="e" type="_v4JXYO53EemaMugWAghOSQ"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Y2VooO53EemaMugWAghOSQ" name="MenuFichier">
+      <generalization xmi:type="uml:Generalization" xmi:id="_Ylvo0O8wEemjJYIjW0ZGQA" general="_q9zZwO52EemaMugWAghOSQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_VfzGcO5-EemgPsYa4oxO5Q" name="actionPerformed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_VfzGce5-EemgPsYa4oxO5Q" name="e" type="_v4JXYO53EemaMugWAghOSQ"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_EFL0QO5_EemgPsYa4oxO5Q" client="_98B-UO52EemaMugWAghOSQ" supplier="_BTWfcO53EemaMugWAghOSQ"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_EyEIYO5_EemgPsYa4oxO5Q" client="_98B-UO52EemaMugWAghOSQ" supplier="_Y2VooO53EemaMugWAghOSQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_v4JXYO53EemaMugWAghOSQ" name="ActionEvent"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_oQpWUO5-EemgPsYa4oxO5Q" name="MouseEvent"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rqMsEO5-EemgPsYa4oxO5Q" name="KeyboardEvent"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_q9zZwO52EemaMugWAghOSQ" name="Controller">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3mY2YO8wEemjJYIjW0ZGQA" name="musique" type="_XcFrYO8rEemuJ8XGuPBVpg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_YS-jQO5_EemgPsYa4oxO5Q" name="View">
+    <packagedElement xmi:type="uml:Class" xmi:id="_gQsAsO5_EemgPsYa4oxO5Q" name="InterfaceGraphique">
+      <generalization xmi:type="uml:Generalization" xmi:id="_8wY7gO5_EemgPsYa4oxO5Q" general="_cIomMO5_EemgPsYa4oxO5Q"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_9x5b0O5_EemgPsYa4oxO5Q" name="igaffichage" type="_y10IwO5_EemgPsYa4oxO5Q" association="_9x2_kO5_EemgPsYa4oxO5Q">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9yEa8O5_EemgPsYa4oxO5Q"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9yEa8e5_EemgPsYa4oxO5Q" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_SGn5Qu6AEemgPsYa4oxO5Q" name="jpanel" type="_CZzbEO6AEemgPsYa4oxO5Q" association="_SGmrIO6AEemgPsYa4oxO5Q">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SGogUO6AEemgPsYa4oxO5Q"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SGogUe6AEemgPsYa4oxO5Q" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZFqH8u6AEemgPsYa4oxO5Q" name="jbutton" type="_DgDRcO6AEemgPsYa4oxO5Q">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZFqvAO6AEemgPsYa4oxO5Q"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZFqvAe6AEemgPsYa4oxO5Q" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_jAgAcu6AEemgPsYa4oxO5Q" name="jmenubar" type="_FwBwAO6AEemgPsYa4oxO5Q" association="_jAeyUO6AEemgPsYa4oxO5Q">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jAgngO6AEemgPsYa4oxO5Q"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jAgnge6AEemgPsYa4oxO5Q" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_VDDUQO8nEemuJ8XGuPBVpg" name="jbutton" type="_DgDRcO6AEemgPsYa4oxO5Q" association="_VCyOgO8nEemuJ8XGuPBVpg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VDD7UO8nEemuJ8XGuPBVpg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VDD7Ue8nEemuJ8XGuPBVpg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_VeodAe8nEemuJ8XGuPBVpg" name="jmenu" type="_E0cRgO6AEemgPsYa4oxO5Q" association="_VenO4O8nEemuJ8XGuPBVpg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VeodAu8nEemuJ8XGuPBVpg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VeodA-8nEemuJ8XGuPBVpg" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_0bf2cO8qEemuJ8XGuPBVpg" name="TAILLE_FENETRE_X" visibility="private" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="__BryAO8qEemuJ8XGuPBVpg" name="TAILLE_FENETRE_Y" visibility="private" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Ayvf8O8rEemuJ8XGuPBVpg" name="MILIEU_FENETRE_X" visibility="private" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_DMK1cO8rEemuJ8XGuPBVpg" name="MILIEU_FENETRE_Y" visibility="private" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iXQroO5_EemgPsYa4oxO5Q" name="InterfaceGraphique"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_luwL4O5_EemgPsYa4oxO5Q" name="creationMenu" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_pVrPQO5_EemgPsYa4oxO5Q" name="creationBouton" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ppx3AO5_EemgPsYa4oxO5Q" name="creationVisualisation" visibility="private"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_y10IwO5_EemgPsYa4oxO5Q" name="IGAffichage">
+      <generalization xmi:type="uml:Generalization" xmi:id="_O5lpYO8sEemuJ8XGuPBVpg" general="_CZzbEO6AEemgPsYa4oxO5Q"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_0JBdEO5_EemgPsYa4oxO5Q" name="paint">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_3u-QEO5_EemgPsYa4oxO5Q" name="g" type="_1RqgIO5_EemgPsYa4oxO5Q"/>
+      </ownedOperation>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_cIomMO5_EemgPsYa4oxO5Q" name="JFrame"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1RqgIO5_EemgPsYa4oxO5Q" name="Graphics"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_9x2_kO5_EemgPsYa4oxO5Q" memberEnd="_9x5b0O5_EemgPsYa4oxO5Q _9yFCAO5_EemgPsYa4oxO5Q">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9x4NsO5_EemgPsYa4oxO5Q" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_9x40wO5_EemgPsYa4oxO5Q" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_9yFCAO5_EemgPsYa4oxO5Q" name="interfacegraphique" type="_gQsAsO5_EemgPsYa4oxO5Q" association="_9x2_kO5_EemgPsYa4oxO5Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_CZzbEO6AEemgPsYa4oxO5Q" name="JPanel"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_DgDRcO6AEemgPsYa4oxO5Q" name="JButton"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_E0cRgO6AEemgPsYa4oxO5Q" name="JMenu"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FwBwAO6AEemgPsYa4oxO5Q" name="JMenuBar"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_SGmrIO6AEemgPsYa4oxO5Q" memberEnd="_SGn5Qu6AEemgPsYa4oxO5Q _SGogUu6AEemgPsYa4oxO5Q">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SGn5QO6AEemgPsYa4oxO5Q" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_SGn5Qe6AEemgPsYa4oxO5Q" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_SGogUu6AEemgPsYa4oxO5Q" name="interfacegraphique" type="_gQsAsO5_EemgPsYa4oxO5Q" association="_SGmrIO6AEemgPsYa4oxO5Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jAeyUO6AEemgPsYa4oxO5Q" memberEnd="_jAgAcu6AEemgPsYa4oxO5Q _jAhOkO6AEemgPsYa4oxO5Q">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jAgAcO6AEemgPsYa4oxO5Q" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_jAgAce6AEemgPsYa4oxO5Q" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_jAhOkO6AEemgPsYa4oxO5Q" name="interfacegraphique" type="_gQsAsO5_EemgPsYa4oxO5Q" association="_jAeyUO6AEemgPsYa4oxO5Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VCyOgO8nEemuJ8XGuPBVpg" memberEnd="_VDDUQO8nEemuJ8XGuPBVpg _VDD7Uu8nEemuJ8XGuPBVpg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VC0DsO8nEemuJ8XGuPBVpg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VC0qwO8nEemuJ8XGuPBVpg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VDD7Uu8nEemuJ8XGuPBVpg" name="interfacegraphique" type="_gQsAsO5_EemgPsYa4oxO5Q" association="_VCyOgO8nEemuJ8XGuPBVpg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VenO4O8nEemuJ8XGuPBVpg" memberEnd="_VeodAe8nEemuJ8XGuPBVpg _VepEEO8nEemuJ8XGuPBVpg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Ven18O8nEemuJ8XGuPBVpg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VeodAO8nEemuJ8XGuPBVpg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VepEEO8nEemuJ8XGuPBVpg" name="interfacegraphique" type="_gQsAsO5_EemgPsYa4oxO5Q" association="_VenO4O8nEemuJ8XGuPBVpg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_UiiEUO8rEemuJ8XGuPBVpg" name="Model">
+    <packagedElement xmi:type="uml:Class" xmi:id="_XcFrYO8rEemuJ8XGuPBVpg" name="Musique">
+      <generalization xmi:type="uml:Generalization" xmi:id="_4TNSYO8rEemuJ8XGuPBVpg" general="_aUA6wO8rEemuJ8XGuPBVpg"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_bmyxQO8rEemuJ8XGuPBVpg" name="frequence" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_i96IwO8rEemuJ8XGuPBVpg" name="temps" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_kdz1QO8rEemuJ8XGuPBVpg" name="calculRatioRectangle"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_aUA6wO8rEemuJ8XGuPBVpg" name="MediaPlayer"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_6O7_QO8rEemuJ8XGuPBVpg" name="VisualsMusic">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_q5iwU-8wEemjJYIjW0ZGQA" name="controller" type="_q9zZwO52EemaMugWAghOSQ" association="_q5iwUO8wEemjJYIjW0ZGQA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_q5iwVO8wEemjJYIjW0ZGQA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_q5iwVe8wEemjJYIjW0ZGQA" value="*"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_7_KmwO8rEemuJ8XGuPBVpg" name="main" isStatic="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_98B-UO52EemaMugWAghOSQ" name="ActionListener"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_ElwsUO8wEemjJYIjW0ZGQA" name="KeyboardListener"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_HSA3MO8wEemjJYIjW0ZGQA" name="MouseListener"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_c2Rp4O8wEemjJYIjW0ZGQA" client="_ElwsUO8wEemjJYIjW0ZGQA" supplier="_1_aGAO52EemaMugWAghOSQ"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_d6EpMO8wEemjJYIjW0ZGQA" client="_HSA3MO8wEemjJYIjW0ZGQA" supplier="_3Bt3kO52EemaMugWAghOSQ"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_q5iwUO8wEemjJYIjW0ZGQA" visibility="package" memberEnd="_q5iwU-8wEemjJYIjW0ZGQA _q5iwVu8wEemjJYIjW0ZGQA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_q5iwUe8wEemjJYIjW0ZGQA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_q5iwUu8wEemjJYIjW0ZGQA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_q5iwVu8wEemjJYIjW0ZGQA" name="visualsmusic" type="_6O7_QO8rEemuJ8XGuPBVpg" association="_q5iwUO8wEemjJYIjW0ZGQA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LAqdwO8xEemjJYIjW0ZGQA"/>
+</uml:Model>
