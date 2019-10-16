@@ -1,5 +1,7 @@
 package Model;
 
-public class Musique {
+import java.applet.Applet;
 
+public class Musique {
+	
 }
