@@ -6,5 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/JMF-2.1.1e/jmf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
