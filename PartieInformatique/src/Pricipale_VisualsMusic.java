@@ -1,4 +1,4 @@
-package View;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +12,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import Controller.Controller_Bouton_LecturePause;
+import Controller.Controller_MenuFichier;
+import Model.Model;
+import View.Vue_GenerationForme;
+
 /** 
  * @author Goodwui
  * Classe représentant l'IG, composé de 
@@ -19,12 +24,15 @@ import javax.swing.JPanel;
  *     - le visualiseur de musique
  *     - les bouton de lectures
  */
-public class InterfaceGraphique extends JFrame {
+public class Pricipale_VisualsMusic extends JFrame {
 
 	///////////////////////////////////////
 	////////////// Attributs //////////////
 	///////////////////////////////////////
 
+	//TODO javadoc
+	Model model;
+	
 	/**
 	 * Bouton permettant de mettre en marche la musique
 	 * S'affiche si la vidéo est en pause
@@ -46,7 +54,7 @@ public class InterfaceGraphique extends JFrame {
 	 * Contiendra les différents boutons de navigation de la musique
 	 * (play, stop, pause, ...)
 	 */
-	private JPanel bouton;
+	private JPanel panel_bouton;
 	
 	/**
 	 * Menu qui permettra d'accéder à toutes les fonctionnalitées de l'application
@@ -65,13 +73,13 @@ public class InterfaceGraphique extends JFrame {
 	 * Actions de @menu_fichier
 	 * Permet d'ouvrir un fichier
 	 */
-	private JMenu menu_fichier_ouvrir;
+	private JMenuItem menu_fichier_ouvrir;
 	
 	/**
 	 * Panneau principale
 	 * Affichera les formes en fonction de la musique
 	 */
-	private IGAffichage visualisateur;
+	private Vue_GenerationForme visualisateur;
 
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
@@ -80,7 +88,10 @@ public class InterfaceGraphique extends JFrame {
 	/**
 	 * Créateur de l'IG toute entière
 	 */
-	public InterfaceGraphique () {
+	public Pricipale_VisualsMusic () {
+		
+		//Création Model
+		Model model = new Model();
 		
 		//Paramètrage de la fenêtre
 		this.setVisible(true);
@@ -95,7 +106,7 @@ public class InterfaceGraphique extends JFrame {
 		
 		
 		//Ajout de tous les éléments
-		this.add(bouton, BorderLayout.SOUTH);
+		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur, BorderLayout.CENTER);
 				
@@ -109,16 +120,17 @@ public class InterfaceGraphique extends JFrame {
 	 */
 	private void creationMenu() {
 		
-		//Création des éléments
-		bouton = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		
+		//Création des éléments		
 		menu = new JMenuBar();
 		
 		menu_fichier = new JMenu("Fichier");
-		menu_fichier_ouvrir = new JMenu("Ouvrir un fichier...");
+		menu_fichier_ouvrir = new JMenuItem("Ouvrir un fichier...");
 		
 		//Modification des éléments
 		menu.setBackground(new Color(206, 213, 209));
+
+		//Ajout des Controller
+		menu_fichier.addMenuListener(new Controller_MenuFichier());
 		
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
@@ -134,17 +146,21 @@ public class InterfaceGraphique extends JFrame {
 	private void creationBouton() {
 		
 		//Création des éléments
-		bouton = new JPanel();
+		panel_bouton = new JPanel();
 		
 		bouton_play = new JButton("Play");
 		bouton_pause = new JButton("Pause");
 		
 		//Modification des éléments
-		bouton.setBackground(new Color(87, 73, 73, 50));
+		panel_bouton.setBackground(new Color(87, 73, 73, 50));
+		
+		//Ajout des Controller
+		bouton_play.addActionListener(new Controller_Bouton_LecturePause());
+		bouton_pause.addActionListener(new Controller_Bouton_LecturePause());
 		
 		//Ajout des éléments
-		bouton.add(bouton_play);
-		bouton.add(bouton_pause);
+		panel_bouton.add(bouton_play);
+		panel_bouton.add(bouton_pause);
 
 	}
 	
@@ -155,7 +171,7 @@ public class InterfaceGraphique extends JFrame {
 	private void creationVisualisateur() {
 		
 		//Création des éléments
-		visualisateur = new IGAffichage();	
+		visualisateur = new Vue_GenerationForme();	
 		
 		//Modification des éléments
 		visualisateur.setPreferredSize(

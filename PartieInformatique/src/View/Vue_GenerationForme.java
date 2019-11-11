@@ -1,7 +1,12 @@
 package View;
 
 import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JPanel;
+
+import Model.Model;
 
 /**
  * 
@@ -9,7 +14,7 @@ import javax.swing.JPanel;
  * Classe représentant le visualisateur de l'IG
  * Affiche des formes géométrique (2D, 3D) en fonction de la musique écouté
  */
-public class IGAffichage extends JPanel {
+public class Vue_GenerationForme extends JPanel implements Observer {
 
 	/**
 	 * Taille Maximale de la fenètre de l'application
@@ -50,6 +55,15 @@ public class IGAffichage extends JPanel {
 		
 		//sert à rien
 		g.drawRect(MILIEU_FENETRE_X, MILIEU_FENETRE_Y-200, 30, 200);
+		
+		//TODO a compléter
+	}
+
+	public void update(Observable m, Object obj) {
+		// TODO Auto-generated method stub
+		
+		Model model = (Model) m;
+		
 	}
 	
 }
