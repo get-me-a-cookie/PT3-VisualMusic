@@ -17,9 +17,11 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		// TODO Auto-generated method stub
 		JButton bouton = (JButton) arg0.getSource();
 		if (bouton.getText().equals("Play")) {
-			model.ouvertureFichier();
-			model.preparationLectureFichier();
 			model.lectureFichier();
+			if (model.getMusique().isPause()) model.getMusique().setPause();
+		}
+		if (bouton.getText().equals("Pause")) {
+			if (!model.getMusique().isPause()) model.getMusique().setPause();
 		}
 	}
 
