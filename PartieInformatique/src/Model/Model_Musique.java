@@ -11,14 +11,13 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+
 public class Model_Musique implements Runnable {
 
 	private SourceDataLine line;
 	private AudioInputStream audioInputStream;	
 	private AudioFormat audioFormat;
 	private boolean pause = false;
-
-	private byte bytes[] = new byte[1024];
 	
 	public boolean initialisation(File file){
 
@@ -49,8 +48,8 @@ public class Model_Musique implements Runnable {
 		return true;
 	} 
 
-	public void run() {
-
+	public void run() {	
+		
 		pause = false;
 		
 		try {
@@ -64,10 +63,11 @@ public class Model_Musique implements Runnable {
 		line.start();
 		
 		try {
-			int bytesRead=0;			
+			byte bytes[] = new byte[1024];
+	 
+			int bytesRead = 0;			
 			while (((bytesRead = audioInputStream.read(bytes, 0, bytes.length)) != -1)
 					&& !pause) {
-				System.out.println(bytes[1]);
 				line.write(bytes, 0, bytesRead);
 			}
 		} 
@@ -77,10 +77,6 @@ public class Model_Musique implements Runnable {
 		}
 		
 		line.close();
-	}
-
-	public int getOneBytes() {
-		return bytes[0];
 	}
 
 	public void setPause() {

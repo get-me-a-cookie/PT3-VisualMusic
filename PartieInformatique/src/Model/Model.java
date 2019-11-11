@@ -14,11 +14,6 @@ public class Model extends Observable {
 
 	//TODO bricolage -> fonctionne pas
 	public void modifier () {
-		int delai = 0;
-		
-		if (bit != musique.getOneBytes() && delai < 3) {
-			delai++;
-		}
 		
 		setChanged();
 		notifyObservers();
