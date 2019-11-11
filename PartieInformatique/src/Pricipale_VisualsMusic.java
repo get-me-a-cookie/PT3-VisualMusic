@@ -89,9 +89,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
-		
+		/* TODO changer le constructeur en main
+		 * 		Mettre les attributs directement dans le main
+		 */
 		//Création Model
-		Model model = new Model();
+		model = new Model();
 		
 		//Paramètrage de la fenêtre
 		this.setVisible(true);
@@ -103,8 +105,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.creationMenu();
 		this.creationBouton();
 		this.creationVisualisateur();
-		
-		
+				
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
@@ -130,7 +131,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		menu.setBackground(new Color(206, 213, 209));
 
 		//Ajout des Controller
-		menu_fichier.addMenuListener(new Controller_MenuFichier());
+		menu_fichier_ouvrir.addActionListener(new Controller_MenuFichier(model));
 		
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
@@ -155,8 +156,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
 		
 		//Ajout des Controller
-		bouton_play.addActionListener(new Controller_Bouton_LecturePause());
-		bouton_pause.addActionListener(new Controller_Bouton_LecturePause());
+		bouton_play.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_pause.addActionListener(new Controller_Bouton_LecturePause(model));
 		
 		//Ajout des éléments
 		panel_bouton.add(bouton_play);
@@ -181,6 +182,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 		
 	}
 	
-
+	public static void main (String[] args) {
+		Pricipale_VisualsMusic easy = new Pricipale_VisualsMusic();
+	}
 	
 }

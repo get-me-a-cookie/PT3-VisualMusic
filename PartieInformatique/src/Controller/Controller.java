@@ -5,6 +5,11 @@ import Model.Model;
 //TODO Javadoc
 public class Controller {
 
-	Model model = new Model();
+	Model model;
+
+	public Controller(Model model) {
+		super();
+		this.model = model;
+	}
 	
 }
