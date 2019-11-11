@@ -28,7 +28,7 @@ public class Controller_MenuFichier extends Controller implements ActionListener
 				model.setFichier(fc.getSelectedFile());
 			}
 			*/
-			model.setFichier(new File("res/son.wav"));	//TODO A supprimer
+		model.setFichier(new File("res/film.wav"));	//TODO A supprimer
 		}
 	}
 }

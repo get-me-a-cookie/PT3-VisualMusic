@@ -39,6 +39,12 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 	 * du milieu de la @TAILLE_FENETRE_Y
 	 */
 	private static int MILIEU_FENETRE_Y = TAILLE_FENETRE_Y / 2;
+
+	//TODO javadoc
+	private static int EPAISSEUR_RECTANGLE = 30;
+	
+	//TODO javadoc
+	private int[] bitDeLecture = new int[18]; //nb de rectangle max sur l'IG
 	
 	/**
 	 * Définition de la méthode paint
@@ -53,17 +59,32 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 				   TAILLE_FENETRE_X - 100, 
 				   MILIEU_FENETRE_Y);
 		
-		//sert à rien
-		g.drawRect(MILIEU_FENETRE_X, MILIEU_FENETRE_Y-200, 30, 200);
-		
+		/* TODO Ne fonctionne pas
+		 * int j = 0;
+		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*8; 
+				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*8; 
+				 i += EPAISSEUR_RECTANGLE) {
+			g.drawRect(i,
+					   MILIEU_FENETRE_Y-bitDeLecture[j]/50*MILIEU_FENETRE_Y,
+					   EPAISSEUR_RECTANGLE,
+					   bitDeLecture[j]/50*MILIEU_FENETRE_Y);
+			j++;
+		}
+		*/
 		//TODO a compléter
 	}
 
 	public void update(Observable m, Object obj) {
 		// TODO Auto-generated method stub
 		
-		Model model = (Model) m;
-		
+		/* TODO Ne fonctionne pas
+		 * Model model = (Model) m;
+		for (int i = 0; i < bitDeLecture.length; i ++) {
+			int bit = model.getMusique().getOneBytes();
+			bitDeLecture[i] = bit < 0 ? -bit: bit; //nb de rectangle max sur l'IG
+			repaint();
+		}
+		*/
 	}
 	
 }

@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_MenuFichier;
 import Model.Model;
+import View.Vue_Erreur;
 import View.Vue_GenerationForme;
 
 /** 
@@ -80,6 +81,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Affichera les formes en fonction de la musique
 	 */
 	private Vue_GenerationForme visualisateur;
+	
+	//TODO javadoc
+	private Vue_Erreur erreur;
 
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
@@ -100,12 +104,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Visuals Music");
 		
-		
 		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
 		this.creationVisualisateur();
-				
+		erreur = new Vue_Erreur();
+		
+		//Ajout des observer
+		model.addObserver(visualisateur);
+		model.addObserver(erreur);
+		
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);

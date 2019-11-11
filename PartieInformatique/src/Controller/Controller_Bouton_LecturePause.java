@@ -14,7 +14,10 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		if (!model.isFileLoaded()) {
+			model.setErreur(true);
+			return;
+		}
 		JButton bouton = (JButton) arg0.getSource();
 		if (bouton.getText().equals("Play")) {
 			model.lectureFichier();
