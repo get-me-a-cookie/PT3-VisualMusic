@@ -31,8 +31,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 	////////////// Attributs //////////////
 	///////////////////////////////////////
 
-	//TODO javadoc
-	Model model;
+	/**
+	 * Model qui sera incérer dans la création des Action
+	 * afin de respecter le modèle MVC
+	 */
+	private Model model;
 	
 	/**
 	 * Bouton permettant de mettre en marche la musique
@@ -82,7 +85,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private Vue_GenerationForme visualisateur;
 	
-	//TODO javadoc
+	/**
+	 * Message d'erreur qui s'affiche quand:
+	 *    - Aucun fichier n'a été sélectionner mais que
+	 *		l'utilisateur essai de le lire
+	 */
 	private Vue_Erreur erreur;
 
 	///////////////////////////////////////
@@ -93,7 +100,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
-		/* TODO changer le constructeur en main
+		/* TODO A voir
+		 * 		changer le constructeur en main
 		 * 		Mettre les attributs directement dans le main
 		 */
 		//Création Model
