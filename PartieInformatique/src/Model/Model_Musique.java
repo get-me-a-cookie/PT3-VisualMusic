@@ -31,15 +31,20 @@ public class Model_Musique implements Runnable {
 	//TODO javadoc
 	private SourceDataLine line;
 	private AudioInputStream audioInputStream;	
-	private AudioFormat audioFormat;
-	
+	private AudioFormat audioFormat; 
+
 	/**
 	 * Définis si la lecture doit être en pause ou non
 	 * true  -> la lecture s'arrète
 	 * false -> la lecture continue/commence
 	 */
 	private boolean pause = true;
-	
+
+	/**
+	 * Définis si un fichier à été chargé et convertis en line
+	 */
+	private boolean load = false;
+
 	/**
 	 * Initialise la lecture de la musique
 	 * 	A éxécuter avant la méthode Thread.start(), sinon erreur
@@ -52,7 +57,6 @@ public class Model_Musique implements Runnable {
 
 		try {
 			audioInputStream = AudioSystem.getAudioInputStream(file);
-
 		} 
 		catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
@@ -64,11 +68,12 @@ public class Model_Musique implements Runnable {
 		}
 
 		audioFormat = audioInputStream.getFormat();
-		
+
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
 
 		try {
 			line = (SourceDataLine) AudioSystem.getLine(info);
+			load = true;
 		} 
 		catch (LineUnavailableException e) {
 			e.printStackTrace();
@@ -86,9 +91,8 @@ public class Model_Musique implements Runnable {
 	 * Enfin quand la lecture et finis, ferme le fichier
 	 */
 	public void run() {	
-		
 		pause = false;
-		
+
 		try {
 			line.open(audioFormat);
 		} 
@@ -96,12 +100,12 @@ public class Model_Musique implements Runnable {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		line.start();
-		
+
 		try {
 			byte bytes[] = new byte[1024];
-	 
+
 			int bytesRead = 0;			
 			while (((bytesRead = audioInputStream.read(bytes, 0, bytes.length)) != -1)
 					&& !pause) {
@@ -112,7 +116,7 @@ public class Model_Musique implements Runnable {
 			io.printStackTrace();
 			return;
 		}
-		
+
 		line.close();
 	}
 
@@ -137,10 +141,17 @@ public class Model_Musique implements Runnable {
 		return pause;
 	}
 
+	/**
+	 * @return the load
+	 */
+	public boolean isLoad() {
+		return load;
+	}
+
 	/*
 	 * public SourceDataLine getLine() {
 		return line;
 	}
-	*/
+	 */
 
 }

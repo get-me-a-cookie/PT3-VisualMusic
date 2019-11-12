@@ -51,14 +51,20 @@ public class Model extends Observable {
 		notifyObservers();
 	}
 
+	//TODO Check pause / mettre pause a true dès le début
 	public void lectureFichier() {
-		if (!musique.isPause())
-			musique.initialisation(fichier);
-
-		//cool du multithreading :)
-		musiqueThread = new Thread(musique);
-		musiqueThread.start();
-		modifier();
+		if (musiqueThread == null || musique.isPause()) {
+			if (!musique.isLoad())
+				musique.initialisation(fichier);
+	
+			//cool du multithreading :)
+			musiqueThread = new Thread(musique);
+			musiqueThread.start();
+			if (Thread.State.TERMINATED == musiqueThread.getState()) {
+				musiqueThread = null;
+				musique.setPause(true);
+			}
+		}
 	}
 
 	public void setFichier(File file) {
