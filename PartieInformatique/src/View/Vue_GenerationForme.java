@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Model.Model;
@@ -39,6 +40,7 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 	 * du milieu de la @TAILLE_FENETRE_Y
 	 */
 	private static int MILIEU_FENETRE_Y = TAILLE_FENETRE_Y / 2;
+	
 	
 	/**
 	 * Définition de la méthode paint
