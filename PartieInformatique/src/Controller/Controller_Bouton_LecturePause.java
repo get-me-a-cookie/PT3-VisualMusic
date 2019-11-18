@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import Model.Model;
+import View.Vue_Pleine_Ecran;
 
 /**
  * 
@@ -16,7 +17,7 @@ import Model.Model;
  * Instancié uniquement pour les boutons Lecture et Pause
  */
 public class Controller_Bouton_LecturePause extends Controller implements ActionListener {
-
+	
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model -> Instanciant le Model
@@ -46,6 +47,9 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		if (bouton.getText().equals("Pause")) {
 			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
 			return;
+		}
+		if(bouton.getText().contentEquals("Stop")) {
+			model.stop();
 		}
 	}
 
