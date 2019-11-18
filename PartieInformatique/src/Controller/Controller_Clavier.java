@@ -5,8 +5,21 @@ import java.awt.event.KeyListener;
 
 import Model.Model;
 
+/**
+ * 
+ * @author goodw
+ *
+ * Classe implémentant KeyListener 
+ * 
+ * Instancié uniquement pour permettre de mettre des racourcis clavier
+ * 	comme presser la touche ESPACE pour mettre en pause/lecture
+ */
 public class Controller_Clavier extends Controller implements KeyListener {
 
+	/**
+	 * Constructeur utilisant le Constructeur Parent
+	 * @param model -> Instanciant le Model
+	 */
 	public Controller_Clavier(Model model) {
 		super(model);
 	}

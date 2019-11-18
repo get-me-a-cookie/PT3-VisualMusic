@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_MenuFichier;
 import Model.Model;
+import View.Vue_Erreur;
 import View.Vue_GenerationForme;
 import View.Vue_Pleine_Ecran;
 
@@ -31,8 +32,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 	////////////// Attributs //////////////
 	///////////////////////////////////////
 
-	//TODO javadoc
-	Model model;
+	/**
+	 * Model qui sera incérer dans la création des Action
+	 * afin de respecter le modèle MVC
+	 */
+	private Model model;
 	
 	/**
 	 * Bouton permettant de mettre en marche la musique
@@ -82,6 +86,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private Vue_GenerationForme visualisateur;
 	
+	/**
+	 * Message d'erreur qui s'affiche quand:
+	 *    - Aucun fichier n'a été sélectionner mais que
+	 *		l'utilisateur essai de le lire
+	 */
+	private Vue_Erreur erreur;
 
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
@@ -91,7 +101,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
-		/* TODO changer le constructeur en main
+		/* TODO A voir
+		 * 		changer le constructeur en main
 		 * 		Mettre les attributs directement dans le main
 		 */
 		//Création Model
@@ -102,12 +113,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Visuals Music");
 		
-		
 		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
 		this.creationVisualisateur();
-				
+		erreur = new Vue_Erreur();
+		
+		//Ajout des observer
+		model.addObserver(visualisateur);
+		model.addObserver(erreur);
+		
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
