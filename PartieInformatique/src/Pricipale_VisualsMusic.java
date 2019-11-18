@@ -17,6 +17,7 @@ import Controller.Controller_MenuFichier;
 import Model.Model;
 import View.Vue_Erreur;
 import View.Vue_GenerationForme;
+import View.Vue_Pleine_Ecran;
 
 /** 
  * @author Goodwui
@@ -49,9 +50,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */	
 	private JButton bouton_pause;
 	
-	//private JButton bouton_stop;
+	private JButton bouton_stop;
 	//private JButton bouton_volume;
-	//private JButton bouton_pleinEcran;
+	private JButton bouton_pleinEcran;
 		
 	/**
 	 * Bandeau inférieur de l'IG
@@ -126,6 +127,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur, BorderLayout.CENTER);
+		//this.add(pleine_ecran);
 				
 		this.pack();
 		
@@ -166,18 +168,24 @@ public class Pricipale_VisualsMusic extends JFrame {
 		panel_bouton = new JPanel();
 		
 		bouton_play = new JButton("Play");
-		bouton_pause = new JButton("Pause");
+		bouton_stop = new JButton("Stop");
+		bouton_pleinEcran = new JButton("Ecran");
 		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
+		bouton_play.setPreferredSize(new Dimension(100,50));
+		bouton_stop.setPreferredSize(new Dimension(100,50));
+		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 		
 		//Ajout des Controller
 		bouton_play.addActionListener(new Controller_Bouton_LecturePause(model));
-		bouton_pause.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model));
 		
 		//Ajout des éléments
 		panel_bouton.add(bouton_play);
-		panel_bouton.add(bouton_pause);
+		panel_bouton.add(bouton_stop);
+		panel_bouton.add(bouton_pleinEcran);
 
 	}
 	
@@ -199,7 +207,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 	}
 	
 	public static void main (String[] args) {
-		Pricipale_VisualsMusic easy = new Pricipale_VisualsMusic();
+		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
+	
 	}
 	
 }

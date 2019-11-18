@@ -36,6 +36,9 @@ public class Model extends Observable {
 	 */
 	private Thread musiqueThread;
 	
+	//TODO javadoc
+	private boolean enCours;
+	
 	/**
 	 * Définis si le programme a rencontré une erreur
 	 * 0 -> aucune erreur
@@ -73,6 +76,10 @@ public class Model extends Observable {
 
 	public Model_Musique getMusique() {
 		return musique;
+	}
+	
+	public void stop() {
+		musique.reset();
 	}
 
 	public boolean isFileLoaded() {

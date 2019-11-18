@@ -107,9 +107,11 @@ public class Model_Musique implements Runnable {
 			byte bytes[] = new byte[1024];
 
 			int bytesRead = 0;			
-			while (((bytesRead = audioInputStream.read(bytes, 0, bytes.length)) != -1)
-					&& !pause) {
-				line.write(bytes, 0, bytesRead);
+			while (!pause) {
+				bytesRead = audioInputStream.read(bytes, 0, bytes.length);
+				if (bytesRead != -1) {
+					line.write(bytes, 0, bytesRead);
+				}
 			}
 		} 
 		catch (IOException io) {
@@ -119,7 +121,7 @@ public class Model_Musique implements Runnable {
 
 		line.close();
 	}
-
+	
 	/**
 	 * Permet de mettre en pause ou en lecture
 	 * 
@@ -140,18 +142,69 @@ public class Model_Musique implements Runnable {
 	public boolean isPause() {
 		return pause;
 	}
-
+	
 	/**
 	 * @return the load
 	 */
 	public boolean isLoad() {
 		return load;
 	}
-
+	
+	public void reset() {
+		pause = true;
+		audioFormat = null;
+		audioInputStream = null;
+		line.close();
+		line = null;
+		load = false;
+	}
+	
 	/*
-	 * public SourceDataLine getLine() {
+	 public SourceDataLine getLine() {
 		return line;
 	}
-	 */
-
+	*/
+	
+	/* Transformation de Fourier */
+	public static double[][] TransformationFourier( double[][] tableau) {
+		/* Longueur de notre signal doit être un multiple de 2*/
+		int longueurSignal = tableau.length;
+		
+		/* fin de l'appel récursif */
+		double[][] tampon = new double [longueurSignal][1];
+				if (longueurSignal==1) return tampon;
+		
+		/* Préparation des données pour faire Fourier */
+		int longueurSignalDiviser2 = longueurSignal/2;
+		double[][] transformationFourier = new double[longueurSignal][2];
+		
+		/* Déclaration des tableaux double avec leur taille */
+		double[][] pair = new double[longueurSignalDiviser2][2];
+		double[][] impair = new double[longueurSignalDiviser2][2];	
+		
+		/* Coupe le signal en termes d'indices pairs et impairs */
+		for(int i=0; i < longueurSignalDiviser2; i++) {
+			pair[i] = tableau[2*i];
+			impair[i] = tableau[2*i+1];
+			
+		}
+		
+		/* Calcul recursif de la fonction */
+		pair = 	TransformationFourier(pair);
+		impair = 	TransformationFourier(impair);
+			
+		/* Reconstruction des valeurs par Fourier */
+		for(int i = 0; i < longueurSignal; i++) {
+			transformationFourier[i][0] = pair[i%longueurSignalDiviser2][0] 
+					+ impair[i%longueurSignalDiviser2][0]*Math.cos(2*Math.PI*i/longueurSignal) 
+					 + impair[i%longueurSignalDiviser2][1]*Math.sin(2*Math.PI*i/longueurSignal);
+			
+			transformationFourier[i][1] = pair[i%longueurSignalDiviser2][1] 
+					+ impair[i%longueurSignalDiviser2][1]*Math.cos(2*Math.PI*i/longueurSignal) 
+					 - impair[i%longueurSignalDiviser2][0]*Math.sin(2*Math.PI*i/longueurSignal);
+		}
+		return transformationFourier;
+				
+		}
+	
 }
