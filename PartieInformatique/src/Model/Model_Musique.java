@@ -151,12 +151,12 @@ public class Model_Musique implements Runnable {
 	}
 	
 	public void reset() {
+		pause = true;
 		audioFormat = null;
 		audioInputStream = null;
 		line.close();
 		line = null;
 		load = false;
-		pause = true;
 	}
 	
 	/*

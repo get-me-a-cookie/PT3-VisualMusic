@@ -168,22 +168,22 @@ public class Pricipale_VisualsMusic extends JFrame {
 		panel_bouton = new JPanel();
 		
 		bouton_play = new JButton("Play");
-		bouton_pause = new JButton("Pause");
 		bouton_stop = new JButton("Stop");
 		bouton_pleinEcran = new JButton("Ecran");
 		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
+		bouton_play.setPreferredSize(new Dimension(100,50));
+		bouton_stop.setPreferredSize(new Dimension(100,50));
+		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 		
 		//Ajout des Controller
 		bouton_play.addActionListener(new Controller_Bouton_LecturePause(model));
-		bouton_pause.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model));
 		
 		//Ajout des éléments
 		panel_bouton.add(bouton_play);
-		panel_bouton.add(bouton_pause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
 

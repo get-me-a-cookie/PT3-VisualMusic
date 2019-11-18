@@ -40,11 +40,13 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		}
 		JButton bouton = (JButton) arg0.getSource();
 		if (bouton.getText().equals("Play")) {
+			bouton.setText("Pause");
 			model.lectureFichier();
 			if (model.getMusique().isPause()) model.getMusique().setPause(false);
 			return;
 		}
 		if (bouton.getText().equals("Pause")) {
+			bouton.setText("Play");
 			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
 			return;
 		}
