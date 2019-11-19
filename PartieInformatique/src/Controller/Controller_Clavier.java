@@ -18,7 +18,7 @@ public class Controller_Clavier extends Controller implements KeyListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model -> Instanciant le Model
+	 * @param model : Instanciant le Model
 	 */
 	public Controller_Clavier(Model model) {
 		super(model);

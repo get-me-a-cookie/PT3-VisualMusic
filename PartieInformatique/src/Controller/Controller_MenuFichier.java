@@ -25,7 +25,7 @@ public class Controller_MenuFichier extends Controller implements ActionListener
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model -> Instanciant le Model
+	 * @param model : Instanciant le Model
 	 */
 	public Controller_MenuFichier(Model model) {
 		super(model);

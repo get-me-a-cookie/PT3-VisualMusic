@@ -41,13 +41,13 @@ public class Model extends Observable {
 	
 	/**
 	 * Définis si le programme a rencontré une erreur
-	 * 0 -> aucune erreur
-	 * 1 -> erreur de type ""
+	 * 0 : aucune erreur
+	 * 1 : erreur de type ""
 	 */
 	private int erreur = 0;
 	private int bit;
 
-	//TODO bricolage -> fonctionne pas
+	//TODO bricolage : fonctionne pas
 	public void modifier () {
 		
 		setChanged();

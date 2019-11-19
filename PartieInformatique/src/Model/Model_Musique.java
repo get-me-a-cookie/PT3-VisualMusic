@@ -35,8 +35,8 @@ public class Model_Musique implements Runnable {
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
-	 * true  -> la lecture s'arrète
-	 * false -> la lecture continue/commence
+	 * true  : la lecture s'arrète
+	 * false : la lecture continue/commence
 	 */
 	private boolean pause = true;
 
@@ -49,7 +49,7 @@ public class Model_Musique implements Runnable {
 	 * Initialise la lecture de la musique
 	 * 	A éxécuter avant la méthode Thread.start(), sinon erreur
 	 * 
-	 * @param file -> le fichier audio a ouvrir
+	 * @param file : le fichier audio a ouvrir
 	 * @return un boolean, afin de voir si la préparation
 	 * 	c'est bien passé
 	 */
@@ -125,8 +125,9 @@ public class Model_Musique implements Runnable {
 	/**
 	 * Permet de mettre en pause ou en lecture
 	 * 
-	 * true  -> sera mis en pause
-	 * false -> sera mis en lecture
+	 * @param b
+	 * true  : sera mis en pause
+	 * false : sera mis en lecture
 	 */
 	public void setPause(boolean b) {
 		this.pause = b;
@@ -136,8 +137,8 @@ public class Model_Musique implements Runnable {
 	 * Informe de l'état de la pause
 	 * 
 	 * @return un boolean informant de l'état de la pause
-	 * true  -> fichier en pause
-	 * false -> fichier en lecture
+	 * true  : fichier en pause
+	 * false : fichier en lecture
 	 */
 	public boolean isPause() {
 		return pause;

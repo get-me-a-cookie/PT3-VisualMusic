@@ -23,7 +23,7 @@ public abstract class Controller {
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
 	 * 	structure MVC
-	 * @param model -> Instanciant le Model
+	 * @param model : Instanciant le Model
 	 */
 	public Controller(Model model) {
 		super();
