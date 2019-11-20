@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.Toolkit;
 
@@ -111,7 +112,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		model = new Model();
 
 		//Paramètrage de la fenêtre
-		this.FullScreen();
+		this.fullScreen();
 
 		//Création des éléments 
 		this.creationMenu();
@@ -130,7 +131,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(visualisateur2D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 
-		this.pack();
+		//this.pack();
 
 	}
 
@@ -214,14 +215,13 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Création de la fênetre à dimension normale
 	 *  et FullEcran selon une boolean 
 	 */
-	public void FullScreen() {
+	public void fullScreen() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
 		int height = tailleEcran.height;
 		int width = tailleEcran.width;
 		
 		if(!pleine_ecran) {
-			this.setTitle("Visuals Music");
 			pleine_ecran = false;
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -229,16 +229,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 			this.setSize(width/2, height/2);
 			this.setLocationRelativeTo(null);
 			this.setVisible(true);
+			this.pack();
 		}
 		else {
-			this.revalidate();
 			pleine_ecran = true;
-			this.setTitle("Visuals Music");
 			this.setExtendedState(this.MAXIMIZED_BOTH);
 			this.setVisible(true);
-			this.pack();
-
 		}
+		this.setTitle("Visuals Music");
 	}
 
 	public static void main (String[] args) {
