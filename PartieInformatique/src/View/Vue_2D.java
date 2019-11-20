@@ -44,7 +44,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE = 30;	
+	private static int EPAISSEUR_RECTANGLE = 90;	
 	
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
@@ -70,10 +70,13 @@ public class Vue_2D extends JPanel implements Observer {
 		// TODO Ne fonctionne pas
 		//Décalement vers gauche
 		int j = 0;
-		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*8; 
-				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*8; 
+		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
+				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				 i += EPAISSEUR_RECTANGLE) {
-			g.drawRect(i,
+			System.out.println(i);
+			System.out.println(j);
+			if (ratioFrequence[j] != 0)
+				g.drawRect(i,
 					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
 					   EPAISSEUR_RECTANGLE,
 					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
@@ -90,13 +93,14 @@ public class Vue_2D extends JPanel implements Observer {
 		
 		for (int index = 0; index < ratioFrequence.length; index ++) {
 			try {
-				ratioFrequence[index] = ratioFrequence[index + 1];
+				//if (ratioFrequence[index] != 0)
+					ratioFrequence[index] = ratioFrequence[index + 1];
 			}
 			catch (IndexOutOfBoundsException e) {
 				ratioFrequence[index] = model.getRatioFrequence();
 			}
 		}
-		
+		validate();
 		repaint();
 		/*for (int i = 0; i < bitDeLecture.length; i ++) {
 			int bit = model.getMusique().getOneBytes();

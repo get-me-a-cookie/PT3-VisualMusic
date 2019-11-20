@@ -111,12 +111,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Création Model
 		model = new Model();
 
-		//Paramètrage de la fenêtre
-		this.fullScreen();
-		this.setTitle("Visuals Music");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-
 		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
@@ -133,7 +127,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur2D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
-
+		
+		//Paramètrage de la fenêtre
+		this.fullScreen();
+		this.setTitle("Visuals Music");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 		this.pack();
 
 	}

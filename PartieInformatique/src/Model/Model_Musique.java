@@ -2,6 +2,7 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -28,8 +29,11 @@ import flanagan.math.FourierTransform;
  * 
  * Cette classe conserne uniquement la lecture de la musique à partir
  * 	d'un fichier audio composé uniquement de données brutes
+ * 
+ * Hérite de Observable afin de pouvoir notifié les observer de Model
+ * 	quand la fréquence change
  */
-public class Model_Musique implements Runnable {
+public class Model_Musique extends Observable implements Runnable {
 
 	//TODO voir pour pré-load la musique
 	
@@ -76,6 +80,15 @@ public class Model_Musique implements Runnable {
 	 * Définis si un fichier à été chargé et convertis en line
 	 */
 	private boolean load = false;
+
+	/**
+	 * ajoute le model en observer afin de pouvoir actualiser
+	 * l'affichage dès un changement de fréquence
+	 */
+	public Model_Musique(Model m) {
+		super();
+		this.addObserver(m);
+	}
 
 	/**
 	 * Initialise la lecture de la musique
@@ -161,6 +174,9 @@ public class Model_Musique implements Runnable {
 						frequence = frequence + Math.abs(tableau_complexe_temporaire[variable_temporaire].getReal());
 					}
 					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
+					System.out.println(frequence);
+					setChanged();
+					notifyObservers();
 					line.write(bytes, 0, bytesRead);
 				}
 				else break;

@@ -3,6 +3,7 @@ package Model;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
+import java.util.Observer;
 
 //TODO Javadoc, contenu
 /** 
@@ -18,7 +19,7 @@ import java.util.Observable;
  * 	programme
  * 	Elle informe également les Vue
  */
-public class Model extends Observable {
+public class Model extends Observable implements Observer {
 
 	/**
 	 * Fichier qui sera écouté
@@ -29,7 +30,7 @@ public class Model extends Observable {
 	 * Classe de type Model, connu et instancié uniquement ici
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 */
-	private Model_Musique musique = new Model_Musique();
+	private Model_Musique musique = new Model_Musique(this);
 	
 	/**
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
@@ -48,13 +49,6 @@ public class Model extends Observable {
 	private IOException erreur = null;
 	private int bit;
 
-	//TODO bricolage : fonctionne pas
-	public void modifier () {
-		
-		setChanged();
-		notifyObservers();
-	}
-
 	//TODO Check pause / mettre pause a true dès le début
 	public void lectureFichier() {
 		if (musiqueThread == null || musique.isPause()) {
@@ -65,10 +59,13 @@ public class Model extends Observable {
 			musiqueThread = new Thread(musique);
 			musiqueThread.start();
 			//modifier();
+			/*Je crois on peux delte TODO
 			if (Thread.State.TERMINATED == musiqueThread.getState()) {
+			 
 				musiqueThread = null;
 				musique.setPause(true);
 			}
+			*/
 		}
 	}
 
@@ -111,5 +108,10 @@ public class Model extends Observable {
 		double freq = 0;
 		freq = musique.getFrequence()/musique.getAudioFormat().getFrameRate();
 		return freq;
+	}
+
+	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers();
 	}
 }
