@@ -11,6 +11,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import flanagan.complex.Complex;
+import flanagan.math.FourierTransform;
+
 /** 
  * 
  * @author goodw
@@ -28,10 +31,39 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Model_Musique implements Runnable {
 
-	//TODO javadoc
+	//TODO voir pour pré-load la musique
+	
+	/**
+	 * Ligne permettant l'écoute audio
+	 * Sort en son, ce qu'il y a écrit dedans
+	 */
 	private SourceDataLine line;
-	private AudioInputStream audioInputStream;	
+	
+	/**
+	 * Sert à transformer le fichier ouvert en 
+	 * fichier ouvert à la lecture multimédia
+	 * 
+	 * Courant d'entrée audio
+	 */
+	private AudioInputStream audioInputStream;
+	
+	/**
+	 * Réfère tous les champs spécifique qu format audio
+	 */
 	private AudioFormat audioFormat; 
+	
+	/**
+	 * Stock les fréquences des octects lus lors 
+	 * de l'écoute de la musique
+	 */
+	private double freq;
+	
+	/**
+	 * Tranformé rapide de Fourrier
+	 * Sert à passer du signal temporel de la musique
+	 * au spectre fréquentiel
+	 */
+	private FourierTransform FFT = new FourierTransform();
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
@@ -104,14 +136,27 @@ public class Model_Musique implements Runnable {
 		line.start();
 
 		try {
-			byte bytes[] = new byte[1024];
-
+			//TODO rendre le truc bien pour tout format de musique
+			//Freq diff
+			//encodage diff
+			byte bytes[] = new byte[32768];	//32 * 1024
+			
 			int bytesRead = 0;			
 			while (!pause) {
 				bytesRead = audioInputStream.read(bytes, 0, bytes.length);
-				if (bytesRead != -1) {
+				if (bytesRead != -1) {	//si il y a des octets lus
+					Complex[] comp = new Complex[bytesRead];	//taille = nb de bytes lus
+					for (int variable_temporaire = 0; 
+							variable_temporaire < bytesRead;
+							variable_temporaire ++) {
+						comp[variable_temporaire] = new Complex(bytes[variable_temporaire]);
+					}
+					FFT.setData(comp);
+					FFT.transform();
+					freq = Math.abs(FFT.getTransformedDataAsComplex()[0].getReal()); //valeur absolue
 					line.write(bytes, 0, bytesRead);
 				}
+				else break;
 			}
 		} 
 		catch (IOException io) {
@@ -151,6 +196,11 @@ public class Model_Musique implements Runnable {
 		return load;
 	}
 	
+	/**
+	 * Remet tous les argument à null
+	 * Afin de remettre à zéro lorsque l'utilisateur
+	 * presse "stop" par exemple
+	 */
 	public void reset() {
 		pause = true;
 		audioFormat = null;
@@ -165,47 +215,4 @@ public class Model_Musique implements Runnable {
 		return line;
 	}
 	*/
-	
-	/* Transformation de Fourier */
-	public static double[][] TransformationFourier( double[][] tableau) {
-		/* Longueur de notre signal doit être un multiple de 2*/
-		int longueurSignal = tableau.length;
-		
-		/* fin de l'appel récursif */
-		double[][] tampon = new double [longueurSignal][1];
-				if (longueurSignal==1) return tampon;
-		
-		/* Préparation des données pour faire Fourier */
-		int longueurSignalDiviser2 = longueurSignal/2;
-		double[][] transformationFourier = new double[longueurSignal][2];
-		
-		/* Déclaration des tableaux double avec leur taille */
-		double[][] pair = new double[longueurSignalDiviser2][2];
-		double[][] impair = new double[longueurSignalDiviser2][2];	
-		
-		/* Coupe le signal en termes d'indices pairs et impairs */
-		for(int i=0; i < longueurSignalDiviser2; i++) {
-			pair[i] = tableau[2*i];
-			impair[i] = tableau[2*i+1];
-			
-		}
-		
-		/* Calcul recursif de la fonction */
-		pair = 	TransformationFourier(pair);
-		impair = 	TransformationFourier(impair);
-			
-		/* Reconstruction des valeurs par Fourier */
-		for(int i = 0; i < longueurSignal; i++) {
-			transformationFourier[i][0] = pair[i%longueurSignalDiviser2][0] 
-					+ impair[i%longueurSignalDiviser2][0]*Math.cos(2*Math.PI*i/longueurSignal) 
-					 + impair[i%longueurSignalDiviser2][1]*Math.sin(2*Math.PI*i/longueurSignal);
-			
-			transformationFourier[i][1] = pair[i%longueurSignalDiviser2][1] 
-					+ impair[i%longueurSignalDiviser2][1]*Math.cos(2*Math.PI*i/longueurSignal) 
-					 - impair[i%longueurSignalDiviser2][0]*Math.sin(2*Math.PI*i/longueurSignal);
-		}
-		return transformationFourier;
-				
-		}
-	
 }

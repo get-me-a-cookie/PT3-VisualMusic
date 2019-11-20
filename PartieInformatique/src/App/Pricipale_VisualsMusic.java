@@ -43,13 +43,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Bouton permettant de mettre en marche la musique
 	 * S'affiche si la vidéo est en pause
 	 */	
-	private JButton bouton_play;
-	
-	/**
-	 * Bouton permettant de mettre en pause la musique
-	 * S'affiche si la vidéo est en lecture
-	 */	
-	private JButton bouton_pause;
+	private JButton bouton_playPause;
 	
 	private JButton bouton_stop;
 	//private JButton bouton_volume;
@@ -168,23 +162,23 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Création des éléments
 		panel_bouton = new JPanel();
 		
-		bouton_play = new JButton("Play");
+		bouton_playPause = new JButton("Play");
 		bouton_stop = new JButton("Stop");
 		bouton_pleinEcran = new JButton("Ecran");
 		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
-		bouton_play.setPreferredSize(new Dimension(100,50));
+		bouton_playPause.setPreferredSize(new Dimension(100,50));
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 		
 		//Ajout des Controller
-		bouton_play.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model));
 		
 		//Ajout des éléments
-		panel_bouton.add(bouton_play);
+		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
 
