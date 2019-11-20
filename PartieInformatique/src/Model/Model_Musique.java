@@ -150,17 +150,17 @@ public class Model_Musique implements Runnable {
 	public boolean isLoad() {
 		return load;
 	}
-	/**
-	 * TODO
-	 * Lorsque l'on appuie deux fois sur stop -> Erreur
-	 */
+	
+	/* Méthode qui réinitialise la musique du début  */
 	public void reset() {
-		pause = true;
-		audioFormat = null;
-		audioInputStream = null;
-		line.close();
-		line = null;
-		load = false;
+		if(!pause) {
+			pause = true;
+			audioFormat = null;
+			audioInputStream = null;
+			line.close();
+			line = null;
+			load = false;
+		}
 	}
 	
 	/*
