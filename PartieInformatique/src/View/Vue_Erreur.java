@@ -1,5 +1,6 @@
 package View;
 
+import java.io.FileNotFoundException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,7 +13,7 @@ public class Vue_Erreur extends JOptionPane implements Observer {
 
 	public void update(Observable m, Object arg1) {
 		Model model = (Model) m;
-		if (model.getErreur() == 1) JOptionPane.showMessageDialog(null, 
+		if (model.getErreur() instanceof FileNotFoundException) JOptionPane.showMessageDialog(null, 
 				"Désolé mais notre hamster s'est perdu, ... \n\nAucun fichier n'a été ouvert !!", 
 				"Aucun fichier ouvert !!", ERROR_MESSAGE);
 	}
