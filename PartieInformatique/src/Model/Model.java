@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 
 //TODO Javadoc, contenu
@@ -44,7 +45,7 @@ public class Model extends Observable {
 	 * 0 : aucune erreur
 	 * 1 : erreur de type ""
 	 */
-	private int erreur = 0;
+	private IOException erreur = null;
 	private int bit;
 
 	//TODO bricolage : fonctionne pas
@@ -87,19 +88,27 @@ public class Model extends Observable {
 		return true;
 	}
 
-	public void setErreur(int b) {
-		/* TODO A voir si on peux enlever le paramètre et juste faire
-		 * erreur = true;
-		 * Notify.......
-		 * erreur = false;
-		 */
-		erreur  = b;
+	public void setErreur(IOException e) {
+		erreur  = e;
 		setChanged();
 		notifyObservers();
-		erreur = 0;
+		erreur = null;
 	}
 
-	public int getErreur() {
+	/**
+	 * @return le type d'une erreur si elle existe
+	 */
+	public IOException getErreur() {
 		return erreur;
+	}
+	
+	/**
+	 * @return le ration de la fréquense actuel
+	 * par rapport à celle du fichier
+	 */
+	public double getRatioFrequence() {
+		double freq = 0;
+		freq = musique.getFrequence()/musique.getAudioFormat().getFrameRate();
+		return freq;
 	}
 }

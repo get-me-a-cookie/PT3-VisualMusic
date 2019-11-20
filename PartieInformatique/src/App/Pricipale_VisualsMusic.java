@@ -16,8 +16,9 @@ import javax.swing.JPanel;
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_MenuFichier;
 import Model.Model;
+import View.Vue_2D;
+import View.Vue_3D;
 import View.Vue_Erreur;
-import View.Vue_GenerationForme;
 import View.Vue_Pleine_Ecran;
 
 /** 
@@ -77,9 +78,15 @@ public class Pricipale_VisualsMusic extends JFrame {
 	
 	/**
 	 * Panneau principale
-	 * Affichera les formes en fonction de la musique
+	 * Affichera les formes 2D en fonction de la musique
 	 */
-	private Vue_GenerationForme visualisateur;
+	private Vue_2D visualisateur2D;
+	
+	/**
+	 * Panneau principale
+	 * Affichera les formes 3D en fonction de la musique
+	 */
+	private Vue_3D visualisateur3D;
 	
 	/**
 	 * Message d'erreur qui s'affiche quand:
@@ -115,13 +122,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		erreur = new Vue_Erreur();
 		
 		//Ajout des observer
-		model.addObserver(visualisateur);
+		model.addObserver(visualisateur2D);
+		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
 		
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
-		this.add(visualisateur, BorderLayout.CENTER);
+		this.add(visualisateur2D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 				
 		this.pack();
@@ -191,10 +199,13 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private void creationVisualisateur() {
 		
 		//Création des éléments
-		visualisateur = new Vue_GenerationForme();	
+		visualisateur2D = new Vue_2D();	
+		visualisateur3D = new Vue_3D();	
 		
 		//Modification des éléments
-		visualisateur.setPreferredSize(
+		visualisateur2D.setPreferredSize(
+				new Dimension(800,450)); //rapport de 16:9
+		visualisateur3D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
 		
 		//Ajout des éléments

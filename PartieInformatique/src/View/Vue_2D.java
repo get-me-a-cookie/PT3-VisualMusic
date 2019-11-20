@@ -13,9 +13,9 @@ import Model.Model;
  * 
  * @author Goodwin
  * Classe représentant le visualisateur de l'IG
- * Affiche des formes géométrique (2D, 3D) en fonction de la musique écouté
+ * Affiche des formes géométrique 2D en fonction de la musique écouté
  */
-public class Vue_GenerationForme extends JPanel implements Observer {
+public class Vue_2D extends JPanel implements Observer {
 
 	/**
 	 * Taille Maximale de la fenètre de l'application
@@ -41,13 +41,19 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 	 */
 	private static int MILIEU_FENETRE_Y = TAILLE_FENETRE_Y / 2;
 
-	//TODO javadoc
-	private static int EPAISSEUR_RECTANGLE = 30;
+	/**
+	 * Epaisseur de chaqun des triangles
+	 */
+	private static int EPAISSEUR_RECTANGLE = 30;	
 	
-	//TODO javadoc
-	private int[] bitDeLecture = new int[18]; //nb de rectangle max sur l'IG
-	
-	
+	/**
+	 * Contient tout les ratios qui seront affiché (barres)
+	 * Taille définit dans méthode update
+	 */
+	private double[] ratioFrequence = new double[
+                             (TAILLE_FENETRE_X - 200) / EPAISSEUR_RECTANGLE
+	                                             ];
+
 	/**
 	 * Définition de la méthode paint
 	 * Affiche des formes géométriques (2D, 3D)
@@ -61,8 +67,9 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 				   TAILLE_FENETRE_X - 100, 
 				   MILIEU_FENETRE_Y);
 		
-		/* TODO Ne fonctionne pas
-		 * int j = 0;
+		// TODO Ne fonctionne pas
+		//Décalement vers gauche
+		/*int j = 0;
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*8; 
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*8; 
 				 i += EPAISSEUR_RECTANGLE) {
@@ -71,22 +78,31 @@ public class Vue_GenerationForme extends JPanel implements Observer {
 					   EPAISSEUR_RECTANGLE,
 					   bitDeLecture[j]/50*MILIEU_FENETRE_Y);
 			j++;
-		}
-		*/
+		}*/
+		
+		
 		//TODO a compléter
 	}
 
 	public void update(Observable m, Object obj) {
-		// TODO Auto-generated method stub
+		/* TODO Ne fonctionne pas */
+		Model model = (Model) m;
 		
-		/* TODO Ne fonctionne pas
-		 * Model model = (Model) m;
-		for (int i = 0; i < bitDeLecture.length; i ++) {
+		for (int index = 0; index < ratioFrequence.length; index ++) {
+			try {
+				ratioFrequence[index] = ratioFrequence[index + 1];
+			}
+			catch (IndexOutOfBoundsException e) {
+				ratioFrequence[index] = model.getRatioFrequence();
+			}
+		}
+		
+		repaint();
+		/*for (int i = 0; i < bitDeLecture.length; i ++) {
 			int bit = model.getMusique().getOneBytes();
 			bitDeLecture[i] = bit < 0 ? -bit: bit; //nb de rectangle max sur l'IG
 			repaint();
-		}
-		*/
+		}*/
 	}
 	
 }

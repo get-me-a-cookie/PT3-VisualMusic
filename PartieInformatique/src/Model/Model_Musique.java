@@ -56,7 +56,7 @@ public class Model_Musique implements Runnable {
 	 * Stock les fréquences des octects lus lors 
 	 * de l'écoute de la musique
 	 */
-	private double freq;
+	private double frequence;
 	
 	/**
 	 * Tranformé rapide de Fourrier
@@ -137,7 +137,7 @@ public class Model_Musique implements Runnable {
 
 		try {
 			//TODO rendre le truc bien pour tout format de musique
-			//Freq diff
+			//frequence diff
 			//encodage diff
 			byte bytes[] = new byte[32768];	//32 * 1024
 			
@@ -153,7 +153,7 @@ public class Model_Musique implements Runnable {
 					}
 					FFT.setData(comp);
 					FFT.transform();
-					freq = Math.abs(FFT.getTransformedDataAsComplex()[0].getReal()); //valeur absolue
+					frequence = Math.abs(FFT.getTransformedDataAsComplex()[0].getReal()); //valeur absolue
 					line.write(bytes, 0, bytesRead);
 				}
 				else break;
@@ -177,6 +177,20 @@ public class Model_Musique implements Runnable {
 	public void setPause(boolean b) {
 		this.pause = b;
 	}	
+
+	/**
+	 * @return the audioInputStream
+	 */
+	public AudioFormat getAudioFormat() {
+		return audioFormat;
+	}
+
+	/**
+	 * @return the frequence
+	 */
+	public double getFrequence() {
+		return frequence;
+	}
 
 	/**
 	 * Informe de l'état de la pause

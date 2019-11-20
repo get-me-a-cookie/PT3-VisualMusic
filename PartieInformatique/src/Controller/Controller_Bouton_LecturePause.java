@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 
@@ -35,7 +36,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (!model.isFileLoaded()) {
-			model.setErreur(1);
+			model.setErreur(new FileNotFoundException());
 			return;
 		}
 		JButton bouton = (JButton) arg0.getSource();
