@@ -165,46 +165,4 @@ public class Model_Musique implements Runnable {
 	}
 	*/
 	
-	/* Transformation de Fourier */
-	public static double[][] TransformationFourier( double[][] tableau) {
-		/* Longueur de notre signal doit être un multiple de 2*/
-		int longueurSignal = tableau.length;
-		
-		/* fin de l'appel récursif */
-		double[][] tampon = new double [longueurSignal][1];
-				if (longueurSignal==1) return tampon;
-		
-		/* Préparation des données pour faire Fourier */
-		int longueurSignalDiviser2 = longueurSignal/2;
-		double[][] transformationFourier = new double[longueurSignal][2];
-		
-		/* Déclaration des tableaux double avec leur taille */
-		double[][] pair = new double[longueurSignalDiviser2][2];
-		double[][] impair = new double[longueurSignalDiviser2][2];	
-		
-		/* Coupe le signal en termes d'indices pairs et impairs */
-		for(int i=0; i < longueurSignalDiviser2; i++) {
-			pair[i] = tableau[2*i];
-			impair[i] = tableau[2*i+1];
-			
-		}
-		
-		/* Calcul recursif de la fonction */
-		pair = 	TransformationFourier(pair);
-		impair = 	TransformationFourier(impair);
-			
-		/* Reconstruction des valeurs par Fourier */
-		for(int i = 0; i < longueurSignal; i++) {
-			transformationFourier[i][0] = pair[i%longueurSignalDiviser2][0] 
-					+ impair[i%longueurSignalDiviser2][0]*Math.cos(2*Math.PI*i/longueurSignal) 
-					 + impair[i%longueurSignalDiviser2][1]*Math.sin(2*Math.PI*i/longueurSignal);
-			
-			transformationFourier[i][1] = pair[i%longueurSignalDiviser2][1] 
-					+ impair[i%longueurSignalDiviser2][1]*Math.cos(2*Math.PI*i/longueurSignal) 
-					 - impair[i%longueurSignalDiviser2][0]*Math.sin(2*Math.PI*i/longueurSignal);
-		}
-		return transformationFourier;
-				
-		}
-	
 }
