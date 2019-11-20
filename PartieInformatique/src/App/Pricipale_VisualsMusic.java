@@ -19,7 +19,6 @@ import Model.Model;
 import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Erreur;
-import View.Vue_Pleine_Ecran;
 
 /** 
  * @author Goodwui
