@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import Model.Model;
-import View.Vue_Pleine_Ecran;
 
 /**
  * 

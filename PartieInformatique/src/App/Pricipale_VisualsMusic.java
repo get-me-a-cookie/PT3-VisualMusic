@@ -20,8 +20,6 @@ import Controller.Controller_MenuFichier;
 import Model.Model;
 import View.Vue_Erreur;
 import View.Vue_GenerationForme;
-import View.Vue_Pleine_Ecran;
-
 /** 
  * @author Goodwui
  * Classe représentant l'IG, composé de 
