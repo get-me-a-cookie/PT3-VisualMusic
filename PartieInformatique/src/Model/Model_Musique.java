@@ -216,12 +216,14 @@ public class Model_Musique implements Runnable {
 	 * presse "stop" par exemple
 	 */
 	public void reset() {
-		pause = true;
-		audioFormat = null;
-		audioInputStream = null;
-		line.close();
-		line = null;
-		load = false;
+		if(!pause) {
+			pause = true;
+			audioFormat = null;
+			audioInputStream = null;
+			line.close();
+			line = null;
+			load = false;
+		}
 	}
 	
 	/*
