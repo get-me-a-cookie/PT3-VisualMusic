@@ -153,7 +153,14 @@ public class Model_Musique implements Runnable {
 					}
 					FFT.setData(comp);
 					FFT.transform();
-					frequence = Math.abs(FFT.getTransformedDataAsComplex()[0].getReal()); //valeur absolue
+					frequence = 0;
+					Complex[] tableau_complexe_temporaire = FFT.getTransformedDataAsComplex();
+					for (int variable_temporaire = 0; 
+							variable_temporaire < tableau_complexe_temporaire.length;
+							variable_temporaire ++) {
+						frequence = frequence + Math.abs(tableau_complexe_temporaire[variable_temporaire].getReal());
+					}
+					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
 					line.write(bytes, 0, bytesRead);
 				}
 				else break;

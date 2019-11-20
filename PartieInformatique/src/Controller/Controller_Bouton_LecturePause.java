@@ -50,8 +50,9 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
 			return;
 		}
-		if(bouton.getText().contentEquals("Stop")) {
+		if(bouton.getText().equals("Stop")) {
 			model.stop();
+			return;
 		}
 	}
 

@@ -113,6 +113,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 
 		//Paramètrage de la fenêtre
 		this.fullScreen();
+		this.setTitle("Visuals Music");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 
 		//Création des éléments 
 		this.creationMenu();
@@ -131,7 +134,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(visualisateur2D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 
-		//this.pack();
+		this.pack();
 
 	}
 
@@ -223,20 +226,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		
 		if(!pleine_ecran) {
 			pleine_ecran = false;
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			// On récuper la taille de l'écran
 			this.setSize(width/2, height/2);
 			this.setLocationRelativeTo(null);
-			this.setVisible(true);
 			this.pack();
 		}
 		else {
 			pleine_ecran = true;
 			this.setExtendedState(this.MAXIMIZED_BOTH);
-			this.setVisible(true);
 		}
-		this.setTitle("Visuals Music");
 	}
 
 	public static void main (String[] args) {

@@ -64,6 +64,7 @@ public class Model extends Observable {
 			//cool du multithreading :)
 			musiqueThread = new Thread(musique);
 			musiqueThread.start();
+			//modifier();
 			if (Thread.State.TERMINATED == musiqueThread.getState()) {
 				musiqueThread = null;
 				musique.setPause(true);

@@ -69,16 +69,16 @@ public class Vue_2D extends JPanel implements Observer {
 		
 		// TODO Ne fonctionne pas
 		//Décalement vers gauche
-		/*int j = 0;
+		int j = 0;
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*8; 
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*8; 
 				 i += EPAISSEUR_RECTANGLE) {
 			g.drawRect(i,
-					   MILIEU_FENETRE_Y-bitDeLecture[j]/50*MILIEU_FENETRE_Y,
+					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
 					   EPAISSEUR_RECTANGLE,
-					   bitDeLecture[j]/50*MILIEU_FENETRE_Y);
+					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
 			j++;
-		}*/
+		}
 		
 		
 		//TODO a compléter
