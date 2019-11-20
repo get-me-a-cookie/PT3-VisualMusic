@@ -1,3 +1,4 @@
+package App;
 
 
 import java.awt.BorderLayout;
@@ -15,8 +16,9 @@ import javax.swing.JPanel;
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_MenuFichier;
 import Model.Model;
+import View.Vue_2D;
+import View.Vue_3D;
 import View.Vue_Erreur;
-import View.Vue_GenerationForme;
 import View.Vue_Pleine_Ecran;
 
 /** 
@@ -42,13 +44,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Bouton permettant de mettre en marche la musique
 	 * S'affiche si la vidéo est en pause
 	 */	
-	private JButton bouton_play;
-	
-	/**
-	 * Bouton permettant de mettre en pause la musique
-	 * S'affiche si la vidéo est en lecture
-	 */	
-	private JButton bouton_pause;
+	private JButton bouton_playPause;
 	
 	private JButton bouton_stop;
 	//private JButton bouton_volume;
@@ -82,9 +78,15 @@ public class Pricipale_VisualsMusic extends JFrame {
 	
 	/**
 	 * Panneau principale
-	 * Affichera les formes en fonction de la musique
+	 * Affichera les formes 2D en fonction de la musique
 	 */
-	private Vue_GenerationForme visualisateur;
+	private Vue_2D visualisateur2D;
+	
+	/**
+	 * Panneau principale
+	 * Affichera les formes 3D en fonction de la musique
+	 */
+	private Vue_3D visualisateur3D;
 	
 	/**
 	 * Message d'erreur qui s'affiche quand:
@@ -120,13 +122,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		erreur = new Vue_Erreur();
 		
 		//Ajout des observer
-		model.addObserver(visualisateur);
+		model.addObserver(visualisateur2D);
+		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
 		
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
-		this.add(visualisateur, BorderLayout.CENTER);
+		this.add(visualisateur2D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 				
 		this.pack();
@@ -167,23 +170,23 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Création des éléments
 		panel_bouton = new JPanel();
 		
-		bouton_play = new JButton("Play");
-		bouton_pause = new JButton("Pause");
+		bouton_playPause = new JButton("Play");
 		bouton_stop = new JButton("Stop");
 		bouton_pleinEcran = new JButton("Ecran");
 		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
+		bouton_playPause.setPreferredSize(new Dimension(100,50));
+		bouton_stop.setPreferredSize(new Dimension(100,50));
+		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 		
 		//Ajout des Controller
-		bouton_play.addActionListener(new Controller_Bouton_LecturePause(model));
-		bouton_pause.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model));
 		
 		//Ajout des éléments
-		panel_bouton.add(bouton_play);
-		panel_bouton.add(bouton_pause);
+		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
 
@@ -196,10 +199,13 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private void creationVisualisateur() {
 		
 		//Création des éléments
-		visualisateur = new Vue_GenerationForme();	
+		visualisateur2D = new Vue_2D();	
+		visualisateur3D = new Vue_3D();	
 		
 		//Modification des éléments
-		visualisateur.setPreferredSize(
+		visualisateur2D.setPreferredSize(
+				new Dimension(800,450)); //rapport de 16:9
+		visualisateur3D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
 		
 		//Ajout des éléments

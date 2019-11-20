@@ -18,7 +18,7 @@ public class Controller_Souris extends Controller implements MouseListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model -> Instanciant le Model
+	 * @param model : Instanciant le Model
 	 */
 	public Controller_Souris(Model model) {
 		super(model);

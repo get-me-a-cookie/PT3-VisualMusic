@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 
@@ -20,7 +21,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 	
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model -> Instanciant le Model
+	 * @param model : Instanciant le Model
 	 */
 	public Controller_Bouton_LecturePause(Model model) {
 		super(model);
@@ -35,16 +36,18 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (!model.isFileLoaded()) {
-			model.setErreur(1);
+			model.setErreur(new FileNotFoundException());
 			return;
 		}
 		JButton bouton = (JButton) arg0.getSource();
 		if (bouton.getText().equals("Play")) {
+			bouton.setText("Pause");
 			model.lectureFichier();
 			if (model.getMusique().isPause()) model.getMusique().setPause(false);
 			return;
 		}
 		if (bouton.getText().equals("Pause")) {
+			bouton.setText("Play");
 			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
 			return;
 		}
