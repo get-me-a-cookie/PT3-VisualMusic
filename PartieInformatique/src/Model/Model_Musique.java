@@ -150,7 +150,10 @@ public class Model_Musique implements Runnable {
 	public boolean isLoad() {
 		return load;
 	}
-	
+	/**
+	 * TODO
+	 * Lorsque l'on appuie deux fois sur stop -> Erreur
+	 */
 	public void reset() {
 		pause = true;
 		audioFormat = null;
