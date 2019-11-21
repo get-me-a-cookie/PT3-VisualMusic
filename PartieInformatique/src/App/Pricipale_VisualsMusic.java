@@ -9,16 +9,18 @@ import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.Toolkit;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 
 import Controller.Controller_Bouton_LecturePause;
-import Controller.Controller_MenuFichier;
-import Controller.Handler_ButtonHandler;
+import Controller.Controller_Menu;
+import Controller.Handler_ControllerHandler;
 import Model.Model;
 import View.Vue_2D;
 import View.Vue_3D;
@@ -58,7 +60,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private JButton bouton_pleinEcran;
 	
 	//TODO
-	private Handler_ButtonHandler handler = new Handler_ButtonHandler();
+	private Handler_ControllerHandler handler = new Handler_ControllerHandler();
 
 	/**
 	 * Bandeau inférieur de l'IG
@@ -80,6 +82,28 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private JMenu menu_fichier;
 
+	/**  
+	 * Catégorie du @menu
+	 * Actions disponibles :
+	 * 		- Vue 2D
+	 * 		- Vue 3D
+	 */
+	private JMenu menu_affichage;
+
+	/**
+	 * Actions de @menu_affichage
+	 * Permet d'afficher en 2D la musique
+	 */
+	private JRadioButtonMenuItem menu_affichage_2D;
+
+	/**
+	 * Actions de @menu_affichage
+	 * Permet d'afficher en 3D la musique
+	 */
+	private JRadioButtonMenuItem menu_affichage_3D;
+	
+	private ButtonGroup menu_affichage_dimension;
+	
 	/**
 	 * Actions de @menu_fichier
 	 * Permet d'ouvrir un fichier
@@ -158,17 +182,32 @@ public class Pricipale_VisualsMusic extends JFrame {
 
 		menu_fichier = new JMenu("Fichier");
 		menu_fichier_ouvrir = new JMenuItem("Ouvrir un fichier...");
+		
+		menu_affichage = new JMenu("Affichage");
+		menu_affichage_2D = new JRadioButtonMenuItem("2D");
+		menu_affichage_3D = new JRadioButtonMenuItem("3D");
+		
+		menu_affichage_dimension = new ButtonGroup();
 
 		//Modification des éléments
 		menu.setBackground(new Color(206, 213, 209));
+		
+		menu_affichage_2D.setSelected(true);
 
 		//Ajout des Controller
-		menu_fichier_ouvrir.addActionListener(new Controller_MenuFichier(model));
+		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model));
 
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
 
+		menu_affichage_dimension.add(menu_affichage_2D);
+		menu_affichage_dimension.add(menu_affichage_3D);
+
+		menu_affichage.add(menu_affichage_2D);
+		menu_affichage.add(menu_affichage_3D);
+
 		menu.add(menu_fichier);
+		menu.add(menu_affichage);
 
 	}
 
@@ -192,9 +231,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 
 		//Ajout des Bouton dans le handler
-		handler.getBoutons().add(bouton_playPause);
-		handler.getBoutons().add(bouton_stop);
-		handler.getBoutons().add(bouton_pleinEcran);
+		handler.getComponent().add(bouton_playPause);
+		handler.getComponent().add(bouton_stop);
+		handler.getComponent().add(bouton_pleinEcran);
 		
 		//Ajout des Controller
 		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model, handler));

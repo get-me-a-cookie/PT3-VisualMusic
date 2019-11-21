@@ -174,7 +174,6 @@ public class Model_Musique extends Observable implements Runnable {
 						frequence = frequence + Math.abs(tableau_complexe_temporaire[variable_temporaire].getReal());
 					}
 					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
-					System.out.println(frequence);
 					setChanged();
 					notifyObservers();
 					line.write(bytes, 0, bytesRead);

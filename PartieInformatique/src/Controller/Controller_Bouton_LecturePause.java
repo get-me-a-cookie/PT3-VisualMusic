@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import Model.Model;
 
@@ -19,14 +21,14 @@ import Model.Model;
 public class Controller_Bouton_LecturePause extends Controller implements ActionListener {
 	
 	//TODO javadoc
-	private Handler_ButtonHandler handler;
+	private Handler_ControllerHandler handler;
 	
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model : Instanciant le Model
 	 */
 	public Controller_Bouton_LecturePause(Model model,
-			Handler_ButtonHandler handler) {
+			Handler_ControllerHandler handler) {
 		super(model);
 		this.handler = handler;
 	}
@@ -50,6 +52,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 			if (model.getMusique().isPause()) model.getMusique().setPause(false);
 			return;
 		}
+		// TODO Remmetre à play quand Slider de progression est finis
 		if (bouton.getText().equals("Pause")) {
 			bouton.setText("Play");
 			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
@@ -57,8 +60,9 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		}
 		if(bouton.getText().equals("Stop")) {
 			model.stop();
-			for (JButton b : handler.getBoutons()) {
-				if (b.getText().equals("Pause")) b.setText("Play");
+			for (JComponent b : handler.getComponent()) {
+				if (((JButton) b).getText().equals("Pause"))
+					((JButton) b).setText("Play");
 			}
 			return;
 		}

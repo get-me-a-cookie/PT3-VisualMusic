@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
 
 /*
@@ -21,20 +22,19 @@ import javax.swing.JButton;
  * @author goodw
  *
  */
-public class Handler_ButtonHandler {
+public class Handler_ControllerHandler {
 
-	Set<JButton> boutons;
+	Set<JComponent> component;
 
 	/**
 	 * 
 	 */
-	public Handler_ButtonHandler() {
-		super();
-		boutons = new HashSet<JButton>();
+	public Handler_ControllerHandler() {
+		component = new HashSet<JComponent>();
 	}
 
-	public Set<JButton> getBoutons() {
-		return boutons;
+	public Set<JComponent> getComponent() {
+		return component;
 	}
 	
 }

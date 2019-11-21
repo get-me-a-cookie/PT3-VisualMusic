@@ -21,13 +21,13 @@ import Model.Model;
  * 
  * Instancié uniquement pour les JMenuItem du JMenu "Fichier"
  */
-public class Controller_MenuFichier extends Controller implements ActionListener  {
+public class Controller_Menu extends Controller implements ActionListener  {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model : Instanciant le Model
 	 */
-	public Controller_MenuFichier(Model model) {
+	public Controller_Menu(Model model) {
 		super(model);
 	}
 	
