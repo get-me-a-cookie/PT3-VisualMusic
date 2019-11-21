@@ -181,13 +181,12 @@ public class Model_Musique extends Observable implements Runnable {
 				}
 				else break;
 			}
+			this.reset();
 		} 
 		catch (IOException io) {
 			io.printStackTrace();
 			return;
 		}
-
-		line.close();
 	}
 	
 	/**
