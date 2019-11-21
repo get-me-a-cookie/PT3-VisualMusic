@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_MenuFichier;
+import Controller.Handler_ButtonHandler;
 import Model.Model;
 import View.Vue_2D;
 import View.Vue_3D;
@@ -46,9 +47,18 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * S'affiche si la vidéo est en pause
 	 */	
 	private JButton bouton_playPause;
+
+	//TODO
 	private JButton bouton_stop;
+
+	//TODO
 	//private JButton bouton_volume;
+
+	//TODO
 	private JButton bouton_pleinEcran;
+	
+	//TODO
+	private Handler_ButtonHandler handler = new Handler_ButtonHandler();
 
 	/**
 	 * Bandeau inférieur de l'IG
@@ -173,7 +183,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		
 		bouton_playPause = new JButton("Play");
 		bouton_stop = new JButton("Stop");
-		bouton_pleinEcran = new JButton("Ecran");
+		bouton_pleinEcran = new JButton("Ecran");		
 
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
@@ -181,10 +191,15 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 
+		//Ajout des Bouton dans le handler
+		handler.getBoutons().add(bouton_playPause);
+		handler.getBoutons().add(bouton_stop);
+		handler.getBoutons().add(bouton_pleinEcran);
+		
 		//Ajout des Controller
-		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model));
-		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model));
-		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model));
+		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model, handler));
+		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model, handler));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model, handler));
 
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);

@@ -76,8 +76,6 @@ public class Vue_2D extends JPanel implements Observer {
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				 i += EPAISSEUR_RECTANGLE) {
-			System.out.println(i);
-			System.out.println(j);
 			if (ratioFrequence[j] != 0)
 				g.drawRect(i,
 					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
@@ -103,7 +101,6 @@ public class Vue_2D extends JPanel implements Observer {
 				ratioFrequence[index] = model.getRatioFrequence();
 			}
 		}
-		validate();
 		repaint();
 		/*for (int i = 0; i < bitDeLecture.length; i ++) {
 			int bit = model.getMusique().getOneBytes();
