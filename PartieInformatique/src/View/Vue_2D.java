@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
@@ -60,6 +61,8 @@ public class Vue_2D extends JPanel implements Observer {
 	 * en fonction de la musique
 	 */
 	public void paint(Graphics g) { 
+
+		g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
 		
 		// affiche une ligne au centre de la fenêtre
 		g.drawLine(100, 
