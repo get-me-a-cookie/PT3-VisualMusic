@@ -70,7 +70,6 @@ public class Vue_2D extends JPanel implements Observer {
 				   TAILLE_FENETRE_X - 100, 
 				   MILIEU_FENETRE_Y);
 		
-		// TODO Ne fonctionne pas
 		//Décalement vers gauche
 		int j = 0;
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
@@ -89,24 +88,19 @@ public class Vue_2D extends JPanel implements Observer {
 	}
 
 	public void update(Observable m, Object obj) {
-		/* TODO Ne fonctionne pas */
 		Model model = (Model) m;
 		
-		for (int index = 0; index < ratioFrequence.length; index ++) {
-			try {
-				//if (ratioFrequence[index] != 0)
+		if (model.getErreur() == null) {
+			for (int index = 0; index < ratioFrequence.length; index ++) {
+				try {
 					ratioFrequence[index] = ratioFrequence[index + 1];
+				}
+				catch (IndexOutOfBoundsException e) {
+					ratioFrequence[index] = model.getRatioFrequence();
+				}
 			}
-			catch (IndexOutOfBoundsException e) {
-				ratioFrequence[index] = model.getRatioFrequence();
-			}
-		}
-		repaint();
-		/*for (int i = 0; i < bitDeLecture.length; i ++) {
-			int bit = model.getMusique().getOneBytes();
-			bitDeLecture[i] = bit < 0 ? -bit: bit; //nb de rectangle max sur l'IG
 			repaint();
-		}*/
+		}
 	}
 	
 }
