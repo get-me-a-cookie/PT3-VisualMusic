@@ -22,6 +22,7 @@ import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_Menu;
 import Controller.Handler_ControllerHandler;
 import Model.Model;
+import Model.Model_Cube;
 import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Erreur;
@@ -133,7 +134,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////
-
+	private Model_Cube cube;
 	/**
 	 * Créateur de l'IG toute entière
 	 */
@@ -152,14 +153,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		erreur = new Vue_Erreur();
 
 		//Ajout des observer
-		model.addObserver(visualisateur2D);
+		//model.addObserver(visualisateur2D);
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
 
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
-		this.add(visualisateur2D, BorderLayout.CENTER);
+		this.add(visualisateur3D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 		
 		//Paramètrage de la fenêtre
@@ -254,12 +255,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private void creationVisualisateur() {
 
 		//Création des éléments
-		visualisateur2D = new Vue_2D();	
+		//visualisateur2D = new Vue_2D();	
 		visualisateur3D = new Vue_3D();	
 		
 		//Modification des éléments
-		visualisateur2D.setPreferredSize(
-				new Dimension(800,450)); //rapport de 16:9
+		//visualisateur2D.setPreferredSize(
+		//		new Dimension(800,450)); //rapport de 16:9
 		visualisateur3D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
 

@@ -245,7 +245,7 @@ public class Model_Musique extends Observable implements Runnable {
 			line = null;
 			load = false;
 		}
-	}
+	}	
 	
 	/*
 	 public SourceDataLine getLine() {

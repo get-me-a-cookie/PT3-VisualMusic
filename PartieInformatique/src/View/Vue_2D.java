@@ -71,6 +71,7 @@ public class Vue_2D extends JPanel implements Observer {
 				   MILIEU_FENETRE_Y);
 		
 		//Décalement vers gauche
+		
 		int j = 0;
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
