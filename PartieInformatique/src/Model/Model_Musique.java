@@ -200,7 +200,8 @@ public class Model_Musique extends Observable implements Runnable {
 	}	
 
 	/**
-	 * @return the audioInputStream
+	 * @return le format du fichier
+	 * 
 	 */
 	public AudioFormat getAudioFormat() {
 		return audioFormat;
@@ -208,6 +209,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * @return the frequence
+	 * retourne la fréquence de la musique 
 	 */
 	public double getFrequence() {
 		return frequence;
@@ -226,6 +228,10 @@ public class Model_Musique extends Observable implements Runnable {
 	
 	/**
 	 * @return the load
+	 * La méthode permet de connaaitre
+	 * si la musique est chargé
+	 * true : fichier chargé
+	 * false : fichier non chargé
 	 */
 	public boolean isLoad() {
 		return load;

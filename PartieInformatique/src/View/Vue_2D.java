@@ -87,7 +87,9 @@ public class Vue_2D extends JPanel implements Observer {
 		
 		//TODO a compléter
 	}
-
+	/*
+	 * on met à jour le model s'il n'y a aucune erreur
+	 */
 	public void update(Observable m, Object obj) {
 		Model model = (Model) m;
 		

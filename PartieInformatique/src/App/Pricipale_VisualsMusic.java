@@ -129,12 +129,18 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *		l'utilisateur essai de le lire
 	 */
 	private Vue_Erreur erreur;
+	//TODO plus tard 
 	private boolean pleine_ecran = false;
-
+	/*
+	 * Cube qui créer un cube
+	 * a testé car pas afficher
+	 */
+	//TODO
+	private Model_Cube cube;
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////
-	private Model_Cube cube;
+
 	/**
 	 * Créateur de l'IG toute entière
 	 */
@@ -272,6 +278,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Création de la fênetre à dimension normale
 	 *  et FullEcran selon une boolean 
 	 */
+	//TODO fullscreen -> abscence de vue
 	public void fullScreen() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
@@ -291,7 +298,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 			this.setExtendedState(this.MAXIMIZED_BOTH);
 		}
 	}
-
+	/*
+	 * Pour afficher notre application
+	 */
 	public static void main (String[] args) {
 		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
 

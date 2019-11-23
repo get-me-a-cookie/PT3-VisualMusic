@@ -16,23 +16,25 @@ import javax.swing.JComponent;
  * Moyen que la classe soit inutile
  * Set directement dans les COntroller
  */
-//TODO javadoc
-
 /**
  * @author goodw
  *
  */
 public class Handler_ControllerHandler {
-
+	// Declaration des variables
 	Set<JComponent> component;
 
 	/**
-	 * 
+	 * Constructeur principal
+	 * qui créer une hahset
 	 */
 	public Handler_ControllerHandler() {
 		component = new HashSet<JComponent>();
 	}
-
+	/*
+	 * permet de connaitre la liste du
+	 * handler
+	 */
 	public Set<JComponent> getComponent() {
 		return component;
 	}

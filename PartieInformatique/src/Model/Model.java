@@ -31,6 +31,7 @@ public class Model extends Observable implements Observer {
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 */
 	private Model_Musique musique = new Model_Musique(this);
+	private Model_Cube cube = new Model_Cube(100, 100, 50, 50);
 	
 	/**
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
@@ -38,7 +39,10 @@ public class Model extends Observable implements Observer {
 	 */
 	private Thread musiqueThread;
 	
-	//TODO javadoc
+	/*
+	 * permet de connaitre si la musique 
+	 * est en cours de lecture
+	 */
 	private boolean enCours;
 	
 	/**
@@ -68,24 +72,41 @@ public class Model extends Observable implements Observer {
 			*/
 		}
 	}
-
+	/**
+	 * permet de modifier le nom du fichier
+	 */
 	public void setFichier(File file) {
 		fichier = file;
 	}
-
+	
+	//TODO
 	public Model_Musique getMusique() {
 		return musique;
 	}
-	
+	/**
+	 * permet d'arrêter la musique
+	 * et de remettre le même fichier
+	 * au début de la lecture
+	 */
 	public void stop() {
 		musique.reset();
 	}
 
+	/**
+	 * @return une boolean qui permet de savoir
+	 * si le fichier est en cours de lecture ou pas
+	 * true : le fichier est entrain d'être lu
+	 * false : il n'y a pas de fichier en cour de lecture
+	 */
 	public boolean isFileLoaded() {
 		if (fichier == null) return false;
 		return true;
 	}
 
+	/**
+	 * notify si il y a une erreur,
+	 * à la vue
+	 */
 	public void setErreur(IOException e) {
 		erreur  = e;
 		setChanged();
@@ -110,6 +131,7 @@ public class Model extends Observable implements Observer {
 		return freq;
 	}
 
+	//TODO
 	public void update(Observable o, Object arg) {
 		setChanged();
 		notifyObservers();

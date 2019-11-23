@@ -59,9 +59,17 @@ public class Vue_3D extends JPanel implements Observer {
 	private double[] ratioFrequence = new double[
 	                                             (TAILLE_FENETRE_X - 200) / EPAISSEUR_RECTANGLE
 	                                             ];
+	/*
+	 * On créer deux points afin de tester l'affichage d'un cube
+	 */
 	private Point[] cubeOnePoints = {new Point(100,200) };
 	private Point[] cubeTwoPoints = {new Point(200,300)};
 
+	/* 
+	 * Méthode qui permet l'affichage des cubes en 3D
+	 * en fonction du temps, de la féquence 
+	 */
+	//TODO le tableau ratioFrequence toujours égal à 0
     public void paint(Graphics g) {
     	g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
     	g.drawLine(100, 
@@ -85,7 +93,7 @@ public class Vue_3D extends JPanel implements Observer {
         }
     }
     /*
-     * Tracer un cube 
+     * Méthode qui permet de tracer un cube 
      */
     public void drawCube(Graphics g) {
         g.drawRect(MILIEU_FENETRE_X, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y);
@@ -95,6 +103,10 @@ public class Vue_3D extends JPanel implements Observer {
                     cubeTwoPoints[i].x, cubeTwoPoints[i].y);
         }
     }
+    
+    /*
+     * Méthode permettant 
+     */
     public void update(Observable m, Object obj) {
 		Model model = (Model) m;
 		
