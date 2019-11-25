@@ -20,8 +20,9 @@ public class Controller_Clavier extends Controller implements KeyListener {
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model : Instanciant le Model
 	 */
-	public Controller_Clavier(Model model) {
-		super(model);
+	public Controller_Clavier(Model model,
+			Handler_ControllerHandler handler) {
+		super(model, handler);
 	}
 
 	public void keyPressed(KeyEvent arg0) {

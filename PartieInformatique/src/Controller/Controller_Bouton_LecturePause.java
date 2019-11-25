@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -20,17 +21,13 @@ import Model.Model;
  */
 public class Controller_Bouton_LecturePause extends Controller implements ActionListener {
 	
-	//TODO javadoc
-	private Handler_ControllerHandler handler;
-	
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model : Instanciant le Model
 	 */
 	public Controller_Bouton_LecturePause(Model model,
 			Handler_ControllerHandler handler) {
-		super(model);
-		this.handler = handler;
+		super(model, handler);
 	}
 	
 	/**
@@ -67,7 +64,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		//Controle le bouton stop
 		if(bouton.getText().equals("Stop")) {
 			model.stop();
-			for (JComponent b : handler.getComponent()) {
+			for (Component b : handler.getComponent()) {
 				if (((JButton) b).getText().equals("Pause"))
 					((JButton) b).setText("Play");
 			}

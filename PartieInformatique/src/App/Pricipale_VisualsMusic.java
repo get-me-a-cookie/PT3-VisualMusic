@@ -159,14 +159,18 @@ public class Pricipale_VisualsMusic extends JFrame {
 		erreur = new Vue_Erreur();
 
 		//Ajout des observer
-		//model.addObserver(visualisateur2D);
+		model.addObserver(visualisateur2D);
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
+
+		//Ajout de la fenêtre dans le handler
+		handler.getComponent().add(this);
 
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
-		this.add(visualisateur3D, BorderLayout.CENTER);
+		this.add(visualisateur2D, BorderLayout.CENTER);
+		//this.add(visualisateur3D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 		
 		//Paramètrage de la fenêtre
@@ -175,7 +179,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.pack();
-
 	}
 
 	/**
@@ -202,7 +205,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 		menu_affichage_2D.setSelected(true);
 
 		//Ajout des Controller
-		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model));
+		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model, handler));
+		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler));
+		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler));
 
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
@@ -261,14 +266,18 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private void creationVisualisateur() {
 
 		//Création des éléments
-		//visualisateur2D = new Vue_2D();	
+		visualisateur2D = new Vue_2D();	
 		visualisateur3D = new Vue_3D();	
 		
 		//Modification des éléments
-		//visualisateur2D.setPreferredSize(
-		//		new Dimension(800,450)); //rapport de 16:9
+		visualisateur2D.setPreferredSize(
+				new Dimension(800,450)); //rapport de 16:9
 		visualisateur3D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
+
+		//Ajout des éléments dans le handler
+		handler.getComponent().add(visualisateur2D);
+		handler.getComponent().add(visualisateur3D);
 
 		//Ajout des éléments
 

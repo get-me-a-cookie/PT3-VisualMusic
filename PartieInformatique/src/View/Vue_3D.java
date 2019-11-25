@@ -65,17 +65,18 @@ public class Vue_3D extends JPanel implements Observer {
 	private Point[] cubeOnePoints = {new Point(100,200) };
 	private Point[] cubeTwoPoints = {new Point(200,300)};
 
-	/* 
+	/**
 	 * Méthode qui permet l'affichage des cubes en 3D
 	 * en fonction du temps, de la féquence 
 	 */
 	//TODO le tableau ratioFrequence toujours égal à 0
     public void paint(Graphics g) {
     	g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
-    	g.drawLine(100, 
+    	/*g.drawLine(100, 
 				MILIEU_FENETRE_Y, 
 				TAILLE_FENETRE_X - 100, 
 				MILIEU_FENETRE_Y);
+				*/
     	
         g.drawRect(100, 100, 200 - 100, 100);
         // draw connecting lines
@@ -84,7 +85,7 @@ public class Vue_3D extends JPanel implements Observer {
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				 i += EPAISSEUR_RECTANGLE) {
         	if(ratioFrequence[j] != 0)
-        		g.drawLine(i,
+        		g.drawRect(i,
 					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
 					   EPAISSEUR_RECTANGLE,
 					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y) );
@@ -95,14 +96,14 @@ public class Vue_3D extends JPanel implements Observer {
     /*
      * Méthode qui permet de tracer un cube 
      */
-    public void drawCube(Graphics g) {
+    /*public void drawCube(Graphics g) {
         g.drawRect(MILIEU_FENETRE_X, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y);
         // draw connecting lines
         for (int i = 0; i < 4; i++) {
             g.drawLine(cubeOnePoints[i].x, cubeOnePoints[i].y, 
                     cubeTwoPoints[i].x, cubeTwoPoints[i].y);
         }
-    }
+    }*/
     
     /*
      * Méthode permettant 

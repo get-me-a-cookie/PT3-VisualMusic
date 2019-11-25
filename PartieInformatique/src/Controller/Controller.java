@@ -18,14 +18,21 @@ public abstract class Controller {
 	 * Sera partager par toute les classes filles
 	 */
 	protected Model model;
+	
+	/**TODO
+	 * 
+	 */
+	protected Handler_ControllerHandler handler;
 
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
 	 * 	structure MVC
 	 * @param model : Instanciant le Model
 	 */
-	public Controller(Model model) {
+	public Controller(Model model,
+			Handler_ControllerHandler handler) {
 		super();
+		this.handler = handler;
 		this.model = model;
 	}
 	

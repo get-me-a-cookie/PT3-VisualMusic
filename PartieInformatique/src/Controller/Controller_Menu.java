@@ -1,5 +1,7 @@
 package Controller;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -11,15 +13,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import org.omg.CORBA.portable.InputStream;
-
 import Model.Model;
+import View.Vue_2D;
+import View.Vue_3D;
 
 /**
  * 
@@ -35,10 +39,11 @@ public class Controller_Menu extends Controller implements ActionListener  {
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model : Instanciant le Model
 	 */
-	public Controller_Menu(Model model) {
-		super(model);
+	public Controller_Menu(Model model,
+			Handler_ControllerHandler handler) {
+		super(model, handler);
 	}
-	
+
 	/**
 	 * Méthode de l'interface parente ActionListener
 	 * 
@@ -55,43 +60,57 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION) {
 				model.setFichier(fc.getSelectedFile());
 			}
-			*/
-			//test pour lire un mp3 -> erreur
-			/*
-			 * URLConnection conn = null; 
-			 
-		     
-	         
-		    try {
-				 conn = new URL("url").openConnection();
-				 InputStream is = (InputStream) conn.getInputStream();
-				 
-				    OutputStream outstream = new FileOutputStream(new File("/res/spiritp3")); // fill in correct file name.
-				     
-				    byte[] buffer = new byte[4096];
-				    int len;
-				     
-				     
-				    while ((len = is.read(buffer)) > -1) {
-				        outstream.write(buffer, 0, len);
-				    }
-				    outstream.close(); // in a finally block of course
-				is.close();
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} // fill in the correct http address
-		    */
-
-		 
-		 model.setFichier(new File("res/son.wav"));	//TODO A supprimer
-		    }
+			 */		 
+		}
+		if (menu.getText().equals("2D") && menu.isSelected()) {
+			JFrame fenetre	= null;
+			Vue_2D twoD 	= null;
+			Vue_3D threeD 	= null;
+			for (Component b : handler.getComponent()) {
+				if (b instanceof JFrame) {
+					fenetre = (JFrame) b;
+				}
+				if (b instanceof Vue_2D) {
+					twoD = (Vue_2D) b;
+				}
+				if (b instanceof Vue_3D) {
+					threeD = (Vue_3D) b;
+				}
+			}
+			try {
+				fenetre.remove(threeD);
+				fenetre.add(twoD, BorderLayout.CENTER);
+				fenetre.repaint();
+			}
+			catch (NullPointerException e) {
+				System.out.println("erreur2");
+			}
+		}
+		if (menu.getText().equals("3D") && menu.isSelected()) {
+			JFrame fenetre	= null;
+			Vue_2D twoD 	= null;
+			Vue_3D threeD 	= null;
+			for (Component b : handler.getComponent()) {
+				if (b instanceof JFrame) {
+					fenetre = (JFrame) b;
+				}
+				if (b instanceof Vue_2D) {
+					twoD = (Vue_2D) b;
+				}
+				if (b instanceof Vue_3D) {
+					threeD = (Vue_3D) b;
+				}
+			}
+			try {
+				fenetre.remove(twoD);
+				fenetre.add(threeD, BorderLayout.CENTER);
+				fenetre.repaint();
+			}
+			catch (NullPointerException e) {
+				System.out.println("erreur3");
+			}
+		}
+		model.setFichier(new File("res/son.wav"));	//TODO A supprimer
 	}
-
-		
-		
-	}
+}
 

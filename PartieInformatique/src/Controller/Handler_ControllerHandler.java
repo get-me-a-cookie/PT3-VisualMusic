@@ -3,6 +3,7 @@
  */
 package Controller;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,20 +23,20 @@ import javax.swing.JComponent;
  */
 public class Handler_ControllerHandler {
 	// Declaration des variables
-	Set<JComponent> component;
+	Set<Component> component;
 
 	/**
 	 * Constructeur principal
 	 * qui créer une hahset
 	 */
 	public Handler_ControllerHandler() {
-		component = new HashSet<JComponent>();
+		component = new HashSet<Component>();
 	}
 	/*
 	 * permet de connaitre la liste du
 	 * handler
 	 */
-	public Set<JComponent> getComponent() {
+	public Set<Component> getComponent() {
 		return component;
 	}
 	
