@@ -21,7 +21,7 @@ import javax.swing.JComponent;
  * @author goodw
  *
  */
-public class Handler_ControllerHandler {
+public class Adapteur_ControllerVue {
 	// Declaration des variables
 	Set<Component> component;
 
@@ -29,7 +29,7 @@ public class Handler_ControllerHandler {
 	 * Constructeur principal
 	 * qui créer une hahset
 	 */
-	public Handler_ControllerHandler() {
+	public Adapteur_ControllerVue() {
 		component = new HashSet<Component>();
 	}
 	/*

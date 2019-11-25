@@ -22,7 +22,7 @@ public abstract class Controller {
 	/**TODO
 	 * 
 	 */
-	protected Handler_ControllerHandler handler;
+	protected Adapteur_ControllerVue handler;
 
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
@@ -30,7 +30,7 @@ public abstract class Controller {
 	 * @param model : Instanciant le Model
 	 */
 	public Controller(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super();
 		this.handler = handler;
 		this.model = model;

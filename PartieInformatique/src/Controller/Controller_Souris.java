@@ -21,7 +21,7 @@ public class Controller_Souris extends Controller implements MouseListener {
 	 * @param model : Instanciant le Model
 	 */
 	public Controller_Souris(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
 

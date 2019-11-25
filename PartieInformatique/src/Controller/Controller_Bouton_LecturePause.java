@@ -26,7 +26,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 	 * @param model : Instanciant le Model
 	 */
 	public Controller_Bouton_LecturePause(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
 	

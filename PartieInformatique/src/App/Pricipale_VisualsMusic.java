@@ -20,7 +20,7 @@ import javax.swing.JRadioButtonMenuItem;
 
 import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_Menu;
-import Controller.Handler_ControllerHandler;
+import Controller.Adapteur_ControllerVue;
 import Model.Model;
 import View.Vue_2D;
 import View.Vue_3D;
@@ -60,7 +60,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private JButton bouton_pleinEcran;
 	
 	//TODO
-	private Handler_ControllerHandler handler = new Handler_ControllerHandler();
+	private Adapteur_ControllerVue handler = new Adapteur_ControllerVue();
 
 	/**
 	 * Bandeau inférieur de l'IG

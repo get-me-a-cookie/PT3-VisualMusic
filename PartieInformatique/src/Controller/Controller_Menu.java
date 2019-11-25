@@ -40,7 +40,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 	 * @param model : Instanciant le Model
 	 */
 	public Controller_Menu(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
 
