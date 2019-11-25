@@ -22,7 +22,6 @@ import Controller.Controller_Bouton_LecturePause;
 import Controller.Controller_Menu;
 import Controller.Handler_ControllerHandler;
 import Model.Model;
-import Model.Model_Cube;
 import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Erreur;
@@ -131,12 +130,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private Vue_Erreur erreur;
 	//TODO plus tard 
 	private boolean pleine_ecran = false;
-	/*
-	 * Cube qui créer un cube
-	 * a testé car pas afficher
-	 */
-	//TODO
-	private Model_Cube cube;
+	
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////

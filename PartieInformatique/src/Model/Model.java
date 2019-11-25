@@ -31,7 +31,6 @@ public class Model extends Observable implements Observer {
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 */
 	private Model_Musique musique = new Model_Musique(this);
-	private Model_Cube cube = new Model_Cube(100, 100, 50, 50);
 	
 	/**
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
