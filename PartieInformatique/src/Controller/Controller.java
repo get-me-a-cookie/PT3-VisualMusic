@@ -19,15 +19,16 @@ public abstract class Controller {
 	 */
 	protected Model model;
 	
-	/**TODO
-	 * 
+	/**
+	 * Adaptateur entre les composant graphique et les controlleur
 	 */
 	protected Adapteur_ControllerVue handler;
 
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
 	 * 	structure MVC
-	 * @param model : Instanciant le Model
+	 * @param model   : Instanciant le Model
+	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller(Model model,
 			Adapteur_ControllerVue handler) {

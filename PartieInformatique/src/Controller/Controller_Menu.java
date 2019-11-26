@@ -26,7 +26,8 @@ public class Controller_Menu extends Controller implements ActionListener  {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model : Instanciant le Model
+	 * @param model   : Instanciant le Model
+	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Menu(Model model,
 			Adapteur_ControllerVue handler) {
