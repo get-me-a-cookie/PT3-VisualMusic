@@ -46,20 +46,30 @@ public class Pricipale_VisualsMusic extends JFrame {
 
 	/**
 	 * Bouton permettant de mettre en marche la musique
-	 * S'affiche si la vidéo est en pause
+	 * si vidéo en pause : "Play"
+	 * sinon 			 : "Pause
 	 */	
 	private JButton bouton_playPause;
 
-	//TODO
+	/**
+	 * Bouton permettant de stoper la musique
+	 * Elle reprendra à zeron si on reclique sur play
+	 */	
 	private JButton bouton_stop;
 
 	//TODO
 	//private JButton bouton_volume;
 
-	//TODO
+	/**
+	 * Bouton permettant de mettre la fenêtre en plein écran
+	 */	
 	private JButton bouton_pleinEcran;
-	
-	//TODO
+
+	/**
+	 * Adapteur entre les controller et l'interface graphique
+	 * Sert à retirer des éléments dans l'interface quand on 
+	 * clique sur un bouton, ect ...
+	 */
 	private Adapteur_ControllerVue handler = new Adapteur_ControllerVue();
 
 	/**
@@ -102,6 +112,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private JRadioButtonMenuItem menu_affichage_3D;
 	
+	/**
+	 * Groupe de radio bouton du menu "Affichage"
+	 * Groupe les bouton radios afin de selectioner 
+	 * le type de vue (2D, 3D)
+	 */
 	private ButtonGroup menu_affichage_dimension;
 	
 	/**
@@ -128,8 +143,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *		l'utilisateur essai de le lire
 	 */
 	private Vue_Erreur erreur;
-	//TODO plus tard 
-	private boolean pleine_ecran = false;
 	
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
@@ -168,7 +181,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//this.add(pleine_ecran);
 		
 		//Paramètrage de la fenêtre
-		this.fullScreen();
+		//this.fullScreen();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -282,6 +295,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *  et FullEcran selon une boolean 
 	 */
 	//TODO fullscreen -> abscence de vue
+	/*
 	public void fullScreen() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
@@ -301,8 +315,10 @@ public class Pricipale_VisualsMusic extends JFrame {
 			this.setExtendedState(this.MAXIMIZED_BOTH);
 		}
 	}
-	/*
-	 * Pour afficher notre application
+	*/
+	
+	/**
+	 * Lance notre application
 	 */
 	public static void main (String[] args) {
 		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
