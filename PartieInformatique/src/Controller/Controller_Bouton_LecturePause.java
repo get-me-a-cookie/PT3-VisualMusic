@@ -5,9 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import Model.Model;
 
