@@ -18,7 +18,7 @@ import Model.Model;
  * Instancié uniquement pour les boutons Lecture et Pause
  */
 public class Controller_Bouton_LecturePause extends Controller implements ActionListener {
-	
+
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model   : Instanciant le Model
@@ -28,7 +28,7 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
-	
+
 	/**
 	 * Méthode de l'interface parente ActionListener
 	 * 
@@ -64,8 +64,10 @@ public class Controller_Bouton_LecturePause extends Controller implements Action
 		if(bouton.getText().equals("Stop")) {
 			model.stop();
 			for (Component b : handler.getComponent()) {
-				if (((JButton) b).getText().equals("Pause"))
-					((JButton) b).setText("Play");
+				if (b instanceof JButton) {
+					if (((JButton) b).getText().equals("Pause"))
+						((JButton) b).setText("Play");
+				}
 			}
 			return;
 		}
