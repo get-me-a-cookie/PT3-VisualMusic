@@ -45,7 +45,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE = 60;	
+	private static int EPAISSEUR_RECTANGLE = 22;	
 
 	/**
 	 * Distance en pixel entre les forme 
@@ -61,7 +61,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE = 
+	private static int NOMBRE_RECTANGLE =
             (
             		(TAILLE_FENETRE_X - 2*MARGIN_FORME_FENETRE)
             		- 2 * EPAISSEUR_RECTANGLE
@@ -81,23 +81,6 @@ public class Vue_2D extends JPanel implements Observer {
 	 * au nombre de rectangle
 	 */
 	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
-	
-	/**
-	 * Constructeur utilisant celui du père
-	 * JPanel
-	 * Donne des couleurs aléatoires
-	 */
-	public Vue_2D() {
-		super();
-		for (int index_dans_tableau = 0;
-			 index_dans_tableau < NOMBRE_RECTANGLE;
-			 index_dans_tableau ++) {
-			couleurs[index_dans_tableau] = new Color(
-												(float) Math.random(),
-												(float) Math.random(),
-												(float) Math.random());
-		}
-	}
 	
 	/**
 	 * Définition de la méthode paint
@@ -125,24 +108,28 @@ public class Vue_2D extends JPanel implements Observer {
 		
 		if ((NOMBRE_RECTANGLE % 2) == 0) {
 			System.out.println("Affiche bien -> nb paire");
+			paintPaire(g);
 		}
 		else {
-			
+			paintImpaire(g);
 		}
 		
+	}
+	
+	private void paintPaire(Graphics g) {
 		int j = 0;
 		for (int i = MARGIN_FORME_FENETRE + EPAISSEUR_RECTANGLE; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				 j < NOMBRE_RECTANGLE; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				 i += EPAISSEUR_RECTANGLE) {
 			
-			// On trace le rectangle
-			// la couleur correspond au dedans du rectangle
-			g.setColor(couleurs[j]);
 			//Génération d'une couleur différente à chaque fois
 			couleurs[j] = new Color(
 					(float) Math.random(),
 					(float) Math.random(),
 					(float) Math.random());
+			// On trace le rectangle
+			// la couleur correspond au dedans du rectangle
+			g.setColor(couleurs[j]);
 			
 			if (ratioFrequence[j] != 0) {
 				//TODO Avoir lequel vous préférer
@@ -183,13 +170,46 @@ public class Vue_2D extends JPanel implements Observer {
 		   */
 			j++;
 		}
-		
-		
-		//TODO a compléter
 	}
-	/*
-	 * on met à jour le model s'il n'y a aucune erreur
-	 */
+	
+	
+	private void paintImpaire(Graphics g) {
+		
+		System.out.println(NOMBRE_RECTANGLE/2);
+		
+		int j = 0;
+		for (int i = MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE/2;
+				 j < NOMBRE_RECTANGLE/2+1;
+				 i += EPAISSEUR_RECTANGLE) {
+			
+			//Génération d'une couleur différente à chaque fois
+			couleurs[j] = new Color(
+					(float) Math.random(),
+					(float) Math.random(),
+					(float) Math.random());
+			// On trace le rectangle
+			// la couleur correspond au dedans du rectangle
+			g.setColor(couleurs[j]);
+			
+			if (ratioFrequence[j] != 0) {
+				g.fillRect(i-EPAISSEUR_RECTANGLE*((NOMBRE_RECTANGLE/2+1)-j),
+						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*TAILLE_FENETRE_Y));
+			}
+			
+			if (ratioFrequence[j+(NOMBRE_RECTANGLE/2)] != 0 && j != NOMBRE_RECTANGLE/2) {
+				g.fillRect(i,
+						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*TAILLE_FENETRE_Y));
+			}
+			
+			j ++;
+			
+		}
+		
+	}
 	
 	/**
 	 * Met à jour la vue
