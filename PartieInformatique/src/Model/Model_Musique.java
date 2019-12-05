@@ -149,42 +149,58 @@ public class Model_Musique extends Observable implements Runnable {
 		line.start();
 
 		try {
-			//TODO rendre le truc bien pour tout format de musique
-			//frequence diff
-			//encodage diff
-			byte bytes[] = new byte[32768];	//32 * 1024
 			
-			int bytesRead = 0;			
+			byte bytes[] = new byte[audioFormat.getSampleSizeInBits()*1024];	//taille de l'echantillon * 1024
+			int bytesRead = 0;
+			
 			while (!pause) {
+				
 				bytesRead = audioInputStream.read(bytes, 0, bytes.length);
+				
 				if (bytesRead != -1) {	//si il y a des octets lus
 					Complex[] comp = new Complex[bytesRead];	//taille = nb de bytes lus
-					for (int variable_temporaire = 0; 
-							variable_temporaire < bytesRead;
-							variable_temporaire ++) {
-						comp[variable_temporaire] = new Complex(bytes[variable_temporaire]);
+					
+					for (int index_dans_tableau = 0; 
+							index_dans_tableau < bytesRead;
+							index_dans_tableau ++) {
+						
+						comp[index_dans_tableau] = new Complex(bytes[index_dans_tableau]);
+					
 					}
+					
 					FFT.setData(comp);
 					FFT.transform();
 					frequence = 0;
 					Complex[] tableau_complexe_temporaire = FFT.getTransformedDataAsComplex();
-					for (int variable_temporaire = 0; 
-							variable_temporaire < tableau_complexe_temporaire.length;
-							variable_temporaire ++) {
-						frequence = frequence + Math.abs(tableau_complexe_temporaire[variable_temporaire].getReal());
+					
+					for (int index_dans_tableau = 0; 
+							index_dans_tableau < tableau_complexe_temporaire.length;
+							index_dans_tableau ++) {
+						
+						frequence = frequence + Math.abs(tableau_complexe_temporaire[index_dans_tableau].getReal());
+					
 					}
+					
 					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
 					setChanged();
 					notifyObservers();
 					line.write(bytes, 0, bytesRead);
+					
 				}
+				
 				else break;
+				
 			}
+			
 			this.reset();
+			
 		} 
+		
 		catch (IOException io) {
+			
 			io.printStackTrace();
 			return;
+			
 		}
 	}
 	
