@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -93,12 +94,13 @@ public class Vue_3D extends JPanel implements Observer {
 					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
 			// on trace le contour
 			g.setColor(Color.black);
-			g.drawRect(i,
-					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+			/*g.drawRect(i+10,
+					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y)-20,
 					   EPAISSEUR_RECTANGLE,
 					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+			*/
 			
-			j++;
+			j ++;
 		}
 		
     }
