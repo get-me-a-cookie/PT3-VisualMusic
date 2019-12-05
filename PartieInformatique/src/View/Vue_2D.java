@@ -94,9 +94,9 @@ public class Vue_2D extends JPanel implements Observer {
 			 index_dans_tableau < NOMBRE_RECTANGLE;
 			 index_dans_tableau ++) {
 			couleurs[index_dans_tableau] = new Color(
-												(int) (Math.random()*255),
-												(int) (Math.random()*255),
-												(int) (Math.random()*255));
+												(float) Math.random(),
+												(float) Math.random(),
+												(float) Math.random());
 		}
 	}
 	
@@ -132,11 +132,40 @@ public class Vue_2D extends JPanel implements Observer {
 			// On trace le rectangle
 			// la couleur correspond au dedans du rectangle
 			g.setColor(couleurs[j]);
-			if (ratioFrequence[j] != 0)
+			//Génération d'une couleur différente à chaque fois
+			couleurs[j] = new Color(
+					(float) Math.random(),
+					(float) Math.random(),
+					(float) Math.random());
+			
+			if (ratioFrequence[j] != 0) {
+				//TODO Avoir lequel vous préférer
+				//choix 1
+				/*
+				 g.fillRect(i,
+						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+						   */
+				
+				//choix 2
+				/*
+				 g.fillRect(i,
+						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+				 g.fillRect(i,
+						   MILIEU_FENETRE_Y,
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+						   */
+				
+				//choix 3
 				g.fillRect(i,
-					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
-					   EPAISSEUR_RECTANGLE,
-					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						   EPAISSEUR_RECTANGLE,
+						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y*2));
+			}
 			
 			// on trace le contour
 			/* TODO INUTILE

@@ -100,7 +100,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				System.out.println("erreur3");
 			}
 		}
-		model.setFichier(new File("res/auprintemps.wav"));	//TODO A supprimer
+		model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
 	}
 }
 
