@@ -66,7 +66,7 @@ public class Vue_2D extends JPanel implements Observer {
             		(TAILLE_FENETRE_X - 2*MARGIN_FORME_FENETRE)
             		- 2 * EPAISSEUR_RECTANGLE
             )
-            / EPAISSEUR_RECTANGLE;	
+            / EPAISSEUR_RECTANGLE;
 	
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
@@ -89,7 +89,6 @@ public class Vue_2D extends JPanel implements Observer {
 	 */
 	public Vue_2D() {
 		super();
-		System.out.println(couleurs.length);
 		for (int index_dans_tableau = 0;
 			 index_dans_tableau < NOMBRE_RECTANGLE;
 			 index_dans_tableau ++) {
@@ -124,6 +123,13 @@ public class Vue_2D extends JPanel implements Observer {
 		
 		//g.setColor(Color.cyan);
 		
+		if ((NOMBRE_RECTANGLE % 2) == 0) {
+			System.out.println("Affiche bien -> nb paire");
+		}
+		else {
+			
+		}
+		
 		int j = 0;
 		for (int i = MARGIN_FORME_FENETRE + EPAISSEUR_RECTANGLE; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				 j < NOMBRE_RECTANGLE; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
@@ -155,7 +161,7 @@ public class Vue_2D extends JPanel implements Observer {
 						   EPAISSEUR_RECTANGLE,
 						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
 				 g.fillRect(i,
-						   MILIEU_FENETRE_Y,
+						   MILIEU_FENETRE_Y+EPAISSEUR_LIGNE/2,
 						   EPAISSEUR_RECTANGLE,
 						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
 						   */
@@ -164,7 +170,7 @@ public class Vue_2D extends JPanel implements Observer {
 				g.fillRect(i,
 						   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
 						   EPAISSEUR_RECTANGLE,
-						   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y*2));
+						   (int) (ratioFrequence[j]*TAILLE_FENETRE_Y));
 			}
 			
 			// on trace le contour
@@ -183,6 +189,13 @@ public class Vue_2D extends JPanel implements Observer {
 	}
 	/*
 	 * on met à jour le model s'il n'y a aucune erreur
+	 */
+	
+	/**
+	 * Met à jour la vue
+	 * Importe la frequence du model et la stock dans le 
+	 * tableau ratioFrequence tout en décalant chaque
+	 * élément vers la gauche
 	 */
 	public void update(Observable m, Object obj) {
 		Model model = (Model) m;
