@@ -63,7 +63,7 @@ public class Vue_2D extends JPanel implements Observer {
 	public void paint(Graphics g) { 
 
 		g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
-		
+
 		// affiche une ligne au centre de la fenêtre
 		g.drawLine(100, 
 				   MILIEU_FENETRE_Y, 
@@ -76,8 +76,17 @@ public class Vue_2D extends JPanel implements Observer {
 		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				 i += EPAISSEUR_RECTANGLE) {
+			// On trace le rectangle
+			// la couleur correspond au dedans du rectangle
+			g.setColor(Color.cyan);
 			if (ratioFrequence[j] != 0)
-				g.drawRect(i,
+				g.fillRect(i,
+					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+					   EPAISSEUR_RECTANGLE,
+					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+			// on trace le contour
+			g.setColor(Color.black);
+			g.drawRect(i,
 					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
 					   EPAISSEUR_RECTANGLE,
 					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
