@@ -198,7 +198,7 @@ public class Vue_2D extends JPanel implements Observer {
 
 		if (model.getErreur() == null) {
 
-			AMPLITUDE = model.getParametres().get("Amplitude");
+			//AMPLITUDE = model.getParametres().get("Amplitude")/100;
 			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 			ESPACEMENT = model.getParametres().get("Espacement");
 			

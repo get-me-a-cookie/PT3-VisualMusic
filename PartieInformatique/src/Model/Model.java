@@ -150,7 +150,9 @@ public class Model extends Observable implements Observer {
 	 */
 	public double getRatioFrequence() {
 		double freq = 0;
-		freq = musique.getFrequence()/musique.getAudioFormat().getFrameRate();
+		freq = 	(musique.getFrequence() 
+				* (parametres.get("Amplitude")) / 100)
+				/ musique.getAudioFormat().getFrameRate();
 		return freq;
 	}
 
