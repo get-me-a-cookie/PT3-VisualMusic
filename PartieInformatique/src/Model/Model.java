@@ -59,14 +59,20 @@ public class Model extends Observable implements Observer {
 	 * 
 	 */
 	public Model(String[] parameters) {
+		
 		super();
+		
 		for (String parametre : parameters) {
+			
 			if (parametre.equals("Amplitude"))
 				this.parametres.put(parametre, 100);
+			
 			else if (parametre.equals("Epaisseur"))
 				this.parametres.put(parametre, 60);
+			
 			else
 				this.parametres.put(parametre, 0);
+			
 		}
 	}
 

@@ -44,7 +44,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE = 22;	
+	private static int EPAISSEUR_RECTANGLE;	
 
 	/**
 	 * Distance en pixel entre les forme 
@@ -60,20 +60,13 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE =
-			(
-					(TAILLE_FENETRE_X - 2*MARGIN_FORME_FENETRE)
-					- 2 * EPAISSEUR_RECTANGLE
-					)
-			/ EPAISSEUR_RECTANGLE;
+	private static int NOMBRE_RECTANGLE;
 
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
 	 * Taille définit dans méthode update
 	 */
-	private double[] ratioFrequence = new double[
-	                                             (TAILLE_FENETRE_X - 200) / EPAISSEUR_RECTANGLE
-	                                             ];
+	private double[] ratioFrequence;
 
 	/**
 	 * Un tableau contenant un nombre de couleur egal
@@ -205,29 +198,45 @@ public class Vue_2D extends JPanel implements Observer {
 
 		if (model.getErreur() == null) {
 
+			AMPLITUDE = model.getParametres().get("Amplitude");
+			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+			ESPACEMENT = model.getParametres().get("Espacement");
+			
+			NOMBRE_RECTANGLE = (
+					(TAILLE_FENETRE_X - 2*MARGIN_FORME_FENETRE)
+					- 2 * EPAISSEUR_RECTANGLE)
+					/ EPAISSEUR_RECTANGLE;
+			
+			
+			double[] sauvegarde_rationFrequence = ratioFrequence;
+			ratioFrequence = new double[NOMBRE_RECTANGLE];
+			
+			if (sauvegarde_rationFrequence != null) {
+				
+				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+					
+					ratioFrequence[index] = sauvegarde_rationFrequence[index];
+					
+				}
+			}
+
 			if (model.isFileLoaded() 
 					&& model.getMusique().isLoad()
 					&& !model.getMusique().isPause()) {
 
-				for (int index = 0; index < ratioFrequence.length; index ++) {
+				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
 
 					try {
-
+						
 						ratioFrequence[index] = ratioFrequence[index + 1];
-
 					}
 
 					catch (IndexOutOfBoundsException e) {
-
+						
 						ratioFrequence[index] = model.getRatioFrequence();
-
 					}
 				}
 			}
-
-			AMPLITUDE = model.getParametres().get("Amplitude");
-			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-			ESPACEMENT = model.getParametres().get("Espacement");
 
 			repaint();
 
