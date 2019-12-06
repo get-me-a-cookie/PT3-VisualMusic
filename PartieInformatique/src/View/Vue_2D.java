@@ -74,7 +74,6 @@ public class Vue_2D extends JPanel implements Observer {
 	 */
 	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
 
-	private static double AMPLITUDE = 1;
 	private static int ESPACEMENT = 0;
 
 	/**
@@ -115,7 +114,7 @@ public class Vue_2D extends JPanel implements Observer {
 		for (int i = TAILLE_FENETRE_X / 2
 				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE) {
+				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
 			j ++;
@@ -124,7 +123,7 @@ public class Vue_2D extends JPanel implements Observer {
 
 		for (int i = TAILLE_FENETRE_X / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE) {
+				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
 			j ++;
@@ -145,7 +144,7 @@ public class Vue_2D extends JPanel implements Observer {
 		for (int i = TAILLE_FENETRE_X / 2 //- EPAISSEUR_RECTANGLE / 2
 				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE) {
+				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
 			j ++;
@@ -154,7 +153,7 @@ public class Vue_2D extends JPanel implements Observer {
 
 		for (int i = TAILLE_FENETRE_X / 2 - EPAISSEUR_RECTANGLE / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE) {
+				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
 			j ++;
@@ -198,14 +197,13 @@ public class Vue_2D extends JPanel implements Observer {
 
 		if (model.getErreur() == null) {
 
-			//AMPLITUDE = model.getParametres().get("Amplitude")/100;
 			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-			ESPACEMENT = model.getParametres().get("Espacement");
+			//ESPACEMENT = model.getParametres().get("Espacement");
 			
 			NOMBRE_RECTANGLE = (
-					(TAILLE_FENETRE_X - 2*MARGIN_FORME_FENETRE)
+					(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
 					- 2 * EPAISSEUR_RECTANGLE)
-					/ EPAISSEUR_RECTANGLE;
+					/ (EPAISSEUR_RECTANGLE);
 			
 			
 			double[] sauvegarde_rationFrequence = ratioFrequence;
@@ -229,11 +227,13 @@ public class Vue_2D extends JPanel implements Observer {
 					try {
 						
 						ratioFrequence[index] = ratioFrequence[index + 1];
+						
 					}
 
 					catch (IndexOutOfBoundsException e) {
 						
 						ratioFrequence[index] = model.getRatioFrequence();
+						
 					}
 				}
 			}
