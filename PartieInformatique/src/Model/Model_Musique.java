@@ -77,7 +77,7 @@ public class Model_Musique extends Observable implements Runnable {
 	private boolean pause = true;
 
 	/**
-	 * Définis si un fichier à été chargé et convertis en line
+	 * Définis si un fichier à été chargé (initialisé) et convertis en line
 	 */
 	private boolean load = false;
 
@@ -244,7 +244,7 @@ public class Model_Musique extends Observable implements Runnable {
 	
 	/**
 	 * @return the load
-	 * La méthode permet de connaaitre
+	 * La méthode permet de connaitre
 	 * si la musique est chargé
 	 * true : fichier chargé
 	 * false : fichier non chargé

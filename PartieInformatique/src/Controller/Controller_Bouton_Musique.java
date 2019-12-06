@@ -17,14 +17,14 @@ import Model.Model;
  * 
  * Instancié uniquement pour les boutons Lecture et Pause
  */
-public class Controller_Bouton_LecturePause extends Controller implements ActionListener {
+public class Controller_Bouton_Musique extends Controller implements ActionListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model   : Instanciant le Model
 	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller_Bouton_LecturePause(Model model,
+	public Controller_Bouton_Musique(Model model,
 			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}

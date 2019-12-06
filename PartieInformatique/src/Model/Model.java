@@ -2,6 +2,8 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -49,8 +51,30 @@ public class Model extends Observable implements Observer {
 	 * 0 : aucune erreur
 	 * 1 : erreur de type ""
 	 */
-	private IOException erreur = null;
+	private Exception erreur = null;
 	private int bit;
+	private Map<String, Integer> parametres = new HashMap<String, Integer>();
+	
+	/**
+	 * 
+	 */
+	public Model(String[] parameters) {
+		
+		super();
+		
+		for (String parametre : parameters) {
+			
+			if (parametre.equals("Amplitude"))
+				this.parametres.put(parametre, 100);
+			
+			else if (parametre.equals("Epaisseur"))
+				this.parametres.put(parametre, 60);
+			
+			else
+				this.parametres.put(parametre, 0);
+			
+		}
+	}
 
 	//TODO Check pause / mettre pause a true dès le début
 	public void lectureFichier() {
@@ -106,7 +130,7 @@ public class Model extends Observable implements Observer {
 	 * notify si il y a une erreur,
 	 * à la vue
 	 */
-	public void setErreur(IOException e) {
+	public void setErreur(Exception e) {
 		erreur  = e;
 		setChanged();
 		notifyObservers();
@@ -116,7 +140,7 @@ public class Model extends Observable implements Observer {
 	/**
 	 * @return le type d'une erreur si elle existe
 	 */
-	public IOException getErreur() {
+	public Exception getErreur() {
 		return erreur;
 	}
 	
@@ -126,12 +150,27 @@ public class Model extends Observable implements Observer {
 	 */
 	public double getRatioFrequence() {
 		double freq = 0;
-		freq = musique.getFrequence()/musique.getAudioFormat().getFrameRate();
+		freq = 	(musique.getFrequence() 
+				* (parametres.get("Amplitude")) / 100)
+				/ musique.getAudioFormat().getFrameRate();
 		return freq;
 	}
 
 	//TODO
 	public void update(Observable o, Object arg) {
+		setChanged();
+		notifyObservers();
+	}
+	
+	/**
+	 * @return the parametres
+	 */
+	public Map<String, Integer> getParametres() {
+		return parametres;
+	}
+	
+	public void parametersChanged(String textLabel, int texteToInt) {
+		parametres.put(textLabel, texteToInt);
 		setChanged();
 		notifyObservers();
 	}

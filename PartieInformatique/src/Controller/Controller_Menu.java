@@ -73,7 +73,8 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				fenetre.repaint();
 			}
 			catch (NullPointerException e) {
-				System.out.println("erreur2");
+				model.setErreur(e);
+				return;
 			}
 		}
 		if (menu.getText().equals("3D") && menu.isSelected()) {
@@ -97,7 +98,8 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				fenetre.repaint();
 			}
 			catch (NullPointerException e) {
-				System.out.println("erreur3");
+				model.setErreur(e);
+				return;
 			}
 		}
 		model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
