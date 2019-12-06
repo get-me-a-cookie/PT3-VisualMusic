@@ -12,13 +12,15 @@ import java.awt.Toolkit;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextField;
 
-import Controller.Controller_Bouton_LecturePause;
+import Controller.Controller_Bouton_Musique;
 import Controller.Controller_Menu;
 import Controller.Adapteur_ControllerVue;
 import Model.Model;
@@ -100,6 +102,25 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private JMenu menu_affichage;
 
+	/**  
+	 * Catégorie du @menu
+	 * Actions disponibles :
+	 * 		- Amplitude
+	 * 		- Taille rectangles
+	 * 		- Espacement rectangles
+	 */
+	private JMenu menu_parametre;
+
+	/**
+	 * TODO
+	 */
+	private JTextField menu_parametre_amplitude_field;
+	private JLabel menu_parametre_amplitude_label;
+	private JTextField menu_parametre_width_field;
+	private JLabel menu_parametre_width_label;
+	private JTextField menu_parametre_margin_field;
+	private JLabel menu_parametre_margin_label;
+	
 	/**
 	 * Actions de @menu_affichage
 	 * Permet d'afficher en 2D la musique
@@ -205,6 +226,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		menu_affichage_3D = new JRadioButtonMenuItem("3D");
 		
 		menu_affichage_dimension = new ButtonGroup();
+		
+		menu_parametre = new JMenu("Paramètres");
+		menu_parametre_amplitude_field  = new JTextField(4);
+		menu_parametre_amplitude_label  = new JLabel("Amplitude");
+		menu_parametre_margin_field	    = new JTextField(4);
+		menu_parametre_margin_label 	= new JLabel("Espacement");
+		menu_parametre_width_field 		= new JTextField(4);
+		menu_parametre_width_label 		= new JLabel("Epaisseur");
 
 		//Modification des éléments
 		menu.setBackground(new Color(206, 213, 209));
@@ -225,8 +254,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		menu_affichage.add(menu_affichage_2D);
 		menu_affichage.add(menu_affichage_3D);
 
+		menu_parametre.add(menu_parametre_amplitude_field);
+		menu_parametre.add(menu_parametre_amplitude_label);
+		menu_parametre.add(menu_parametre_margin_field);
+		menu_parametre.add(menu_parametre_margin_label);
+		menu_parametre.add(menu_parametre_width_field);
+		menu_parametre.add(menu_parametre_width_label);
+
 		menu.add(menu_fichier);
 		menu.add(menu_affichage);
+		menu.add(menu_parametre);
 
 	}
 
@@ -255,9 +292,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 		handler.getComponent().add(bouton_pleinEcran);
 		
 		//Ajout des Controller
-		bouton_playPause.addActionListener(new Controller_Bouton_LecturePause(model, handler));
-		bouton_stop.addActionListener(new Controller_Bouton_LecturePause(model, handler));
-		bouton_pleinEcran.addActionListener(new Controller_Bouton_LecturePause(model, handler));
+		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
+		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
 
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);
