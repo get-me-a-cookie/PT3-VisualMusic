@@ -163,5 +163,7 @@ public class Model extends Observable implements Observer {
 	
 	public void parametersChanged(String textLabel, int texteToInt) {
 		parametres.put(textLabel, texteToInt);
+		setChanged();
+		notifyObservers();
 	}
 }

@@ -81,6 +81,9 @@ public class Vue_2D extends JPanel implements Observer {
 	 */
 	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
 
+	private static double AMPLITUDE = 1;
+	private static int ESPACEMENT = 0;
+
 	/**
 	 * Définition de la méthode paint
 	 * Affiche des formes géométriques (2D, 3D)
@@ -120,21 +123,21 @@ public class Vue_2D extends JPanel implements Observer {
 				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				i += EPAISSEUR_RECTANGLE) {
-			
+
 			paintRectCouleur(g, i, j);
 			j ++;
-			
+
 		}
-		
+
 		for (int i = TAILLE_FENETRE_X / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				i += EPAISSEUR_RECTANGLE) {
-			
+
 			paintRectCouleur(g, i, j);
 			j ++;
-			
+
 		}
-			
+
 	}
 
 	/**
@@ -150,19 +153,19 @@ public class Vue_2D extends JPanel implements Observer {
 				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				i += EPAISSEUR_RECTANGLE) {
-			
+
 			paintRectCouleur(g, i, j);
 			j ++;
-			
+
 		}
-		
+
 		for (int i = TAILLE_FENETRE_X / 2 - EPAISSEUR_RECTANGLE / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
 				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
 				i += EPAISSEUR_RECTANGLE) {
-			
+
 			paintRectCouleur(g, i, j);
 			j ++;
-			
+
 		}
 
 	}
@@ -188,9 +191,9 @@ public class Vue_2D extends JPanel implements Observer {
 					EPAISSEUR_RECTANGLE,
 					(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
 		}
-		
+
 	}
-	
+
 	/**
 	 * Met à jour la vue
 	 * Importe la frequence du model et la stock dans le 
@@ -201,15 +204,33 @@ public class Vue_2D extends JPanel implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
-			for (int index = 0; index < ratioFrequence.length; index ++) {
-				try {
-					ratioFrequence[index] = ratioFrequence[index + 1];
-				}
-				catch (IndexOutOfBoundsException e) {
-					ratioFrequence[index] = model.getRatioFrequence();
+
+			if (model.isFileLoaded() 
+					&& model.getMusique().isLoad()
+					&& !model.getMusique().isPause()) {
+
+				for (int index = 0; index < ratioFrequence.length; index ++) {
+
+					try {
+
+						ratioFrequence[index] = ratioFrequence[index + 1];
+
+					}
+
+					catch (IndexOutOfBoundsException e) {
+
+						ratioFrequence[index] = model.getRatioFrequence();
+
+					}
 				}
 			}
+
+			AMPLITUDE = model.getParametres().get("Amplitude");
+			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+			ESPACEMENT = model.getParametres().get("Espacement");
+
 			repaint();
+
 		}
 	}
 
