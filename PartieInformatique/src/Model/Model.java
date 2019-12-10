@@ -41,22 +41,25 @@ public class Model extends Observable implements Observer {
 	private Thread musiqueThread;
 	
 	/**
-	 * permet de connaitre si la musique 
-	 * est en cours de lecture
-	 */
-	private boolean enCours;
-	
-	/**
 	 * Définis si le programme a rencontré une erreur
 	 * 0 : aucune erreur
 	 * 1 : erreur de type ""
 	 */
 	private Exception erreur = null;
-	//TODO attribut
-	private int bit;
+	
+	/**
+	 * les paramètres avec leur valeurs
+	 */
 	private Map<String, Integer> parametres = new HashMap<String, Integer>();
 	
-	//TODO
+	/**
+	 * Création du model avec la liste de tous les paramètres
+	 * @param parameters : tous les paramètres sous forme de chaîne de caractères
+	 * Exemple :
+	 * 		- Amplitude
+	 * 		- Couleur
+	 * 		- ...
+	 */
 	public Model(String[] parameters) {
 		
 		super();
@@ -76,45 +79,51 @@ public class Model extends Observable implements Observer {
 	}
 
 	//TODO Check pause / mettre pause a true dès le début
+	/**
+	 * Permet de lire un fichier audio tous en permettant de
+	 * garder la main sur l'application grâce au multithreading
+	 */
 	public void lectureFichier() {
+		
 		if (musiqueThread == null || musique.isPause()) {
+			
 			if (!musique.isLoad())
 				musique.initialisation(fichier);
-	
-			//cool du multithreading :)
+			
 			musiqueThread = new Thread(musique);
 			musiqueThread.start();
-			//modifier();
-			/*Je crois on peux delte TODO
-			if (Thread.State.TERMINATED == musiqueThread.getState()) {
-			 
-				musiqueThread = null;
-				musique.setPause(true);
-			}
-			*/
+			
 		}
-	}
-	/**
-	 * permet de modifier le nom du fichier
-	 */
-	public void setFichier(File file) {
-		fichier = file;
 	}
 	
 	/**
-	 * 
+	 * permet de modifier le fichier qui fdoit être lus
+	 */
+	public void setFichier(File file) {
+		
+		fichier = file;
+		
+	}
+	
+	/**
+	 * permet d'obtenir le model jouant la musique
 	 * @return le model de la musique
 	 */
 	public Model_Musique getMusique() {
+		
 		return musique;
+		
 	}
+	
 	/**
 	 * permet d'arrêter la musique
 	 * et de remettre le même fichier
 	 * au début de la lecture
 	 */
 	public void stop() {
+		
 		musique.reset();
+		
 	}
 
 	/**
@@ -124,8 +133,12 @@ public class Model extends Observable implements Observer {
 	 * false : il n'y a pas de fichier en cour de lecture
 	 */
 	public boolean isFileLoaded() {
-		if (fichier == null) return false;
+		
+		if (fichier == null)
+			return false;
+		
 		return true;
+		
 	}
 
 	/**
@@ -133,17 +146,25 @@ public class Model extends Observable implements Observer {
 	 * à la vue
 	 */
 	public void setErreur(Exception e) {
+		
 		erreur  = e;
+		
 		setChanged();
 		notifyObservers();
+		
 		erreur = null;
+		
 	}
 
 	/**
-	 * @return le type d'une erreur si elle existe
+	 * permet d'obtenir une erreur
+	 * @return  Exception si il y a une erreur
+	 * 			null sinon
 	 */
 	public Exception getErreur() {
+		
 		return erreur;
+		
 	}
 	
 	/**
@@ -151,11 +172,15 @@ public class Model extends Observable implements Observer {
 	 * par rapport à celle du fichier
 	 */
 	public double getRatioFrequence() {
+		
 		double freq = 0;
+		
 		freq = 	(musique.getFrequence() 
 				* (parametres.get("Amplitude")) / 100)
 				/ musique.getAudioFormat().getFrameRate();
+		
 		return freq;
+		
 	}
 
 	/**
@@ -163,21 +188,34 @@ public class Model extends Observable implements Observer {
 	 * et de notify l'observer
 	 */
 	public void update(Observable o, Object arg) {
+		
 		setChanged();
 		notifyObservers();
+		
 	}
 	
 	/**
+	 * renvoie tous les parmetres ainsi que leur valeurs associé
 	 * @return the parametres
 	 */
 	public Map<String, Integer> getParametres() {
+		
 		return parametres;
+		
 	}
 	
-	//TODO
+	/**
+	 * permet de modifié un paramètre en donnant
+	 * sa valeur et le paramètre
+	 * @param textLabel		: le paramètre a modifié
+	 * @param texteToInt	: la valeur a donner
+	 */
 	public void parametersChanged(String textLabel, int texteToInt) {
+		
 		parametres.put(textLabel, texteToInt);
+		
 		setChanged();
 		notifyObservers();
+		
 	}
 }
