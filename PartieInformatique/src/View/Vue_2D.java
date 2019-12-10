@@ -74,6 +74,9 @@ public class Vue_2D extends JPanel implements Observer {
 	 */
 	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
 
+	/**
+	 * L'espacement entre chaque rectangle, en pixel
+	 */
 	private static int ESPACEMENT = 0;
 
 	/**
@@ -95,10 +98,15 @@ public class Vue_2D extends JPanel implements Observer {
 		//g.setColor(Color.cyan);
 
 		if ((NOMBRE_RECTANGLE % 2) == 0) {
+			
 			paintPaire(g);
+			
 		}
+		
 		else {
+			
 			paintImpaire(g);
+			
 		}
 
 	}
@@ -155,16 +163,19 @@ public class Vue_2D extends JPanel implements Observer {
 	private void paintRectCouleur(Graphics g, int x, int numero_rectangle) {
 		// On trace le rectangle
 		// la couleur correspond au dedans du rectangle
+		
 		g.setColor(new Color(
 				(float) Math.random(),
 				(float) Math.random(),
 				(float) Math.random()));
 
 		if (ratioFrequence[numero_rectangle] != 0) {
+			
 			g.fillRect(x,
 					(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
 					EPAISSEUR_RECTANGLE,
 					(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+			
 		}
 
 	}
@@ -176,6 +187,7 @@ public class Vue_2D extends JPanel implements Observer {
 	 * élément vers la gauche
 	 */
 	public void update(Observable m, Object obj) {
+		
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
