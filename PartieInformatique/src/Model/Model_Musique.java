@@ -67,7 +67,7 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Sert à passer du signal temporel de la musique
 	 * au spectre fréquentiel
 	 */
-	private FourierTransform FFT = new FourierTransform();
+	private static FourierTransform FFT = new FourierTransform();
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
@@ -269,9 +269,4 @@ public class Model_Musique extends Observable implements Runnable {
 		}
 	}	
 	
-	/*
-	 public SourceDataLine getLine() {
-		return line;
-	}
-	*/
 }
