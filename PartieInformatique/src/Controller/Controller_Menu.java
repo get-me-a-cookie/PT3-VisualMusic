@@ -16,11 +16,9 @@ import View.Vue_3D;
 
 /**
  * 
- * @author goodw
- * 
  * Classe implémentant ActionListener
  * 
- * Instancié uniquement pour les JMenuItem du JMenu "Fichier"
+ * @author goodw
  */
 public class Controller_Menu extends Controller implements ActionListener  {
 
@@ -31,7 +29,9 @@ public class Controller_Menu extends Controller implements ActionListener  {
 	 */
 	public Controller_Menu(Model model,
 			Adapteur_ControllerVue handler) {
+		
 		super(model, handler);
+		
 	}
 
 	/**
@@ -42,64 +42,89 @@ public class Controller_Menu extends Controller implements ActionListener  {
 	 * 	qui renvoi et ouvre le fichier choisit
 	 */
 	public void actionPerformed(ActionEvent arg0) {
+		
 		JMenuItem menu = (JMenuItem) arg0.getSource();
+		
 		if (menu.getText().equals("Ouvrir un fichier...")) {
+			
 			/*// TODO A décommenter ...
 			JFileChooser fc = new JFileChooser();
 			int valeur_de_retour = fc.showOpenDialog(null);
-			if (valeur_de_retour == JFileChooser.APPROVE_OPTION) {
+			
+			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
-			}
 			 */		 
 		}
+		
 		if (menu.getText().equals("2D") && menu.isSelected()) {
+			
 			JFrame fenetre	= null;
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
+			
 			for (Component b : handler.getComponent()) {
-				if (b instanceof JFrame) {
+				
+				if (b instanceof JFrame)
 					fenetre = (JFrame) b;
-				}
-				if (b instanceof Vue_2D) {
+				
+				if (b instanceof Vue_2D)
 					twoD = (Vue_2D) b;
-				}
-				if (b instanceof Vue_3D) {
+				
+				if (b instanceof Vue_3D)
 					threeD = (Vue_3D) b;
-				}
+				
 			}
+			
 			try {
+				
 				fenetre.remove(threeD);
 				fenetre.add(twoD, BorderLayout.CENTER);
 				fenetre.repaint();
+				
 			}
+			
 			catch (NullPointerException e) {
+
+				//TODO message d'erreur
 				model.setErreur(e);
 				return;
+				
 			}
 		}
+		
 		if (menu.getText().equals("3D") && menu.isSelected()) {
+			
 			JFrame fenetre	= null;
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
+			
 			for (Component b : handler.getComponent()) {
-				if (b instanceof JFrame) {
+				
+				if (b instanceof JFrame)
 					fenetre = (JFrame) b;
-				}
-				if (b instanceof Vue_2D) {
+
+				if (b instanceof Vue_2D)
 					twoD = (Vue_2D) b;
-				}
-				if (b instanceof Vue_3D) {
+
+				if (b instanceof Vue_3D)
 					threeD = (Vue_3D) b;
-				}
+
 			}
+			
 			try {
+				
 				fenetre.remove(twoD);
 				fenetre.add(threeD, BorderLayout.CENTER);
 				fenetre.repaint();
+				
 			}
+			
 			catch (NullPointerException e) {
+
+				//TODO message d'erreur
 				model.setErreur(e);
 				return;
+				
 			}
 		}
 		model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer

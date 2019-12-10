@@ -13,8 +13,6 @@ import Model.Model;
  * 
  * Classe implémentant ActionListener
  * 
- * Instancié uniquement pour les boutons Lecture et Pause
- * 
  * @author goodw
  */
 public class Controller_Bouton_Musique extends Controller implements ActionListener {
