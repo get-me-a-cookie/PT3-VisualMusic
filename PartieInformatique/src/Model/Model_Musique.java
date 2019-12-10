@@ -86,8 +86,10 @@ public class Model_Musique extends Observable implements Runnable {
 	 * l'affichage dès un changement de fréquence
 	 */
 	public Model_Musique(Model m) {
+		
 		super();
 		this.addObserver(m);
+		
 	}
 
 	/**
@@ -101,15 +103,24 @@ public class Model_Musique extends Observable implements Runnable {
 	public boolean initialisation(File file){
 
 		try {
+			
 			audioInputStream = AudioSystem.getAudioInputStream(file);
+			
 		} 
+		
 		catch (UnsupportedAudioFileException e) {
+			//TODO message d'erreur
 			e.printStackTrace();
 			return false;
+			
 		} 
+		
 		catch (IOException e) {
+			//TODO message d'erreur
+			
 			e.printStackTrace();
 			return false;
+			
 		}
 
 		audioFormat = audioInputStream.getFormat();
@@ -117,14 +128,22 @@ public class Model_Musique extends Observable implements Runnable {
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
 
 		try {
+			
 			line = (SourceDataLine) AudioSystem.getLine(info);
 			load = true;
+			
 		} 
+		
 		catch (LineUnavailableException e) {
+
+			//TODO message d'erreur
 			e.printStackTrace();
 			return false;
+			
 		}
+		
 		return true;
+		
 	} 
 
 	/**
@@ -136,14 +155,21 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Enfin quand la lecture et finis, ferme le fichier
 	 */
 	public void run() {	
+		
 		pause = false;
 
 		try {
+			
 			line.open(audioFormat);
+			
 		} 
+		
 		catch (LineUnavailableException e) {
+
+			//TODO message d'erreur
 			e.printStackTrace();
 			return;
+			
 		}
 
 		line.start();
@@ -158,6 +184,7 @@ public class Model_Musique extends Observable implements Runnable {
 				bytesRead = audioInputStream.read(bytes, 0, bytes.length);
 				
 				if (bytesRead != -1) {	//si il y a des octets lus
+					
 					Complex[] comp = new Complex[bytesRead];	//taille = nb de bytes lus
 					
 					for (int index_dans_tableau = 0; 
@@ -182,8 +209,10 @@ public class Model_Musique extends Observable implements Runnable {
 					}
 					
 					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
+					
 					setChanged();
 					notifyObservers();
+					
 					line.write(bytes, 0, bytesRead);
 					
 				}
@@ -197,7 +226,8 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (IOException io) {
-			
+
+			//TODO message d'erreur
 			io.printStackTrace();
 			return;
 			
@@ -212,22 +242,29 @@ public class Model_Musique extends Observable implements Runnable {
 	 * false : sera mis en lecture
 	 */
 	public void setPause(boolean b) {
+		
 		this.pause = b;
+		
 	}	
 
 	/**
+	 * Permet d'obtenir le format du fichier
 	 * @return le format du fichier
 	 */
 	public AudioFormat getAudioFormat() {
+		
 		return audioFormat;
+		
 	}
 
 	/**
-	 * @return the frequence
-	 * retourne la fréquence de la musique 
+	 * Permet d'obtenir la fréquence actuelle du fichier audio
+	 * @return la fréquence de la musique 
 	 */
 	public double getFrequence() {
+		
 		return frequence;
+		
 	}
 
 	/**
@@ -238,7 +275,9 @@ public class Model_Musique extends Observable implements Runnable {
 	 * false : fichier en lecture
 	 */
 	public boolean isPause() {
+		
 		return pause;
+		
 	}
 	
 	/**
@@ -249,7 +288,9 @@ public class Model_Musique extends Observable implements Runnable {
 	 * false : fichier non chargé
 	 */
 	public boolean isLoad() {
+		
 		return load;
+		
 	}
 	
 	/**
@@ -258,13 +299,16 @@ public class Model_Musique extends Observable implements Runnable {
 	 * presse "stop" par exemple
 	 */
 	public void reset() {
+		
 		if(!pause) {
+			
 			pause = true;
 			audioFormat = null;
 			audioInputStream = null;
 			line.close();
 			line = null;
 			load = false;
+			
 		}
 	}	
 	
