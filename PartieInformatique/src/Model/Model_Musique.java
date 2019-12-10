@@ -217,7 +217,6 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * @return le format du fichier
-	 * 
 	 */
 	public AudioFormat getAudioFormat() {
 		return audioFormat;

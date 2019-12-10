@@ -40,7 +40,7 @@ public class Model extends Observable implements Observer {
 	 */
 	private Thread musiqueThread;
 	
-	/*
+	/**
 	 * permet de connaitre si la musique 
 	 * est en cours de lecture
 	 */
@@ -52,12 +52,11 @@ public class Model extends Observable implements Observer {
 	 * 1 : erreur de type ""
 	 */
 	private Exception erreur = null;
+	//TODO attribut
 	private int bit;
 	private Map<String, Integer> parametres = new HashMap<String, Integer>();
 	
-	/**
-	 * 
-	 */
+	//TODO
 	public Model(String[] parameters) {
 		
 		super();
@@ -102,7 +101,10 @@ public class Model extends Observable implements Observer {
 		fichier = file;
 	}
 	
-	//TODO
+	/**
+	 * 
+	 * @return le model de la musique
+	 */
 	public Model_Musique getMusique() {
 		return musique;
 	}
@@ -156,7 +158,10 @@ public class Model extends Observable implements Observer {
 		return freq;
 	}
 
-	//TODO
+	/**
+	 * Méthode permettant de mettre à jour
+	 * et de notify l'observer
+	 */
 	public void update(Observable o, Object arg) {
 		setChanged();
 		notifyObservers();
@@ -169,6 +174,7 @@ public class Model extends Observable implements Observer {
 		return parametres;
 	}
 	
+	//TODO
 	public void parametersChanged(String textLabel, int texteToInt) {
 		parametres.put(textLabel, texteToInt);
 		setChanged();
