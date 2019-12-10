@@ -3,13 +3,11 @@ package Controller;
 import Model.Model;
 
 /**
- * 
- * @author goodw
- *
  * Classe permettant de faciliter la structure MVC
  * Définit un Model qui sera commun à tout les Controller
  * 	et un Constructeur initialisant ce model
  * 
+ * @author goodw
  */
 public abstract class Controller {
 
@@ -32,9 +30,11 @@ public abstract class Controller {
 	 */
 	public Controller(Model model,
 			Adapteur_ControllerVue handler) {
+		
 		super();
 		this.handler = handler;
 		this.model = model;
+		
 	}
 	
 }
