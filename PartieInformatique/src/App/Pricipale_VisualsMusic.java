@@ -31,12 +31,14 @@ import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Erreur;
 import View.Vue_TextField_PlusMoins;
+
 /** 
- * @author Goodwui
  * Classe représentant l'IG, composé de 
  *     - un menu
  *     - le visualiseur de musique
  *     - les bouton de lectures
+ *     
+ * @author Goodwui
  */
 public class Pricipale_VisualsMusic extends JFrame {
 
@@ -115,9 +117,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	private JMenu menu_parametre;
 
-	/**
-	 * TODO
-	 */
+	//TODO A delete
 	private JTextField 	menu_parametre_amplitude_field;
 	private JButton 	menu_parametre_amplitude_plus;
 	private JButton 	menu_parametre_amplitude_moins;
@@ -136,6 +136,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	private JPanel menu_parametre_amplitude;
 	private JPanel menu_parametre_width;
 	private JPanel menu_parametre_margin;
+
 	/**
 	 * Actions de @menu_affichage
 	 * Permet d'afficher en 2D la musique
@@ -188,13 +189,18 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
+		
 		/* TODO A voir
 		 * 		changer le constructeur en main
 		 * 		Mettre les attributs directement dans le main
 		 */
-		String[] listOfParameters = {	"Amplitude",
+		
+		//TODO a voir pour pas le mêtre dans la fenetre paramètres
+		String[] listOfParameters = {	
+				"Amplitude",
 				"Epaisseur",
-		"Espacement"	};
+				"Espacement"
+		};
 
 		//Création Model
 		model = new Model(listOfParameters);
@@ -217,7 +223,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur2D, BorderLayout.CENTER);
-		//this.add(visualisateur3D, BorderLayout.CENTER);
 		//this.add(pleine_ecran);
 
 		//Paramètrage de la fenêtre
@@ -226,6 +231,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.pack();
+		
 	}
 
 	/**
@@ -452,6 +458,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Lance notre application
 	 */
 	public static void main (String[] args) {
+		
 		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
 
 	}
