@@ -109,20 +109,12 @@ public class Vue_2D extends JPanel implements Observer {
 	 * @param g : de type Graphics, sert à tracé les rectangles
 	 */
 	private void paintPaire(Graphics g) {
+		
 		int j;
 		j = 0;
-		for (int i = TAILLE_FENETRE_X / 2
-				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
-				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
-
-			paintRectCouleur(g, i, j);
-			j ++;
-
-		}
-
-		for (int i = TAILLE_FENETRE_X / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
-				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
+		
+		for (int i = TAILLE_FENETRE_X / 2 - (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2);
+				j < NOMBRE_RECTANGLE;
 				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
@@ -141,18 +133,9 @@ public class Vue_2D extends JPanel implements Observer {
 
 		int j;
 		j = 0;
-		for (int i = TAILLE_FENETRE_X / 2 //- EPAISSEUR_RECTANGLE / 2
-				- (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2); //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
-				j < NOMBRE_RECTANGLE / 2; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
-
-			paintRectCouleur(g, i, j);
-			j ++;
-
-		}
-
-		for (int i = TAILLE_FENETRE_X / 2 - EPAISSEUR_RECTANGLE / 2; //MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
-				j < NOMBRE_RECTANGLE ; //MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
+		
+		for (int i = TAILLE_FENETRE_X / 2 - (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2);
+				j < NOMBRE_RECTANGLE;
 				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
 
 			paintRectCouleur(g, i, j);
