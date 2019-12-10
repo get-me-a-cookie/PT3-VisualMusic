@@ -11,11 +11,11 @@ import Model.Model;
 
 /**
  * 
- * @author goodw
- * 
  * Classe implémentant ActionListener
  * 
  * Instancié uniquement pour les boutons Lecture et Pause
+ * 
+ * @author goodw
  */
 public class Controller_Bouton_Musique extends Controller implements ActionListener {
 
@@ -26,7 +26,9 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 	 */
 	public Controller_Bouton_Musique(Model model,
 			Adapteur_ControllerVue handler) {
+		
 		super(model, handler);
+		
 	}
 
 	/**
@@ -40,36 +42,60 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 	 * 
 	 */
 	public void actionPerformed(ActionEvent arg0) {
+		
 		// si le fichier n'est pas lu alors on affiche une erreur
 		if (!model.isFileLoaded()) {
+			
 			model.setErreur(new FileNotFoundException());
 			return;
+			
 		}
+		
 		JButton bouton = (JButton) arg0.getSource();
+		
 		//Controle le bouton play
 		if (bouton.getText().equals("Play")) {
+			
 			bouton.setText("Pause");
 			model.lectureFichier();
-			if (model.getMusique().isPause()) model.getMusique().setPause(false);
+			
+			if (model.getMusique().isPause()) 
+				model.getMusique().setPause(false);
+			
 			return;
+			
 		}
+		
 		//Contorle le bouton pause
 		// TODO Remmetre à play quand Slider de progression est finis
 		if (bouton.getText().equals("Pause")) {
+			
 			bouton.setText("Play");
-			if (!model.getMusique().isPause()) model.getMusique().setPause(true);
+			
+			if (!model.getMusique().isPause()) 
+				model.getMusique().setPause(true);
+			
 			return;
+			
 		}
+		
 		//Controle le bouton stop
 		if(bouton.getText().equals("Stop")) {
+			
 			model.stop();
+			
 			for (Component b : handler.getComponent()) {
+				
 				if (b instanceof JButton) {
+					
 					if (((JButton) b).getText().equals("Pause"))
 						((JButton) b).setText("Play");
+					
 				}
 			}
+			
 			return;
+			
 		}
 	}
 
