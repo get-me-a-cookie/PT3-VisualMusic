@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 import Model.Model;
 
 /**
- * 
- * @author Goodwin
  * Classe représentant le visualisateur de l'IG
  * Affiche des formes géométrique 2D en fonction de la musique écouté
+ * 
+ * @author Goodwin
  */
 public class Vue_2D extends JPanel implements Observer {
 

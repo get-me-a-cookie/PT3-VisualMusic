@@ -9,9 +9,6 @@ import java.util.Observer;
 
 //TODO Javadoc, contenu
 /** 
- * 
- * @author goodw
- *
  * Classe de type Model, permettant la structure MVC
  * 	Instancié uniquement dans le code principale
  * 	et méthode quasi-uniquement utilisé dans les Controller
@@ -20,6 +17,8 @@ import java.util.Observer;
  * Cette classe conserne toute la gestion évenementiel du
  * 	programme
  * 	Elle informe également les Vue
+ * 
+ * @author goodw
  */
 public class Model extends Observable implements Observer {
 

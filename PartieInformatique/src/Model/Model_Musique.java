@@ -16,8 +16,6 @@ import flanagan.complex.Complex;
 import flanagan.math.FourierTransform;
 
 /** 
- * 
- * @author goodw
  *
  * Classe de type Model, connu uniquement par la Classe "Model"
  * 
@@ -32,6 +30,8 @@ import flanagan.math.FourierTransform;
  * 
  * Hérite de Observable afin de pouvoir notifié les observer de Model
  * 	quand la fréquence change
+ * 
+ * @author goodw
  */
 public class Model_Musique extends Observable implements Runnable {
 
