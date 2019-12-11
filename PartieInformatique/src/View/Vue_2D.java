@@ -191,6 +191,9 @@ public class Vue_2D extends JPanel implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
+			
+			if (model.isVueChanged())
+				ratioFrequence = null;
 
 			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 			//ESPACEMENT = model.getParametres().get("Espacement");

@@ -92,6 +92,9 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
+			
+			if (model.isVueChanged())
+				ratioFrequence = null;
 
 			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 			//ESPACEMENT = model.getParametres().get("Espacement");
