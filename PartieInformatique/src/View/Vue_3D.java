@@ -1,13 +1,21 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
+import javax.media.opengl.GLProfile;
+import javax.media.opengl.awt.GLCanvas;
 import javax.swing.JPanel;
+
+import com.jogamp.opengl.util.Animator;
+import com.jogamp.opengl.util.FPSAnimator;
 
 import Model.Model;
 
@@ -17,7 +25,7 @@ import Model.Model;
  * 
  * @author Goodwin
  */
-public class Vue_3D extends JPanel implements Observer, GLEventListener {
+public class Vue_3D extends GLCanvas implements Observer {
 
 	/**
 	 * Taille Maximale de la fenètre de l'application
@@ -62,13 +70,13 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE;
+	private static int NOMBRE_RECTANGLE = 4;
 
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
 	 * Taille définit dans méthode update
 	 */
-	private double[] ratioFrequence;
+	private double[] ratioFrequence = new double[4];
 
 	/**
 	 * Un tableau contenant un nombre de couleur egal
@@ -81,6 +89,24 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 	 */
 	private static int ESPACEMENT = 0;
 
+
+	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
+	static GLCapabilities capabilities = new GLCapabilities( profile );
+
+	final Animator animator = new Animator(this);
+
+	private Forme_Cube cube;
+
+	public Vue_3D() {
+
+		super(capabilities);
+
+		cube = new Forme_Cube();
+
+		this.addGLEventListener(cube);
+
+	}
+
 	/**
 	 * Met à jour la vue
 	 * Importe la frequence du model et la stock dans le 
@@ -88,87 +114,61 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 	 * élément vers la gauche
 	 */
 	public void update(Observable m, Object obj) {
-		
+
+
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
-			
-			if (model.isVueChanged())
-				ratioFrequence = null;
 
-			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-			//ESPACEMENT = model.getParametres().get("Espacement");
-			
-			NOMBRE_RECTANGLE = (
-					(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
-					- 2 * EPAISSEUR_RECTANGLE)
-					/ (EPAISSEUR_RECTANGLE);
-			
-			
-			double[] sauvegarde_rationFrequence = ratioFrequence;
-			ratioFrequence = new double[NOMBRE_RECTANGLE];
-			
-			if (sauvegarde_rationFrequence != null) {
+			if (!model.isThreeDimension()) {
+
+				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
+				animator.stop();
+
+			}
+
+			else {
+
+				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+				//ESPACEMENT = model.getParametres().get("Espacement");
+
+				if (model.isFileLoaded() 
+						&& model.getMusique().isLoad()
+						&& !model.getMusique().isPause()) {
+
+					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+
+						try {
+
+							ratioFrequence[index] = ratioFrequence[index + 1];
+
+						}
+
+						catch (IndexOutOfBoundsException e) {
+
+							ratioFrequence[index] = model.getRatioFrequence();
+
+						}
+					}
+				}
+
+				cube.setRatioFrequence(ratioFrequence);
 				
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
-					
-					ratioFrequence[index] = sauvegarde_rationFrequence[index];
-					
-				}
+				if (!animator.isAnimating())
+					animator.start();
+
+				if (animator.isPaused())
+					System.out.println("pause");
+				
+				if (!animator.isAnimating())
+					System.out.println("pas ouf");
+				
+				System.out.println("le model");
+				
+				//TODO Thread
 			}
-
-			if (model.isFileLoaded() 
-					&& model.getMusique().isLoad()
-					&& !model.getMusique().isPause()) {
-
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
-
-					try {
-						
-						ratioFrequence[index] = ratioFrequence[index + 1];
-						
-					}
-
-					catch (IndexOutOfBoundsException e) {
-						
-						ratioFrequence[index] = model.getRatioFrequence();
-						
-					}
-				}
-			}
-
-			repaint();
-
 		}
 	}
 
 	//https://www.tutorialspoint.com/jogl/jogl_quick_guide.htm
-	public void display(GLAutoDrawable arg0) {
-
-		
-		
-	}
-
-
-	public void dispose(GLAutoDrawable arg0) {
-
-
-		
-	}
-
-
-	public void init(GLAutoDrawable arg0) {
-
-
-		
-	}
-
-
-	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
-
-
-		
-		
-	}
-
 }

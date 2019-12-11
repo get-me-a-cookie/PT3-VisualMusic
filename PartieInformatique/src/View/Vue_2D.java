@@ -44,7 +44,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE;	
+	private static int EPAISSEUR_RECTANGLE = 60;	
 
 	/**
 	 * Distance en pixel entre les forme 
@@ -60,13 +60,16 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE;
+	private static int NOMBRE_RECTANGLE = (
+			(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
+			- 2 * EPAISSEUR_RECTANGLE)
+			/ (EPAISSEUR_RECTANGLE);
 
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
 	 * Taille définit dans méthode update
 	 */
-	private double[] ratioFrequence;
+	private double[] ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 	/**
 	 * Un tableau contenant un nombre de couleur egal
@@ -98,15 +101,15 @@ public class Vue_2D extends JPanel implements Observer {
 		//g.setColor(Color.cyan);
 
 		if ((NOMBRE_RECTANGLE % 2) == 0) {
-			
+
 			paintPaire(g);
-			
+
 		}
-		
+
 		else {
-			
+
 			paintImpaire(g);
-			
+
 		}
 
 	}
@@ -117,10 +120,10 @@ public class Vue_2D extends JPanel implements Observer {
 	 * @param g : de type Graphics, sert à tracé les rectangles
 	 */
 	private void paintPaire(Graphics g) {
-		
+
 		int j;
 		j = 0;
-		
+
 		for (int i = TAILLE_FENETRE_X / 2 - (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2);
 				j < NOMBRE_RECTANGLE;
 				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
@@ -141,7 +144,7 @@ public class Vue_2D extends JPanel implements Observer {
 
 		int j;
 		j = 0;
-		
+
 		for (int i = TAILLE_FENETRE_X / 2 - (EPAISSEUR_RECTANGLE * NOMBRE_RECTANGLE / 2);
 				j < NOMBRE_RECTANGLE;
 				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
@@ -163,19 +166,19 @@ public class Vue_2D extends JPanel implements Observer {
 	private void paintRectCouleur(Graphics g, int x, int numero_rectangle) {
 		// On trace le rectangle
 		// la couleur correspond au dedans du rectangle
-		
+
 		g.setColor(new Color(
 				(float) Math.random(),
 				(float) Math.random(),
 				(float) Math.random()));
 
 		if (ratioFrequence[numero_rectangle] != 0) {
-			
+
 			g.fillRect(x,
 					(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
 					EPAISSEUR_RECTANGLE,
 					(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
-			
+
 		}
 
 	}
@@ -187,57 +190,60 @@ public class Vue_2D extends JPanel implements Observer {
 	 * élément vers la gauche
 	 */
 	public void update(Observable m, Object obj) {
-		
+
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
 			
-			if (model.isVueChanged())
-				ratioFrequence = null;
+			if (model.isThreeDimension())
+				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
-			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-			//ESPACEMENT = model.getParametres().get("Espacement");
-			
-			NOMBRE_RECTANGLE = (
-					(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
-					- 2 * EPAISSEUR_RECTANGLE)
-					/ (EPAISSEUR_RECTANGLE);
-			
-			
-			double[] sauvegarde_rationFrequence = ratioFrequence;
-			ratioFrequence = new double[NOMBRE_RECTANGLE];
-			
-			if (sauvegarde_rationFrequence != null) {
-				
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
-					
-					ratioFrequence[index] = sauvegarde_rationFrequence[index];
-					
-				}
-			}
+			else {
 
-			if (model.isFileLoaded() 
-					&& model.getMusique().isLoad()
-					&& !model.getMusique().isPause()) {
+				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+				//ESPACEMENT = model.getParametres().get("Espacement");
 
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+				NOMBRE_RECTANGLE = (
+						(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
+						- 2 * EPAISSEUR_RECTANGLE)
+						/ (EPAISSEUR_RECTANGLE);
 
-					try {
-						
-						ratioFrequence[index] = ratioFrequence[index + 1];
-						
-					}
 
-					catch (IndexOutOfBoundsException e) {
-						
-						ratioFrequence[index] = model.getRatioFrequence();
-						
+				double[] sauvegarde_rationFrequence = ratioFrequence;
+				ratioFrequence = new double[NOMBRE_RECTANGLE];
+
+				if (sauvegarde_rationFrequence != null) {
+
+					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+
+						ratioFrequence[index] = sauvegarde_rationFrequence[index];
+
 					}
 				}
+
+				if (model.isFileLoaded() 
+						&& model.getMusique().isLoad()
+						&& !model.getMusique().isPause()) {
+
+					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+
+						try {
+
+							ratioFrequence[index] = ratioFrequence[index + 1];
+
+						}
+
+						catch (IndexOutOfBoundsException e) {
+
+							ratioFrequence[index] = model.getRatioFrequence();
+
+						}
+					}
+				}
+
+				repaint();
+
 			}
-
-			repaint();
-
 		}
 	}
 
