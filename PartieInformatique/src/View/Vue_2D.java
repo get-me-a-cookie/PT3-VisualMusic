@@ -44,7 +44,7 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE;	
+	private static int EPAISSEUR_RECTANGLE = 60;	
 
 	/**
 	 * Distance en pixel entre les forme 
@@ -60,13 +60,16 @@ public class Vue_2D extends JPanel implements Observer {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE;
+	private static int NOMBRE_RECTANGLE = (
+			(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
+			- 2 * EPAISSEUR_RECTANGLE)
+			/ (EPAISSEUR_RECTANGLE);
 
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
 	 * Taille définit dans méthode update
 	 */
-	private double[] ratioFrequence;
+	private double[] ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 	/**
 	 * Un tableau contenant un nombre de couleur egal
@@ -191,7 +194,7 @@ public class Vue_2D extends JPanel implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
-
+			System.out.println(model.isThreeDimension());
 			if (model.isThreeDimension())
 				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
