@@ -14,6 +14,7 @@ import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
 import javax.swing.JPanel;
 
+import com.jogamp.opengl.util.Animator;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import Model.Model;
@@ -92,6 +93,8 @@ public class Vue_3D extends GLCanvas implements Observer {
 	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
 	static GLCapabilities capabilities = new GLCapabilities( profile );
 
+	final Animator animator = new Animator(this);
+
 	private Forme_Cube cube;
 
 	public Vue_3D() {
@@ -102,9 +105,6 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 		this.addGLEventListener(cube);
 
-		//final FPSAnimator animator = new FPSAnimator(this, 60, true);
-
-		//animator.start();
 	}
 
 	/**
@@ -120,11 +120,15 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 		if (model.getErreur() == null) {
 
-			if (!model.isThreeDimension())
+			if (!model.isThreeDimension()) {
+
 				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
+				animator.stop();
+
+			}
 
 			else {
-				
+
 				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 				//ESPACEMENT = model.getParametres().get("Espacement");
 
@@ -149,9 +153,19 @@ public class Vue_3D extends GLCanvas implements Observer {
 				}
 
 				cube.setRatioFrequence(ratioFrequence);
+				
+				if (!animator.isAnimating())
+					animator.start();
 
-				repaint();
-
+				if (animator.isPaused())
+					System.out.println("pause");
+				
+				if (!animator.isAnimating())
+					System.out.println("pas ouf");
+				
+				System.out.println("le model");
+				
+				//TODO Thread
 			}
 		}
 	}

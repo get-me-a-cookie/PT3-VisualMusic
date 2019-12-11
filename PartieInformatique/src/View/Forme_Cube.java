@@ -49,18 +49,20 @@ public class Forme_Cube implements GLEventListener {
 
 	public void display(GLAutoDrawable drawable) {
 
-		if (ratioFrequence != null 
-				&& hauteur != null) {
+		for (int index = 0; 
+				index < ratioFrequence.length;
+				index ++) {
+
+			hauteur[index] = 5 * ratioFrequence[index];
+			System.out.println(hauteur[index]);
 			
-			for (int index = 0; 
-					index < ratioFrequence.length;
-					index ++) {
-				
-				hauteur[index] = 5 * ratioFrequence[index];
-				System.out.println(hauteur[index]);
-			}
 		}
 		
+		 double couleur_red = Math.random();
+		 double couleur_green = Math.random();
+		 double couleur_blue = Math.random();
+
+
 		final GL2 gl = drawable.getGL().getGL2();
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
@@ -269,13 +271,17 @@ public class Forme_Cube implements GLEventListener {
 	 * @return the ratioFrequence
 	 */
 	public double[] getRatioFrequence() {
+		
 		return ratioFrequence;
+		
 	}
 
 	/**
 	 * @param ratioFrequence the ratioFrequence to set
 	 */
 	public void setRatioFrequence(double[] ratioFrequence) {
+		
 		this.ratioFrequence = ratioFrequence;
+		
 	}
 }
