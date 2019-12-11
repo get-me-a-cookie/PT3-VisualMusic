@@ -62,6 +62,8 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
 			
+			model.setVueChanged(true);
+			
 			for (Component b : handler.getComponent()) {
 				
 				if (b instanceof JFrame)
@@ -97,6 +99,8 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			JFrame fenetre	= null;
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
+
+			model.setVueChanged(true);
 			
 			for (Component b : handler.getComponent()) {
 				

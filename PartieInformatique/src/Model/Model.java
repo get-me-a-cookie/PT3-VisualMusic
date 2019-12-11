@@ -52,6 +52,14 @@ public class Model extends Observable implements Observer {
 	private Map<String, Integer> parametres = new HashMap<String, Integer>();
 	
 	/**
+	 * Définis si l'utilisateur a demander de changer de vue
+	 * afin de pouvoir réinitialiser les vue à chaque fois.
+	 * true  : l'utilisateur veux changer de vue
+	 * false : il reste sur sa vue actuelle 
+	 */
+	private boolean vueChanged = false;
+
+	/**
 	 * Création du model avec la liste de tous les paramètres
 	 * @param parameters : tous les paramètres sous forme de chaîne de caractères
 	 * Exemple :
@@ -215,6 +223,29 @@ public class Model extends Observable implements Observer {
 		
 		setChanged();
 		notifyObservers();
+		
+	}
+	
+	/**
+	 * @return the vueChanged
+	 */
+	public boolean isVueChanged() {
+		
+		return vueChanged;
+		
+	}
+
+	/**
+	 * @param vueChanged the vueChanged to set
+	 */
+	public void setVueChanged(boolean vueChanged) {
+		
+		this.vueChanged = vueChanged;
+		
+		setChanged();
+		notifyObservers();
+		
+		this.vueChanged = false;
 		
 	}
 }
