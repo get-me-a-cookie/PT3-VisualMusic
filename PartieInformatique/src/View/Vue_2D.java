@@ -193,7 +193,7 @@ public class Vue_2D extends JPanel implements Observer {
 		if (model.getErreur() == null) {
 
 			if (model.isThreeDimension())
-				ratioFrequence = null;
+				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 			else {
 

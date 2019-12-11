@@ -51,12 +51,16 @@ public class Forme_Cube implements GLEventListener {
 
 		if (ratioFrequence != null 
 				&& hauteur != null) {
+			
 			for (int index = 0; 
 					index < ratioFrequence.length;
 					index ++) {
-				hauteur[index] = hauteur[index] * ratioFrequence[index];
+				
+				hauteur[index] = 5 * ratioFrequence[index];
+				
 			}
 		}
+		
 		final GL2 gl = drawable.getGL().getGL2();
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );

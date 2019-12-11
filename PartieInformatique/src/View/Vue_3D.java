@@ -121,10 +121,10 @@ public class Vue_3D extends GLCanvas implements Observer {
 		if (model.getErreur() == null) {
 
 			if (!model.isThreeDimension())
-				ratioFrequence = null;
+				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
 
 			else {
-
+				
 				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 				//ESPACEMENT = model.getParametres().get("Espacement");
 
