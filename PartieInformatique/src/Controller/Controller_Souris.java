@@ -18,10 +18,11 @@ public class Controller_Souris extends Controller implements MouseListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model : Instanciant le Model
+	 * @param model   : Instanciant le Model
+	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Souris(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
 

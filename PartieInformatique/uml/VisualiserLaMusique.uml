@@ -20,11 +20,15 @@
     <packagedElement xmi:type="uml:UseCase" xmi:id="_kTtyQO50EemaMugWAghOSQ" name="AvoirTempsMusique">
       <include xmi:type="uml:Include" xmi:id="_4MR4IO50EemaMugWAghOSQ" addition="_pgMeMO50EemaMugWAghOSQ"/>
       <include xmi:type="uml:Include" xmi:id="_46Lf8O50EemaMugWAghOSQ" addition="_qQeEkO50EemaMugWAghOSQ"/>
+      <include xmi:type="uml:Include" xmi:id="_qUTjwA-GEequoclprA3lCQ" addition="_YexFkA-GEequoclprA3lCQ"/>
+      <include xmi:type="uml:Include" xmi:id="_-BrQ0A-HEequoclprA3lCQ" addition="_8MwWkA-HEequoclprA3lCQ"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_pgMeMO50EemaMugWAghOSQ" name="Pause"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_pgMeMO50EemaMugWAghOSQ" name="Pause / Play"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_qQeEkO50EemaMugWAghOSQ" name="ModificationTemps"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_EZrpIO51EemaMugWAghOSQ" name="2D"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_FeXZQO51EemaMugWAghOSQ" name="3D"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_YexFkA-GEequoclprA3lCQ" name="Stop"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_8MwWkA-HEequoclprA3lCQ" name="PleinEcran"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_G63o8O50EemaMugWAghOSQ" memberEnd="_G7Kj4u50EemaMugWAghOSQ _G7de0O50EemaMugWAghOSQ">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_G7Kj4O50EemaMugWAghOSQ" source="org.eclipse.papyrus">

@@ -4,11 +4,13 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Model.Model;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import java.awt.Point;
@@ -49,7 +51,7 @@ public class Vue_3D extends JPanel implements Observer {
 	/**
 	 * Epaisseur de chaqun des triangles
 	 */
-	private static int EPAISSEUR_RECTANGLE = 30;	
+	private static int EPAISSEUR_RECTANGLE = 90;	
 
 	/**
 	 * Définition de la méthode paint
@@ -59,68 +61,91 @@ public class Vue_3D extends JPanel implements Observer {
 	private double[] ratioFrequence = new double[
 	                                             (TAILLE_FENETRE_X - 200) / EPAISSEUR_RECTANGLE
 	                                             ];
-	/*
-	 * On créer deux points afin de tester l'affichage d'un cube
+	
+	private static double AMPLITUDE = 1;
+	
+	/** 
+	 * Espacement entre chaque rectangle tracer
 	 */
-	private Point[] cubeOnePoints = {new Point(100,200) };
-	private Point[] cubeTwoPoints = {new Point(200,300)};
-
+	private static int ESPACEMENT = 0;
+	
 	/**
 	 * Méthode qui permet l'affichage des cubes en 3D
 	 * en fonction du temps, de la féquence 
 	 */
-	//TODO le tableau ratioFrequence toujours égal à 0
-    public void paint(Graphics g) {
-    	g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
-    	/*g.drawLine(100, 
+
+	public void paint(Graphics g) {
+		g.clearRect(0, 0, TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
+
+		// affiche une ligne au centre de la fenêtre
+		g.drawLine(100, 
 				MILIEU_FENETRE_Y, 
 				TAILLE_FENETRE_X - 100, 
 				MILIEU_FENETRE_Y);
-				*/
-    	
-        g.drawRect(100, 100, 200 - 100, 100);
-        // draw connecting lines
-        int j=0;
-        for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
-				 i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
-				 i += EPAISSEUR_RECTANGLE) {
-        	if(ratioFrequence[j] != 0)
-        		g.drawRect(i,
-					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+
+		//Décalement vers gauche
+		int j = 0;
+		for (int i = MILIEU_FENETRE_X-EPAISSEUR_RECTANGLE*3; 
+				i < MILIEU_FENETRE_X+EPAISSEUR_RECTANGLE*3; 
+				i += EPAISSEUR_RECTANGLE + ESPACEMENT) {
+			// On trace le rectangle
+			// la couleur correspond au dedans du rectangle
+			g.setColor(Color.cyan);
+			if (ratioFrequence[j] != 0)
+				g.fillRect(i,
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y),
+						EPAISSEUR_RECTANGLE,
+						(int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+			// on trace le contour
+			g.setColor(Color.black);
+			/*g.drawRect(i+10,
+					   (int) (MILIEU_FENETRE_Y-ratioFrequence[j]*MILIEU_FENETRE_Y)-20,
 					   EPAISSEUR_RECTANGLE,
-					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y) );
-        	j++;
-        	System.out.println(ratioFrequence[j]);
-        }
-    }
-    /*
-     * Méthode qui permet de tracer un cube 
-     */
-    /*public void drawCube(Graphics g) {
-        g.drawRect(MILIEU_FENETRE_X, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y, MILIEU_FENETRE_Y);
-        // draw connecting lines
-        for (int i = 0; i < 4; i++) {
-            g.drawLine(cubeOnePoints[i].x, cubeOnePoints[i].y, 
-                    cubeTwoPoints[i].x, cubeTwoPoints[i].y);
-        }
-    }*/
-    
-    /*
-     * Méthode permettant 
-     */
-    public void update(Observable m, Object obj) {
+					   (int) (ratioFrequence[j]*MILIEU_FENETRE_Y));
+			 */
+
+			j ++;
+		}
+
+	}
+
+	/**
+	 * Met à jour la vue
+	 * Importe la frequence du model et la stock dans le 
+	 * tableau ratioFrequence tout en décalant chaque
+	 * élément vers la gauche
+	 */
+	public void update(Observable m, Object obj) {
 		Model model = (Model) m;
-		
+
 		if (model.getErreur() == null) {
-			for (int index = 0; index < ratioFrequence.length; index ++) {
-				try {
-					ratioFrequence[index] = ratioFrequence[index + 1];
-				}
-				catch (IndexOutOfBoundsException e) {
-					ratioFrequence[index] = model.getRatioFrequence();
+
+			if (model.isFileLoaded() 
+					&& model.getMusique().isLoad()
+					&& !model.getMusique().isPause()) {
+
+				for (int index = 0; index < ratioFrequence.length; index ++) {
+
+					try {
+
+						ratioFrequence[index] = ratioFrequence[index + 1];
+
+					}
+
+					catch (IndexOutOfBoundsException e) {
+
+						ratioFrequence[index] = model.getRatioFrequence();
+
+					}
 				}
 			}
+
+			AMPLITUDE = model.getParametres().get("Amplitude");
+			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+			ESPACEMENT = model.getParametres().get("Espacement");
+
 			repaint();
+
 		}
 	}
 

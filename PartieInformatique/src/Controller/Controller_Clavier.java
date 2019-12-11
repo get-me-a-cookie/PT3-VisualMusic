@@ -18,10 +18,11 @@ public class Controller_Clavier extends Controller implements KeyListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
-	 * @param model : Instanciant le Model
+	 * @param model   : Instanciant le Model
+	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Clavier(Model model,
-			Handler_ControllerHandler handler) {
+			Adapteur_ControllerVue handler) {
 		super(model, handler);
 	}
 

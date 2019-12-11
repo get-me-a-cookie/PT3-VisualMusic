@@ -16,8 +16,6 @@ import flanagan.complex.Complex;
 import flanagan.math.FourierTransform;
 
 /** 
- * 
- * @author goodw
  *
  * Classe de type Model, connu uniquement par la Classe "Model"
  * 
@@ -32,6 +30,8 @@ import flanagan.math.FourierTransform;
  * 
  * Hérite de Observable afin de pouvoir notifié les observer de Model
  * 	quand la fréquence change
+ * 
+ * @author goodw
  */
 public class Model_Musique extends Observable implements Runnable {
 
@@ -67,7 +67,7 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Sert à passer du signal temporel de la musique
 	 * au spectre fréquentiel
 	 */
-	private FourierTransform FFT = new FourierTransform();
+	private static FourierTransform FFT = new FourierTransform();
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
@@ -77,7 +77,7 @@ public class Model_Musique extends Observable implements Runnable {
 	private boolean pause = true;
 
 	/**
-	 * Définis si un fichier à été chargé et convertis en line
+	 * Définis si un fichier à été chargé (initialisé) et convertis en line
 	 */
 	private boolean load = false;
 
@@ -86,8 +86,10 @@ public class Model_Musique extends Observable implements Runnable {
 	 * l'affichage dès un changement de fréquence
 	 */
 	public Model_Musique(Model m) {
+		
 		super();
 		this.addObserver(m);
+		
 	}
 
 	/**
@@ -101,15 +103,24 @@ public class Model_Musique extends Observable implements Runnable {
 	public boolean initialisation(File file){
 
 		try {
+			
 			audioInputStream = AudioSystem.getAudioInputStream(file);
+			
 		} 
+		
 		catch (UnsupportedAudioFileException e) {
+			//TODO message d'erreur
 			e.printStackTrace();
 			return false;
+			
 		} 
+		
 		catch (IOException e) {
+			//TODO message d'erreur
+			
 			e.printStackTrace();
 			return false;
+			
 		}
 
 		audioFormat = audioInputStream.getFormat();
@@ -117,14 +128,22 @@ public class Model_Musique extends Observable implements Runnable {
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
 
 		try {
+			
 			line = (SourceDataLine) AudioSystem.getLine(info);
 			load = true;
+			
 		} 
+		
 		catch (LineUnavailableException e) {
+
+			//TODO message d'erreur
 			e.printStackTrace();
 			return false;
+			
 		}
+		
 		return true;
+		
 	} 
 
 	/**
@@ -136,55 +155,82 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Enfin quand la lecture et finis, ferme le fichier
 	 */
 	public void run() {	
+		
 		pause = false;
 
 		try {
+			
 			line.open(audioFormat);
+			
 		} 
+		
 		catch (LineUnavailableException e) {
+
+			//TODO message d'erreur
 			e.printStackTrace();
 			return;
+			
 		}
 
 		line.start();
 
 		try {
-			//TODO rendre le truc bien pour tout format de musique
-			//frequence diff
-			//encodage diff
-			byte bytes[] = new byte[32768];	//32 * 1024
 			
-			int bytesRead = 0;			
+			byte bytes[] = new byte[audioFormat.getSampleSizeInBits()*1024];	//taille de l'echantillon * 1024
+			int bytesRead = 0;
+			
 			while (!pause) {
+				
 				bytesRead = audioInputStream.read(bytes, 0, bytes.length);
+				
 				if (bytesRead != -1) {	//si il y a des octets lus
+					
 					Complex[] comp = new Complex[bytesRead];	//taille = nb de bytes lus
-					for (int variable_temporaire = 0; 
-							variable_temporaire < bytesRead;
-							variable_temporaire ++) {
-						comp[variable_temporaire] = new Complex(bytes[variable_temporaire]);
+					
+					for (int index_dans_tableau = 0; 
+							index_dans_tableau < bytesRead;
+							index_dans_tableau ++) {
+						
+						comp[index_dans_tableau] = new Complex(bytes[index_dans_tableau]);
+					
 					}
+					
 					FFT.setData(comp);
 					FFT.transform();
 					frequence = 0;
 					Complex[] tableau_complexe_temporaire = FFT.getTransformedDataAsComplex();
-					for (int variable_temporaire = 0; 
-							variable_temporaire < tableau_complexe_temporaire.length;
-							variable_temporaire ++) {
-						frequence = frequence + Math.abs(tableau_complexe_temporaire[variable_temporaire].getReal());
+					
+					for (int index_dans_tableau = 0; 
+							index_dans_tableau < tableau_complexe_temporaire.length;
+							index_dans_tableau ++) {
+						
+						frequence = frequence + Math.abs(tableau_complexe_temporaire[index_dans_tableau].getReal());
+					
 					}
+					
 					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
+					
 					setChanged();
 					notifyObservers();
+					
 					line.write(bytes, 0, bytesRead);
+					
 				}
+				
 				else break;
+				
 			}
+			
 			this.reset();
+			
 		} 
+		
 		catch (IOException io) {
+
+			//TODO message d'erreur
 			io.printStackTrace();
 			return;
+			
 		}
 	}
 	
@@ -196,23 +242,29 @@ public class Model_Musique extends Observable implements Runnable {
 	 * false : sera mis en lecture
 	 */
 	public void setPause(boolean b) {
+		
 		this.pause = b;
+		
 	}	
 
 	/**
+	 * Permet d'obtenir le format du fichier
 	 * @return le format du fichier
-	 * 
 	 */
 	public AudioFormat getAudioFormat() {
+		
 		return audioFormat;
+		
 	}
 
 	/**
-	 * @return the frequence
-	 * retourne la fréquence de la musique 
+	 * Permet d'obtenir la fréquence actuelle du fichier audio
+	 * @return la fréquence de la musique 
 	 */
 	public double getFrequence() {
+		
 		return frequence;
+		
 	}
 
 	/**
@@ -223,18 +275,22 @@ public class Model_Musique extends Observable implements Runnable {
 	 * false : fichier en lecture
 	 */
 	public boolean isPause() {
+		
 		return pause;
+		
 	}
 	
 	/**
 	 * @return the load
-	 * La méthode permet de connaaitre
+	 * La méthode permet de connaitre
 	 * si la musique est chargé
 	 * true : fichier chargé
 	 * false : fichier non chargé
 	 */
 	public boolean isLoad() {
+		
 		return load;
+		
 	}
 	
 	/**
@@ -243,19 +299,17 @@ public class Model_Musique extends Observable implements Runnable {
 	 * presse "stop" par exemple
 	 */
 	public void reset() {
+		
 		if(!pause) {
+			
 			pause = true;
 			audioFormat = null;
 			audioInputStream = null;
 			line.close();
 			line = null;
 			load = false;
+			
 		}
 	}	
 	
-	/*
-	 public SourceDataLine getLine() {
-		return line;
-	}
-	*/
 }
