@@ -57,7 +57,7 @@ public class Forme_Cube implements GLEventListener {
 					index ++) {
 				
 				hauteur[index] = 5 * ratioFrequence[index];
-				
+				System.out.println(hauteur[index]);
 			}
 		}
 		

@@ -81,6 +81,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				
 				fenetre.remove(threeD);
 				fenetre.add(twoD, BorderLayout.CENTER);
+				fenetre.revalidate();
 				fenetre.repaint();
 				
 			}
@@ -119,6 +120,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				
 				fenetre.remove(twoD);
 				fenetre.add(threeD, BorderLayout.CENTER);
+				fenetre.revalidate();
 				fenetre.repaint();
 				
 			}
