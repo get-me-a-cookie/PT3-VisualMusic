@@ -57,7 +57,7 @@ public class Model extends Observable implements Observer {
 	 * true  : l'utilisateur veux changer de vue
 	 * false : il reste sur sa vue actuelle 
 	 */
-	private boolean vueChanged = false;
+	private boolean isThreeDimension = false;
 
 	/**
 	 * Création du model avec la liste de tous les paramètres
@@ -229,23 +229,23 @@ public class Model extends Observable implements Observer {
 	/**
 	 * @return the vueChanged
 	 */
-	public boolean isVueChanged() {
+	public boolean isThreeDimension() {
 		
-		return vueChanged;
+		return isThreeDimension;
 		
 	}
 
 	/**
 	 * @param vueChanged the vueChanged to set
 	 */
-	public void setVueChanged(boolean vueChanged) {
+	public void setIsThreeDimension(boolean vueChanged) {
 		
-		this.vueChanged = vueChanged;
+		this.isThreeDimension = vueChanged;
 		
 		setChanged();
 		notifyObservers();
 		
-		this.vueChanged = false;
+		this.isThreeDimension = false;
 		
 	}
 }

@@ -69,13 +69,13 @@ public class Vue_3D extends GLCanvas implements Observer {
 	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE;
+	private static int NOMBRE_RECTANGLE = 4;
 
 	/**
 	 * Contient tout les ratios qui seront affiché (barres)
 	 * Taille définit dans méthode update
 	 */
-	private double[] ratioFrequence;
+	private double[] ratioFrequence = new double[4];
 
 	/**
 	 * Un tableau contenant un nombre de couleur egal
@@ -92,25 +92,15 @@ public class Vue_3D extends GLCanvas implements Observer {
 	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
 	static GLCapabilities capabilities = new GLCapabilities( profile );
 
-	private Forme_Cube cube1;
-	private Forme_Cube cube2;
-	private Forme_Cube cube3;
-	private Forme_Cube cube4;
+	private Forme_Cube cube;
 
 	public Vue_3D() {
 
 		super(capabilities);
 
-		cube1 = new Forme_Cube();
-		//cube2 = new Forme_Cube();
-		//cube3 = new Forme_Cube();
-		//cube4 = new Forme_Cube();
+		cube = new Forme_Cube();
 
-		//this.addGLEventListener(cube1);
-		this.addGLEventListener(cube1);
-		//this.addGLEventListener(cube2);
-		//this.addGLEventListener(cube3);
-		//this.addGLEventListener(cube4);
+		this.addGLEventListener(cube);
 
 		//final FPSAnimator animator = new FPSAnimator(this, 60, true);
 
@@ -126,60 +116,44 @@ public class Vue_3D extends GLCanvas implements Observer {
 	public void update(Observable m, Object obj) {
 
 
-
-		/*
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
 
-			if (model.isVueChanged())
+			if (!model.isThreeDimension())
 				ratioFrequence = null;
 
-			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-			//ESPACEMENT = model.getParametres().get("Espacement");
+			else {
 
-			NOMBRE_RECTANGLE = (
-					(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
-					- 2 * EPAISSEUR_RECTANGLE)
-					/ (EPAISSEUR_RECTANGLE);
+				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+				//ESPACEMENT = model.getParametres().get("Espacement");
 
+				if (model.isFileLoaded() 
+						&& model.getMusique().isLoad()
+						&& !model.getMusique().isPause()) {
 
-			double[] sauvegarde_rationFrequence = ratioFrequence;
-			ratioFrequence = new double[NOMBRE_RECTANGLE];
+					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
 
-			if (sauvegarde_rationFrequence != null) {
+						try {
 
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+							ratioFrequence[index] = ratioFrequence[index + 1];
 
-					ratioFrequence[index] = sauvegarde_rationFrequence[index];
+						}
 
-				}
-			}
+						catch (IndexOutOfBoundsException e) {
 
-			if (model.isFileLoaded() 
-					&& model.getMusique().isLoad()
-					&& !model.getMusique().isPause()) {
+							ratioFrequence[index] = model.getRatioFrequence();
 
-				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
-
-					try {
-
-						ratioFrequence[index] = ratioFrequence[index + 1];
-
-					}
-
-					catch (IndexOutOfBoundsException e) {
-
-						ratioFrequence[index] = model.getRatioFrequence();
-
+						}
 					}
 				}
+
+				cube.setRatioFrequence(ratioFrequence);
+
+				repaint();
+
 			}
-
-			repaint();
-
 		}
-		 */
 	}
 
 	//https://www.tutorialspoint.com/jogl/jogl_quick_guide.htm

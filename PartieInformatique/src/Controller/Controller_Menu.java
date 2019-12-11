@@ -62,7 +62,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
 			
-			model.setVueChanged(true);
+			model.setIsThreeDimension(false);
 			
 			for (Component b : handler.getComponent()) {
 				
@@ -100,7 +100,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
 
-			model.setVueChanged(true);
+			model.setIsThreeDimension(true);
 			
 			for (Component b : handler.getComponent()) {
 				
