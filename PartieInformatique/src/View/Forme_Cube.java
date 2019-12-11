@@ -17,70 +17,108 @@ public class Forme_Cube implements GLEventListener {
 	private double couleur_red = Math.random();
 	private double couleur_green = Math.random();
 	private double couleur_blue = Math.random();
-	
-	private double largeur;
-	private double hauteur = 0;
-	private double profondeur;
-	
+
+	private double 	 largeur 	= 1;
+	private double 	 profondeur	= 1;
+	private double[] hauteur 	= {0, 0, 0, 0};
+
+	private double cube1_posX = -1;
+	private double cube1_posY = -4;
+	private double cube1_posZ = -16;
+
+	private double cube2_posX =  1;
+	private double cube2_posY = -4;
+	private double cube2_posZ = -16;
+
+	private double cube3_posX = -1;
+	private double cube3_posY = -4;
+	private double cube3_posZ = -14;
+
+	private double cube4_posX =  1;
+	private double cube4_posY = -4;
+	private double cube4_posZ = -14;
+
+	private static int CUBE_ONE = 0;
+	private static int CUBE_TWO = 1;
+	private static int CUBE_THREE = 2;
+	private static int CUBE_FOUR = 3;
+
 	private GLU glu = new GLU();
 	double x = 0;
 
 	public void display(GLAutoDrawable drawable) {
 
 		final GL2 gl = drawable.getGL().getGL2();
+		
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
+		
 		gl.glColor3d(couleur_red, couleur_green, couleur_blue);
-		gl.glTranslatef( 0f, 0f, -5.0f ); 
-		
-		gl.glRotated(x, 1, 1, 1);
 
-		//giving different colors to different sides
-		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
+		//gl.glRotated(x, 1, 1, 1);
 		
-		gl.glVertex3d( largeur, hauteur, -profondeur); // Top Right Of The Quad (Top)
-		gl.glVertex3d(-largeur, hauteur, -profondeur); // Top Left Of The Quad (Top)
-		gl.glVertex3d(-largeur, hauteur,  profondeur); // Bottom Left Of The Quad (Top)
-		gl.glVertex3d( largeur, hauteur,  profondeur); // Bottom Right Of The Quad (Top)
-
+		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); 
+		this.paintCube(gl, Forme_Cube.CUBE_ONE);
 		
-		gl.glColor3d(1, 0, 0);
+		gl.glTranslated(cube2_posX, cube2_posY, cube2_posZ); 
+		this.paintCube(gl, Forme_Cube.CUBE_TWO);
 		
-		gl.glVertex3f( 1.0f, -1.0f, 1.0f ); // Top Right Of The Quad
-		gl.glVertex3f( -1.0f, -1.0f, 1.0f ); // Top Left Of The Quad
-		gl.glVertex3f( -1.0f, -1.0f, -1.0f ); // Bottom Left Of The Quad
-		gl.glVertex3f( 1.0f, -1.0f, -1.0f ); // Bottom Right Of The Quad
+		gl.glTranslated(cube3_posX, cube3_posY, cube3_posZ); 
+		this.paintCube(gl, Forme_Cube.CUBE_THREE);
 		
-		gl.glVertex3f( 1.0f, 1.0f, 1.0f ); // Top Right Of The Quad (Front)
-		gl.glVertex3f( -1.0f, 1.0f, 1.0f ); // Top Left Of The Quad (Front)
-		gl.glVertex3f( -1.0f, -1.0f, 1.0f ); // Bottom Left Of The Quad
-		gl.glVertex3f( 1.0f, -1.0f, 1.0f ); // Bottom Right Of The Quad 
-
-		gl.glVertex3f( 1.0f, -1.0f, -1.0f ); // Bottom Left Of The Quad
-		gl.glVertex3f( -1.0f, -1.0f, -1.0f ); // Bottom Right Of The Quad
-		gl.glVertex3f( -1.0f, 1.0f, -1.0f ); // Top Right Of The Quad (Back)
-		gl.glVertex3f( 1.0f, 1.0f, -1.0f ); // Top Left Of The Quad (Back)
-
-		gl.glVertex3f( -1.0f, 1.0f, 1.0f ); // Top Right Of The Quad (Left)
-		gl.glVertex3f( -1.0f, 1.0f, -1.0f ); // Top Left Of The Quad (Left)
-		gl.glVertex3f( -1.0f, -1.0f, -1.0f ); // Bottom Left Of The Quad
-		gl.glVertex3f( -1.0f, -1.0f, 1.0f ); // Bottom Right Of The Quad 
-
-		gl.glVertex3f( 1.0f, 1.0f, -1.0f ); // Top Right Of The Quad (Right)
-		gl.glVertex3f( 1.0f, 1.0f, 1.0f ); // Top Left Of The Quad
-		gl.glVertex3f( 1.0f, -1.0f, 1.0f ); // Bottom Left Of The Quad
-		gl.glVertex3f( 1.0f, -1.0f, -1.0f ); // Bottom Right Of The Quad
-		gl.glEnd(); // Done Drawing The Quad
+		gl.glTranslated(cube4_posX, cube4_posY, cube4_posZ); 
+		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
+		
 		gl.glFlush();
-		x += 0.2;
+		
+		//x += 0.5;
+
 	}
 
-	@Override
+	private void paintCube(GL2 gl, int numeroCube) {
+		
+		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
+
+		gl.glVertex3d( largeur,  hauteur[numeroCube], -profondeur); 	// Top Right Of The Quad (Top)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube], -profondeur); 	// Top Left Of The Quad (Top)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube],  profondeur); 	// Bottom Left Of The Quad (Top)
+		gl.glVertex3d( largeur,  hauteur[numeroCube],  profondeur); 	// Bottom Right Of The Quad (Top)
+
+		gl.glVertex3d( largeur, -hauteur[numeroCube], -profondeur);		// Top Right Of The Quad (Bot)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube], -profondeur); 	// Top Left Of The Quad (Bot)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube],  profondeur);		// Bottom Left Of The Quad (Bot)
+		gl.glVertex3d( largeur,  hauteur[numeroCube],  profondeur); 	// Bottom Right Of The Quad (Bot)
+
+		gl.glVertex3d( largeur,  hauteur[numeroCube],  profondeur);		// Top Right Of The Quad (Front)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube],  profondeur);		// Top Left Of The Quad (Front)
+		gl.glVertex3d(-largeur, -hauteur[numeroCube],  profondeur);		// Bottom Left Of The Quad
+		gl.glVertex3d( largeur, -hauteur[numeroCube],  profondeur );	// Bottom Right Of The Quad 
+
+		gl.glVertex3d( largeur, -hauteur[numeroCube], -profondeur ); 	// Bottom Left Of The Quad
+		gl.glVertex3d(-largeur, -hauteur[numeroCube], -profondeur );	// Bottom Right Of The Quad
+		gl.glVertex3d(-largeur,  hauteur[numeroCube], -profondeur ); 	// Top Right Of The Quad (Back)
+		gl.glVertex3d( largeur,  hauteur[numeroCube], -profondeur );	// Top Left Of The Quad (Back)
+
+		gl.glVertex3d(-largeur,  hauteur[numeroCube],  profondeur ); 	// Top Right Of The Quad (Left)
+		gl.glVertex3d(-largeur,  hauteur[numeroCube], -profondeur ); 	// Top Left Of The Quad (Left)
+		gl.glVertex3d(-largeur, -hauteur[numeroCube], -profondeur ); 	// Bottom Left Of The Quad
+		gl.glVertex3d(-largeur, -hauteur[numeroCube],  profondeur ); 	// Bottom Right Of The Quad 
+
+		gl.glVertex3d( largeur,  hauteur[numeroCube], -profondeur ); 	// Top Right Of The Quad (Right)
+		gl.glVertex3d( largeur,  hauteur[numeroCube],  profondeur ); 	// Top Left Of The Quad
+		gl.glVertex3d( largeur, -hauteur[numeroCube],  profondeur ); 	// Bottom Left Of The Quad
+		gl.glVertex3d( largeur, -hauteur[numeroCube], -profondeur ); 	// Bottom Right Of The Quad
+		
+		gl.glEnd(); // Done Drawing The Quad
+		
+	}
+
 	public void dispose( GLAutoDrawable drawable ) {
-		// TODO Auto-generated method stub
+
+		
+		
 	}
 
-	@Override
 	public void init( GLAutoDrawable drawable ) {
 
 		final GL2 gl = drawable.getGL().getGL2();
@@ -93,14 +131,13 @@ public class Forme_Cube implements GLEventListener {
 
 	}
 
-	@Override
-	public void reshape( GLAutoDrawable drawable, int x, int y, int width, int height ) {
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 
 		final GL2 gl = drawable.getGL().getGL2();
 		if( height <= 0 )
 			height = 1;
 
-		final float h = ( float ) width / ( float ) height;
+		final float h = (float) width / (float) height;
 		gl.glViewport( 0, 0, width, height );
 		gl.glMatrixMode( GL2.GL_PROJECTION );
 		gl.glLoadIdentity();
@@ -110,5 +147,4 @@ public class Forme_Cube implements GLEventListener {
 		gl.glLoadIdentity();
 
 	}
-
 }

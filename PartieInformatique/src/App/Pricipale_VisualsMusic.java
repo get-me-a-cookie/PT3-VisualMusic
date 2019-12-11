@@ -416,7 +416,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Modification des éléments
 		visualisateur2D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
-		visualisateur3D.setPreferredSize(
+		visualisateur3D.setSize( 		 //Obligé de faire setSize pour un Canva
 				new Dimension(800,450)); //rapport de 16:9
 
 		//Ajout des éléments dans le handler

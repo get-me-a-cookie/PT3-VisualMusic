@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
@@ -105,13 +106,15 @@ public class Vue_3D extends GLCanvas implements Observer {
 		//cube3 = new Forme_Cube();
 		//cube4 = new Forme_Cube();
 
+		//this.addGLEventListener(cube1);
 		this.addGLEventListener(cube1);
-		this.setSize(TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
+		//this.addGLEventListener(cube2);
+		//this.addGLEventListener(cube3);
+		//this.addGLEventListener(cube4);
 
+		//final FPSAnimator animator = new FPSAnimator(this, 60, true);
 
-		final FPSAnimator animator = new FPSAnimator(this, 300,true);
-
-		animator.start();
+		//animator.start();
 	}
 
 	/**
