@@ -5,9 +5,15 @@ import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
+import javax.media.opengl.GLProfile;
+import javax.media.opengl.awt.GLCanvas;
 import javax.swing.JPanel;
+
+import com.jogamp.opengl.util.FPSAnimator;
 
 import Model.Model;
 
@@ -17,7 +23,7 @@ import Model.Model;
  * 
  * @author Goodwin
  */
-public class Vue_3D extends JPanel implements Observer, GLEventListener {
+public class Vue_3D extends GLCanvas implements Observer {
 
 	/**
 	 * Taille Maximale de la fenètre de l'application
@@ -81,6 +87,33 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 	 */
 	private static int ESPACEMENT = 0;
 
+
+	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
+	static GLCapabilities capabilities = new GLCapabilities( profile );
+
+	private Forme_Cube cube1;
+	private Forme_Cube cube2;
+	private Forme_Cube cube3;
+	private Forme_Cube cube4;
+
+	public Vue_3D() {
+
+		super(capabilities);
+
+		cube1 = new Forme_Cube();
+		//cube2 = new Forme_Cube();
+		//cube3 = new Forme_Cube();
+		//cube4 = new Forme_Cube();
+
+		this.addGLEventListener(cube1);
+		this.setSize(TAILLE_FENETRE_X, TAILLE_FENETRE_Y);
+
+
+		final FPSAnimator animator = new FPSAnimator(this, 300,true);
+
+		animator.start();
+	}
+
 	/**
 	 * Met à jour la vue
 	 * Importe la frequence du model et la stock dans le 
@@ -88,32 +121,35 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 	 * élément vers la gauche
 	 */
 	public void update(Observable m, Object obj) {
-		
+
+
+
+		/*
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
-			
+
 			if (model.isVueChanged())
 				ratioFrequence = null;
 
 			EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
 			//ESPACEMENT = model.getParametres().get("Espacement");
-			
+
 			NOMBRE_RECTANGLE = (
 					(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
 					- 2 * EPAISSEUR_RECTANGLE)
 					/ (EPAISSEUR_RECTANGLE);
-			
-			
+
+
 			double[] sauvegarde_rationFrequence = ratioFrequence;
 			ratioFrequence = new double[NOMBRE_RECTANGLE];
-			
+
 			if (sauvegarde_rationFrequence != null) {
-				
+
 				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
-					
+
 					ratioFrequence[index] = sauvegarde_rationFrequence[index];
-					
+
 				}
 			}
 
@@ -124,15 +160,15 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 				for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
 
 					try {
-						
+
 						ratioFrequence[index] = ratioFrequence[index + 1];
-						
+
 					}
 
 					catch (IndexOutOfBoundsException e) {
-						
+
 						ratioFrequence[index] = model.getRatioFrequence();
-						
+
 					}
 				}
 			}
@@ -140,35 +176,8 @@ public class Vue_3D extends JPanel implements Observer, GLEventListener {
 			repaint();
 
 		}
+		 */
 	}
 
 	//https://www.tutorialspoint.com/jogl/jogl_quick_guide.htm
-	public void display(GLAutoDrawable arg0) {
-
-		
-		
-	}
-
-
-	public void dispose(GLAutoDrawable arg0) {
-
-
-		
-	}
-
-
-	public void init(GLAutoDrawable arg0) {
-
-
-		
-	}
-
-
-	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
-
-
-		
-		
-	}
-
 }
