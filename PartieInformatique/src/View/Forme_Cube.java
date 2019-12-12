@@ -14,11 +14,23 @@ import Model.Model;
 
 public class Forme_Cube implements GLEventListener {
 
-	private double couleur_red = Math.random();
-	private double couleur_green = Math.random();
-	private double couleur_blue = Math.random();
+	private double[] couleur_red 	= {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
+	private double[] couleur_green  = {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
+	private double[] couleur_blue 	= {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
 
-	private double[] ratioFrequence = new double[4];
+	private double[] ratioFrequence = {0.8,0.9,0.2,0.4};//new double[4];
 
 	private double 	 largeur 	= 1;
 	private double 	 profondeur	= 1;
@@ -55,31 +67,44 @@ public class Forme_Cube implements GLEventListener {
 
 			hauteur[index] = 5 * ratioFrequence[index];
 			System.out.println(hauteur[index]);
-			
-		}
-		
-		 double couleur_red = Math.random();
-		 double couleur_green = Math.random();
-		 double couleur_blue = Math.random();
 
+		}
 
 		final GL2 gl = drawable.getGL().getGL2();
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
-		gl.glLoadIdentity();
 
-		gl.glColor3d(couleur_red, couleur_green, couleur_blue);
 
-		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); 
+		gl.glLoadIdentity();	//reset l'origine
+		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); //déplace l'origine
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_ONE],
+				couleur_green[Forme_Cube.CUBE_ONE],
+				couleur_blue[Forme_Cube.CUBE_ONE]);
 		this.paintCube(gl, Forme_Cube.CUBE_ONE);
 
+		gl.glLoadIdentity();
 		gl.glTranslated(cube2_posX, cube2_posY, cube2_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_TWO],
+				couleur_green[Forme_Cube.CUBE_TWO],
+				couleur_blue[Forme_Cube.CUBE_TWO]);
 		this.paintCube(gl, Forme_Cube.CUBE_TWO);
 
+		gl.glLoadIdentity();
 		gl.glTranslated(cube3_posX, cube3_posY, cube3_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_THREE],
+				couleur_green[Forme_Cube.CUBE_THREE],
+				couleur_blue[Forme_Cube.CUBE_THREE]);
 		this.paintCube(gl, Forme_Cube.CUBE_THREE);
 
+		gl.glLoadIdentity();
 		gl.glTranslated(cube4_posX, cube4_posY, cube4_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_FOUR],
+				couleur_green[Forme_Cube.CUBE_FOUR],
+				couleur_blue[Forme_Cube.CUBE_FOUR]);
 		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
 
 		gl.glFlush();
@@ -132,84 +157,35 @@ public class Forme_Cube implements GLEventListener {
 
 	public void init( GLAutoDrawable drawable ) {
 
-		final GL2 gl = drawable.getGL().getGL2();
-		gl.glShadeModel( GL2.GL_SMOOTH );
-		gl.glClearColor( 0f, 0f, 0f, 0f );
-		gl.glClearDepth( 1.0f );
-		gl.glEnable( GL2.GL_DEPTH_TEST );
-		gl.glDepthFunc( GL2.GL_LEQUAL );
-		gl.glHint( GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST );
+		GL2 gl = drawable.getGL().getGL2();      // get the OpenGL graphics context
+		glu = new GLU();                         // get GL Utilities
+		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background (clear) color
+		gl.glClearDepth(1.0f);      // set clear depth value to farthest
+		gl.glEnable(GL2.GL_DEPTH_TEST); // enables depth testing
+		gl.glDepthFunc(GL2.GL_LEQUAL);  // the type of depth test to do
+		gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST); // best perspective correction
+		gl.glShadeModel(GL2.GL_SMOOTH); // blends colors nicely, and smoothes out lighting
 
 	}
 
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 
-		final GL2 gl = drawable.getGL().getGL2();
-		if( height <= 0 )
-			height = 1;
+		GL2 gl = drawable.getGL().getGL2();  // get the OpenGL 2 graphics context
 
-		final float h = (float) width / (float) height;
-		gl.glViewport( 0, 0, width, height );
-		gl.glMatrixMode( GL2.GL_PROJECTION );
-		gl.glLoadIdentity();
+		if (height == 0) height = 1;   // prevent divide by zero
+		float aspect = (float)width / height;
 
-		glu.gluPerspective( 45.0f, h, 1.0, 20.0 );
-		gl.glMatrixMode( GL2.GL_MODELVIEW );
-		gl.glLoadIdentity();
+		// Set the view port (display area) to cover the entire window
+		gl.glViewport(0, 0, width, height);
 
-	}
+		// Setup perspective projection, with aspect ratio matches viewport
+		gl.glMatrixMode(GL2.GL_PROJECTION);  // choose projection matrix
+		gl.glLoadIdentity();             // reset projection matrix
+		glu.gluPerspective(45.0, aspect, 0.1, 100.0); // fovy, aspect, zNear, zFar
 
-	/**
-	 * @return the couleur_red
-	 */
-	public double getCouleur_red() {
-
-		return couleur_red;
-
-	}
-
-	/**
-	 * @param couleur_red the couleur_red to set
-	 */
-	public void setCouleur_red(double couleur_red) {
-
-		this.couleur_red = couleur_red;
-
-	}
-
-	/**
-	 * @return the couleur_green
-	 */
-	public double getCouleur_green() {
-
-		return couleur_green;
-
-	}
-
-	/**
-	 * @param couleur_green the couleur_green to set
-	 */
-	public void setCouleur_green(double couleur_green) {
-
-		this.couleur_green = couleur_green;
-
-	}
-
-	/**
-	 * @return the couleur_blue
-	 */
-	public double getCouleur_blue() {
-
-		return couleur_blue;
-
-	}
-
-	/**
-	 * @param couleur_blue the couleur_blue to set
-	 */
-	public void setCouleur_blue(double couleur_blue) {
-
-		this.couleur_blue = couleur_blue;
+		// Enable the model-view transform
+		gl.glMatrixMode(GL2.GL_MODELVIEW);
+		gl.glLoadIdentity(); // reset
 
 	}
 
@@ -271,17 +247,17 @@ public class Forme_Cube implements GLEventListener {
 	 * @return the ratioFrequence
 	 */
 	public double[] getRatioFrequence() {
-		
+
 		return ratioFrequence;
-		
+
 	}
 
 	/**
 	 * @param ratioFrequence the ratioFrequence to set
 	 */
 	public void setRatioFrequence(double[] ratioFrequence) {
-		
+
 		this.ratioFrequence = ratioFrequence;
-		
+
 	}
 }
