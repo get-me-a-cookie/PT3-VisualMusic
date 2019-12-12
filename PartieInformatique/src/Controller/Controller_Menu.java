@@ -53,6 +53,9 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
+			if(!model.getFichier()) {
+				model.lectureFichier();
+			}
 			 */		 
 		}
 		
@@ -135,6 +138,10 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			
 		}
 		model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
+		
+		if(!model.getFichier()) {
+			model.lectureFichier(); // TODO a supprimer et le mettre ailleur (remis dans le commentaire) 
+		}
 	}
 }
 

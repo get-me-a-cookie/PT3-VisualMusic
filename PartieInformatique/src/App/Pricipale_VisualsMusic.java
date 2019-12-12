@@ -19,16 +19,19 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import Controller.Controller_Bouton_Musique;
 import Controller.Controller_Bouton_PlusMoins;
 import Controller.Controller_Menu;
 import Controller.Adapteur_ControllerVue;
+import Controller.ChangementSon;
 import Model.Model;
 import Model.Model_Musique;
 import View.Vue_2D;
 import View.Vue_3D;
+import View.Vue_Ecran_Full;
 import View.Vue_Erreur;
 import View.Vue_TextField_PlusMoins;
 
@@ -45,6 +48,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 	///////////////////////////////////////
 	////////////// Attributs //////////////
 	///////////////////////////////////////
+
+	private boolean pleine_ecran = false;
 
 	/**
 	 * Model qui sera incérer dans la création des Action
@@ -180,7 +185,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *		l'utilisateur essai de le lire
 	 */
 	private Vue_Erreur erreur;
-
+	private Vue_Ecran_Full vue_full_ecran;
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////
@@ -189,12 +194,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
-		
+
 		/* TODO A voir
 		 * 		changer le constructeur en main
 		 * 		Mettre les attributs directement dans le main
 		 */
-		
+
 		//TODO a voir pour pas le mêtre dans la fenetre paramètres
 		String[] listOfParameters = {	
 				"Amplitude",
@@ -208,13 +213,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
+		this.creationSliderMusique();
 		this.creationVisualisateur();
 		erreur = new Vue_Erreur();
+		vue_full_ecran = new Vue_Ecran_Full();
 
 		//Ajout des observer
 		model.addObserver(visualisateur2D);
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
+		model.addObserver(vue_full_ecran);
 
 		//Ajout de la fenêtre dans le handler
 		handler.getComponent().add(this);
@@ -223,16 +231,17 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur2D, BorderLayout.CENTER);
-		//this.add(pleine_ecran);
 
 		//Paramètrage de la fenêtre
-		//this.fullScreen();
+
+		this.Centrage();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setVisible(true);
 		this.pack();
-		
+
+
 	}
 
 	/**
@@ -386,6 +395,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
+		
 
 		//Ajout des Bouton dans le handler
 		handler.getComponent().add(bouton_playPause);
@@ -396,12 +406,30 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
-
+		
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
+		
 
+	}
+	/**
+	 * Création d'une méthode qui va créer un slider
+	 * elle définit un volume par défaut qui est à 30
+	 */
+	public void creationSliderMusique() {
+		JSlider slider = new JSlider();
+		
+		slider.setPreferredSize(new Dimension(100,50));
+		
+		slider.setMaximum(100);
+		slider.setMinimum(0);
+		slider.setValue(30);
+		
+		slider.addChangeListener(new ChangementSon(slider.getValue()));
+		
+		panel_bouton.add(slider);
 	}
 
 	/**
@@ -432,35 +460,26 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Création de la fênetre à dimension normale
 	 *  et FullEcran selon une boolean 
 	 */
-	//TODO fullscreen -> abscence de vue
-	/*
-	public void fullScreen() {
+
+	public void Centrage() {
+		
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
 		int height = tailleEcran.height;
 		int width = tailleEcran.width;
+		// On récuper la taille de l'écran
+		this.setSize(width/2, height/2);
+		this.setLocationRelativeTo(null);
+		this.pack();
 
-		if(!pleine_ecran) {
-			pleine_ecran = false;
-
-			// On récuper la taille de l'écran
-			this.setSize(width/2, height/2);
-			this.setLocationRelativeTo(null);
-			this.pack();
-		}
-		else {
-			pleine_ecran = true;
-			this.setExtendedState(this.MAXIMIZED_BOTH);
-           // frame.setUndecorated(true);     // no decoration such as title bar
-		}
 	}
-	 */
+
 
 	/**
 	 * Lance notre application
 	 */
 	public static void main (String[] args) {
-		
+
 		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
 
 	}

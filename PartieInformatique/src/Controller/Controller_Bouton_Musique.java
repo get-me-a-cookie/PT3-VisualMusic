@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import javax.swing.JButton;
 
 import Model.Model;
+import View.Vue_Ecran_Full;
 
 /**
  * 
@@ -16,7 +17,7 @@ import Model.Model;
  * @author goodw
  */
 public class Controller_Bouton_Musique extends Controller implements ActionListener {
-
+	private Vue_Ecran_Full vue = new Vue_Ecran_Full();
 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model   : Instanciant le Model
@@ -94,6 +95,11 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 			
 			return;
 			
+		}
+		
+		if(bouton.getText().equals("Ecran")) {
+			System.out.println(vue.getBoolean());
+			vue.fullScreen();
 		}
 	}
 
