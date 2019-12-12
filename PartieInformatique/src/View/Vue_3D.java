@@ -95,15 +95,27 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 	final Animator animator = new Animator(this);
 
-	private Forme_Cube cube;
+	private Forme_Cube cube1;
+	private Forme_Cube cube2;
+	private Forme_Cube cube3;
+	private Forme_Cube cube4;
 
 	public Vue_3D() {
 
 		super(capabilities);
 
-		cube = new Forme_Cube();
+		cube1 = new Forme_Cube(-1, -16);
+		cube2 = new Forme_Cube( 1, -16);
+		cube3 = new Forme_Cube(-1, -14);
+		cube4 = new Forme_Cube( 1, -14);
 
-		this.addGLEventListener(cube);
+		this.addGLEventListener(cube1);
+		this.addGLEventListener(cube2);
+		this.addGLEventListener(cube3);
+		this.addGLEventListener(cube4);
+		
+		this.revalidate();
+		this.repaint();
 
 	}
 
@@ -151,19 +163,9 @@ public class Vue_3D extends GLCanvas implements Observer {
 						}
 					}
 				}
-
-				cube.setRatioFrequence(ratioFrequence);
 				
 				if (!animator.isAnimating())
 					animator.start();
-
-				if (animator.isPaused())
-					System.out.println("pause");
-				
-				if (!animator.isAnimating())
-					System.out.println("pas ouf");
-				
-				System.out.println("le model");
 				
 				//TODO Thread
 			}
