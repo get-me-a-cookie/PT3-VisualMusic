@@ -72,14 +72,13 @@ public class Forme_Cube implements GLEventListener {
 		final GL2 gl = drawable.getGL().getGL2();
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
-
-		
 		
 		gl.glLoadIdentity();	//reset l'origine
 		gl.glTranslated(		//déplace l'origine
 				cube1_posX,
 				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
-				cube1_posZ); 
+				cube1_posZ);
+		gl.glRotated(45, 0, 0.1, 0);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_ONE],
 				couleur_green[Forme_Cube.CUBE_ONE],
@@ -91,6 +90,7 @@ public class Forme_Cube implements GLEventListener {
 				cube2_posX,
 				cube2_posY + hauteur[Forme_Cube.CUBE_TWO],
 				cube2_posZ); 
+		gl.glRotated(45, 0, 0.1, 0);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_TWO],
 				couleur_green[Forme_Cube.CUBE_TWO],
@@ -102,6 +102,7 @@ public class Forme_Cube implements GLEventListener {
 				cube3_posX,
 				cube3_posY + hauteur[Forme_Cube.CUBE_THREE],
 				cube3_posZ); 
+		gl.glRotated(45, 0, 0.1, 0);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_THREE],
 				couleur_green[Forme_Cube.CUBE_THREE],
@@ -113,14 +114,70 @@ public class Forme_Cube implements GLEventListener {
 				cube4_posX,
 				cube4_posY + hauteur[Forme_Cube.CUBE_FOUR],
 				cube4_posZ); 
+		gl.glRotated(45, 0, 0.1, 0);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_FOUR],
 				couleur_green[Forme_Cube.CUBE_FOUR],
 				couleur_blue[Forme_Cube.CUBE_FOUR]);
 		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
-
+		
 		gl.glFlush();
 
+	}
+	
+	//Sauvegarde
+	//Premier affichage réussi obtenue
+	//affiche donc les 4 cubes (2devant, 2 derière)
+	private void paintFaceToFace(GL2 gl) {
+
+		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
+		
+		gl.glLoadIdentity();	//reset l'origine
+		gl.glTranslated(		//déplace l'origine
+				cube1_posX,
+				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
+				cube1_posZ);
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_ONE],
+				couleur_green[Forme_Cube.CUBE_ONE],
+				couleur_blue[Forme_Cube.CUBE_ONE]);
+		this.paintCube(gl, Forme_Cube.CUBE_ONE);
+
+		gl.glLoadIdentity();
+		gl.glTranslated(
+				cube2_posX,
+				cube2_posY + hauteur[Forme_Cube.CUBE_TWO],
+				cube2_posZ);
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_TWO],
+				couleur_green[Forme_Cube.CUBE_TWO],
+				couleur_blue[Forme_Cube.CUBE_TWO]);
+		this.paintCube(gl, Forme_Cube.CUBE_TWO);
+
+		gl.glLoadIdentity();
+		gl.glTranslated(
+				cube3_posX,
+				cube3_posY + hauteur[Forme_Cube.CUBE_THREE],
+				cube3_posZ);
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_THREE],
+				couleur_green[Forme_Cube.CUBE_THREE],
+				couleur_blue[Forme_Cube.CUBE_THREE]);
+		this.paintCube(gl, Forme_Cube.CUBE_THREE);
+
+		gl.glLoadIdentity();
+		gl.glTranslated(
+				cube4_posX,
+				cube4_posY + hauteur[Forme_Cube.CUBE_FOUR],
+				cube4_posZ);
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_FOUR],
+				couleur_green[Forme_Cube.CUBE_FOUR],
+				couleur_blue[Forme_Cube.CUBE_FOUR]);
+		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
+		
+		gl.glFlush();
+		
 	}
 
 	private void paintCube(GL2 gl, int numeroCube) {
