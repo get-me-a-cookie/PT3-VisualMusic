@@ -459,9 +459,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Création de la fênetre à dimension normale
 	 *  et FullEcran selon une boolean 
 	 */
-	//TODO fullscreen -> abscence de vue
 
 	public void Centrage() {
+		
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
 		int height = tailleEcran.height;
@@ -470,7 +470,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setSize(width/2, height/2);
 		this.setLocationRelativeTo(null);
 		this.pack();
-
 
 	}
 
