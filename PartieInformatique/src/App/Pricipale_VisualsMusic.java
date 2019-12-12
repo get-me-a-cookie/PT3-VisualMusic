@@ -237,6 +237,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.Centrage();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		this.setVisible(true);
 		this.pack();
 

@@ -103,8 +103,6 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			JFrame fenetre	= null;
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
-
-			model.setIsThreeDimension(true);
 			
 			for (Component b : handler.getComponent()) {
 				
@@ -135,6 +133,9 @@ public class Controller_Menu extends Controller implements ActionListener  {
 				return;
 				
 			}
+
+			model.setIsThreeDimension(true);
+			
 		}
 		model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
 		
