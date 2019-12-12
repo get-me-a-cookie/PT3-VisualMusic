@@ -245,7 +245,5 @@ public class Model extends Observable implements Observer {
 		setChanged();
 		notifyObservers();
 		
-		this.isThreeDimension = false;
-		
 	}
 }

@@ -56,11 +56,24 @@ public class Forme_Cube implements GLEventListener {
 	private static int CUBE_TWO = 1;
 	private static int CUBE_THREE = 2;
 	private static int CUBE_FOUR = 3;
+	
+	private Vue_3D vue3D;
 
 	private GLU glu = new GLU();
 
+	//TODO getfreq
+	// genre sa va cherché dans le model le ration pour la frequencce
+	
+	public Forme_Cube(Vue_3D vue) {
+		
+		vue3D = vue;
+		
+	}
+	
 	public void display(GLAutoDrawable drawable) {
 
+		ratioFrequence = vue3D.getRatioFrequence();
+		
 		for (int index = 0; 
 				index < ratioFrequence.length;
 				index ++) {

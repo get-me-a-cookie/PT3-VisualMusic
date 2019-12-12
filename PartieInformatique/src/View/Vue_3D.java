@@ -79,6 +79,13 @@ public class Vue_3D extends GLCanvas implements Observer {
 	private double[] ratioFrequence = new double[4];
 
 	/**
+	 * @return the ratioFrequence
+	 */
+	public double[] getRatioFrequence() {
+		return ratioFrequence;
+	}
+
+	/**
 	 * Un tableau contenant un nombre de couleur egal
 	 * au nombre de rectangle
 	 */
@@ -101,11 +108,9 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 		super(capabilities);
 
-		cubes = new Forme_Cube();
+		cubes = new Forme_Cube(this);
 
 		this.addGLEventListener(cubes);
-
-		animator.start();
 
 	}
 
@@ -124,8 +129,10 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 			if (!model.isThreeDimension()) {
 
+				System.out.println("erreur");
 				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
-
+				animator.stop();
+				
 			}
 
 			else {
@@ -136,6 +143,9 @@ public class Vue_3D extends GLCanvas implements Observer {
 				if (model.isFileLoaded() 
 						&& model.getMusique().isLoad()
 						&& !model.getMusique().isPause()) {
+
+					if (!animator.isStarted())
+						animator.start();
 
 					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
 
