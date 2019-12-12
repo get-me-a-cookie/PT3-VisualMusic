@@ -61,6 +61,8 @@ public class Forme_Cube implements GLEventListener {
 	
 	public void display(GLAutoDrawable drawable) {
 		
+		//TODO le rotate, modifie toutes les coordonnées
+		
 		for (int index = 0; 
 				index < ratioFrequence.length;
 				index ++) {
@@ -78,7 +80,7 @@ public class Forme_Cube implements GLEventListener {
 				cube1_posX,
 				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
 				cube1_posZ);
-		gl.glRotated(45, 0, 0.1, 0);
+		gl.glRotated(45, 0.2, 0.5, 0.1);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_ONE],
 				couleur_green[Forme_Cube.CUBE_ONE],
@@ -90,7 +92,7 @@ public class Forme_Cube implements GLEventListener {
 				cube2_posX,
 				cube2_posY + hauteur[Forme_Cube.CUBE_TWO],
 				cube2_posZ); 
-		gl.glRotated(45, 0, 0.1, 0);
+		gl.glRotated(45, 0.2, 0.5, 0.1);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_TWO],
 				couleur_green[Forme_Cube.CUBE_TWO],
@@ -102,7 +104,7 @@ public class Forme_Cube implements GLEventListener {
 				cube3_posX,
 				cube3_posY + hauteur[Forme_Cube.CUBE_THREE],
 				cube3_posZ); 
-		gl.glRotated(45, 0, 0.1, 0);
+		gl.glRotated(45, 0.2, 0.5, 0.1);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_THREE],
 				couleur_green[Forme_Cube.CUBE_THREE],
@@ -114,7 +116,7 @@ public class Forme_Cube implements GLEventListener {
 				cube4_posX,
 				cube4_posY + hauteur[Forme_Cube.CUBE_FOUR],
 				cube4_posZ); 
-		gl.glRotated(45, 0, 0.1, 0);
+		gl.glRotated(45, 0.2, 0.5, 0.1);
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_FOUR],
 				couleur_green[Forme_Cube.CUBE_FOUR],
