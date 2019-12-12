@@ -25,7 +25,6 @@ public class Vue_Ecran_Full  extends JFrame implements Observer{
 
 		if(pleine_ecran) {
 			pleine_ecran = false;
-			
 			// On récuper la taille de l'écran
 			this.setSize(width/2, height/2);
 			this.setLocationRelativeTo(null);
