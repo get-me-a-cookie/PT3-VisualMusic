@@ -19,12 +19,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import Controller.Controller_Bouton_Musique;
 import Controller.Controller_Bouton_PlusMoins;
 import Controller.Controller_Menu;
 import Controller.Adapteur_ControllerVue;
+import Controller.ChangementSon;
 import Model.Model;
 import Model.Model_Musique;
 import View.Vue_2D;
@@ -192,12 +194,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 * Créateur de l'IG toute entière
 	 */
 	public Pricipale_VisualsMusic () {
-		
+
 		/* TODO A voir
 		 * 		changer le constructeur en main
 		 * 		Mettre les attributs directement dans le main
 		 */
-		
+
 		//TODO a voir pour pas le mêtre dans la fenetre paramètres
 		String[] listOfParameters = {	
 				"Amplitude",
@@ -211,16 +213,17 @@ public class Pricipale_VisualsMusic extends JFrame {
 		//Création des éléments 
 		this.creationMenu();
 		this.creationBouton();
+		this.creationSliderMusique();
 		this.creationVisualisateur();
 		erreur = new Vue_Erreur();
 		vue_full_ecran = new Vue_Ecran_Full();
-		
+
 		//Ajout des observer
 		model.addObserver(visualisateur2D);
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
 		model.addObserver(vue_full_ecran);
-		
+
 		//Ajout de la fenêtre dans le handler
 		handler.getComponent().add(this);
 
@@ -230,12 +233,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(visualisateur2D, BorderLayout.CENTER);
 
 		//Paramètrage de la fenêtre
+
 		this.Centrage();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.pack();
-		
+
+
 	}
 
 	/**
@@ -389,6 +394,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
+		
 
 		//Ajout des Bouton dans le handler
 		handler.getComponent().add(bouton_playPause);
@@ -399,12 +405,26 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
-
+		
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
+		
 
+	}
+	
+	public void creationSliderMusique() {
+		JSlider slider = new JSlider();
+		slider.setPreferredSize(new Dimension(100,50));
+		
+		slider.setMaximum(100);
+		slider.setMinimum(0);
+		slider.setValue(30);
+		
+		slider.addChangeListener(new ChangementSon(slider.getValue()));
+		
+		panel_bouton.add(slider);
 	}
 
 	/**
@@ -436,7 +456,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *  et FullEcran selon une boolean 
 	 */
 	//TODO fullscreen -> abscence de vue
-	
+
 	public void Centrage() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
@@ -446,16 +466,16 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.setSize(width/2, height/2);
 		this.setLocationRelativeTo(null);
 		this.pack();
-		
+
 
 	}
-	 
+
 
 	/**
 	 * Lance notre application
 	 */
 	public static void main (String[] args) {
-		
+
 		Pricipale_VisualsMusic vue = new Pricipale_VisualsMusic();
 
 	}

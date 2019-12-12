@@ -28,11 +28,14 @@ public class Vue_Ecran_Full  extends JFrame implements Observer{
 			// On récuper la taille de l'écran
 			this.setSize(width/2, height/2);
 			this.setLocationRelativeTo(null);
-			this.pack();
+			this.repaint();
+			
 		}
 		else {
 			pleine_ecran = true;
 			this.setExtendedState(this.MAXIMIZED_BOTH);
+			this.repaint();
+		
 		}
 	}
 	public boolean getBoolean() {

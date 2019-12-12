@@ -11,9 +11,12 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
 import Model.Model;
+//TODO JAVADOC
 
 public class Forme_Cube implements GLEventListener {
-
+	/**
+	 * Attribut qui prennent des couleurs randoms
+	 */
 	private double couleur_red = Math.random();
 	private double couleur_green = Math.random();
 	private double couleur_blue = Math.random();
