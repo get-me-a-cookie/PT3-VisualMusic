@@ -413,9 +413,13 @@ public class Pricipale_VisualsMusic extends JFrame {
 		
 
 	}
-	
+	/**
+	 * Création d'une méthode qui va créer un slider
+	 * elle définit un volume par défaut qui est à 30
+	 */
 	public void creationSliderMusique() {
 		JSlider slider = new JSlider();
+		
 		slider.setPreferredSize(new Dimension(100,50));
 		
 		slider.setMaximum(100);
