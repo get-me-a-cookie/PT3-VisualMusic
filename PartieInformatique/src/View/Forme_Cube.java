@@ -11,9 +11,19 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
 import Model.Model;
-
+//TODO JAVADOC
+/**
+ * Classe qui permet de tracer des cubes 
+ * en 3D
+ * @author perri
+ *
+ */
 public class Forme_Cube implements GLEventListener {
 
+	/**
+	 * Attribut qui prennent des couleurs randoms
+	 * tableau de double 
+	 */
 	private double[] couleur_red 	= {
 			Math.random(),
 			Math.random(),
@@ -31,6 +41,7 @@ public class Forme_Cube implements GLEventListener {
 			Math.random()};
 
 	private double[] ratioFrequence = {0.8,0.9,0.2,0.4};//new double[4];
+
 
 	private double 	 largeur 	= 1;
 	private double 	 profondeur	= 1;

@@ -112,6 +112,13 @@ public class Model extends Observable implements Observer {
 		
 	}
 	
+	public boolean getFichier() {
+		if(fichier.exists())
+		{
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * permet d'obtenir le model jouant la musique
 	 * @return le model de la musique

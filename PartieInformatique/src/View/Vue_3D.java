@@ -12,6 +12,7 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
+import javax.media.opengl.glu.GLU;
 import javax.swing.JPanel;
 
 import com.jogamp.opengl.util.Animator;
@@ -87,7 +88,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 	/**
 	 * L'espacement entre chaque rectangle, en pixel
 	 */
-	private static int ESPACEMENT = 0;
+	private static int ESPACEMENT = 20;
 
 
 	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
@@ -100,6 +101,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 	public Vue_3D() {
 
 		super(capabilities);
+
 
 		cubes = new Forme_Cube();
 
@@ -119,7 +121,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 
 		Model model = (Model) m;
-
+		
 		if (model.getErreur() == null) {
 
 			if (!model.isThreeDimension()) {
@@ -142,7 +144,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 						try {
 
 							ratioFrequence[index] = ratioFrequence[index + 1];
-
+							
 						}
 
 						catch (IndexOutOfBoundsException e) {
