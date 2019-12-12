@@ -14,11 +14,23 @@ import Model.Model;
 
 public class Forme_Cube implements GLEventListener {
 
-	private double couleur_red = Math.random();
-	private double couleur_green = Math.random();
-	private double couleur_blue = Math.random();
+	private double[] couleur_red 	= {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
+	private double[] couleur_green  = {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
+	private double[] couleur_blue 	= {
+			Math.random(),
+			Math.random(),
+			Math.random(),
+			Math.random()};
 
-	private double[] ratioFrequence = new double[4];
+	private double[] ratioFrequence = {0.8,0.9,0.2,0.4};//new double[4];
 
 	private double 	 largeur 	= 1;
 	private double 	 profondeur	= 1;
@@ -58,31 +70,41 @@ public class Forme_Cube implements GLEventListener {
 
 		}
 
-		double couleur_red = Math.random();
-		double couleur_green = Math.random();
-		double couleur_blue = Math.random();
-
-
 		final GL2 gl = drawable.getGL().getGL2();
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
 
-		gl.glColor3d(couleur_red, couleur_green, couleur_blue);
 
-		gl.glLoadIdentity();
-		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); 
+		gl.glLoadIdentity();	//reset l'origine
+		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); //déplace l'origine
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_ONE],
+				couleur_green[Forme_Cube.CUBE_ONE],
+				couleur_blue[Forme_Cube.CUBE_ONE]);
 		this.paintCube(gl, Forme_Cube.CUBE_ONE);
 
 		gl.glLoadIdentity();
 		gl.glTranslated(cube2_posX, cube2_posY, cube2_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_TWO],
+				couleur_green[Forme_Cube.CUBE_TWO],
+				couleur_blue[Forme_Cube.CUBE_TWO]);
 		this.paintCube(gl, Forme_Cube.CUBE_TWO);
 
 		gl.glLoadIdentity();
 		gl.glTranslated(cube3_posX, cube3_posY, cube3_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_THREE],
+				couleur_green[Forme_Cube.CUBE_THREE],
+				couleur_blue[Forme_Cube.CUBE_THREE]);
 		this.paintCube(gl, Forme_Cube.CUBE_THREE);
 
 		gl.glLoadIdentity();
 		gl.glTranslated(cube4_posX, cube4_posY, cube4_posZ); 
+		gl.glColor3d(
+				couleur_red[Forme_Cube.CUBE_FOUR],
+				couleur_green[Forme_Cube.CUBE_FOUR],
+				couleur_blue[Forme_Cube.CUBE_FOUR]);
 		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
 
 		gl.glFlush();
@@ -164,60 +186,6 @@ public class Forme_Cube implements GLEventListener {
 		// Enable the model-view transform
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity(); // reset
-
-	}
-
-	/**
-	 * @return the couleur_red
-	 */
-	public double getCouleur_red() {
-
-		return couleur_red;
-
-	}
-
-	/**
-	 * @param couleur_red the couleur_red to set
-	 */
-	public void setCouleur_red(double couleur_red) {
-
-		this.couleur_red = couleur_red;
-
-	}
-
-	/**
-	 * @return the couleur_green
-	 */
-	public double getCouleur_green() {
-
-		return couleur_green;
-
-	}
-
-	/**
-	 * @param couleur_green the couleur_green to set
-	 */
-	public void setCouleur_green(double couleur_green) {
-
-		this.couleur_green = couleur_green;
-
-	}
-
-	/**
-	 * @return the couleur_blue
-	 */
-	public double getCouleur_blue() {
-
-		return couleur_blue;
-
-	}
-
-	/**
-	 * @param couleur_blue the couleur_blue to set
-	 */
-	public void setCouleur_blue(double couleur_blue) {
-
-		this.couleur_blue = couleur_blue;
 
 	}
 
