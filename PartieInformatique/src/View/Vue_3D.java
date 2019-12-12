@@ -108,7 +108,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 		super(capabilities);
 
-		cubes = new Forme_Cube(this);
+		cubes = new Forme_Cube();
 
 		this.addGLEventListener(cubes);
 
@@ -129,7 +129,6 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 			if (!model.isThreeDimension()) {
 
-				System.out.println("erreur");
 				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
 				animator.stop();
 				
@@ -163,7 +162,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 					}
 				}
 
-				//cubes.setRatioFrequence(ratioFrequence);
+				cubes.setRatioFrequence(ratioFrequence);
 				//TODO Thread
 			}
 		}

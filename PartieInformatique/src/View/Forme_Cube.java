@@ -56,30 +56,16 @@ public class Forme_Cube implements GLEventListener {
 	private static int CUBE_TWO = 1;
 	private static int CUBE_THREE = 2;
 	private static int CUBE_FOUR = 3;
-	
-	private Vue_3D vue3D;
 
 	private GLU glu = new GLU();
-
-	//TODO getfreq
-	// genre sa va cherché dans le model le ration pour la frequencce
-	
-	public Forme_Cube(Vue_3D vue) {
-		
-		vue3D = vue;
-		
-	}
 	
 	public void display(GLAutoDrawable drawable) {
-
-		ratioFrequence = vue3D.getRatioFrequence();
 		
 		for (int index = 0; 
 				index < ratioFrequence.length;
 				index ++) {
 
-			hauteur[index] = 5 * ratioFrequence[index];
-			System.out.println(hauteur[index]);
+			hauteur[index] = 10 * ratioFrequence[index];
 
 		}
 
@@ -87,9 +73,13 @@ public class Forme_Cube implements GLEventListener {
 
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
 
-
+		
+		
 		gl.glLoadIdentity();	//reset l'origine
-		gl.glTranslated(cube1_posX, cube1_posY, cube1_posZ); //déplace l'origine
+		gl.glTranslated(		//déplace l'origine
+				cube1_posX,
+				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
+				cube1_posZ); 
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_ONE],
 				couleur_green[Forme_Cube.CUBE_ONE],
@@ -97,7 +87,10 @@ public class Forme_Cube implements GLEventListener {
 		this.paintCube(gl, Forme_Cube.CUBE_ONE);
 
 		gl.glLoadIdentity();
-		gl.glTranslated(cube2_posX, cube2_posY, cube2_posZ); 
+		gl.glTranslated(
+				cube2_posX,
+				cube2_posY + hauteur[Forme_Cube.CUBE_TWO],
+				cube2_posZ); 
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_TWO],
 				couleur_green[Forme_Cube.CUBE_TWO],
@@ -105,7 +98,10 @@ public class Forme_Cube implements GLEventListener {
 		this.paintCube(gl, Forme_Cube.CUBE_TWO);
 
 		gl.glLoadIdentity();
-		gl.glTranslated(cube3_posX, cube3_posY, cube3_posZ); 
+		gl.glTranslated(
+				cube3_posX,
+				cube3_posY + hauteur[Forme_Cube.CUBE_THREE],
+				cube3_posZ); 
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_THREE],
 				couleur_green[Forme_Cube.CUBE_THREE],
@@ -113,7 +109,10 @@ public class Forme_Cube implements GLEventListener {
 		this.paintCube(gl, Forme_Cube.CUBE_THREE);
 
 		gl.glLoadIdentity();
-		gl.glTranslated(cube4_posX, cube4_posY, cube4_posZ); 
+		gl.glTranslated(
+				cube4_posX,
+				cube4_posY + hauteur[Forme_Cube.CUBE_FOUR],
+				cube4_posZ); 
 		gl.glColor3d(
 				couleur_red[Forme_Cube.CUBE_FOUR],
 				couleur_green[Forme_Cube.CUBE_FOUR],
