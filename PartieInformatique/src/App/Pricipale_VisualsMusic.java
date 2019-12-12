@@ -29,6 +29,7 @@ import Model.Model;
 import Model.Model_Musique;
 import View.Vue_2D;
 import View.Vue_3D;
+import View.Vue_Ecran_Full;
 import View.Vue_Erreur;
 import View.Vue_TextField_PlusMoins;
 
@@ -45,6 +46,8 @@ public class Pricipale_VisualsMusic extends JFrame {
 	///////////////////////////////////////
 	////////////// Attributs //////////////
 	///////////////////////////////////////
+
+	private boolean pleine_ecran = false;
 
 	/**
 	 * Model qui sera incérer dans la création des Action
@@ -180,7 +183,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *		l'utilisateur essai de le lire
 	 */
 	private Vue_Erreur erreur;
-
+	private Vue_Ecran_Full vue_full_ecran;
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////
@@ -210,12 +213,14 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.creationBouton();
 		this.creationVisualisateur();
 		erreur = new Vue_Erreur();
-
+		vue_full_ecran = new Vue_Ecran_Full();
+		
 		//Ajout des observer
 		model.addObserver(visualisateur2D);
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
-
+		model.addObserver(vue_full_ecran);
+		
 		//Ajout de la fenêtre dans le handler
 		handler.getComponent().add(this);
 
@@ -223,10 +228,9 @@ public class Pricipale_VisualsMusic extends JFrame {
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
 		this.add(visualisateur2D, BorderLayout.CENTER);
-		//this.add(pleine_ecran);
 
 		//Paramètrage de la fenêtre
-		//this.fullScreen();
+		this.Centrage();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -432,27 +436,20 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 *  et FullEcran selon une boolean 
 	 */
 	//TODO fullscreen -> abscence de vue
-	/*
-	public void fullScreen() {
+	
+	public void Centrage() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
 		int height = tailleEcran.height;
 		int width = tailleEcran.width;
+		// On récuper la taille de l'écran
+		this.setSize(width/2, height/2);
+		this.setLocationRelativeTo(null);
+		this.pack();
+		
 
-		if(!pleine_ecran) {
-			pleine_ecran = false;
-
-			// On récuper la taille de l'écran
-			this.setSize(width/2, height/2);
-			this.setLocationRelativeTo(null);
-			this.pack();
-		}
-		else {
-			pleine_ecran = true;
-			this.setExtendedState(this.MAXIMIZED_BOTH);
-		}
 	}
-	 */
+	 
 
 	/**
 	 * Lance notre application
