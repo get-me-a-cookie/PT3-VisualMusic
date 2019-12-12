@@ -450,6 +450,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		else {
 			pleine_ecran = true;
 			this.setExtendedState(this.MAXIMIZED_BOTH);
+           // frame.setUndecorated(true);     // no decoration such as title bar
 		}
 	}
 	 */

@@ -93,26 +93,17 @@ public class Vue_3D extends GLCanvas implements Observer {
 	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
 	static GLCapabilities capabilities = new GLCapabilities( profile );
 
-	final Animator animator = new Animator(this);
+	final FPSAnimator animator = new FPSAnimator(this, 60, true);
 
-	private Forme_Cube cube1;
-	private Forme_Cube cube2;
-	private Forme_Cube cube3;
-	private Forme_Cube cube4;
+	private Forme_Cube cubes;
 
 	public Vue_3D() {
 
 		super(capabilities);
 
-		cube1 = new Forme_Cube(-1, -16);
-		cube2 = new Forme_Cube( 1, -16);
-		cube3 = new Forme_Cube(-1, -14);
-		cube4 = new Forme_Cube( 1, -14);
+		cubes = new Forme_Cube();
 
-		this.addGLEventListener(cube1);
-		this.addGLEventListener(cube2);
-		this.addGLEventListener(cube3);
-		this.addGLEventListener(cube4);
+		this.addGLEventListener(cubes);
 		
 		this.revalidate();
 		this.repaint();
