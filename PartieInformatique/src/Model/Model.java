@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 //TODO Javadoc, contenu
 /** 
  * Classe de type Model, permettant la structure MVC
