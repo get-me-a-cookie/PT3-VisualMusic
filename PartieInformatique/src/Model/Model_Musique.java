@@ -8,6 +8,8 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -54,7 +56,7 @@ public class Model_Musique extends Observable implements Runnable {
 	/**
 	 * Réfère tous les champs spécifique qu format audio
 	 */
-	private AudioFormat audioFormat; 
+	private static AudioFormat audioFormat; 
 	
 	/**
 	 * Stock les fréquences des octects lus lors 
@@ -80,7 +82,7 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Définis si un fichier à été chargé (initialisé) et convertis en line
 	 */
 	private boolean load = false;
-
+	private int vol=30;
 	/**
 	 * ajoute le model en observer afin de pouvoir actualiser
 	 * l'affichage dès un changement de fréquence
@@ -122,11 +124,11 @@ public class Model_Musique extends Observable implements Runnable {
 			return false;
 			
 		}
-
+		setVol(vol,audioInputStream);
 		audioFormat = audioInputStream.getFormat();
 
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
-
+		
 		try {
 			
 			line = (SourceDataLine) AudioSystem.getLine(info);
@@ -145,7 +147,11 @@ public class Model_Musique extends Observable implements Runnable {
 		return true;
 		
 	} 
-
+	private static void setVol(int vol,AudioInputStream audioInputStream ) {
+		FloatControl gain = (FloatControl) ((Line) audioFormat).getControl(FloatControl.Type.MASTER_GAIN);
+		float dB =(float) (Math.log(vol) / Math.log(10)*20);
+		gain.setValue(dB);
+	}
 	/**
 	 * Méthode de l'interface parente Runnable
 	 * 	permettant l'execution de la méthode Thread.start()
@@ -311,6 +317,6 @@ public class Model_Musique extends Observable implements Runnable {
 			
 		}
 	}	
-	
+
 	
 }
