@@ -25,6 +25,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Model extends Observable implements Observer {
 
+	private boolean fullScreen = false;
+	
 	/**
 	 * Fichier qui sera écouté
 	 */
@@ -259,6 +261,27 @@ public class Model extends Observable implements Observer {
 		
 		this.isThreeDimension = vueChanged;
 		
+		setChanged();
+		notifyObservers();
+		
+	}
+
+	/**
+	 * @return the fullScreen
+	 */
+	public boolean isFullScreen() {
+		
+		return fullScreen;
+		
+	}
+
+	/**
+	 * @param fullScreen the fullScreen to set
+	 */
+	public void setFullScreen(boolean fullScreen) {
+		
+		this.fullScreen = fullScreen;
+
 		setChanged();
 		notifyObservers();
 		

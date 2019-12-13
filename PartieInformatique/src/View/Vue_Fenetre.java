@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -44,7 +46,7 @@ import View.Vue_TextField_PlusMoins;
  * Perrin
  * 	Création de la méthode frameCenter, creationSlider
  */
-public class Vue_Fenetre extends JFrame {
+public class Vue_Fenetre extends JFrame implements Observer {
 
 	///////////////////////////////////////
 	////////////// Attributs //////////////
@@ -222,6 +224,7 @@ public class Vue_Fenetre extends JFrame {
 		model.addObserver(visualisateur3D);
 		model.addObserver(erreur);
 		model.addObserver(vue_full_ecran);
+		model.addObserver(this);
 
 		//Ajout de la fenêtre dans le handler
 		handler.getComponent().add(this);
@@ -460,7 +463,7 @@ public class Vue_Fenetre extends JFrame {
 
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();
-		
+
 		int posY = 
 				( (int) tailleEcran.getHeight()
 						- (int) visualisateur2D.getPreferredSize().getHeight()
@@ -469,9 +472,37 @@ public class Vue_Fenetre extends JFrame {
 		int posX = 
 				( (int) tailleEcran.getWidth() 
 						- (int) visualisateur2D.getPreferredSize().getWidth()) / 2;
-		
+
 		this.setLocation(posX, posY);
 
 	}
 
+
+	public void update(Observable m, Object o) {
+
+		Model model = (Model) m;
+
+		if (model.getErreur() == null) {
+
+			if (model.isFullScreen()) {
+
+				this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+				this.setUndecorated(true);
+				//TODO mettre les taille des panels
+				
+			}
+			
+			else {
+				
+				this.pack();
+				this.frameCenter();
+				//TODO mettre les taille des panels
+				
+			}
+
+			this.revalidate();
+			this.repaint();
+			
+		}
+	}
 }
