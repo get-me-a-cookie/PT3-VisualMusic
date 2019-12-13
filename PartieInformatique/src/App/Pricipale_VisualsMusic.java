@@ -242,7 +242,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 
 		//Paramètrage de la fenêtre
 
-		this.Centrage();
+		this.frameCenter();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -432,8 +432,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 		c.gridy=1;
 		panel_bouton.add(slider,c);
 		
-		
-		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
@@ -450,13 +448,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
-		
-		//Ajout des éléments
-		//panel_bouton.add(bouton_playPause);
-		//panel_bouton.add(bouton_stop);
-		//panel_bouton.add(bouton_pleinEcran);
-		
-		
+
 	}
 	/**
 	 * Création d'une méthode qui va créer un slider
@@ -492,21 +484,24 @@ public class Pricipale_VisualsMusic extends JFrame {
 
 	/** 
 	 * Création de la fênetre à dimension normale
-	 *  et FullEcran selon une boolean 
 	 */
+	public void frameCenter() {
 
-	public void Centrage() {
-		
-		Dimension tailleEcran = Toolkit.getDefaultToolkit().
-				getScreenSize();	
-		int height = tailleEcran.height;
-		int width = tailleEcran.width;
-		// On récuper la taille de l'écran
-		this.setSize(width/2, height/2);
-		this.setLocationRelativeTo(null);
-		this.pack();
+        Dimension tailleEcran = Toolkit.getDefaultToolkit().
+                getScreenSize();
 
-	}
+        int posY = 
+                ( (int) tailleEcran.getHeight()
+                        - (int) visualisateur2D.getPreferredSize().getHeight()
+                        - (int) menu.getPreferredSize().getHeight()
+                        - (int) panel_bouton.getPreferredSize().getHeight()) / 2;    
+        int posX = 
+                ( (int) tailleEcran.getWidth() 
+                        - (int) visualisateur2D.getPreferredSize().getWidth()) / 2;
+
+        this.setLocation(posX, posY);
+
+    }
 
 
 	/**
