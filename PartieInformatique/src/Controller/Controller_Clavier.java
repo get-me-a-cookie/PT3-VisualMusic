@@ -3,6 +3,8 @@ package Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JButton;
+
 import Model.Model;
 
 /**
@@ -26,9 +28,32 @@ public class Controller_Clavier extends Controller implements KeyListener {
 		super(model, handler);
 	}
 
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		//fonctionne mais met du temps à se faire - touche espace pour
+		// play ou pause
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if(model.isFileLoaded()) {
+				JButton bouton = (JButton) e.getSource();
+				
+				//Controle le bouton play
+				if (bouton.getText().equals("Play")) {
+					
+					bouton.setText("Pause");
+					model.lectureFichier();
+					
+					if (model.getMusique().isPause()) 
+						model.getMusique().setPause(false);
+					
+					return;
+					
+				}
+			}
+		}
+		//on appuye sur echap pour quitter -> vue s'affiche ?
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			
+		}
 	}
 
 	public void keyReleased(KeyEvent arg0) {
