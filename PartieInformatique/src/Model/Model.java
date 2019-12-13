@@ -62,6 +62,13 @@ public class Model extends Observable implements Observer {
 	 */
 	private boolean isThreeDimension = false;
 
+
+	public Model() {
+		
+		super();
+		
+	}
+	
 	/**
 	 * Création du model avec la liste de tous les paramètres
 	 * @param parameters : tous les paramètres sous forme de chaîne de caractères
