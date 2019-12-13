@@ -389,7 +389,7 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
-		
+
 
 		//Ajout des Bouton dans le handler
 		handler.getComponent().add(bouton_playPause);
@@ -400,12 +400,12 @@ public class Pricipale_VisualsMusic extends JFrame {
 		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
-		
+
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
 		panel_bouton.add(bouton_pleinEcran);
-		
+
 
 	}
 	/**
@@ -414,15 +414,15 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 	public void creationSliderMusique() {
 		JSlider slider = new JSlider();
-		
+
 		slider.setPreferredSize(new Dimension(100,50));
-		
+
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue(30);
-		
+
 		slider.addChangeListener(new Controller_Slider(model, handler));
-		
+
 		panel_bouton.add(slider);
 	}
 
@@ -456,14 +456,20 @@ public class Pricipale_VisualsMusic extends JFrame {
 	 */
 
 	public void Centrage() {
-		
+
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
-		int height = tailleEcran.height - (int) visualisateur2D.getSize().getHeight();
-		int width = tailleEcran.width;
+		int posY = 
+				( (int) tailleEcran.getHeight()
+						- (int) visualisateur2D.getPreferredSize().getHeight()
+						- (int) menu.getPreferredSize().getHeight()
+						- (int) panel_bouton.getPreferredSize().getHeight()) / 2;	
+		int posX = 
+				( (int) tailleEcran.getWidth() 
+						- (int) visualisateur2D.getPreferredSize().getWidth()) / 2;
 		// On récuper la taille de l'écran
 		//this.setSize(width/2, height/2);
-		this.setLocation(width, height);
+		this.setLocation(posX, posY);
 
 	}
 
