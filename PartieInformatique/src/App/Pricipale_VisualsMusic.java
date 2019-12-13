@@ -25,8 +25,8 @@ import javax.swing.JTextField;
 import Controller.Controller_Bouton_Musique;
 import Controller.Controller_Bouton_PlusMoins;
 import Controller.Controller_Menu;
+import Controller.Controller_Slider;
 import Controller.Adapteur_ControllerVue;
-import Controller.ChangementSon;
 import Model.Model;
 import Model.Model_Musique;
 import View.Vue_2D;
@@ -426,8 +426,10 @@ public class Pricipale_VisualsMusic extends JFrame {
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue(30);
-		
-		slider.addChangeListener(new ChangementSon(slider.getValue()));
+		slider.setMajorTickSpacing(50);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.addChangeListener(new Controller_Slider(model, handler));
 		
 		panel_bouton.add(slider);
 	}
