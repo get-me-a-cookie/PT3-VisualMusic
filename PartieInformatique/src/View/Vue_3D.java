@@ -165,7 +165,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 				}
 
 				cubes.setRatioFrequence(ratioFrequence);
-				//TODO Thread
+				
 			}
 		}
 	}
