@@ -4,9 +4,6 @@ package App;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.GraphicsDevice;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
@@ -28,7 +25,6 @@ import Controller.Controller_Menu;
 import Controller.Controller_Slider;
 import Controller.Adapteur_ControllerVue;
 import Model.Model;
-import Model.Model_Musique;
 import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Ecran_Full;
@@ -48,8 +44,6 @@ public class Pricipale_VisualsMusic extends JFrame {
 	///////////////////////////////////////
 	////////////// Attributs //////////////
 	///////////////////////////////////////
-
-	private boolean pleine_ecran = false;
 
 	/**
 	 * Model qui sera incérer dans la création des Action
@@ -465,12 +459,11 @@ public class Pricipale_VisualsMusic extends JFrame {
 		
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
 				getScreenSize();	
-		int height = tailleEcran.height;
+		int height = tailleEcran.height - (int) visualisateur2D.getSize().getHeight();
 		int width = tailleEcran.width;
 		// On récuper la taille de l'écran
-		this.setSize(width/2, height/2);
-		this.setLocationRelativeTo(null);
-		this.pack();
+		//this.setSize(width/2, height/2);
+		this.setLocation(width, height);
 
 	}
 
