@@ -3,25 +3,22 @@ package Controller;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import Model.Model;
 /**
  * Classe qui permettra de gèrer le son lorsque 
  * l'utilisateur va le changer
  * @author perri
  *
  */
-public class ChangementSon implements ChangeListener{
-	// définition des variables
-	// la valeur du volume au moment pas changé
-	private  int slider;
-	// le slider 
-	private JSlider slider_son;
+public class Controlleur_Slider extends Controller implements ChangeListener {
 	
-	// on récupére la valeur du slider
-	public ChangementSon(int i) {
-		// TODO Auto-generated constructor stub
-		this.slider = i;
+	public Controlleur_Slider(Model model, Adapteur_ControllerVue handler) {
+		
+		super(model, handler);
+		
 	}
-	@Override
+
 	/*
 	 * A implémenter pour que le "click" fait pour changer
 	 * le volume est ajoutée au slider
@@ -29,9 +26,8 @@ public class ChangementSon implements ChangeListener{
 	 * ne modifie pas pour le moment le volume
 	 */
 	public void stateChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
-		 
-	        String str = Integer.toString(slider);
+		
+		
 	        
 	}
 }

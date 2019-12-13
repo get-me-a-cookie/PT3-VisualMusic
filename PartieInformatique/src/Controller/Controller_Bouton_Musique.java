@@ -17,8 +17,8 @@ import View.Vue_Ecran_Full;
  * @author goodw
  */
 public class Controller_Bouton_Musique extends Controller implements ActionListener {
-	private Vue_Ecran_Full vue = new Vue_Ecran_Full();
-	/**
+	
+ 	/**
 	 * Constructeur utilisant le Constructeur Parent
 	 * @param model   : Instanciant le Model
 	 * @param handler : Instanciant l'adapteur
@@ -98,8 +98,9 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 		}
 		
 		if(bouton.getText().equals("Ecran")) {
-			System.out.println(vue.getBoolean());
-			vue.fullScreen();
+			
+			
+			
 		}
 	}
 

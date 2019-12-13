@@ -19,7 +19,7 @@ public class Vue_Ecran_Full  extends JFrame implements Observer{
 	
 	public void fullScreen() {
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
-				getScreenSize();	
+				getScreenSize();
 		int height = tailleEcran.height;
 		int width = tailleEcran.width;
 
