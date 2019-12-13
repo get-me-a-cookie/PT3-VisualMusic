@@ -422,15 +422,17 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 */
 	public void creationSliderMusique(Model model) {
 		JSlider slider = new JSlider();
-
+		
 		slider.setPreferredSize(new Dimension(100,50));
-
+		
 		slider.setMaximum(100);
 		slider.setMinimum(0);
 		slider.setValue(30);
-
+		slider.setMajorTickSpacing(50);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
 		slider.addChangeListener(new Controller_Slider(model, handler));
-
+		
 		panel_bouton.add(slider);
 	}
 
