@@ -60,10 +60,12 @@ public class Controller_Clavier extends Controller implements KeyListener {
 		 * Volume :Flèche haut et bas
 		 */
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			
+			volume = slider.getValue();
+			slider.setValue(volume);
 		}
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			
+			volume = slider.getValue();
+			slider.setValue(volume);
 		}
 		
 		
