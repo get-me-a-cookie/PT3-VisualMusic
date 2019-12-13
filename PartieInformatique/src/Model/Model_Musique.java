@@ -124,7 +124,7 @@ public class Model_Musique extends Observable implements Runnable {
 			return false;
 			
 		}
-		setVol(vol,audioInputStream);
+		//setVol(40,audioInputStream);
 		audioFormat = audioInputStream.getFormat();
 
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
