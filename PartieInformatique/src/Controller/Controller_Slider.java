@@ -11,9 +11,9 @@ import Model.Model;
  * @author perri
  *
  */
-public class Controlleur_Slider extends Controller implements ChangeListener {
+public class Controller_Slider extends Controller implements ChangeListener {
 	
-	public Controlleur_Slider(Model model, Adapteur_ControllerVue handler) {
+	public Controller_Slider(Model model, Adapteur_ControllerVue handler) {
 		
 		super(model, handler);
 		
