@@ -3,11 +3,14 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -84,7 +87,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Sert à retirer des éléments dans l'interface quand on 
 	 * clique sur un bouton, ect ...
 	 */
-	private Adapteur_ControllerVue handler = new Adapteur_ControllerVue();
+	Set<Component> handler = new HashSet<Component>();
 
 	/**
 	 * Bandeau inférieur de l'IG
@@ -212,9 +215,9 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		model = new Model(listOfParameters);
 
 		//Création des éléments 
-		this.creationMenu(model);
-		this.creationBouton(model);
-		this.creationSliderMusique(model);
+		this.creationMenu(model, handler);
+		this.creationBouton(model, handler);
+		this.creationSliderMusique(model, handler);
 		this.creationVisualisateur();
 		erreur = new Vue_Erreur();
 		vue_full_ecran = new Vue_Ecran_Full();
@@ -225,9 +228,9 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		model.addObserver(erreur);
 		model.addObserver(vue_full_ecran);
 		model.addObserver(this);
-
-		//Ajout de la fenêtre dans le handler
-		handler.getComponent().add(this);
+		
+		
+		handler.add(this);
 
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
@@ -235,7 +238,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		this.add(visualisateur2D, BorderLayout.CENTER);
 
 		//Paramètrage de la fenêtre
-
 		this.frameCenter();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -249,8 +251,9 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	/**
 	 * Création du l'IG supérieur
 	 * Menu (fichier, ...)
+	 * @param handler2 
 	 */
-	private void creationMenu(Model model) {
+	private void creationMenu(Model model, Set<Component> handler2) {
 
 		//Création des éléments		
 		menu = new JMenuBar();
@@ -309,47 +312,17 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		menu_parametre_width_field.setEditable(false);
 		menu_parametre_margin_field.setEditable(false);
 
-		//Ajout des JPanel dans le handler
-		handler.getComponent().add(menu_parametre_amplitude);
-		handler.getComponent().add(menu_parametre_width);
-		handler.getComponent().add(menu_parametre_margin);
-
 		//Ajout des Controller
-		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model, handler));
+		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model, handler2));
 
-		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler));
-		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler));
+		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler2));
+		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler2));
+		
 
-		menu_parametre_amplitude_plus.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_amplitude_field));
-		menu_parametre_amplitude_moins.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_amplitude_field));
-		menu_parametre_margin_plus.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_margin_field));
-		menu_parametre_margin_moins.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_margin_field));
-		menu_parametre_width_plus.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_width_field));
-		menu_parametre_width_moins.addActionListener(
-				new Controller_Bouton_PlusMoins(
-						model,
-						handler,
-						menu_parametre_width_field));
+
+		handler.add(menu_parametre_amplitude);
+		handler.add(menu_parametre_width);
+		handler.add(menu_parametre_margin);
 
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
@@ -383,7 +356,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Création du l'IG inférieur
 	 * Bouton de navigation
 	 */
-	private void creationBouton(Model model) {
+	private void creationBouton(Model model, Set<Component> handler2) {
 
 		//Création des éléments
 		panel_bouton = new JPanel();
@@ -398,17 +371,17 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		bouton_stop.setPreferredSize(new Dimension(100,50));
 		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
 
-
-		//Ajout des Bouton dans le handler
-		handler.getComponent().add(bouton_playPause);
-		handler.getComponent().add(bouton_stop);
-		handler.getComponent().add(bouton_pleinEcran);
-
 		//Ajout des Controller
-		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
-		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
-		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
+		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler2));
+		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler2));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler2));
 
+		
+
+		handler.add(bouton_playPause);
+		handler.add(bouton_stop);
+		handler.add(bouton_pleinEcran);
+		
 		//Ajout des éléments
 		panel_bouton.add(bouton_playPause);
 		panel_bouton.add(bouton_stop);
@@ -420,7 +393,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Création d'une méthode qui va créer un slider
 	 * elle définit un volume par défaut qui est à 30
 	 */
-	public void creationSliderMusique(Model model) {
+	public void creationSliderMusique(Model model, Set<Component> handler2) {
 		JSlider slider = new JSlider();
 
 		slider.setPreferredSize(new Dimension(100,50));
@@ -429,7 +402,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		slider.setMinimum(0);
 		slider.setValue(30);
 
-		slider.addChangeListener(new Controller_Slider(model, handler));
+		slider.addChangeListener(new Controller_Slider(model, handler2));
 
 		panel_bouton.add(slider);
 	}
@@ -450,12 +423,10 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		visualisateur3D.setSize( 		 //Obligé de faire setSize pour un Canva
 				new Dimension(800,450)); //rapport de 16:9
 
-		//Ajout des éléments dans le handler
-		handler.getComponent().add(visualisateur2D);
-		handler.getComponent().add(visualisateur3D);
-
 		//Ajout des éléments
 
+		handler.add(visualisateur2D);
+		handler.add(visualisateur3D);
 	}
 
 	//TODO Javadoc
@@ -489,20 +460,20 @@ public class Vue_Fenetre extends JFrame implements Observer {
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				this.setUndecorated(true);
 				//TODO mettre les taille des panels
-				
+
 			}
-			
+
 			else {
-				
+
 				this.pack();
 				this.frameCenter();
 				//TODO mettre les taille des panels
-				
+
 			}
 
 			this.revalidate();
 			this.repaint();
-			
+
 		}
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
@@ -28,7 +29,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Menu(Model model,
-			Adapteur_ControllerVue handler) {
+			Set<Component> handler) {
 		
 		super(model, handler);
 		
@@ -67,7 +68,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			
 			model.setIsThreeDimension(false);
 			
-			for (Component b : handler.getComponent()) {
+			for (Component b : handler) {
 				
 				if (b instanceof JFrame)
 					fenetre = (JFrame) b;
@@ -104,7 +105,7 @@ public class Controller_Menu extends Controller implements ActionListener  {
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
 			
-			for (Component b : handler.getComponent()) {
+			for (Component b : handler) {
 				
 				if (b instanceof JFrame)
 					fenetre = (JFrame) b;

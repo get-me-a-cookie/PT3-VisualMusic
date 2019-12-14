@@ -1,7 +1,9 @@
 package Controller;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Set;
 
 import Model.Model;
 
@@ -22,8 +24,10 @@ public class Controller_Souris extends Controller implements MouseListener {
 	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Souris(Model model,
-			Adapteur_ControllerVue handler) {
+			Set<Component> handler) {
+		
 		super(model, handler);
+		
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
