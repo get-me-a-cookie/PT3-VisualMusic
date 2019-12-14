@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.util.HashSet;
@@ -166,7 +168,14 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 *		l'utilisateur essai de le lire
 	 */
 	private Vue_Erreur erreur;
+	
+	/**
+	 * Vue permettant d'afficher une vue 
+	 * en pleine écran
+	 */
 	private Vue_Ecran_Full vue_full_ecran;
+	
+	private GridBagConstraints c;
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
 	///////////////////////////////////////
@@ -188,8 +197,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		//Création des éléments 
 		this.creationMenu(model, handler);
-		this.creationBouton(model, handler);
-		this.creationSliderMusique(model, handler);
+		this.creationPanelSud(model, handler);
 		this.creationVisualisateur();
 		erreur = new Vue_Erreur();
 		vue_full_ecran = new Vue_Ecran_Full();
@@ -273,55 +281,64 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Création du l'IG inférieur
 	 * Bouton de navigation
 	 */
-	private void creationBouton(Model model, Set<Component> handler2) {
-
+	private void creationPanelSud(Model model, Set<Component> handler) {
+		
 		//Création des éléments
 		panel_bouton = new JPanel();
-
+		JLabel texte_Volume = new JLabel("Volume :");
+		JSlider slider = new JSlider(0,100);
+		panel_bouton.setLayout(new GridBagLayout());
+		c = new GridBagConstraints();
+		
 		bouton_playPause = new JButton("Play");
+		c.gridx =0;
+		c.gridy=0;
+		c.gridheight =2;
+		panel_bouton.add(bouton_playPause,c);
+		
+		
 		bouton_stop = new JButton("Stop");
-		bouton_pleinEcran = new JButton("Ecran");		
+		c.gridx =1;
+		c.gridy=0;
+		panel_bouton.add(bouton_stop,c);
+		
+		bouton_pleinEcran = new JButton("Ecran");
+		c.gridx =2;
+		c.gridy=0;
+		panel_bouton.add(bouton_pleinEcran,c);
 
+		c.gridheight =1;
+		c.gridx=3;
+		c.gridy=0;
+		panel_bouton.add(texte_Volume,c);
+		
+		
+		slider.setPreferredSize(new Dimension(100,50));
+		slider.setMinimum(0);
+		slider.setMajorTickSpacing(50);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.addChangeListener(new Controller_Slider(model, handler));
+		c.gridx=3;
+		c.gridy=1;
+		panel_bouton.add(slider,c);
+		
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
 		bouton_stop.setPreferredSize(new Dimension(100,50));
-		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));
+		bouton_pleinEcran.setPreferredSize(new Dimension(100,50));		
 
-		//Ajout des Controller
-		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler2));
-		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler2));
-		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler2));
-
-		
-
+		//Ajout des Bouton dans le handler
 		handler.add(bouton_playPause);
 		handler.add(bouton_stop);
 		handler.add(bouton_pleinEcran);
-		
-		//Ajout des éléments
-		panel_bouton.add(bouton_playPause);
-		panel_bouton.add(bouton_stop);
-		panel_bouton.add(bouton_pleinEcran);
 
+		//Ajout des Controller
+		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
+		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
 
-	}
-	/**
-	 * Création d'une méthode qui va créer un slider
-	 * elle définit un volume par défaut qui est à 30
-	 */
-	public void creationSliderMusique(Model model, Set<Component> handler2) {
-		JSlider slider = new JSlider();
-
-		slider.setPreferredSize(new Dimension(100,50));
-
-		slider.setMaximum(100);
-		slider.setMinimum(0);
-		slider.setValue(30);
-
-		slider.addChangeListener(new Controller_Slider(model, handler2));
-
-		panel_bouton.add(slider);
 	}
 
 	/**

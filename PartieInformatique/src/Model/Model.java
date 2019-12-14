@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -122,7 +123,15 @@ public class Model extends Observable implements Observer {
 			
 			fichier = file;
 			this.lectureFichier();
+			
 		}
+		
+		else {
+			
+			setErreur(new FileNotFoundException());
+			
+		}
+		
 	}
 	
 	/**
