@@ -3,12 +3,16 @@
  */
 package View;
 
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.time.temporal.JulianFields;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -18,6 +22,7 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 /**
  * @author goodw
@@ -34,8 +39,23 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		super();
 
-		JPanel panel = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
+		JPanel panel_fenetre 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_fenetre 	= new GridBagConstraints();
+
+		JPanel panel_section1 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_section1 = new GridBagConstraints();
+
+		JPanel panel_section2 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_section2 = new GridBagConstraints();
+
+		JPanel panel_section3 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_section3 = new GridBagConstraints();
+
+		JPanel panel_section4 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_section4 = new GridBagConstraints();
+
+		JPanel panel_section5 			= new JPanel(new GridBagLayout());
+		GridBagConstraints gbc_section5 = new GridBagConstraints();
 
 
 
@@ -117,240 +137,199 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		JButton submit = new JButton("Appliquer & quitter");
 
-
-
-		JSeparator separator_parametre_reste = new JSeparator(SwingConstants.HORIZONTAL);
-		JSeparator separator_section4_slider_autoplay = new JSeparator(SwingConstants.HORIZONTAL);
-		JSeparator separator_section1_section2 = new JSeparator(SwingConstants.VERTICAL);
-		JSeparator separator_section2_section3 = new JSeparator(SwingConstants.VERTICAL);
-		JSeparator separator_section3_section4 = new JSeparator(SwingConstants.VERTICAL);
-
+		
+		Border outsideBorder = BorderFactory.createRaisedBevelBorder();
+		Border insideBorder = BorderFactory.createEtchedBorder();
+		Border compound = BorderFactory.createCompoundBorder(insideBorder, insideBorder);
+		
 		/*
 		 * If you are lost in the GridBagConstraints:
 		 * https://docs.google.com/spreadsheets/d/1bSuEb7csMHc0i-HCx7FFaSAbMqYHoHI6-LiGcnqSEtE/edit?usp=sharing
 		 * 
 		 * It's a small Google Sheet, that we used to do the interface.
 		 * 
-		 * Now, in the code that is next, I tried to limit all affectations and so calculation
-		 * for the CPU, how little they are.
-		 * So, it may be a little hard to follow the components adding.
+		 * We have 5 sections. One for each bloc (between black separator)
 		 */
-
-		/* 
-		 * ##################################################
-		 * 
-		 * Ajout de élément simple (sans gridwidth, gridheight)
-		 * 
-		 * ##################################################
-		 */
-
-		//Première partie, Champs de espacement, epaisseur, amplitude
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		panel.add(textField_affichage_espacement, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_affichage_epaisseur, gbc);
-		gbc.gridy = 8;
-		panel.add(textField_affichage_amplitude, gbc);
-
-		gbc.gridx = 2;
-		panel.add(label_affichage_amplitude_pourCent, gbc);
-		gbc.gridy = 6;
-		panel.add(label_affichage_epaisseur_px, gbc);
-		gbc.gridy = 4;
-		panel.add(label_affichage_espacement_px, gbc);
-
-		//Deuxième partie, Champs des couleur de 2D
-		gbc.gridx = 4;
-		gbc.gridy = 6;
-		panel.add(label_couleur_2d_trait_red, gbc);
-		gbc.gridy = 7;
-		panel.add(label_couleur_2d_trait_green, gbc);
-		gbc.gridy = 8;
-		panel.add(label_couleur_2d_trait_blue, gbc);
-
-		gbc.gridx = 5;
-		panel.add(textField_2d_couleur_trait_blue, gbc);
-		gbc.gridy = 7;
-		panel.add(textField_2d_couleur_trait_green, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_2d_couleur_trait_red, gbc);
-
-		gbc.gridx = 6;
-		gbc.gridy = 6;
-		panel.add(label_couleur_2d_forme_red, gbc);
-		gbc.gridy = 7;
-		panel.add(label_couleur_2d_forme_green, gbc);
-		gbc.gridy = 8;
-		panel.add(label_couleur_2d_forme_blue, gbc);
-
-		gbc.gridx = 7;
-		panel.add(textField_2d_couleur_forme_blue, gbc);
-		gbc.gridy = 7;
-		panel.add(textField_2d_couleur_forme_green, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_2d_couleur_forme_red, gbc);
-
-		//Troisième partie, Champs des couleur 3D
-		gbc.gridx = 11;
-		gbc.gridy = 5;
-		panel.add(label_couleur_3d_red, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_3d_couleur_cube1_red, gbc);
-		gbc.gridy = 7;
-		panel.add(textField_3d_couleur_cube2_red, gbc);
-		gbc.gridy = 8;
-		panel.add(textField_3d_couleur_cube3_red, gbc);
-		gbc.gridy = 9;
-		panel.add(textField_3d_couleur_cube4_red, gbc);
-
-		gbc.gridx = 12;
-		panel.add(textField_3d_couleur_cube4_green, gbc);
-		gbc.gridy = 8;
-		panel.add(textField_3d_couleur_cube3_green, gbc);
-		gbc.gridy = 7;
-		panel.add(textField_3d_couleur_cube2_green, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_3d_couleur_cube1_green, gbc);
-		gbc.gridy = 5;
-		panel.add(label_couleur_3d_green, gbc);
-
-		gbc.gridx = 13;
-		panel.add(label_couleur_3d_blue, gbc);
-		gbc.gridy = 6;
-		panel.add(textField_3d_couleur_cube1_blue, gbc);
-		gbc.gridy = 7;
-		panel.add(textField_3d_couleur_cube2_blue, gbc);
-		gbc.gridy = 8;
-		panel.add(textField_3d_couleur_cube3_blue, gbc);
-		gbc.gridy = 9;
-		panel.add(textField_3d_couleur_cube4_blue, gbc);
-
-		/* 
-		 * ##################################################
-		 * 
-		 * Ajout de élément simple (sans gridwidth, gridheight)
-		 * 
-		 * ##################################################
-		 */
-
-		//Titre Paramètre
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = Vue_Parametre.GRID_BAG_CONSTRAINTS_FRAME_SIZE;
-		panel.add(label_parametre, gbc);
-
-
-		//Première Section
-
-		//Titre affichage
-		gbc.gridy = 2;
-		gbc.gridwidth = 3;
-		panel.add(label_affichage, gbc);
-
-		//Sous Titre espacement
-		gbc.gridy = 3;
-		panel.add(label_affichage_espacement, gbc);
-
-		//Sous Titre epaisseur
-		gbc.gridy = 5;
-		panel.add(label_affichage_epaisseur, gbc);
-
-		//Sous Titre amplitude
-		gbc.gridy = 7;
-		panel.add(label_affichage_amplitude, gbc);
-
-
-		//Deuxième Section
-
-		//titre 2D
-		gbc.gridx = 4;
-		gbc.gridy = 2;
-		gbc.gridwidth = 4;
-		panel.add(label_2d, gbc);
-
-		//Sous titre couleur
-		gbc.gridy = 3;
-		panel.add(label_couleur_2d, gbc);
-
-		//checkbox random
-		gbc.gridy = 4;
-		panel.add(checkbox_2d_couleur_random, gbc);
-
-		//sous sous titre trait
-		gbc.gridy = 5;
-		gbc.gridwidth = 2;
-		panel.add(label_2d_trait, gbc);
-
-		//sous sous titre forme
-		gbc.gridx = 6;
-		gbc.gridy = 5;
-		panel.add(label_2d_forme, gbc);
-
-
-		//Troisème section
-
-		//titre 3D
-		gbc.gridx = 9;
-		gbc.gridy = 2;
-		gbc.gridwidth = 5;
-		panel.add(label_3d, gbc);
-
-		//Sous titre couleur
-		gbc.gridy = 3;
-		panel.add(label_couleur_3d, gbc);
-
-		//checkbox random
-		gbc.gridy = 4;
-		panel.add(checkbox_3d_couleur_random, gbc);
-
-		//sous sous titre cube1
-		gbc.gridy = 6;
-		gbc.gridwidth = 2;
-		panel.add(label_3d_cube1, gbc);
-
-		//sous sous titre cube2
-		gbc.gridy = 7;
-		panel.add(label_3d_cube2, gbc);
-
-		//sous sous titre cube3
-		gbc.gridy = 8;
-		panel.add(label_3d_cube3, gbc);
-
-		//sous sous titre cube4
-		gbc.gridy = 9;
-		panel.add(label_3d_cube4, gbc);
-
-
-		//Quatrième section
 		
-		//slider aigu
-		gbc.gridx = 15;
-		gbc.gridy = 2;
-		gbc.gridwidth = 3;
-		panel.add(slider_aigu, gbc);
+		//Section1
+		gbc_section1.gridx = 1;
+		gbc_section1.gridy = 2;
+		panel_section1.add(textField_affichage_espacement, gbc_section1);
+		gbc_section1.gridy = 4;
+		panel_section1.add(textField_affichage_epaisseur, gbc_section1);
+		gbc_section1.gridy = 6;
+		panel_section1.add(textField_affichage_amplitude, gbc_section1);
 		
-		//slider grave
-		gbc.gridy = 3;
-		panel.add(slider_grave, gbc);
-		
-		//slider vitesse
-		gbc.gridy = 4;
-		panel.add(slider_vitesse, gbc);
+		gbc_section1.gridx = 2;
+		gbc_section1.gridy = 2;
+		panel_section1.add(label_affichage_espacement_px, gbc_section1);
+		gbc_section1.gridy = 4;
+		panel_section1.add(label_affichage_epaisseur_px, gbc_section1);
+		gbc_section1.gridy = 6;
+		panel_section1.add(label_affichage_amplitude_pourCent, gbc_section1);
 
-		//autoplay
-		gbc.gridy = 6;
-		panel.add(checkbox_autoplay, gbc);
-		
-		
-		
-		
-		
-		
-		
+		gbc_section1.gridwidth = 3;
+		gbc_section1.gridx = 0;
+		gbc_section1.gridy = 0;
+		panel_section1.add(label_affichage, gbc_section1);
+		gbc_section1.gridy = 1;
+		panel_section1.add(label_affichage_espacement, gbc_section1);
+		gbc_section1.gridy = 3;
+		panel_section1.add(label_affichage_epaisseur, gbc_section1);
+		gbc_section1.gridy = 5;
+		panel_section1.add(label_affichage_amplitude, gbc_section1);
 		
 
-		this.add(panel);
+		//Section2
+		gbc_section2.gridy = 4;
+		panel_section2.add(label_couleur_2d_trait_red, gbc_section2);
+		gbc_section2.gridy = 5;
+		panel_section2.add(label_couleur_2d_trait_green, gbc_section2);
+		gbc_section2.gridy = 6;
+		panel_section2.add(label_couleur_2d_trait_blue, gbc_section2);
+
+		gbc_section2.gridx = 1;
+		gbc_section2.gridy = 4;
+		panel_section2.add(textField_2d_couleur_trait_red, gbc_section2);
+		gbc_section2.gridy = 5;
+		panel_section2.add(textField_2d_couleur_trait_green, gbc_section2);
+		gbc_section2.gridy = 6;
+		panel_section2.add(textField_2d_couleur_trait_blue, gbc_section2);
+
+		gbc_section2.gridx = 2;
+		gbc_section2.gridy = 4;
+		panel_section2.add(label_couleur_2d_forme_red, gbc_section2);
+		gbc_section2.gridy = 5;
+		panel_section2.add(label_couleur_2d_forme_green, gbc_section2);
+		gbc_section2.gridy = 6;
+		panel_section2.add(label_couleur_2d_forme_blue, gbc_section2);
+
+		gbc_section2.gridx = 3;
+		gbc_section2.gridy = 4;
+		panel_section2.add(textField_2d_couleur_forme_red, gbc_section2);
+		gbc_section2.gridy = 5;
+		panel_section2.add(textField_2d_couleur_forme_green, gbc_section2);
+		gbc_section2.gridy = 6;
+		panel_section2.add(textField_2d_couleur_forme_blue, gbc_section2);
+		
+		gbc_section2.gridwidth = 2;
+		gbc_section2.gridy = 3;
+		gbc_section2.gridx = 0;
+		panel_section2.add(label_2d_trait, gbc_section2);
+		gbc_section2.gridx = 2;
+		panel_section2.add(label_2d_forme, gbc_section2);
+		
+		gbc_section2.gridwidth = 4;
+		gbc_section2.gridx = 0;
+		gbc_section2.gridy = 0;
+		panel_section2.add(label_2d, gbc_section2);
+		gbc_section2.gridy = 1;
+		panel_section2.add(label_couleur_2d, gbc_section2);
+		gbc_section2.gridy = 2;
+		panel_section2.add(checkbox_2d_couleur_random, gbc_section2);
+		
+		
+		//Section3
+		gbc_section3.gridx = 2;
+		gbc_section3.gridy = 3;
+		panel_section3.add(label_couleur_3d_red, gbc_section3);
+		gbc_section3.gridy = 4;
+		panel_section3.add(textField_3d_couleur_cube1_red, gbc_section3);
+		gbc_section3.gridy = 5;
+		panel_section3.add(textField_3d_couleur_cube2_red, gbc_section3);
+		gbc_section3.gridy = 6;
+		panel_section3.add(textField_3d_couleur_cube3_red, gbc_section3);
+		gbc_section3.gridy = 7;
+		panel_section3.add(textField_3d_couleur_cube4_red, gbc_section3);
+
+		gbc_section3.gridx = 3;
+		gbc_section3.gridy = 3;
+		panel_section3.add(label_couleur_3d_green, gbc_section3);
+		gbc_section3.gridy = 4;
+		panel_section3.add(textField_3d_couleur_cube1_green, gbc_section3);
+		gbc_section3.gridy = 5;
+		panel_section3.add(textField_3d_couleur_cube2_green, gbc_section3);
+		gbc_section3.gridy = 6;
+		panel_section3.add(textField_3d_couleur_cube3_green, gbc_section3);
+		gbc_section3.gridy = 7;
+		panel_section3.add(textField_3d_couleur_cube4_green, gbc_section3);
+
+		gbc_section3.gridx = 4;
+		gbc_section3.gridy = 3;
+		panel_section3.add(label_couleur_3d_blue, gbc_section3);
+		gbc_section3.gridy = 4;
+		panel_section3.add(textField_3d_couleur_cube1_blue, gbc_section3);
+		gbc_section3.gridy = 5;
+		panel_section3.add(textField_3d_couleur_cube2_blue, gbc_section3);
+		gbc_section3.gridy = 6;
+		panel_section3.add(textField_3d_couleur_cube3_blue, gbc_section3);
+		gbc_section3.gridy = 7;
+		panel_section3.add(textField_3d_couleur_cube4_blue, gbc_section3);
+
+		gbc_section3.gridwidth = 2;
+		gbc_section3.gridx = 0;
+		gbc_section3.gridy = 4;
+		panel_section3.add(label_3d_cube1, gbc_section3);
+		gbc_section3.gridy = 5;
+		panel_section3.add(label_3d_cube2, gbc_section3);
+		gbc_section3.gridy = 6;
+		panel_section3.add(label_3d_cube3, gbc_section3);
+		gbc_section3.gridy = 7;
+		panel_section3.add(label_3d_cube4, gbc_section3);
+
+		gbc_section3.gridwidth = 5;
+		gbc_section3.gridx = 0;
+		gbc_section3.gridy = 0;
+		panel_section3.add(label_3d, gbc_section3);
+		gbc_section3.gridy = 1;
+		panel_section3.add(label_couleur_3d, gbc_section3);
+		gbc_section3.gridy = 2;
+		panel_section3.add(checkbox_3d_couleur_random, gbc_section3);
+		
+		
+		//Section4
+		panel_section4.add(slider_aigu, gbc_section4);
+		gbc_section4.gridy = 1;
+		panel_section4.add(slider_grave, gbc_section4);
+		gbc_section4.gridy = 2;
+		panel_section4.add(slider_vitesse, gbc_section4);
+		
+		
+		//Section5
+		panel_section5.add(checkbox_autoplay, gbc_section5);
+
+		
+		//Ajout Border
+		panel_section1.setBorder(compound);
+		panel_section2.setBorder(compound);
+		panel_section3.setBorder(compound);
+		panel_section4.setBorder(compound);
+		panel_section5.setBorder(compound);
+		
+		
+		//Fenetre
+		gbc_fenetre.gridx = 3;
+		panel_fenetre.add(panel_section4, gbc_fenetre);
+		gbc_fenetre.gridy = 1;
+		panel_fenetre.add(panel_section5, gbc_fenetre);
+		
+		gbc_fenetre.gridheight = 2;
+		gbc_fenetre.gridx = 0;
+		gbc_fenetre.gridy = 0;
+		panel_fenetre.add(panel_section1, gbc_fenetre);
+		gbc_fenetre.gridx = 1;
+		panel_fenetre.add(panel_section2, gbc_fenetre);
+		gbc_fenetre.gridx = 2;
+		panel_fenetre.add(panel_section3, gbc_fenetre);
+
+		gbc_fenetre.gridheight = 1;
+		gbc_fenetre.gridwidth = 4;
+		gbc_fenetre.gridx = 0;
+		gbc_fenetre.gridy = 2;
+		panel_fenetre.add(submit, gbc_fenetre);
+		
+		this.add(panel_fenetre);
+		
 		//Ne rend pas la fenêtre visible quand on la créé
 
 		this.setTitle("Visuals Music - Settings");
