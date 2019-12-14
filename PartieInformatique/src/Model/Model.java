@@ -26,7 +26,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Model extends Observable implements Observer {
 
-	private boolean fullScreen = false;
+	private boolean fullScreen;
 	
 	/**
 	 * Fichier qui sera écouté
@@ -37,7 +37,7 @@ public class Model extends Observable implements Observer {
 	 * Classe de type Model, connu et instancié uniquement ici
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 */
-	private Model_Musique musique = new Model_Musique(this);
+	private Model_Musique musique;
 	
 	/**
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
@@ -50,12 +50,12 @@ public class Model extends Observable implements Observer {
 	 * 0 : aucune erreur
 	 * 1 : erreur de type ""
 	 */
-	private Exception erreur = null;
+	private Exception erreur;
 	
 	/**
 	 * les paramètres avec leur valeurs
 	 */
-	private Map<String, Integer> parametres = new HashMap<String, Integer>();
+	private Map<String, Integer> parametres;
 	
 	/**
 	 * Définis si l'utilisateur a demander de changer de vue
@@ -63,11 +63,21 @@ public class Model extends Observable implements Observer {
 	 * true  : l'utilisateur veux changer de vue
 	 * false : il reste sur sa vue actuelle 
 	 */
-	private boolean isThreeDimension = false;
+	private boolean isThreeDimension;
 	
-	private boolean printSettings = false;
+	private boolean printSettings;
 
 	public Model() {
+				
+		musique = new Model_Musique(this);
+		
+		erreur = null;
+				
+		isThreeDimension = false;
+		printSettings = false;
+		fullScreen = false;
+		
+		parametres = new HashMap<String, Integer>();
 		
 		parametres.put("Autoplay"				, 1); //1 = true, 0 = false
 		parametres.put("Couleur_2d_random"	 	, 1); //1 = true, 0 = false
