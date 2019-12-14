@@ -252,7 +252,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler2));
 		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler2));
 		
-		menu_parametre.addActionListener(new Controller_Menu(model, handler2));
+		menu_parametre.addMenuListener(new Controller_Menu(model, handler2));
 
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);

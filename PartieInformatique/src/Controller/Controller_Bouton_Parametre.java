@@ -564,8 +564,10 @@ public class Controller_Bouton_Parametre extends Controller implements ActionLis
 				}
 
 			}
-			
+
 			model.parametersChanged(settings);
+
+			model.setPrintSettings(false);
 
 		}
 	}

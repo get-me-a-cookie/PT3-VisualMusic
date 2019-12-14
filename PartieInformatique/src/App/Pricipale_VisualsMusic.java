@@ -16,6 +16,8 @@ public class Pricipale_VisualsMusic {
 		//partage du model pour les Controller
 		Vue_Fenetre Frame = new Vue_Fenetre(model);
 		Vue_Parametre settings = new Vue_Parametre(model);
+		
+		model.addObserver(settings);
 
 	}
 

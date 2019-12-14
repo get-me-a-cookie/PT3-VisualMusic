@@ -415,15 +415,23 @@ public class Vue_Parametre extends JFrame implements Observer {
 		this.setTitle("Visuals Music - Settings");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		this.setVisible(true);
 		this.pack();
 		
 	}
 
 	public void update(Observable o, Object arg) {
 
+		Model model = (Model) o;
 
-
+		if (model.getErreur() == null) {
+			
+			if (model.isPrintSettings()) {
+				
+				this.setVisible(true);
+				this.revalidate();
+				this.repaint();
+				
+			}
+		}
 	}
-
 }

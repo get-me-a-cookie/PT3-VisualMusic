@@ -64,6 +64,8 @@ public class Model extends Observable implements Observer {
 	 */
 	private boolean isThreeDimension = false;
 	
+	private boolean printSettings = false;
+
 	public Model() {
 		
 		parametres.put("Autoplay"				, 1); //1 = true, 0 = false
@@ -116,17 +118,13 @@ public class Model extends Observable implements Observer {
 	 */
 	public void setFichier(File file) {
 		
-		fichier = file;
-		
+		if (file.exists()) {
+			
+			fichier = file;
+			this.lectureFichier();
+		}
 	}
 	
-	public boolean getFichier() {
-		if(fichier.exists())
-		{
-			return true;
-		}
-		return false;
-	}
 	/**
 	 * permet d'obtenir le model jouant la musique
 	 * @return le model de la musique
@@ -280,6 +278,27 @@ public class Model extends Observable implements Observer {
 
 		setChanged();
 		notifyObservers();
+		
+	}
+	
+	/**
+	 * @return the printSettings
+	 */
+	public boolean isPrintSettings() {
+		
+		return printSettings;
+		
+	}
+
+	/**
+	 * @param printSettings the printSettings to set
+	 */
+	public void setPrintSettings(boolean printSettings) {
+		
+		this.printSettings = printSettings;
+		
+		this.setChanged();
+		this.notifyObservers();
 		
 	}
 }
