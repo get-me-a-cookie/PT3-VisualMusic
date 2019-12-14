@@ -564,8 +564,6 @@ public class Controller_Bouton_Parametre extends Controller implements ActionLis
 				}
 
 			}
-
-			System.out.println(settings);
 			
 			model.parametersChanged(settings);
 

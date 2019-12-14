@@ -32,7 +32,6 @@ import View.Vue_2D;
 import View.Vue_3D;
 import View.Vue_Ecran_Full;
 import View.Vue_Erreur;
-import View.Vue_TextField_PlusMoins;
 
 /** 
  * Classe représentant l'IG, composé de 
@@ -123,26 +122,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * 		- Espacement rectangles
 	 */
 	private JMenu menu_parametre;
-
-	//TODO A delete
-	private JTextField 	menu_parametre_amplitude_field;
-	private JButton 	menu_parametre_amplitude_plus;
-	private JButton 	menu_parametre_amplitude_moins;
-	private JLabel 		menu_parametre_amplitude_label;
-	private JTextField 	menu_parametre_width_field;
-	private JButton 	menu_parametre_width_plus;
-	private JButton 	menu_parametre_width_moins;
-	private JLabel 		menu_parametre_width_label;
-	private JTextField 	menu_parametre_margin_field;
-	private JButton 	menu_parametre_margin_plus;
-	private JButton 	menu_parametre_margin_moins;
-	private JLabel 		menu_parametre_margin_label;
-	private Vue_TextField_PlusMoins menu_parametre_amplitude_plusMoins;
-	private Vue_TextField_PlusMoins menu_parametre_width_plusMoins;
-	private Vue_TextField_PlusMoins menu_parametre_margin_plusMoins;
-	private JPanel menu_parametre_amplitude;
-	private JPanel menu_parametre_width;
-	private JPanel menu_parametre_margin;
 
 	/**
 	 * Actions de @menu_affichage
@@ -260,50 +239,12 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		menu_affichage_dimension = new ButtonGroup();
 
-
 		menu_parametre = new JMenu("Paramètres");
-		menu_parametre_amplitude_moins	= new JButton("-");
-		menu_parametre_amplitude_plus	= new JButton("+");
-		menu_parametre_amplitude_field  = new JTextField(4);
-		menu_parametre_amplitude_label  = new JLabel("Amplitude");
-
-		menu_parametre_margin_moins		= new JButton("-");
-		menu_parametre_margin_plus		= new JButton("+");
-		menu_parametre_margin_field	    = new JTextField(4);
-		menu_parametre_margin_label 	= new JLabel("Espacement");
-
-		menu_parametre_width_moins		= new JButton("-");
-		menu_parametre_width_plus		= new JButton("+");
-		menu_parametre_width_field 		= new JTextField(4);
-		menu_parametre_width_label 		= new JLabel("Epaisseur");
-
-		menu_parametre_amplitude_plusMoins = new Vue_TextField_PlusMoins(
-				menu_parametre_amplitude_plus,
-				menu_parametre_amplitude_field,
-				menu_parametre_amplitude_moins);
-
-		menu_parametre_margin_plusMoins = new Vue_TextField_PlusMoins(
-				menu_parametre_margin_plus,
-				menu_parametre_margin_field,
-				menu_parametre_margin_moins);
-
-		menu_parametre_width_plusMoins = new Vue_TextField_PlusMoins(
-				menu_parametre_width_plus,
-				menu_parametre_width_field,
-				menu_parametre_width_moins);
-
-		menu_parametre_amplitude 	= new JPanel(new GridLayout(1, 2, 5, 0));
-		menu_parametre_width 		= new JPanel(new GridLayout(1, 2, 5, 0));
-		menu_parametre_margin 		= new JPanel(new GridLayout(1, 2, 5, 0));
 
 		//Modification des éléments
 		menu.setBackground(new Color(206, 213, 209));
 
 		menu_affichage_2D.setSelected(true);
-
-		menu_parametre_amplitude_field.setEditable(false);
-		menu_parametre_width_field.setEditable(false);
-		menu_parametre_margin_field.setEditable(false);
 
 		//Ajout des Controller
 		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model, handler2));
@@ -311,11 +252,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler2));
 		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler2));
 		
-
-
-		handler.add(menu_parametre_amplitude);
-		handler.add(menu_parametre_width);
-		handler.add(menu_parametre_margin);
+		menu_parametre.addActionListener(new Controller_Menu(model, handler2));
 
 		//Ajout des éléments
 		menu_fichier.add(menu_fichier_ouvrir);
@@ -325,19 +262,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		menu_affichage.add(menu_affichage_2D);
 		menu_affichage.add(menu_affichage_3D);
-
-		menu_parametre_amplitude.add(menu_parametre_amplitude_plusMoins);
-		menu_parametre_amplitude.add(menu_parametre_amplitude_label);
-		menu_parametre_margin.add(menu_parametre_margin_plusMoins);
-		menu_parametre_margin.add(menu_parametre_margin_label);
-		menu_parametre_width.add(menu_parametre_width_plusMoins);
-		menu_parametre_width.add(menu_parametre_width_label);
-
-		menu_parametre.add(menu_parametre_amplitude);
-		menu_parametre.addSeparator();
-		menu_parametre.add(menu_parametre_margin);
-		menu_parametre.addSeparator();
-		menu_parametre.add(menu_parametre_width);
 
 		menu.add(menu_fichier);
 		menu.add(menu_affichage);
