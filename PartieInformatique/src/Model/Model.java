@@ -243,6 +243,7 @@ public class Model extends Observable implements Observer {
 		
 		parametres.putAll(map);
 		
+		System.out.println(parametres);
 		setChanged();
 		notifyObservers();
 		

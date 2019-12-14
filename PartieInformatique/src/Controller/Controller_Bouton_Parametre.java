@@ -179,7 +179,7 @@ public class Controller_Bouton_Parametre extends Controller implements ActionLis
 								}
 
 								if (label.getText().equals("Trait")) {
-
+									
 									if (locationB.getY() 
 											- locationA.getY()
 											- Controller_Bouton_Parametre.ESPACE_LABEL_TEXTFIELD == 0) {
@@ -315,10 +315,10 @@ public class Controller_Bouton_Parametre extends Controller implements ActionLis
 										if (fieldToString.length() > 0) {
 
 											textToInt = Integer.parseInt(textField.getText());
-
+											
 											settings.put("Couleur_3d_cube1_red", 
 													checkBorne(textToInt, true, false, true));
-
+											
 										}
 
 										break;

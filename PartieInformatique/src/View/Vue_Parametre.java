@@ -38,110 +38,99 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 	private static int GRID_BAG_CONSTRAINTS_FRAME_SIZE = 18;
 
-	private Set<Component> components = new HashSet<Component>();
+	private Set<Component> components;
 	
-	JPanel panel_fenetre 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_fenetre 	= new GridBagConstraints();
+	private JPanel panel_fenetre;
+	private GridBagConstraints gbc_fenetre;
 
-	JPanel panel_section1 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_section1 = new GridBagConstraints();
+	private JPanel panel_section1;
+	private GridBagConstraints gbc_section1;
 
-	JPanel panel_section2 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_section2 = new GridBagConstraints();
+	private JPanel panel_section2;
+	private GridBagConstraints gbc_section2;
 
-	JPanel panel_section3 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_section3 = new GridBagConstraints();
+	private JPanel panel_section3;
+	private GridBagConstraints gbc_section3;
 
-	JPanel panel_section4 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_section4 = new GridBagConstraints();
+	private JPanel panel_section4;
+	private GridBagConstraints gbc_section4;
 
-	JPanel panel_section5 			= new JPanel(new GridBagLayout());
-	GridBagConstraints gbc_section5 = new GridBagConstraints();
+	private JPanel panel_section5;
+	private GridBagConstraints gbc_section5;
 
-	
+	private JLabel label_parametre;
 
-	JLabel label_parametre = new JLabel("Paramètres");
+	private JLabel label_affichage;
+	private JLabel label_affichage_espacement;
+	private JLabel label_affichage_epaisseur;
+	private JLabel label_affichage_amplitude;
+	private JLabel label_affichage_espacement_px;
+	private JLabel label_affichage_epaisseur_px;
+	private JLabel label_affichage_amplitude_pourCent;
 
-	JLabel label_affichage 						= new JLabel("Affichage");
-	JLabel label_affichage_espacement 			= new JLabel("Espacement");
-	JLabel label_affichage_epaisseur 			= new JLabel("Epaisseur");
-	JLabel label_affichage_amplitude 			= new JLabel("Amplitude");
-	JLabel label_affichage_espacement_px 		= new JLabel("px");
-	JLabel label_affichage_epaisseur_px 		= new JLabel("px");
-	JLabel label_affichage_amplitude_pourCent	= new JLabel("%");
+	private JLabel label_couleur_2d;
+	private JLabel label_couleur_3d;
+	private JLabel label_couleur_2d_trait_red;
+	private JLabel label_couleur_2d_trait_green;
+	private JLabel label_couleur_2d_trait_blue;
+	private JLabel label_couleur_2d_forme_red;
+	private JLabel label_couleur_2d_forme_green;
+	private JLabel label_couleur_2d_forme_blue;
+	private JLabel label_couleur_3d_red;
+	private JLabel label_couleur_3d_green;
+	private JLabel label_couleur_3d_blue;
 
-	JLabel label_couleur_2d 				= new JLabel("Couleur");
-	JLabel label_couleur_3d 				= new JLabel("Couleur");
-	JLabel label_couleur_2d_trait_red 	= new JLabel("R");
-	JLabel label_couleur_2d_trait_green = new JLabel("G");
-	JLabel label_couleur_2d_trait_blue 	= new JLabel("B");
-	JLabel label_couleur_2d_forme_red 	= new JLabel("R");
-	JLabel label_couleur_2d_forme_green = new JLabel("G");
-	JLabel label_couleur_2d_forme_blue 	= new JLabel("B");
-	JLabel label_couleur_3d_red 		= new JLabel("R");
-	JLabel label_couleur_3d_green 		= new JLabel("G");
-	JLabel label_couleur_3d_blue 		= new JLabel("B");
+	private JLabel label_2d;
+	private JLabel label_2d_trait;
+	private JLabel label_2d_forme;
 
-	JLabel label_2d			= new JLabel("2D");
-	JLabel label_2d_trait	= new JLabel("Trait");
-	JLabel label_2d_forme	= new JLabel("Forme");
+	private JLabel label_3d;
+	private JLabel label_3d_cube1;
+	private JLabel label_3d_cube2;
+	private JLabel label_3d_cube3;
+	private JLabel label_3d_cube4;
 
-	JLabel label_3d		= new JLabel("3D");
-	JLabel label_3d_cube1		= new JLabel("Cube 1");
-	JLabel label_3d_cube2		= new JLabel("Cube 2");
-	JLabel label_3d_cube3		= new JLabel("Cube 3");
-	JLabel label_3d_cube4		= new JLabel("Cube 4");
+	private JTextField textField_affichage_espacement;
+	private JTextField textField_affichage_epaisseur;
+	private JTextField textField_affichage_amplitude;
 
+	private JTextField textField_2d_couleur_trait_red;
+	private JTextField textField_2d_couleur_trait_green;
+	private JTextField textField_2d_couleur_trait_blue;
 
+	private JTextField textField_2d_couleur_forme_red;
+	private JTextField textField_2d_couleur_forme_green;
+	private JTextField textField_2d_couleur_forme_blue;
 
-	JTextField textField_affichage_espacement 	= new JTextField(4);
-	JTextField textField_affichage_epaisseur 	= new JTextField(4);
-	JTextField textField_affichage_amplitude  	= new JTextField(4);
+	private JTextField textField_3d_couleur_cube1_red;
+	private JTextField textField_3d_couleur_cube1_green;
+	private JTextField textField_3d_couleur_cube1_blue;
 
-	JTextField textField_2d_couleur_trait_red	= new JTextField(4);
-	JTextField textField_2d_couleur_trait_green	= new JTextField(4);
-	JTextField textField_2d_couleur_trait_blue	= new JTextField(4);
+	private JTextField textField_3d_couleur_cube2_red;
+	private JTextField textField_3d_couleur_cube2_green;
+	private JTextField textField_3d_couleur_cube2_blue;
 
-	JTextField textField_2d_couleur_forme_red	= new JTextField(4);
-	JTextField textField_2d_couleur_forme_green	= new JTextField(4);
-	JTextField textField_2d_couleur_forme_blue	= new JTextField(4);
+	private JTextField textField_3d_couleur_cube3_red;
+	private JTextField textField_3d_couleur_cube3_green;
+	private JTextField textField_3d_couleur_cube3_blue;
 
-	JTextField textField_3d_couleur_cube1_red	= new JTextField(4);
-	JTextField textField_3d_couleur_cube1_green	= new JTextField(4);
-	JTextField textField_3d_couleur_cube1_blue	= new JTextField(4);
+	private JTextField textField_3d_couleur_cube4_red;
+	private JTextField textField_3d_couleur_cube4_green;
+	private JTextField textField_3d_couleur_cube4_blue;
 
-	JTextField textField_3d_couleur_cube2_red	= new JTextField(4);
-	JTextField textField_3d_couleur_cube2_green	= new JTextField(4);
-	JTextField textField_3d_couleur_cube2_blue	= new JTextField(4);
+	private JCheckBox checkbox_2d_couleur_random;
+	private JCheckBox checkbox_3d_couleur_random;
+	private JCheckBox checkbox_autoplay;
 
-	JTextField textField_3d_couleur_cube3_red	= new JTextField(4);
-	JTextField textField_3d_couleur_cube3_green	= new JTextField(4);
-	JTextField textField_3d_couleur_cube3_blue	= new JTextField(4);
+	private JSlider slider_aigu;
+	private JSlider slider_grave;
+	private JSlider slider_vitesse;
 
-	JTextField textField_3d_couleur_cube4_red	= new JTextField(4);
-	JTextField textField_3d_couleur_cube4_green	= new JTextField(4);
-	JTextField textField_3d_couleur_cube4_blue	= new JTextField(4);
+	private JButton submit;
 
-
-
-	JCheckBox checkbox_2d_couleur_random	= new JCheckBox("Aléatoire");
-	JCheckBox checkbox_3d_couleur_random	= new JCheckBox("Aléatoire");
-	JCheckBox checkbox_autoplay				= new JCheckBox("Autoplay");
-
-
-
-	JSlider slider_aigu		= new JSlider(-15, 15);
-	JSlider slider_grave	= new JSlider(-15, 15);
-	JSlider slider_vitesse	= new JSlider(-15, 15);
-
-
-
-	JButton submit = new JButton("Appliquer & quitter");
-
-
-	Border outsideBorder = BorderFactory.createRaisedBevelBorder();
-	Border insideBorder = BorderFactory.createEtchedBorder();
-	Border compound = BorderFactory.createCompoundBorder(insideBorder, insideBorder);
+	private Border outsideBorder;
+	private Border insideBorder;
+	private Border compound;
 	
 	/**
 	 * 
@@ -154,7 +143,111 @@ public class Vue_Parametre extends JFrame implements Observer {
 		 * Creation des composants
 		 */
 
+		components = new HashSet<Component>();
 		
+		panel_fenetre 			= new JPanel(new GridBagLayout());
+		gbc_fenetre 	= new GridBagConstraints();
+
+		panel_section1 			= new JPanel(new GridBagLayout());
+		gbc_section1 = new GridBagConstraints();
+
+		panel_section2 			= new JPanel(new GridBagLayout());
+		gbc_section2 = new GridBagConstraints();
+
+		panel_section3 			= new JPanel(new GridBagLayout());
+		gbc_section3 = new GridBagConstraints();
+
+		panel_section4 			= new JPanel(new GridBagLayout());
+		gbc_section4 = new GridBagConstraints();
+
+		panel_section5 			= new JPanel(new GridBagLayout());
+		gbc_section5 = new GridBagConstraints();
+		
+		
+
+		label_parametre = new JLabel("Paramètres");
+
+		label_affichage 						= new JLabel("Affichage");
+		label_affichage_espacement 			= new JLabel("Espacement");
+		label_affichage_epaisseur 			= new JLabel("Epaisseur");
+		label_affichage_amplitude 			= new JLabel("Amplitude");
+		label_affichage_espacement_px 		= new JLabel("px");
+		label_affichage_epaisseur_px 		= new JLabel("px");
+		label_affichage_amplitude_pourCent	= new JLabel("%");
+
+		label_couleur_2d 				= new JLabel("Couleur");
+		label_couleur_3d 				= new JLabel("Couleur");
+		label_couleur_2d_trait_red 	= new JLabel("R");
+		label_couleur_2d_trait_green = new JLabel("G");
+		label_couleur_2d_trait_blue 	= new JLabel("B");
+		label_couleur_2d_forme_red 	= new JLabel("R");
+		label_couleur_2d_forme_green = new JLabel("G");
+		label_couleur_2d_forme_blue 	= new JLabel("B");
+		label_couleur_3d_red 		= new JLabel("R");
+		label_couleur_3d_green 		= new JLabel("G");
+		label_couleur_3d_blue 		= new JLabel("B");
+
+		label_2d			= new JLabel("2D");
+		label_2d_trait	= new JLabel("Trait");
+		label_2d_forme	= new JLabel("Forme");
+
+		label_3d		= new JLabel("3D");
+		label_3d_cube1		= new JLabel("Cube 1");
+		label_3d_cube2		= new JLabel("Cube 2");
+		label_3d_cube3		= new JLabel("Cube 3");
+		label_3d_cube4		= new JLabel("Cube 4");
+
+
+
+		textField_affichage_espacement 	= new JTextField(4);
+		textField_affichage_epaisseur 	= new JTextField(4);
+		textField_affichage_amplitude  	= new JTextField(4);
+
+		textField_2d_couleur_trait_red	= new JTextField(4);
+		textField_2d_couleur_trait_green	= new JTextField(4);
+		textField_2d_couleur_trait_blue	= new JTextField(4);
+
+		textField_2d_couleur_forme_red	= new JTextField(4);
+		textField_2d_couleur_forme_green	= new JTextField(4);
+		textField_2d_couleur_forme_blue	= new JTextField(4);
+
+		textField_3d_couleur_cube1_red	= new JTextField(4);
+		textField_3d_couleur_cube1_green	= new JTextField(4);
+		textField_3d_couleur_cube1_blue	= new JTextField(4);
+
+		textField_3d_couleur_cube2_red	= new JTextField(4);
+		textField_3d_couleur_cube2_green	= new JTextField(4);
+		textField_3d_couleur_cube2_blue	= new JTextField(4);
+
+		textField_3d_couleur_cube3_red	= new JTextField(4);
+		textField_3d_couleur_cube3_green	= new JTextField(4);
+		textField_3d_couleur_cube3_blue	= new JTextField(4);
+
+		textField_3d_couleur_cube4_red	= new JTextField(4);
+		textField_3d_couleur_cube4_green	= new JTextField(4);
+		textField_3d_couleur_cube4_blue	= new JTextField(4);
+
+
+
+		checkbox_2d_couleur_random	= new JCheckBox("Aléatoire");
+		checkbox_3d_couleur_random	= new JCheckBox("Aléatoire");
+		checkbox_autoplay				= new JCheckBox("Autoplay");
+
+
+
+		slider_aigu		= new JSlider(-15, 15);
+		slider_grave	= new JSlider(-15, 15);
+		slider_vitesse	= new JSlider(-15, 15);
+
+
+
+		submit = new JButton("Appliquer & quitter");
+		
+		
+		
+		outsideBorder = BorderFactory.createRaisedBevelBorder();
+		insideBorder = BorderFactory.createEtchedBorder();
+		compound = BorderFactory.createCompoundBorder(insideBorder, insideBorder);
 
 		/*
 		 * Modification des éléments
