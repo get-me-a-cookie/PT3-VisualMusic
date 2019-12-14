@@ -3,11 +3,14 @@
  */
 package View;
 
+import java.awt.Checkbox;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -180,6 +183,26 @@ public class Vue_Parametre extends JFrame implements Observer {
 		textField_affichage_amplitude.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField_affichage_epaisseur.setHorizontalAlignment(SwingConstants.RIGHT);
 		
+		//Disable textField random
+		textField_2d_couleur_forme_blue.setEnabled(false);
+		textField_2d_couleur_forme_red.setEnabled(false);
+		textField_2d_couleur_forme_green.setEnabled(false);
+		textField_2d_couleur_trait_blue.setEnabled(false);
+		textField_2d_couleur_trait_red.setEnabled(false);
+		textField_2d_couleur_trait_green.setEnabled(false);
+		textField_3d_couleur_cube1_blue.setEnabled(false);
+		textField_3d_couleur_cube1_green.setEnabled(false);
+		textField_3d_couleur_cube1_red.setEnabled(false);
+		textField_3d_couleur_cube2_blue.setEnabled(false);
+		textField_3d_couleur_cube2_green.setEnabled(false);
+		textField_3d_couleur_cube2_red.setEnabled(false);
+		textField_3d_couleur_cube3_blue.setEnabled(false);
+		textField_3d_couleur_cube3_green.setEnabled(false);
+		textField_3d_couleur_cube3_red.setEnabled(false);
+		textField_3d_couleur_cube4_blue.setEnabled(false);
+		textField_3d_couleur_cube4_green.setEnabled(false);
+		textField_3d_couleur_cube4_red.setEnabled(false);
+		
 		//Ajout Border
 		panel_section1.setBorder(compound);
 		panel_section2.setBorder(compound);
@@ -223,7 +246,80 @@ public class Vue_Parametre extends JFrame implements Observer {
 		components.add(slider_aigu);
 		components.add(slider_grave);
 		components.add(slider_vitesse);
+		
 		submit.addActionListener(new Controller_Bouton_Parametre(model, components));
+		
+		
+
+		checkbox_2d_couleur_random.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				if (((JCheckBox)e.getSource()).isSelected()) {
+
+					textField_2d_couleur_forme_blue.setEnabled(false);
+					textField_2d_couleur_forme_red.setEnabled(false);
+					textField_2d_couleur_forme_green.setEnabled(false);
+					textField_2d_couleur_trait_blue.setEnabled(false);
+					textField_2d_couleur_trait_red.setEnabled(false);
+					textField_2d_couleur_trait_green.setEnabled(false);
+					
+				}
+				
+				else {
+
+					textField_2d_couleur_forme_blue.setEnabled(true);
+					textField_2d_couleur_forme_red.setEnabled(true);
+					textField_2d_couleur_forme_green.setEnabled(true);
+					textField_2d_couleur_trait_blue.setEnabled(true);
+					textField_2d_couleur_trait_red.setEnabled(true);
+					textField_2d_couleur_trait_green.setEnabled(true);
+					
+				}
+				
+			}
+		});
+		
+		checkbox_3d_couleur_random.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				if (((JCheckBox)e.getSource()).isSelected()) {
+					
+					textField_3d_couleur_cube1_blue.setEnabled(false);
+					textField_3d_couleur_cube1_green.setEnabled(false);
+					textField_3d_couleur_cube1_red.setEnabled(false);
+					textField_3d_couleur_cube2_blue.setEnabled(false);
+					textField_3d_couleur_cube2_green.setEnabled(false);
+					textField_3d_couleur_cube2_red.setEnabled(false);
+					textField_3d_couleur_cube3_blue.setEnabled(false);
+					textField_3d_couleur_cube3_green.setEnabled(false);
+					textField_3d_couleur_cube3_red.setEnabled(false);
+					textField_3d_couleur_cube4_blue.setEnabled(false);
+					textField_3d_couleur_cube4_green.setEnabled(false);
+					textField_3d_couleur_cube4_red.setEnabled(false);
+					
+				}
+				
+				else {
+					
+					textField_3d_couleur_cube1_blue.setEnabled(true);
+					textField_3d_couleur_cube1_green.setEnabled(true);
+					textField_3d_couleur_cube1_red.setEnabled(true);
+					textField_3d_couleur_cube2_blue.setEnabled(true);
+					textField_3d_couleur_cube2_green.setEnabled(true);
+					textField_3d_couleur_cube2_red.setEnabled(true);
+					textField_3d_couleur_cube3_blue.setEnabled(true);
+					textField_3d_couleur_cube3_green.setEnabled(true);
+					textField_3d_couleur_cube3_red.setEnabled(true);
+					textField_3d_couleur_cube4_blue.setEnabled(true);
+					textField_3d_couleur_cube4_green.setEnabled(true);
+					textField_3d_couleur_cube4_red.setEnabled(true);
+					
+				}
+				
+			}
+		});
 		
 		/*
 		 * If you are lost in the GridBagConstraints:
