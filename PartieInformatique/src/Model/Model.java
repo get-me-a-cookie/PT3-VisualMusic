@@ -243,7 +243,6 @@ public class Model extends Observable implements Observer {
 		
 		parametres.putAll(map);
 		
-		System.out.println(parametres);
 		setChanged();
 		notifyObservers();
 		
@@ -306,6 +305,9 @@ public class Model extends Observable implements Observer {
 	public void setPrintSettings(boolean printSettings) {
 		
 		this.printSettings = printSettings;
+		
+		if (printSettings)
+			musique.setPause(true);
 		
 		this.setChanged();
 		this.notifyObservers();
