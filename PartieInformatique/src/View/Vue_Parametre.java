@@ -5,13 +5,13 @@ package View;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.time.temporal.JulianFields;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,10 +19,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import Controller.Controller_Bouton_Parametre;
@@ -36,6 +34,8 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 	private static int GRID_BAG_CONSTRAINTS_FRAME_SIZE = 18;
 
+	private Set<Component> components = new HashSet<Component>();
+	
 	/**
 	 * 
 	 */
@@ -65,7 +65,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		JPanel panel_section5 			= new JPanel(new GridBagLayout());
 		GridBagConstraints gbc_section5 = new GridBagConstraints();
 
-
+		
 
 		JLabel label_parametre = new JLabel("Paramètres");
 
@@ -170,7 +170,34 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section5.setPreferredSize(new Dimension(150, 100));
 		
 		//Ajout Controlleur
-		submit.addActionListener(new Controller_Bouton_Parametre(model, null));
+		components.add(textField_2d_couleur_forme_blue);
+		components.add(textField_2d_couleur_forme_green);
+		components.add(textField_2d_couleur_forme_red);
+		components.add(textField_2d_couleur_trait_blue);
+		components.add(textField_2d_couleur_trait_green);
+		components.add(textField_2d_couleur_trait_red);
+		components.add(textField_3d_couleur_cube1_blue);
+		components.add(textField_3d_couleur_cube1_green);
+		components.add(textField_3d_couleur_cube1_red);
+		components.add(textField_3d_couleur_cube2_blue);
+		components.add(textField_3d_couleur_cube2_green);
+		components.add(textField_3d_couleur_cube2_red);
+		components.add(textField_3d_couleur_cube3_blue);
+		components.add(textField_3d_couleur_cube3_green);
+		components.add(textField_3d_couleur_cube3_red);
+		components.add(textField_3d_couleur_cube4_blue);
+		components.add(textField_3d_couleur_cube4_green);
+		components.add(textField_3d_couleur_cube4_red);
+		components.add(textField_affichage_amplitude);
+		components.add(textField_affichage_epaisseur);
+		components.add(textField_affichage_espacement);
+		components.add(checkbox_autoplay);
+		components.add(checkbox_2d_couleur_random);
+		components.add(checkbox_3d_couleur_random);
+		components.add(slider_aigu);
+		components.add(slider_grave);
+		components.add(slider_vitesse);
+		submit.addActionListener(new Controller_Bouton_Parametre(model, components));
 		
 		/*
 		 * If you are lost in the GridBagConstraints:
@@ -358,13 +385,14 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		//Fenetre
 		gbc_fenetre.gridx = 3;
-		panel_fenetre.add(panel_section4, gbc_fenetre);
 		gbc_fenetre.gridy = 1;
+		panel_fenetre.add(panel_section4, gbc_fenetre);
+		gbc_fenetre.gridy = 2;
 		panel_fenetre.add(panel_section5, gbc_fenetre);
 
 		gbc_fenetre.gridheight = 2;
 		gbc_fenetre.gridx = 0;
-		gbc_fenetre.gridy = 0;
+		gbc_fenetre.gridy = 1;
 		panel_fenetre.add(panel_section1, gbc_fenetre);
 		gbc_fenetre.gridx = 1;
 		panel_fenetre.add(panel_section2, gbc_fenetre);
@@ -374,8 +402,11 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_fenetre.gridheight = 1;
 		gbc_fenetre.gridwidth = 4;
 		gbc_fenetre.gridx = 0;
-		gbc_fenetre.gridy = 2;
+		gbc_fenetre.gridy = 3;
 		panel_fenetre.add(submit, gbc_fenetre);
+		
+		gbc_fenetre.gridy = 0;
+		panel_fenetre.add(label_parametre, gbc_fenetre);
 
 		this.add(panel_fenetre);
 
@@ -386,7 +417,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.pack();
-
+		
 	}
 
 	public void update(Observable o, Object arg) {

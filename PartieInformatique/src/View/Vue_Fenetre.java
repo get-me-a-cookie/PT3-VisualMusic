@@ -25,10 +25,8 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 import Controller.Controller_Bouton_Musique;
-import Controller.Controller_Bouton_PlusMoins;
 import Controller.Controller_Menu;
 import Controller.Controller_Slider;
-import Controller.Adapteur_ControllerVue;
 import Model.Model;
 import View.Vue_2D;
 import View.Vue_3D;
@@ -205,14 +203,9 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		 */
 
 		//TODO a voir pour pas le mêtre dans la fenetre paramètres
-		String[] listOfParameters = {	
-				"Amplitude",
-				"Epaisseur",
-				"Espacement"
-		};
-
+		
 		//Création Model
-		model = new Model(listOfParameters);
+		model = new Model();
 
 		//Création des éléments 
 		this.creationMenu(model, handler);
