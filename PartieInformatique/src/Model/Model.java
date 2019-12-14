@@ -65,6 +65,7 @@ public class Model extends Observable implements Observer {
 	private boolean isThreeDimension = false;
 	
 	public Model() {
+		
 		parametres.put("Autoplay"				, 1); //1 = true, 0 = false
 		parametres.put("Couleur_2d_random"	 	, 1); //1 = true, 0 = false
 		parametres.put("Couleur_3d_random"	 	, 1); //1 = true, 0 = false
@@ -89,6 +90,7 @@ public class Model extends Observable implements Observer {
 		parametres.put("Couleur_3d_cube2_blue" 	, 0);
 		parametres.put("Couleur_3d_cube3_blue" 	, 0);
 		parametres.put("Couleur_3d_cube4_blue" 	, 0);
+		
 	}
 
 	//TODO Check pause / mettre pause a true dès le début

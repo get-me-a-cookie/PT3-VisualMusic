@@ -205,7 +205,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		//TODO a voir pour pas le mêtre dans la fenetre paramètres
 		
 		//Création Model
-		model = new Model();
+		//model = new Model();
 
 		//Création des éléments 
 		this.creationMenu(model, handler);
