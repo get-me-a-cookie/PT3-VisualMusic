@@ -4,6 +4,7 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,6 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import Controller.Controller_Bouton_Parametre;
+import Model.Model;
+
 /**
  * @author goodw
  *
@@ -35,9 +39,13 @@ public class Vue_Parametre extends JFrame implements Observer {
 	/**
 	 * 
 	 */
-	public Vue_Parametre() {
+	public Vue_Parametre(Model model) {
 
 		super();
+
+		/*
+		 * Creation des composants
+		 */
 
 		JPanel panel_fenetre 			= new JPanel(new GridBagLayout());
 		GridBagConstraints gbc_fenetre 	= new GridBagConstraints();
@@ -137,10 +145,32 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		JButton submit = new JButton("Appliquer & quitter");
 
-		
+
 		Border outsideBorder = BorderFactory.createRaisedBevelBorder();
 		Border insideBorder = BorderFactory.createEtchedBorder();
 		Border compound = BorderFactory.createCompoundBorder(insideBorder, insideBorder);
+
+		/*
+		 * Modification des éléments
+		 */
+
+		//Ajout Border
+		panel_section1.setBorder(compound);
+		panel_section2.setBorder(compound);
+		panel_section3.setBorder(compound);
+		panel_section4.setBorder(compound);
+		panel_section5.setBorder(compound);
+
+		//Modification taille 
+		//panel
+		panel_section1.setPreferredSize(new Dimension(150, 300));
+		panel_section2.setPreferredSize(new Dimension(200, 300));
+		panel_section3.setPreferredSize(new Dimension(300, 300));
+		panel_section4.setPreferredSize(new Dimension(150, 200));
+		panel_section5.setPreferredSize(new Dimension(150, 100));
+		
+		//Ajout Controlleur
+		submit.addActionListener(new Controller_Bouton_Parametre(model, null));
 		
 		/*
 		 * If you are lost in the GridBagConstraints:
@@ -159,7 +189,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section1.add(textField_affichage_epaisseur, gbc_section1);
 		gbc_section1.gridy = 6;
 		panel_section1.add(textField_affichage_amplitude, gbc_section1);
-		
+
 		gbc_section1.gridx = 2;
 		gbc_section1.gridy = 2;
 		panel_section1.add(label_affichage_espacement_px, gbc_section1);
@@ -167,7 +197,8 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section1.add(label_affichage_epaisseur_px, gbc_section1);
 		gbc_section1.gridy = 6;
 		panel_section1.add(label_affichage_amplitude_pourCent, gbc_section1);
-
+		
+		gbc_section1.insets = new Insets(10, 0, 0, 0);
 		gbc_section1.gridwidth = 3;
 		gbc_section1.gridx = 0;
 		gbc_section1.gridy = 0;
@@ -178,7 +209,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section1.add(label_affichage_epaisseur, gbc_section1);
 		gbc_section1.gridy = 5;
 		panel_section1.add(label_affichage_amplitude, gbc_section1);
-		
+
 
 		//Section2
 		gbc_section2.gridy = 4;
@@ -186,7 +217,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section2.gridy = 5;
 		panel_section2.add(label_couleur_2d_trait_green, gbc_section2);
 		gbc_section2.gridy = 6;
+		gbc_section2.insets = new Insets(0, 0, 50, 0);
 		panel_section2.add(label_couleur_2d_trait_blue, gbc_section2);
+		gbc_section2.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section2.gridx = 1;
 		gbc_section2.gridy = 4;
@@ -194,7 +227,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section2.gridy = 5;
 		panel_section2.add(textField_2d_couleur_trait_green, gbc_section2);
 		gbc_section2.gridy = 6;
+		gbc_section2.insets = new Insets(0, 0, 50, 0);
 		panel_section2.add(textField_2d_couleur_trait_blue, gbc_section2);
+		gbc_section2.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section2.gridx = 2;
 		gbc_section2.gridy = 4;
@@ -202,7 +237,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section2.gridy = 5;
 		panel_section2.add(label_couleur_2d_forme_green, gbc_section2);
 		gbc_section2.gridy = 6;
+		gbc_section2.insets = new Insets(0, 0, 50, 0);
 		panel_section2.add(label_couleur_2d_forme_blue, gbc_section2);
+		gbc_section2.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section2.gridx = 3;
 		gbc_section2.gridy = 4;
@@ -210,7 +247,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section2.gridy = 5;
 		panel_section2.add(textField_2d_couleur_forme_green, gbc_section2);
 		gbc_section2.gridy = 6;
+		gbc_section2.insets = new Insets(0, 0, 50, 0);
 		panel_section2.add(textField_2d_couleur_forme_blue, gbc_section2);
+		gbc_section2.insets = new Insets(0, 0, 0, 0);
 		
 		gbc_section2.gridwidth = 2;
 		gbc_section2.gridy = 3;
@@ -218,17 +257,22 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section2.add(label_2d_trait, gbc_section2);
 		gbc_section2.gridx = 2;
 		panel_section2.add(label_2d_forme, gbc_section2);
-		
+
+		gbc_section2.weighty = 1;
 		gbc_section2.gridwidth = 4;
 		gbc_section2.gridx = 0;
 		gbc_section2.gridy = 0;
+		gbc_section2.insets = new Insets(0, 0, 20, 0);
 		panel_section2.add(label_2d, gbc_section2);
+		gbc_section2.weighty = 0;
 		gbc_section2.gridy = 1;
+		gbc_section2.insets = new Insets(0, 0, 5, 0);
 		panel_section2.add(label_couleur_2d, gbc_section2);
 		gbc_section2.gridy = 2;
+		gbc_section2.insets = new Insets(0, 0, 10, 0);
 		panel_section2.add(checkbox_2d_couleur_random, gbc_section2);
-		
-		
+
+
 		//Section3
 		gbc_section3.gridx = 2;
 		gbc_section3.gridy = 3;
@@ -240,7 +284,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section3.gridy = 6;
 		panel_section3.add(textField_3d_couleur_cube3_red, gbc_section3);
 		gbc_section3.gridy = 7;
+		gbc_section3.insets = new Insets(0, 0, 50, 0);
 		panel_section3.add(textField_3d_couleur_cube4_red, gbc_section3);
+		gbc_section3.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section3.gridx = 3;
 		gbc_section3.gridy = 3;
@@ -252,7 +298,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section3.gridy = 6;
 		panel_section3.add(textField_3d_couleur_cube3_green, gbc_section3);
 		gbc_section3.gridy = 7;
+		gbc_section3.insets = new Insets(0, 0, 50, 0);
 		panel_section3.add(textField_3d_couleur_cube4_green, gbc_section3);
+		gbc_section3.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section3.gridx = 4;
 		gbc_section3.gridy = 3;
@@ -264,7 +312,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section3.gridy = 6;
 		panel_section3.add(textField_3d_couleur_cube3_blue, gbc_section3);
 		gbc_section3.gridy = 7;
+		gbc_section3.insets = new Insets(0, 0, 50, 0);
 		panel_section3.add(textField_3d_couleur_cube4_blue, gbc_section3);
+		gbc_section3.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section3.gridwidth = 2;
 		gbc_section3.gridx = 0;
@@ -275,44 +325,43 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section3.gridy = 6;
 		panel_section3.add(label_3d_cube3, gbc_section3);
 		gbc_section3.gridy = 7;
+		gbc_section3.insets = new Insets(0, 0, 50, 0);
 		panel_section3.add(label_3d_cube4, gbc_section3);
+		gbc_section3.insets = new Insets(0, 0, 0, 0);
 
 		gbc_section3.gridwidth = 5;
 		gbc_section3.gridx = 0;
 		gbc_section3.gridy = 0;
+		gbc_section3.weighty = 1;
+		gbc_section3.insets = new Insets(0, 0, 20, 0);
 		panel_section3.add(label_3d, gbc_section3);
+		gbc_section3.weighty = 0;
 		gbc_section3.gridy = 1;
+		gbc_section3.insets = new Insets(0, 0, 5, 0);
 		panel_section3.add(label_couleur_3d, gbc_section3);
 		gbc_section3.gridy = 2;
+		gbc_section3.insets = new Insets(0, 0, 10, 0);
 		panel_section3.add(checkbox_3d_couleur_random, gbc_section3);
-		
-		
+
+
 		//Section4
 		panel_section4.add(slider_aigu, gbc_section4);
 		gbc_section4.gridy = 1;
 		panel_section4.add(slider_grave, gbc_section4);
 		gbc_section4.gridy = 2;
 		panel_section4.add(slider_vitesse, gbc_section4);
-		
-		
+
+
 		//Section5
 		panel_section5.add(checkbox_autoplay, gbc_section5);
 
-		
-		//Ajout Border
-		panel_section1.setBorder(compound);
-		panel_section2.setBorder(compound);
-		panel_section3.setBorder(compound);
-		panel_section4.setBorder(compound);
-		panel_section5.setBorder(compound);
-		
-		
+
 		//Fenetre
 		gbc_fenetre.gridx = 3;
 		panel_fenetre.add(panel_section4, gbc_fenetre);
 		gbc_fenetre.gridy = 1;
 		panel_fenetre.add(panel_section5, gbc_fenetre);
-		
+
 		gbc_fenetre.gridheight = 2;
 		gbc_fenetre.gridx = 0;
 		gbc_fenetre.gridy = 0;
@@ -327,9 +376,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_fenetre.gridx = 0;
 		gbc_fenetre.gridy = 2;
 		panel_fenetre.add(submit, gbc_fenetre);
-		
+
 		this.add(panel_fenetre);
-		
+
 		//Ne rend pas la fenêtre visible quand on la créé
 
 		this.setTitle("Visuals Music - Settings");
