@@ -1,7 +1,9 @@
 package Controller;
 
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JSlider;
@@ -25,7 +27,7 @@ public class Controller_Clavier extends Controller implements KeyListener {
 	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Clavier(Model model,
-			Adapteur_ControllerVue handler) {
+			Set<Component> handler) {
 		super(model, handler);
 	}
 

@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.Set;
 
 import javax.swing.JButton;
 
@@ -24,7 +25,7 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller_Bouton_Musique(Model model,
-			Adapteur_ControllerVue handler) {
+			Set<Component> handler) {
 		
 		super(model, handler);
 		
@@ -83,7 +84,7 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 			
 			model.stop();
 			
-			for (Component b : handler.getComponent()) {
+			for (Component b : handler) {
 				
 				if (b instanceof JButton) {
 					

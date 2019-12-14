@@ -1,5 +1,8 @@
 package Controller;
 
+import java.awt.Component;
+import java.util.Set;
+
 import Model.Model;
 
 /**
@@ -20,7 +23,7 @@ public abstract class Controller {
 	/**
 	 * Adaptateur entre les composant graphique et les controlleur
 	 */
-	protected Adapteur_ControllerVue handler;
+	protected Set<Component> handler;
 
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
@@ -29,7 +32,7 @@ public abstract class Controller {
 	 * @param handler : Instanciant l'adapteur
 	 */
 	public Controller(Model model,
-			Adapteur_ControllerVue handler) {
+			Set<Component> handler) {
 		
 		super();
 		this.handler = handler;

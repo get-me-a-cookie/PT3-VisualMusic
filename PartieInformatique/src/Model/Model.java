@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,38 +64,36 @@ public class Model extends Observable implements Observer {
 	 * false : il reste sur sa vue actuelle 
 	 */
 	private boolean isThreeDimension = false;
-
+	
+	private boolean printSettings = false;
 
 	public Model() {
 		
-		super();
+		parametres.put("Autoplay"				, 1); //1 = true, 0 = false
+		parametres.put("Couleur_2d_random"	 	, 1); //1 = true, 0 = false
+		parametres.put("Couleur_3d_random"	 	, 1); //1 = true, 0 = false
+		parametres.put("Espacement"			 	, 0);
+		parametres.put("Epaisseur"			 	, 60);
+		parametres.put("Amplitude"			 	, 100);
+		parametres.put("Couleur_2d_trait_red"	, 0);
+		parametres.put("Couleur_2d_trait_green"	, 0);
+		parametres.put("Couleur_2d_trait_blue" 	, 0);
+		parametres.put("Couleur_2d_forme_red"  	, 0);
+		parametres.put("Couleur_2d_forme_green"	, 0);
+		parametres.put("Couleur_2d_forme_blue" 	, 0);
+		parametres.put("Couleur_3d_cube1_red"  	, 0);
+		parametres.put("Couleur_3d_cube2_red"  	, 0);
+		parametres.put("Couleur_3d_cube3_red"  	, 0);
+		parametres.put("Couleur_3d_cube4_red"  	, 0);
+		parametres.put("Couleur_3d_cube1_green"	, 0);
+		parametres.put("Couleur_3d_cube2_green"	, 0);
+		parametres.put("Couleur_3d_cube3_green"	, 0);
+		parametres.put("Couleur_3d_cube4_green"	, 0);
+		parametres.put("Couleur_3d_cube1_blue" 	, 0);
+		parametres.put("Couleur_3d_cube2_blue" 	, 0);
+		parametres.put("Couleur_3d_cube3_blue" 	, 0);
+		parametres.put("Couleur_3d_cube4_blue" 	, 0);
 		
-	}
-	
-	/**
-	 * Création du model avec la liste de tous les paramètres
-	 * @param parameters : tous les paramètres sous forme de chaîne de caractères
-	 * Exemple :
-	 * 		- Amplitude
-	 * 		- Couleur
-	 * 		- ...
-	 */
-	public Model(String[] parameters) {
-		
-		super();
-		
-		for (String parametre : parameters) {
-			
-			if (parametre.equals("Amplitude"))
-				this.parametres.put(parametre, 100);
-			
-			else if (parametre.equals("Epaisseur"))
-				this.parametres.put(parametre, 60);
-			
-			else
-				this.parametres.put(parametre, 0);
-			
-		}
 	}
 
 	//TODO Check pause / mettre pause a true dès le début
@@ -120,17 +119,21 @@ public class Model extends Observable implements Observer {
 	 */
 	public void setFichier(File file) {
 		
-		fichier = file;
+		if (file.exists()) {
+			
+			fichier = file;
+			this.lectureFichier();
+			
+		}
+		
+		else {
+			
+			setErreur(new FileNotFoundException());
+			
+		}
 		
 	}
 	
-	public boolean getFichier() {
-		if(fichier.exists())
-		{
-			return true;
-		}
-		return false;
-	}
 	/**
 	 * permet d'obtenir le model jouant la musique
 	 * @return le model de la musique
@@ -236,9 +239,9 @@ public class Model extends Observable implements Observer {
 	 * @param textLabel		: le paramètre a modifié
 	 * @param texteToInt	: la valeur a donner
 	 */
-	public void parametersChanged(String textLabel, int texteToInt) {
+	public void parametersChanged(Map<String, Integer> map) {
 		
-		parametres.put(textLabel, texteToInt);
+		parametres.putAll(map);
 		
 		setChanged();
 		notifyObservers();
@@ -286,5 +289,25 @@ public class Model extends Observable implements Observer {
 		notifyObservers();
 		
 	}
+	
+	/**
+	 * @return the printSettings
+	 */
+	public boolean isPrintSettings() {
+		
+		return printSettings;
+		
+	}
 
+	/**
+	 * @param printSettings the printSettings to set
+	 */
+	public void setPrintSettings(boolean printSettings) {
+		
+		this.printSettings = printSettings;
+		
+		this.setChanged();
+		this.notifyObservers();
+		
+	}
 }

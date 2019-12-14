@@ -199,9 +199,8 @@ public class Vue_2D extends JPanel implements Observer {
 				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 			else {
-
 				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-				//ESPACEMENT = model.getParametres().get("Espacement");
+				ESPACEMENT = model.getParametres().get("Espacement");
 
 				NOMBRE_RECTANGLE = (
 						(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
