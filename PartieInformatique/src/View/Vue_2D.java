@@ -181,15 +181,15 @@ public class Vue_2D extends JPanel implements Observer {
 
 				g.setColor(couleurs_forme[numero_rectangle]);
 				g.fillRect(x,
-						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
 						EPAISSEUR_RECTANGLE,
-						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
 
 				g.setColor(couleurs_trait[numero_rectangle]);
 				g.drawRect(x,
-						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
 						EPAISSEUR_RECTANGLE,
-						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
 
 			}
 
@@ -199,15 +199,15 @@ public class Vue_2D extends JPanel implements Observer {
 
 				g.setColor(couleur_forme);
 				g.fillRect(x,
-						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
 						EPAISSEUR_RECTANGLE,
-						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
 
 				g.setColor(couleur_trait);
 				g.drawRect(x,
-						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
 						EPAISSEUR_RECTANGLE,
-						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
 
 			}
 
