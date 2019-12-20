@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -39,7 +41,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 	private static int GRID_BAG_CONSTRAINTS_FRAME_SIZE = 18;
 
 	private Set<Component> components;
-	
+
 	private JPanel panel_fenetre;
 	private GridBagConstraints gbc_fenetre;
 
@@ -131,7 +133,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 	private Border outsideBorder;
 	private Border insideBorder;
 	private Border compound;
-	
+
 	/**
 	 * 
 	 */
@@ -139,12 +141,25 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		super();
 
+		this.addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+
+				if (JOptionPane.showConfirmDialog(null, 
+						"All non-saved modification will not be considered\n\nAre you sure you want to close this window?", "Close Window?", 
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+
+					model.setPrintSettings(false);
+
+			}
+		});
 		/*
 		 * Creation des composants
 		 */
 
 		components = new HashSet<Component>();
-		
+
 		panel_fenetre 			= new JPanel(new GridBagLayout());
 		gbc_fenetre 	= new GridBagConstraints();
 
@@ -162,8 +177,8 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		panel_section5 			= new JPanel(new GridBagLayout());
 		gbc_section5 = new GridBagConstraints();
-		
-		
+
+
 
 		label_parametre = new JLabel("Paramètres");
 
@@ -242,9 +257,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 
 		submit = new JButton("Appliquer & quitter");
-		
-		
-		
+
+
+
 		outsideBorder = BorderFactory.createRaisedBevelBorder();
 		insideBorder = BorderFactory.createEtchedBorder();
 		compound = BorderFactory.createCompoundBorder(insideBorder, insideBorder);
@@ -252,7 +267,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		/*
 		 * Modification des éléments
 		 */
-		
+
 		//Textfield align right
 		textField_2d_couleur_forme_blue.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField_2d_couleur_forme_green.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -275,7 +290,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		textField_affichage_espacement.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField_affichage_amplitude.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField_affichage_epaisseur.setHorizontalAlignment(SwingConstants.RIGHT);
-		
+
 		//Disable textField random
 		textField_2d_couleur_forme_blue.setEnabled(false);
 		textField_2d_couleur_forme_red.setEnabled(false);
@@ -295,7 +310,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		textField_3d_couleur_cube4_blue.setEnabled(false);
 		textField_3d_couleur_cube4_green.setEnabled(false);
 		textField_3d_couleur_cube4_red.setEnabled(false);
-		
+
 		//Ajout Border
 		panel_section1.setBorder(compound);
 		panel_section2.setBorder(compound);
@@ -310,7 +325,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section3.setPreferredSize(new Dimension(300, 300));
 		panel_section4.setPreferredSize(new Dimension(150, 200));
 		panel_section5.setPreferredSize(new Dimension(150, 100));
-		
+
 		//Ajout Controlleur
 		components.add(textField_2d_couleur_forme_blue);
 		components.add(textField_2d_couleur_forme_green);
@@ -339,15 +354,15 @@ public class Vue_Parametre extends JFrame implements Observer {
 		components.add(slider_aigu);
 		components.add(slider_grave);
 		components.add(slider_vitesse);
-		
+
 		submit.addActionListener(new Controller_Bouton_Parametre(model, components));
-		
-		
+
+
 
 		checkbox_2d_couleur_random.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if (((JCheckBox)e.getSource()).isSelected()) {
 
 					textField_2d_couleur_forme_blue.setEnabled(false);
@@ -356,9 +371,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 					textField_2d_couleur_trait_blue.setEnabled(false);
 					textField_2d_couleur_trait_red.setEnabled(false);
 					textField_2d_couleur_trait_green.setEnabled(false);
-					
+
 				}
-				
+
 				else {
 
 					textField_2d_couleur_forme_blue.setEnabled(true);
@@ -367,18 +382,18 @@ public class Vue_Parametre extends JFrame implements Observer {
 					textField_2d_couleur_trait_blue.setEnabled(true);
 					textField_2d_couleur_trait_red.setEnabled(true);
 					textField_2d_couleur_trait_green.setEnabled(true);
-					
+
 				}
-				
+
 			}
 		});
-		
+
 		checkbox_3d_couleur_random.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if (((JCheckBox)e.getSource()).isSelected()) {
-					
+
 					textField_3d_couleur_cube1_blue.setEnabled(false);
 					textField_3d_couleur_cube1_green.setEnabled(false);
 					textField_3d_couleur_cube1_red.setEnabled(false);
@@ -391,11 +406,11 @@ public class Vue_Parametre extends JFrame implements Observer {
 					textField_3d_couleur_cube4_blue.setEnabled(false);
 					textField_3d_couleur_cube4_green.setEnabled(false);
 					textField_3d_couleur_cube4_red.setEnabled(false);
-					
+
 				}
-				
+
 				else {
-					
+
 					textField_3d_couleur_cube1_blue.setEnabled(true);
 					textField_3d_couleur_cube1_green.setEnabled(true);
 					textField_3d_couleur_cube1_red.setEnabled(true);
@@ -408,12 +423,12 @@ public class Vue_Parametre extends JFrame implements Observer {
 					textField_3d_couleur_cube4_blue.setEnabled(true);
 					textField_3d_couleur_cube4_green.setEnabled(true);
 					textField_3d_couleur_cube4_red.setEnabled(true);
-					
+
 				}
-				
+
 			}
 		});
-		
+
 		/*
 		 * If you are lost in the GridBagConstraints:
 		 * https://docs.google.com/spreadsheets/d/1bSuEb7csMHc0i-HCx7FFaSAbMqYHoHI6-LiGcnqSEtE/edit?usp=sharing
@@ -422,7 +437,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		 * 
 		 * We have 5 sections. One for each bloc (between black separator)
 		 */
-		
+
 		//Section1
 		gbc_section1.gridx = 1;
 		gbc_section1.gridy = 2;
@@ -439,7 +454,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		panel_section1.add(label_affichage_epaisseur_px, gbc_section1);
 		gbc_section1.gridy = 6;
 		panel_section1.add(label_affichage_amplitude_pourCent, gbc_section1);
-		
+
 		gbc_section1.insets = new Insets(10, 0, 0, 0);
 		gbc_section1.gridwidth = 3;
 		gbc_section1.gridx = 0;
@@ -492,7 +507,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_section2.insets = new Insets(0, 0, 50, 0);
 		panel_section2.add(textField_2d_couleur_forme_blue, gbc_section2);
 		gbc_section2.insets = new Insets(0, 0, 0, 0);
-		
+
 		gbc_section2.gridwidth = 2;
 		gbc_section2.gridy = 3;
 		gbc_section2.gridx = 0;
@@ -619,7 +634,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		gbc_fenetre.gridx = 0;
 		gbc_fenetre.gridy = 3;
 		panel_fenetre.add(submit, gbc_fenetre);
-		
+
 		gbc_fenetre.gridy = 0;
 		panel_fenetre.add(label_parametre, gbc_fenetre);
 
@@ -631,7 +646,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.pack();
-		
+
 	}
 
 	public void update(Observable o, Object arg) {
@@ -639,9 +654,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 		Model model = (Model) o;
 
 		if (model.getErreur() == null) {
-			
+
 			if (model.isPrintSettings()) {
-				
+
 				textField_affichage_espacement.setText("" + model.getParametres().get("Espacement"));
 				textField_affichage_amplitude.setText("" + model.getParametres().get("Amplitude"));
 				textField_affichage_epaisseur.setText("" + model.getParametres().get("Epaisseur"));
@@ -666,12 +681,12 @@ public class Vue_Parametre extends JFrame implements Observer {
 				checkbox_2d_couleur_random.setSelected(model.getParametres().get("Couleur_2d_random") == 1 ? true : false);
 				checkbox_3d_couleur_random.setSelected(model.getParametres().get("Couleur_3d_random") == 1 ? true : false);
 				checkbox_autoplay.setSelected(model.getParametres().get("Autoplay") == 1 ? true : false);
-				
+
 				this.setVisible(true);
-				
+
 				//this.revalidate();
 				//this.repaint();
-				
+
 			}
 		}
 	}
