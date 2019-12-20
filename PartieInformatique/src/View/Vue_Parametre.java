@@ -30,7 +30,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
-import Controller.Controller_Bouton_Parametre;
 import Model.Model;
 
 /**
@@ -441,7 +440,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 				model.setAutoplay(checkbox_autoplay.isSelected());
 				model.setCouleur_2d_random(checkbox_2d_couleur_random.isSelected());
-				model.setCouleur_3d_random(checkbox_2d_couleur_random.isSelected());
+				model.setCouleur_3d_random(checkbox_3d_couleur_random.isSelected());
 				
 				
 				
@@ -772,9 +771,9 @@ public class Vue_Parametre extends JFrame implements Observer {
 				textField_3d_couleur_cube4_blue.setText("" + model.getCouleur_3d_cube4_b());
 				textField_3d_couleur_cube4_green.setText("" + model.getCouleur_3d_cube4_g());;
 				textField_3d_couleur_cube4_red.setText("" + model.getCouleur_3d_cube4_r());
-				checkbox_2d_couleur_random.setSelected(model.getParametres().get("Couleur_2d_random") == 1 ? true : false);
-				checkbox_3d_couleur_random.setSelected(model.getParametres().get("Couleur_3d_random") == 1 ? true : false);
-				checkbox_autoplay.setSelected(model.getParametres().get("Autoplay") == 1 ? true : false);
+				checkbox_2d_couleur_random.setSelected(model.isCouleur_2d_random());
+				checkbox_3d_couleur_random.setSelected(model.isCouleur_3d_random());
+				checkbox_autoplay.setSelected(model.isAutoplay());
 
 				this.setVisible(true);
 
