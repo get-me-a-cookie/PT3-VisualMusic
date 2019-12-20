@@ -24,21 +24,9 @@ public class Forme_Cube implements GLEventListener {
 	 * Attribut qui prennent des couleurs randoms
 	 * tableau de double 
 	 */
-	private double[] couleur_red 	= {
-			Math.random(),
-			Math.random(),
-			Math.random(),
-			Math.random()};
-	private double[] couleur_green  = {
-			Math.random(),
-			Math.random(),
-			Math.random(),
-			Math.random()};
-	private double[] couleur_blue 	= {
-			Math.random(),
-			Math.random(),
-			Math.random(),
-			Math.random()};
+	private double[] couleur_red;
+	private double[] couleur_green;
+	private double[] couleur_blue;
 
 	private double[] ratioFrequence = {0.8,0.9,0.2,0.4};//new double[4];
 
@@ -78,7 +66,7 @@ public class Forme_Cube implements GLEventListener {
 				index < ratioFrequence.length;
 				index ++) {
 
-			hauteur[index] = 10 * ratioFrequence[index];
+			hauteur[index] = 5 * ratioFrequence[index];
 
 		}
 
@@ -341,5 +329,23 @@ public class Forme_Cube implements GLEventListener {
 
 		this.ratioFrequence = ratioFrequence;
 
+	}
+	
+	public void setCouleurR(double[] red) {
+		
+		couleur_red = red;
+		
+	}
+	
+	public void setCouleurB(double[] blue) {
+		
+		couleur_blue = blue;
+		
+	}
+	
+	public void setCouleurG(double[] green) {
+		
+		couleur_green = green;
+		
 	}
 }
