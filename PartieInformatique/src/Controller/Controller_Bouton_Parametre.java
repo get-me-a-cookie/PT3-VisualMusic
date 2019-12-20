@@ -562,7 +562,6 @@ public class Controller_Bouton_Parametre extends Controller implements ActionLis
 					//TODO truc des slider
 
 				}
-
 			}
 
 			model.parametersChanged(settings);

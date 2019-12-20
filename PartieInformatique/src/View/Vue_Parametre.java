@@ -12,6 +12,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -143,7 +144,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		this.addWindowListener(new WindowAdapter() {
 
-			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			public void windowClosing(WindowEvent windowEvent) {
 
 				if (JOptionPane.showConfirmDialog(null, 
 						"All non-saved modification will not be considered\n\nAre you sure you want to close this window?", "Close Window?", 
@@ -355,7 +356,100 @@ public class Vue_Parametre extends JFrame implements Observer {
 		components.add(slider_grave);
 		components.add(slider_vitesse);
 
-		submit.addActionListener(new Controller_Bouton_Parametre(model, components));
+		submit.addActionListener(new ActionListener() {	//class interne anonyle car chiant de retrouvé les Component dans le controller
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				int textToInt;
+
+				textToInt = Integer.parseInt(textField_affichage_amplitude.getText());
+				model.setAmplitude(textToInt);
+
+				textToInt = Integer.parseInt(textField_affichage_epaisseur.getText());
+				model.setEpaisseur(textToInt);
+
+				textToInt = Integer.parseInt(textField_affichage_espacement.getText());
+				model.setEspacement(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_2d_couleur_forme_blue.getText());
+				model.setCouleur_2d_forme_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_2d_couleur_forme_green.getText());
+				model.setCouleur_2d_forme_g(textToInt);
+
+				textToInt = Integer.parseInt(textField_2d_couleur_forme_red.getText());
+				model.setCouleur_2d_forme_r(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_2d_couleur_trait_blue.getText());
+				model.setCouleur_2d_trait_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_2d_couleur_trait_green.getText());
+				model.setCouleur_2d_trait_g(textToInt);
+
+				textToInt = Integer.parseInt(textField_2d_couleur_trait_red.getText());
+				model.setCouleur_2d_trait_r(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube1_blue.getText());
+				model.setCouleur_3d_cube1_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube1_red.getText());
+				model.setCouleur_3d_cube1_r(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube1_green.getText());
+				model.setCouleur_3d_cube1_g(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube2_blue.getText());
+				model.setCouleur_3d_cube2_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube2_red.getText());
+				model.setCouleur_3d_cube2_r(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube2_green.getText());
+				model.setCouleur_3d_cube2_g(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube3_blue.getText());
+				model.setCouleur_3d_cube3_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube3_red.getText());
+				model.setCouleur_3d_cube3_r(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube3_green.getText());
+				model.setCouleur_3d_cube3_g(textToInt);
+				
+				
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube4_blue.getText());
+				model.setCouleur_3d_cube4_b(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube4_red.getText());
+				model.setCouleur_3d_cube4_r(textToInt);
+
+				textToInt = Integer.parseInt(textField_3d_couleur_cube4_green.getText());
+				model.setCouleur_3d_cube4_g(textToInt);
+				
+				
+
+				model.setAutoplay(checkbox_autoplay.isSelected());
+				model.setCouleur_2d_random(checkbox_2d_couleur_random.isSelected());
+				model.setCouleur_3d_random(checkbox_2d_couleur_random.isSelected());
+				
+				
+				
+				model.setPrintSettings(false);
+				model.parametersChanged(true);
+				
+			}
+		});
 
 
 
@@ -657,27 +751,27 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 			if (model.isPrintSettings()) {
 
-				textField_affichage_espacement.setText("" + model.getParametres().get("Espacement"));
-				textField_affichage_amplitude.setText("" + model.getParametres().get("Amplitude"));
-				textField_affichage_epaisseur.setText("" + model.getParametres().get("Epaisseur"));
-				textField_2d_couleur_forme_blue.setText("" + model.getParametres().get("Couleur_2d_forme_blue"));
-				textField_2d_couleur_forme_green.setText("" + model.getParametres().get("Couleur_2d_forme_green"));
-				textField_2d_couleur_forme_red.setText("" + model.getParametres().get("Couleur_2d_forme_red"));
-				textField_2d_couleur_trait_blue.setText("" + model.getParametres().get("Couleur_2d_trait_blue"));
-				textField_2d_couleur_trait_green.setText("" + model.getParametres().get("Couleur_2d_trait_green"));
-				textField_2d_couleur_trait_red.setText("" + model.getParametres().get("Couleur_2d_trait_red"));
-				textField_3d_couleur_cube1_blue.setText("" + model.getParametres().get("Couleur_3d_cube1_blue"));
-				textField_3d_couleur_cube1_green.setText("" + model.getParametres().get("Couleur_3d_cube1_green"));
-				textField_3d_couleur_cube1_red.setText("" + model.getParametres().get("Couleur_3d_cube1_red"));
-				textField_3d_couleur_cube2_blue.setText("" + model.getParametres().get("Couleur_3d_cube2_blue"));
-				textField_3d_couleur_cube2_green.setText("" + model.getParametres().get("Couleur_3d_cube2_green"));
-				textField_3d_couleur_cube2_red.setText("" + model.getParametres().get("Couleur_3d_cube2_red"));
-				textField_3d_couleur_cube3_blue.setText("" + model.getParametres().get("Couleur_3d_cube3_blue"));
-				textField_3d_couleur_cube3_green.setText("" + model.getParametres().get("Couleur_3d_cube3_green"));
-				textField_3d_couleur_cube3_red.setText("" + model.getParametres().get("Couleur_3d_cube3_red"));
-				textField_3d_couleur_cube4_blue.setText("" + model.getParametres().get("Couleur_3d_cube4_blue"));
-				textField_3d_couleur_cube4_green.setText("" + model.getParametres().get("Couleur_3d_cube4_green"));
-				textField_3d_couleur_cube4_red.setText("" + model.getParametres().get("Couleur_3d_cube4_red"));
+				textField_affichage_espacement.setText("" + model.getEspacement());
+				textField_affichage_amplitude.setText("" + model.getAmplitude());
+				textField_affichage_epaisseur.setText("" + model.getEpaisseur());
+				textField_2d_couleur_forme_blue.setText("" + model.getCouleur_2d_forme_b());
+				textField_2d_couleur_forme_green.setText("" + model.getCouleur_2d_forme_g());
+				textField_2d_couleur_forme_red.setText("" + model.getCouleur_2d_forme_r());
+				textField_2d_couleur_trait_blue.setText("" + model.getCouleur_2d_trait_b());
+				textField_2d_couleur_trait_green.setText("" + model.getCouleur_2d_trait_g());
+				textField_2d_couleur_trait_red.setText("" + model.getCouleur_2d_trait_r());
+				textField_3d_couleur_cube1_blue.setText("" + model.getCouleur_3d_cube1_b());
+				textField_3d_couleur_cube1_green.setText("" + model.getCouleur_3d_cube1_g());;
+				textField_3d_couleur_cube1_red.setText("" + model.getCouleur_3d_cube1_r());
+				textField_3d_couleur_cube2_blue.setText("" + model.getCouleur_3d_cube2_b());
+				textField_3d_couleur_cube2_green.setText("" + model.getCouleur_3d_cube2_g());;
+				textField_3d_couleur_cube2_red.setText("" + model.getCouleur_3d_cube2_r());
+				textField_3d_couleur_cube3_blue.setText("" + model.getCouleur_3d_cube3_b());
+				textField_3d_couleur_cube3_green.setText("" + model.getCouleur_3d_cube3_g());;
+				textField_3d_couleur_cube3_red.setText("" + model.getCouleur_3d_cube3_r());
+				textField_3d_couleur_cube4_blue.setText("" + model.getCouleur_3d_cube4_b());
+				textField_3d_couleur_cube4_green.setText("" + model.getCouleur_3d_cube4_g());;
+				textField_3d_couleur_cube4_red.setText("" + model.getCouleur_3d_cube4_r());
 				checkbox_2d_couleur_random.setSelected(model.getParametres().get("Couleur_2d_random") == 1 ? true : false);
 				checkbox_3d_couleur_random.setSelected(model.getParametres().get("Couleur_3d_random") == 1 ? true : false);
 				checkbox_autoplay.setSelected(model.getParametres().get("Autoplay") == 1 ? true : false);
@@ -688,6 +782,8 @@ public class Vue_Parametre extends JFrame implements Observer {
 				//this.repaint();
 
 			}
+			
+			else this.setVisible(false);
 		}
 	}
 }

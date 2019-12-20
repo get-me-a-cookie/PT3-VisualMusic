@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -210,7 +211,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		this.addWindowListener(new WindowAdapter() {
 
-			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			public void windowClosing(WindowEvent windowEvent) {
 
 				if (JOptionPane.showConfirmDialog(null, 
 						"Are you sure you want to close this window?", "Close Window?", 

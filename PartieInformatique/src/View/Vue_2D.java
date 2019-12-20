@@ -231,15 +231,15 @@ public class Vue_2D extends JPanel implements Observer {
 				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 			else {
-				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-				ESPACEMENT = model.getParametres().get("Espacement");
+				EPAISSEUR_RECTANGLE = model.getEpaisseur();
+				ESPACEMENT = model.getEspacement();
 
 				NOMBRE_RECTANGLE = (
 						(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
 						- 2 * EPAISSEUR_RECTANGLE)
 						/ (EPAISSEUR_RECTANGLE);
 
-				if (model.getParametres().get("Couleur_2d_random") == 1) {
+				if (model.isCouleur_2d_random()) {
 
 					couleur_forme = null;
 					couleur_trait = null;
@@ -272,14 +272,14 @@ public class Vue_2D extends JPanel implements Observer {
 					couleurs_forme = null;
 
 					couleur_forme = new Color( 
-							model.getParametres().get("Couleur_2d_forme_red"),
-							model.getParametres().get("Couleur_2d_forme_green"),
-							model.getParametres().get("Couleur_2d_forme_blue"));
+							model.getCouleur_2d_forme_r(),
+							model.getCouleur_2d_forme_g(),
+							model.getCouleur_2d_forme_b());
 
 					couleur_trait = new Color( 
-							model.getParametres().get("Couleur_2d_trait_red"),
-							model.getParametres().get("Couleur_2d_trait_green"),
-							model.getParametres().get("Couleur_2d_trait_blue"));
+							model.getCouleur_2d_trait_r(),
+							model.getCouleur_2d_trait_g(),
+							model.getCouleur_2d_trait_b());
 
 				}
 			}

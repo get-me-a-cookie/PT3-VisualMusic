@@ -26,6 +26,31 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Model extends Observable implements Observer {
 
+	private int epaisseur;
+	private int amplitude;
+	private int espacement;
+	private int couleur_2d_forme_r;
+	private int couleur_2d_forme_b;
+	private int couleur_2d_forme_g;
+	private int couleur_2d_trait_r;
+	private int couleur_2d_trait_g;
+	private int couleur_2d_trait_b;
+	private int couleur_3d_cube1_r;
+	private int couleur_3d_cube1_g;
+	private int couleur_3d_cube1_b;
+	private int couleur_3d_cube2_r;
+	private int couleur_3d_cube2_g;
+	private int couleur_3d_cube2_b;
+	private int couleur_3d_cube3_r;
+	private int couleur_3d_cube3_g;
+	private int couleur_3d_cube3_b;
+	private int couleur_3d_cube4_r;
+	private int couleur_3d_cube4_g;
+	private int couleur_3d_cube4_b;
+	private boolean autoplay;
+	private boolean couleur_2d_random;
+	private boolean couleur_3d_random;
+	
 	private boolean fullScreen;
 	
 	/**
@@ -76,6 +101,13 @@ public class Model extends Observable implements Observer {
 		isThreeDimension = false;
 		printSettings = false;
 		fullScreen = false;
+		
+		amplitude 			= 100;
+		epaisseur 			= 60;
+		espacement			= 0;
+		autoplay 			= true;
+		couleur_2d_random	= true;
+		couleur_3d_random	= true;
 		
 		parametres = new HashMap<String, Integer>();
 		
@@ -249,12 +281,12 @@ public class Model extends Observable implements Observer {
 	 * @param textLabel		: le paramètre a modifié
 	 * @param texteToInt	: la valeur a donner
 	 */
-	public void parametersChanged(Map<String, Integer> map) {
+	public void parametersChanged(boolean b) {
 		
-		parametres.putAll(map);
-		
-		setChanged();
-		notifyObservers();
+		if (b) {
+			this.setChanged();
+			this.notifyObservers();
+		}
 		
 	}
 	
@@ -322,5 +354,341 @@ public class Model extends Observable implements Observer {
 		this.setChanged();
 		this.notifyObservers();
 		
+	}
+
+	/**
+	 * @return the epaisseur
+	 */
+	public int getEpaisseur() {
+		return epaisseur;
+	}
+
+	/**
+	 * @param epaisseur the epaisseur to set
+	 */
+	public void setEpaisseur(int epaisseur) {
+		this.epaisseur = epaisseur;
+	}
+
+	/**
+	 * @return the amplitude
+	 */
+	public int getAmplitude() {
+		return amplitude;
+	}
+
+	/**
+	 * @param amplitude the amplitude to set
+	 */
+	public void setAmplitude(int amplitude) {
+		this.amplitude = amplitude;
+	}
+
+	/**
+	 * @return the espacement
+	 */
+	public int getEspacement() {
+		return espacement;
+	}
+
+	/**
+	 * @param espacement the espacement to set
+	 */
+	public void setEspacement(int espacement) {
+		this.espacement = espacement;
+	}
+
+	/**
+	 * @return the couleur_2d_forme_r
+	 */
+	public int getCouleur_2d_forme_r() {
+		return couleur_2d_forme_r;
+	}
+
+	/**
+	 * @param couleur_2d_forme_r the couleur_2d_forme_r to set
+	 */
+	public void setCouleur_2d_forme_r(int couleur_2d_forme_r) {
+		this.couleur_2d_forme_r = couleur_2d_forme_r;
+	}
+
+	/**
+	 * @return the couleur_2d_forme_b
+	 */
+	public int getCouleur_2d_forme_b() {
+		return couleur_2d_forme_b;
+	}
+
+	/**
+	 * @param couleur_2d_forme_b the couleur_2d_forme_b to set
+	 */
+	public void setCouleur_2d_forme_b(int couleur_2d_forme_b) {
+		this.couleur_2d_forme_b = couleur_2d_forme_b;
+	}
+
+	/**
+	 * @return the couleur_2d_forme_g
+	 */
+	public int getCouleur_2d_forme_g() {
+		return couleur_2d_forme_g;
+	}
+
+	/**
+	 * @param couleur_2d_forme_g the couleur_2d_forme_g to set
+	 */
+	public void setCouleur_2d_forme_g(int couleur_2d_forme_g) {
+		this.couleur_2d_forme_g = couleur_2d_forme_g;
+	}
+
+	/**
+	 * @return the couleur_2d_trait_r
+	 */
+	public int getCouleur_2d_trait_r() {
+		return couleur_2d_trait_r;
+	}
+
+	/**
+	 * @param couleur_2d_trait_r the couleur_2d_trait_r to set
+	 */
+	public void setCouleur_2d_trait_r(int couleur_2d_trait_r) {
+		this.couleur_2d_trait_r = couleur_2d_trait_r;
+	}
+
+	/**
+	 * @return the couleur_2d_trait_g
+	 */
+	public int getCouleur_2d_trait_g() {
+		return couleur_2d_trait_g;
+	}
+
+	/**
+	 * @param couleur_2d_trait_g the couleur_2d_trait_g to set
+	 */
+	public void setCouleur_2d_trait_g(int couleur_2d_trait_g) {
+		this.couleur_2d_trait_g = couleur_2d_trait_g;
+	}
+
+	/**
+	 * @return the couleur_2d_trait_b
+	 */
+	public int getCouleur_2d_trait_b() {
+		return couleur_2d_trait_b;
+	}
+
+	/**
+	 * @param couleur_2d_trait_b the couleur_2d_trait_b to set
+	 */
+	public void setCouleur_2d_trait_b(int couleur_2d_trait_b) {
+		this.couleur_2d_trait_b = couleur_2d_trait_b;
+	}
+
+	/**
+	 * @return the couleur_3d_cube1_r
+	 */
+	public int getCouleur_3d_cube1_r() {
+		return couleur_3d_cube1_r;
+	}
+
+	/**
+	 * @param couleur_3d_cube1_r the couleur_3d_cube1_r to set
+	 */
+	public void setCouleur_3d_cube1_r(int couleur_3d_cube1_r) {
+		this.couleur_3d_cube1_r = couleur_3d_cube1_r;
+	}
+
+	/**
+	 * @return the couleur_3d_cube1_g
+	 */
+	public int getCouleur_3d_cube1_g() {
+		return couleur_3d_cube1_g;
+	}
+
+	/**
+	 * @param couleur_3d_cube1_g the couleur_3d_cube1_g to set
+	 */
+	public void setCouleur_3d_cube1_g(int couleur_3d_cube1_g) {
+		this.couleur_3d_cube1_g = couleur_3d_cube1_g;
+	}
+
+	/**
+	 * @return the couleur_3d_cube1_b
+	 */
+	public int getCouleur_3d_cube1_b() {
+		return couleur_3d_cube1_b;
+	}
+
+	/**
+	 * @param couleur_3d_cube1_b the couleur_3d_cube1_b to set
+	 */
+	public void setCouleur_3d_cube1_b(int couleur_3d_cube1_b) {
+		this.couleur_3d_cube1_b = couleur_3d_cube1_b;
+	}
+
+	/**
+	 * @return the couleur_3d_cube2_r
+	 */
+	public int getCouleur_3d_cube2_r() {
+		return couleur_3d_cube2_r;
+	}
+
+	/**
+	 * @param couleur_3d_cube2_r the couleur_3d_cube2_r to set
+	 */
+	public void setCouleur_3d_cube2_r(int couleur_3d_cube2_r) {
+		this.couleur_3d_cube2_r = couleur_3d_cube2_r;
+	}
+
+	/**
+	 * @return the couleur_3d_cube2_g
+	 */
+	public int getCouleur_3d_cube2_g() {
+		return couleur_3d_cube2_g;
+	}
+
+	/**
+	 * @param couleur_3d_cube2_g the couleur_3d_cube2_g to set
+	 */
+	public void setCouleur_3d_cube2_g(int couleur_3d_cube2_g) {
+		this.couleur_3d_cube2_g = couleur_3d_cube2_g;
+	}
+
+	/**
+	 * @return the couleur_3d_cube2_b
+	 */
+	public int getCouleur_3d_cube2_b() {
+		return couleur_3d_cube2_b;
+	}
+
+	/**
+	 * @param couleur_3d_cube2_b the couleur_3d_cube2_b to set
+	 */
+	public void setCouleur_3d_cube2_b(int couleur_3d_cube2_b) {
+		this.couleur_3d_cube2_b = couleur_3d_cube2_b;
+	}
+
+	/**
+	 * @return the couleur_3d_cube3_r
+	 */
+	public int getCouleur_3d_cube3_r() {
+		return couleur_3d_cube3_r;
+	}
+
+	/**
+	 * @param couleur_3d_cube3_r the couleur_3d_cube3_r to set
+	 */
+	public void setCouleur_3d_cube3_r(int couleur_3d_cube3_r) {
+		this.couleur_3d_cube3_r = couleur_3d_cube3_r;
+	}
+
+	/**
+	 * @return the couleur_3d_cube3_g
+	 */
+	public int getCouleur_3d_cube3_g() {
+		return couleur_3d_cube3_g;
+	}
+
+	/**
+	 * @param couleur_3d_cube3_g the couleur_3d_cube3_g to set
+	 */
+	public void setCouleur_3d_cube3_g(int couleur_3d_cube3_g) {
+		this.couleur_3d_cube3_g = couleur_3d_cube3_g;
+	}
+
+	/**
+	 * @return the couleur_3d_cube3_b
+	 */
+	public int getCouleur_3d_cube3_b() {
+		return couleur_3d_cube3_b;
+	}
+
+	/**
+	 * @param couleur_3d_cube3_b the couleur_3d_cube3_b to set
+	 */
+	public void setCouleur_3d_cube3_b(int couleur_3d_cube3_b) {
+		this.couleur_3d_cube3_b = couleur_3d_cube3_b;
+	}
+
+	/**
+	 * @return the couleur_3d_cube4_r
+	 */
+	public int getCouleur_3d_cube4_r() {
+		return couleur_3d_cube4_r;
+	}
+
+	/**
+	 * @param couleur_3d_cube4_r the couleur_3d_cube4_r to set
+	 */
+	public void setCouleur_3d_cube4_r(int couleur_3d_cube4_r) {
+		this.couleur_3d_cube4_r = couleur_3d_cube4_r;
+	}
+
+	/**
+	 * @return the couleur_3d_cube4_g
+	 */
+	public int getCouleur_3d_cube4_g() {
+		return couleur_3d_cube4_g;
+	}
+
+	/**
+	 * @param couleur_3d_cube4_g the couleur_3d_cube4_g to set
+	 */
+	public void setCouleur_3d_cube4_g(int couleur_3d_cube4_g) {
+		this.couleur_3d_cube4_g = couleur_3d_cube4_g;
+	}
+
+	/**
+	 * @return the couleur_3d_cube4_b
+	 */
+	public int getCouleur_3d_cube4_b() {
+		return couleur_3d_cube4_b;
+	}
+
+	/**
+	 * @param couleur_3d_cube4_b the couleur_3d_cube4_b to set
+	 */
+	public void setCouleur_3d_cube4_b(int couleur_3d_cube4_b) {
+		this.couleur_3d_cube4_b = couleur_3d_cube4_b;
+	}
+
+	/**
+	 * @return the autoplay
+	 */
+	public boolean isAutoplay() {
+		return autoplay;
+	}
+
+	/**
+	 * @param autoplay the autoplay to set
+	 */
+	public void setAutoplay(boolean autoplay) {
+		this.autoplay = autoplay;
+	}
+
+	/**
+	 * @return the couleur_2d_random
+	 */
+	public boolean isCouleur_2d_random() {
+		return couleur_2d_random;
+	}
+
+	/**
+	 * @param couleur_2d_random the couleur_2d_random to set
+	 */
+	public void setCouleur_2d_random(boolean couleur_2d_random) {
+		this.couleur_2d_random = couleur_2d_random;
+	}
+
+	/**
+	 * @return the couleur_3d_random
+	 */
+	public boolean isCouleur_3d_random() {
+		return couleur_3d_random;
+	}
+
+	/**
+	 * @param couleur_3d_random the couleur_3d_random to set
+	 */
+	public void setCouleur_3d_random(boolean couleur_3d_random) {
+		this.couleur_3d_random = couleur_3d_random;
 	}
 }
