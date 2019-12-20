@@ -231,7 +231,7 @@ public class Vue_Parametre extends JFrame implements Observer {
 
 		checkbox_2d_couleur_random	= new JCheckBox("Aléatoire");
 		checkbox_3d_couleur_random	= new JCheckBox("Aléatoire");
-		checkbox_autoplay				= new JCheckBox("Autoplay");
+		checkbox_autoplay			= new JCheckBox("Autoplay");
 
 
 
@@ -642,8 +642,6 @@ public class Vue_Parametre extends JFrame implements Observer {
 			
 			if (model.isPrintSettings()) {
 				
-				this.setVisible(true);
-				
 				textField_affichage_espacement.setText("" + model.getParametres().get("Espacement"));
 				textField_affichage_amplitude.setText("" + model.getParametres().get("Amplitude"));
 				textField_affichage_epaisseur.setText("" + model.getParametres().get("Epaisseur"));
@@ -668,9 +666,11 @@ public class Vue_Parametre extends JFrame implements Observer {
 				checkbox_2d_couleur_random.setSelected(model.getParametres().get("Couleur_2d_random") == 1 ? true : false);
 				checkbox_3d_couleur_random.setSelected(model.getParametres().get("Couleur_3d_random") == 1 ? true : false);
 				checkbox_autoplay.setSelected(model.getParametres().get("Autoplay") == 1 ? true : false);
-
-				this.revalidate();
-				this.repaint();
+				
+				this.setVisible(true);
+				
+				//this.revalidate();
+				//this.repaint();
 				
 			}
 		}
