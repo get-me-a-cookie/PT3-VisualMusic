@@ -75,7 +75,10 @@ public class Vue_2D extends JPanel implements Observer {
 	 * Un tableau contenant un nombre de couleur egal
 	 * au nombre de rectangle
 	 */
-	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
+	private Color[] couleurs_trait;
+	private Color[] couleurs_forme;
+	private Color couleur_trait;
+	private Color couleur_forme;
 
 	/**
 	 * L'espacement entre chaque rectangle, en pixel
@@ -174,10 +177,39 @@ public class Vue_2D extends JPanel implements Observer {
 
 		if (ratioFrequence[numero_rectangle] != 0) {
 
-			g.fillRect(x,
-					(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y),
-					EPAISSEUR_RECTANGLE,
-					(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y));
+			if (couleur_forme == null && couleur_trait == null) {
+
+				g.setColor(couleurs_forme[numero_rectangle]);
+				g.fillRect(x,
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
+						EPAISSEUR_RECTANGLE,
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
+
+				g.setColor(couleurs_trait[numero_rectangle]);
+				g.drawRect(x,
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
+						EPAISSEUR_RECTANGLE,
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
+
+			}
+
+			else if (couleurs_forme == null && couleurs_trait ==null) {
+
+
+
+				g.setColor(couleur_forme);
+				g.fillRect(x,
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
+						EPAISSEUR_RECTANGLE,
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
+
+				g.setColor(couleur_trait);
+				g.drawRect(x,
+						(int) (MILIEU_FENETRE_Y-ratioFrequence[numero_rectangle]*MILIEU_FENETRE_Y/2),
+						EPAISSEUR_RECTANGLE,
+						(int) (ratioFrequence[numero_rectangle]*TAILLE_FENETRE_Y/2));
+
+			}
 
 		}
 
@@ -194,56 +226,99 @@ public class Vue_2D extends JPanel implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
-			
+
 			if (model.isThreeDimension())
 				ratioFrequence = new double[Vue_2D.NOMBRE_RECTANGLE];
 
 			else {
-				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
-				ESPACEMENT = model.getParametres().get("Espacement");
+				EPAISSEUR_RECTANGLE = model.getEpaisseur();
+				ESPACEMENT = model.getEspacement();
 
 				NOMBRE_RECTANGLE = (
 						(TAILLE_FENETRE_X - 2 * MARGIN_FORME_FENETRE)
 						- 2 * EPAISSEUR_RECTANGLE)
 						/ (EPAISSEUR_RECTANGLE);
 
+				if (model.isCouleur_2d_random()) {
 
-				double[] sauvegarde_rationFrequence = ratioFrequence;
-				ratioFrequence = new double[NOMBRE_RECTANGLE];
+					couleur_forme = null;
+					couleur_trait = null;
 
-				if (sauvegarde_rationFrequence != null) {
+					couleurs_forme = new Color[NOMBRE_RECTANGLE];
 
-					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+					for (int index = 0; index < couleurs_forme.length; index ++) {
 
-						ratioFrequence[index] = sauvegarde_rationFrequence[index];
+						couleurs_forme[index] = new Color(
+								(float) Math.random(),
+								(float) Math.random(),
+								(float) Math.random()); 
+					}
+
+					couleurs_trait = new Color[NOMBRE_RECTANGLE];
+
+					for (int index = 0; index < couleurs_trait.length; index ++) {
+
+						couleurs_trait[index] = new Color(
+								(float) Math.random(),
+								(float) Math.random(),
+								(float) Math.random()); 
 
 					}
 				}
 
-				if (model.isFileLoaded() 
-						&& model.getMusique().isLoad()
-						&& !model.getMusique().isPause()) {
+				else {
 
-					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+					couleurs_trait = null;
+					couleurs_forme = null;
 
-						try {
+					couleur_forme = new Color( 
+							model.getCouleur_2d_forme_r(),
+							model.getCouleur_2d_forme_g(),
+							model.getCouleur_2d_forme_b());
 
-							ratioFrequence[index] = ratioFrequence[index + 1];
+					couleur_trait = new Color( 
+							model.getCouleur_2d_trait_r(),
+							model.getCouleur_2d_trait_g(),
+							model.getCouleur_2d_trait_b());
 
-						}
-
-						catch (IndexOutOfBoundsException e) {
-
-							ratioFrequence[index] = model.getRatioFrequence();
-
-						}
-					}
 				}
+			}
+		}
 
-				repaint();
+		double[] sauvegarde_rationFrequence = ratioFrequence;
+		ratioFrequence = new double[NOMBRE_RECTANGLE];
+
+		if (sauvegarde_rationFrequence != null) {
+
+			for (int index = 0; index < sauvegarde_rationFrequence.length; index ++) {
+
+				ratioFrequence[index] = sauvegarde_rationFrequence[index];
 
 			}
 		}
+
+		if (model.isFileLoaded() 
+				&& model.getMusique().isLoad()
+				&& !model.getMusique().isPause()) {
+
+			for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+
+				try {
+
+					ratioFrequence[index] = ratioFrequence[index + 1];
+
+				}
+
+				catch (IndexOutOfBoundsException e) {
+
+					ratioFrequence[index] = model.getRatioFrequence();
+
+				}
+			}
+		}
+
+		repaint();
+
 	}
 
 }

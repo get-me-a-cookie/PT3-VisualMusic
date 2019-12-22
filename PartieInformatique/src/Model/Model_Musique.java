@@ -90,6 +90,9 @@ public class Model_Musique extends Observable implements Runnable {
 	public Model_Musique(Model m) {
 		
 		super();
+		
+		pause = true;
+		
 		this.addObserver(m);
 		
 	}
@@ -206,15 +209,18 @@ public class Model_Musique extends Observable implements Runnable {
 					frequence = 0;
 					Complex[] tableau_complexe_temporaire = FFT.getTransformedDataAsComplex();
 					
+					double complexMax = Double.MIN_VALUE;
+					
 					for (int index_dans_tableau = 0; 
 							index_dans_tableau < tableau_complexe_temporaire.length;
 							index_dans_tableau ++) {
 						
-						frequence = frequence + Math.abs(tableau_complexe_temporaire[index_dans_tableau].getReal());
+						double complexTemporaire = Math.abs(tableau_complexe_temporaire[index_dans_tableau].getReal());
+						if (complexMax < complexTemporaire) complexMax = complexTemporaire ;
 					
 					}
 					
-					frequence = frequence / tableau_complexe_temporaire.length; //valeur absolue
+					frequence = complexMax;
 					
 					setChanged();
 					notifyObservers();

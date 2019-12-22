@@ -9,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
@@ -55,12 +58,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	///////////////////////////////////////
 
 	/**
-	 * Model qui sera incérer dans la création des Action
-	 * afin de respecter le modèle MVC
-	 */
-	private Model model;
-
-	/**
 	 * Bouton permettant de mettre en marche la musique
 	 * si vidéo en pause : "Play"
 	 * sinon 			 : "Pause
@@ -72,9 +69,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Elle reprendra à zeron si on reclique sur play
 	 */	
 	private JButton bouton_stop;
-
-	//TODO
-	//private JButton bouton_volume;
 
 	/**
 	 * Bouton permettant de mettre la fenêtre en plein écran
@@ -154,27 +148,27 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Panneau principale
 	 * Affichera les formes 2D en fonction de la musique
 	 */
-	private Vue_2D visualisateur2D;
+	private Vue_2D vue_visualisateur2D;
 
 	/**
 	 * Panneau principale
 	 * Affichera les formes 3D en fonction de la musique
 	 */
-	private Vue_3D visualisateur3D;
+	private Vue_3D vue_visualisateur3D;
 
 	/**
 	 * Message d'erreur qui s'affiche quand:
 	 *    - Aucun fichier n'a été sélectionner mais que
 	 *		l'utilisateur essai de le lire
 	 */
-	private Vue_Erreur erreur;
-	
+	private Vue_Erreur vue_erreur;
+
 	/**
 	 * Vue permettant d'afficher une vue 
 	 * en pleine écran
 	 */
 	private Vue_Ecran_Full vue_full_ecran;
-	
+
 	private GridBagConstraints c;
 	///////////////////////////////////////
 	////////////// Méthodes ///////////////
@@ -191,33 +185,43 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		 */
 
 		//TODO a voir pour pas le mêtre dans la fenetre paramètres
-		
-		//Création Model
-		//model = new Model();
 
 		//Création des éléments 
 		this.creationMenu(model, handler);
 		this.creationPanelSud(model, handler);
 		this.creationVisualisateur();
-		erreur = new Vue_Erreur();
+		vue_erreur = new Vue_Erreur();
 		vue_full_ecran = new Vue_Ecran_Full();
 
 		//Ajout des observer
-		model.addObserver(visualisateur2D);
-		model.addObserver(visualisateur3D);
-		model.addObserver(erreur);
+		model.addObserver(vue_visualisateur2D);
+		model.addObserver(vue_visualisateur3D);
+		model.addObserver(vue_erreur);
 		model.addObserver(vue_full_ecran);
 		model.addObserver(this);
-		
-		
+
 		handler.add(this);
 
 		//Ajout de tous les éléments
 		this.add(panel_bouton, BorderLayout.SOUTH);
 		this.add(menu, BorderLayout.NORTH);
-		this.add(visualisateur2D, BorderLayout.CENTER);
+		this.add(vue_visualisateur2D, BorderLayout.CENTER);
 
 		//Paramètrage de la fenêtre
+
+		this.addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(WindowEvent windowEvent) {
+
+				if (JOptionPane.showConfirmDialog(null, 
+						"Are you sure you want to close this window?", "Close Window?", 
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
+					System.exit(0);
+
+			}
+		});
+
 		this.frameCenter();
 		this.setTitle("Visuals Music");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -259,7 +263,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler2));
 		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler2));
-		
+
 		menu_parametre.addMenuListener(new Controller_Menu(model, handler2));
 
 		//Ajout des éléments
@@ -282,26 +286,26 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 * Bouton de navigation
 	 */
 	private void creationPanelSud(Model model, Set<Component> handler) {
-		
+
 		//Création des éléments
 		panel_bouton = new JPanel();
 		JLabel texte_Volume = new JLabel("Volume :");
 		JSlider slider = new JSlider(0,100);
 		panel_bouton.setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
-		
+
 		bouton_playPause = new JButton("Play");
 		c.gridx =0;
 		c.gridy=0;
 		c.gridheight =2;
 		panel_bouton.add(bouton_playPause,c);
-		
-		
+
+
 		bouton_stop = new JButton("Stop");
 		c.gridx =1;
 		c.gridy=0;
 		panel_bouton.add(bouton_stop,c);
-		
+
 		bouton_pleinEcran = new JButton("Ecran");
 		c.gridx =2;
 		c.gridy=0;
@@ -311,8 +315,8 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		c.gridx=3;
 		c.gridy=0;
 		panel_bouton.add(texte_Volume,c);
-		
-		
+
+
 		slider.setPreferredSize(new Dimension(100,50));
 		slider.setMinimum(0);
 		slider.setMajorTickSpacing(50);
@@ -322,7 +326,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		c.gridx=3;
 		c.gridy=1;
 		panel_bouton.add(slider,c);
-		
+
 		//Modification des éléments
 		panel_bouton.setBackground(new Color(87, 73, 73, 50));
 		bouton_playPause.setPreferredSize(new Dimension(100,50));
@@ -348,22 +352,23 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	private void creationVisualisateur() {
 
 		//Création des éléments
-		visualisateur2D = new Vue_2D();	
-		visualisateur3D = new Vue_3D();	
+		vue_visualisateur2D = new Vue_2D();	
+		vue_visualisateur3D = new Vue_3D();	
 
 		//Modification des éléments
-		visualisateur2D.setPreferredSize(
+		vue_visualisateur2D.setPreferredSize(
 				new Dimension(800,450)); //rapport de 16:9
-		visualisateur3D.setSize( 		 //Obligé de faire setSize pour un Canva
+		vue_visualisateur3D.setSize( 		 //Obligé de faire setSize pour un Canva
 				new Dimension(800,450)); //rapport de 16:9
 
 		//Ajout des éléments
 
-		handler.add(visualisateur2D);
-		handler.add(visualisateur3D);
+		handler.add(vue_visualisateur2D);
+		handler.add(vue_visualisateur3D);
 	}
 
 	//TODO Javadoc
+	//C'est chiant comme méthode, tu peux pas faire ce que tu veux avec la fenetre
 	public void frameCenter() {
 
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().
@@ -371,12 +376,12 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		int posY = 
 				( (int) tailleEcran.getHeight()
-						- (int) visualisateur2D.getPreferredSize().getHeight()
+						- (int) vue_visualisateur2D.getPreferredSize().getHeight()
 						- (int) menu.getPreferredSize().getHeight()
 						- (int) panel_bouton.getPreferredSize().getHeight()) / 2;	
 		int posX = 
 				( (int) tailleEcran.getWidth() 
-						- (int) visualisateur2D.getPreferredSize().getWidth()) / 2;
+						- (int) vue_visualisateur2D.getPreferredSize().getWidth()) / 2;
 
 		this.setLocation(posX, posY);
 
@@ -388,11 +393,16 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
+			
+			if (!model.isPause())
+				bouton_playPause.setText("Pause");
+			else
+				bouton_playPause.setText("Play");
 
 			if (model.isFullScreen()) {
 
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-				this.setUndecorated(true);
+				//this.setUndecorated(true);
 				//TODO mettre les taille des panels
 
 			}

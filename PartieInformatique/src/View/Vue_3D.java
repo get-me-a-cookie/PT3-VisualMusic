@@ -126,19 +126,19 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 
 		Model model = (Model) m;
-		
+
 		if (model.getErreur() == null) {
 
 			if (!model.isThreeDimension()) {
 
 				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
 				animator.stop();
-				
+
 			}
 
 			else {
 
-				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+				EPAISSEUR_RECTANGLE = model.getEpaisseur();
 				//ESPACEMENT = model.getParametres().get("Espacement");
 
 				if (model.isFileLoaded() 
@@ -148,12 +148,66 @@ public class Vue_3D extends GLCanvas implements Observer {
 					if (!animator.isStarted())
 						animator.start();
 
+					if (model.isCouleur_3d_random()) {
+
+						cubes.setCouleurR(
+								new double[] {
+										Math.random(),
+										Math.random(), 
+										Math.random(), 
+										Math.random()
+								});
+						cubes.setCouleurB(
+								new double[] {
+										Math.random(),
+										Math.random(), 
+										Math.random(), 
+										Math.random()
+								});
+						cubes.setCouleurG(
+								new double[] {
+										Math.random(),
+										Math.random(), 
+										Math.random(), 
+										Math.random()
+								});
+
+					}
+
+					else {
+
+						cubes.setCouleurR(
+								new double[] {
+										(double) model.getCouleur_3d_cube1_r() / 255,
+										(double) model.getCouleur_3d_cube2_r() / 255,
+										(double) model.getCouleur_3d_cube3_r() / 255,
+										(double) model.getCouleur_3d_cube4_r() / 255
+								});
+
+						cubes.setCouleurG(
+								new double[] {
+										(double) model.getCouleur_3d_cube1_g() / 255,
+										(double) model.getCouleur_3d_cube2_g() / 255,
+										(double) model.getCouleur_3d_cube3_g() / 255,
+										(double) model.getCouleur_3d_cube4_g() / 255
+								});
+
+						cubes.setCouleurB(
+								new double[] {
+										(double) model.getCouleur_3d_cube1_b() / 255,
+										(double) model.getCouleur_3d_cube2_b() / 255,
+										(double) model.getCouleur_3d_cube3_b() / 255,
+										(double) model.getCouleur_3d_cube4_b() / 255
+								});
+
+					}
+
 					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
 
 						try {
 
 							ratioFrequence[index] = ratioFrequence[index + 1];
-							
+
 						}
 
 						catch (IndexOutOfBoundsException e) {
@@ -165,7 +219,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 				}
 
 				cubes.setRatioFrequence(ratioFrequence);
-				
+
 			}
 		}
 	}
