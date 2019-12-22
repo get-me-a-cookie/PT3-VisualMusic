@@ -310,6 +310,11 @@ public class Vue_Parametre extends JFrame implements Observer {
 		textField_3d_couleur_cube4_blue.setEnabled(false);
 		textField_3d_couleur_cube4_green.setEnabled(false);
 		textField_3d_couleur_cube4_red.setEnabled(false);
+		
+		//disable element pas encore implémenter
+		slider_aigu.setEnabled(false);
+		slider_grave.setEnabled(false);
+		slider_vitesse.setEnabled(false);
 
 		//Ajout Border
 		panel_section1.setBorder(compound);
