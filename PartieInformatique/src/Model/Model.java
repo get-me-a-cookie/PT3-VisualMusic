@@ -50,38 +50,38 @@ public class Model extends Observable implements Observer {
 	private boolean autoplay;
 	private boolean couleur_2d_random;
 	private boolean couleur_3d_random;
-	
+
 	private boolean fullScreen;
-	
+
 	/**
 	 * Fichier qui sera écouté
 	 */
 	private File fichier;
-	
+
 	/**
 	 * Classe de type Model, connu et instancié uniquement ici
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 */
 	private Model_Musique musique;
-	
+
 	/**
 	 * Permet le MultiThreading et ainsi de garder la main sur le programme
 	 * Créé a partir de musique, attribut décris ci-dessus
 	 */
 	private Thread musiqueThread;
-	
+
 	/**
 	 * Définis si le programme a rencontré une erreur
 	 * 0 : aucune erreur
 	 * 1 : erreur de type ""
 	 */
 	private Exception erreur;
-	
+
 	/**
 	 * les paramètres avec leur valeurs
 	 */
 	private Map<String, Integer> parametres;
-	
+
 	/**
 	 * Définis si l'utilisateur a demander de changer de vue
 	 * afin de pouvoir réinitialiser les vue à chaque fois.
@@ -89,53 +89,29 @@ public class Model extends Observable implements Observer {
 	 * false : il reste sur sa vue actuelle 
 	 */
 	private boolean isThreeDimension;
-	
+
 	private boolean printSettings;
+	private boolean pause;
 
 	public Model() {
-				
+
 		musique = new Model_Musique(this);
-		
+
 		erreur = null;
-				
+
 		isThreeDimension = false;
 		printSettings = false;
 		fullScreen = false;
-		
+
 		amplitude 			= 100;
 		epaisseur 			= 60;
 		espacement			= 0;
 		autoplay 			= true;
 		couleur_2d_random	= true;
 		couleur_3d_random	= true;
-		
-		parametres = new HashMap<String, Integer>();
-		
-		parametres.put("Autoplay"				, 1); //1 = true, 0 = false
-		parametres.put("Couleur_2d_random"	 	, 1); //1 = true, 0 = false
-		parametres.put("Couleur_3d_random"	 	, 1); //1 = true, 0 = false
-		parametres.put("Espacement"			 	, 0);
-		parametres.put("Epaisseur"			 	, 60);
-		parametres.put("Amplitude"			 	, 100);
-		parametres.put("Couleur_2d_trait_red"	, 0);
-		parametres.put("Couleur_2d_trait_green"	, 0);
-		parametres.put("Couleur_2d_trait_blue" 	, 0);
-		parametres.put("Couleur_2d_forme_red"  	, 0);
-		parametres.put("Couleur_2d_forme_green"	, 0);
-		parametres.put("Couleur_2d_forme_blue" 	, 0);
-		parametres.put("Couleur_3d_cube1_red"  	, 0);
-		parametres.put("Couleur_3d_cube2_red"  	, 0);
-		parametres.put("Couleur_3d_cube3_red"  	, 0);
-		parametres.put("Couleur_3d_cube4_red"  	, 0);
-		parametres.put("Couleur_3d_cube1_green"	, 0);
-		parametres.put("Couleur_3d_cube2_green"	, 0);
-		parametres.put("Couleur_3d_cube3_green"	, 0);
-		parametres.put("Couleur_3d_cube4_green"	, 0);
-		parametres.put("Couleur_3d_cube1_blue" 	, 0);
-		parametres.put("Couleur_3d_cube2_blue" 	, 0);
-		parametres.put("Couleur_3d_cube3_blue" 	, 0);
-		parametres.put("Couleur_3d_cube4_blue" 	, 0);
-		
+
+		pause = true;
+
 	}
 
 	//TODO Check pause / mettre pause a true dès le début
@@ -144,57 +120,63 @@ public class Model extends Observable implements Observer {
 	 * garder la main sur l'application grâce au multithreading
 	 */
 	public void lectureFichier() {
-		
-		if (musiqueThread == null || musique.isPause()) {
-			
+
+		if (musiqueThread == null || pause) {
+
 			if (!musique.isLoad())
 				musique.initialisation(fichier);
-			
+
 			musiqueThread = new Thread(musique);
 			musiqueThread.start();
-			
+
 		}
 	}
-	
+
 	/**
 	 * permet de modifier le fichier qui fdoit être lus
 	 */
 	public void setFichier(File file) {
-		
+
 		if (file.exists()) {
-			
+
 			fichier = file;
-			this.lectureFichier();
-			
+
+			if (autoplay) {
+
+				this.setPause(false);
+
+				this.lectureFichier();
+
+			}			
 		}
-		
+
 		else {
-			
+
 			setErreur(new FileNotFoundException());
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * permet d'obtenir le model jouant la musique
 	 * @return le model de la musique
 	 */
 	public Model_Musique getMusique() {
-		
+
 		return musique;
-		
+
 	}
-	
+
 	/**
 	 * permet d'arrêter la musique
 	 * et de remettre le même fichier
 	 * au début de la lecture
 	 */
 	public void stop() {
-		
+
 		musique.reset();
-		
+
 	}
 
 	/**
@@ -204,12 +186,12 @@ public class Model extends Observable implements Observer {
 	 * false : il n'y a pas de fichier en cour de lecture
 	 */
 	public boolean isFileLoaded() {
-		
+
 		if (fichier == null)
 			return false;
-		
+
 		return true;
-		
+
 	}
 
 	/**
@@ -217,14 +199,14 @@ public class Model extends Observable implements Observer {
 	 * à la vue
 	 */
 	public void setErreur(Exception e) {
-		
+
 		erreur  = e;
-		
+
 		setChanged();
 		notifyObservers();
-		
+
 		erreur = null;
-		
+
 	}
 
 	/**
@@ -233,25 +215,25 @@ public class Model extends Observable implements Observer {
 	 * 			null sinon
 	 */
 	public Exception getErreur() {
-		
+
 		return erreur;
-		
+
 	}
-	
+
 	/**
 	 * @return le ration de la fréquense actuel
 	 * par rapport à celle du fichier
 	 */
 	public double getRatioFrequence() {
-		
+
 		double freq = 0;
-		
+
 		freq = 	(musique.getFrequence() 
-				* (parametres.get("Amplitude")) / 100)
+				* amplitude / 100)
 				/ musique.getAudioFormat().getFrameRate();
-		
+
 		return freq;
-		
+
 	}
 
 	/**
@@ -259,22 +241,22 @@ public class Model extends Observable implements Observer {
 	 * et de notify l'observer
 	 */
 	public void update(Observable o, Object arg) {
-		
+
 		setChanged();
 		notifyObservers();
-		
+
 	}
-	
+
 	/**
 	 * renvoie tous les parmetres ainsi que leur valeurs associé
 	 * @return the parametres
 	 */
 	public Map<String, Integer> getParametres() {
-		
+
 		return parametres;
-		
+
 	}
-	
+
 	/**
 	 * permet de modifié un paramètre en donnant
 	 * sa valeur et le paramètre
@@ -282,78 +264,78 @@ public class Model extends Observable implements Observer {
 	 * @param texteToInt	: la valeur a donner
 	 */
 	public void parametersChanged(boolean b) {
-		
+
 		if (b) {
 			this.setChanged();
 			this.notifyObservers();
 		}
-		
+
 	}
-	
+
 	/**
 	 * @return the vueChanged
 	 */
 	public boolean isThreeDimension() {
-		
+
 		return isThreeDimension;
-		
+
 	}
 
 	/**
 	 * @param vueChanged the vueChanged to set
 	 */
 	public void setIsThreeDimension(boolean vueChanged) {
-		
+
 		this.isThreeDimension = vueChanged;
-		
+
 		setChanged();
 		notifyObservers();
-		
+
 	}
 
 	/**
 	 * @return the fullScreen
 	 */
 	public boolean isFullScreen() {
-		
+
 		return fullScreen;
-		
+
 	}
 
 	/**
 	 * @param fullScreen the fullScreen to set
 	 */
 	public void setFullScreen(boolean fullScreen) {
-		
+
 		this.fullScreen = fullScreen;
 
 		setChanged();
 		notifyObservers();
-		
+
 	}
-	
+
 	/**
 	 * @return the printSettings
 	 */
 	public boolean isPrintSettings() {
-		
+
 		return printSettings;
-		
+
 	}
 
 	/**
 	 * @param printSettings the printSettings to set
 	 */
 	public void setPrintSettings(boolean printSettings) {
-		
+
 		this.printSettings = printSettings;
-		
+
 		if (printSettings)
 			musique.setPause(true);
-		
+
 		this.setChanged();
 		this.notifyObservers();
-		
+
 	}
 
 	/**
@@ -690,5 +672,22 @@ public class Model extends Observable implements Observer {
 	 */
 	public void setCouleur_3d_random(boolean couleur_3d_random) {
 		this.couleur_3d_random = couleur_3d_random;
+	}
+
+	public void setPause(boolean b) {
+
+		this.pause = b;
+
+		this.musique.setPause(b);
+
+		this.setChanged();
+		this.notifyObservers();
+
+	}
+
+	public boolean isPause() {
+
+		return this.pause;
+
 	}
 }

@@ -393,6 +393,11 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
+			
+			if (!model.isPause())
+				bouton_playPause.setText("Pause");
+			else
+				bouton_playPause.setText("Play");
 
 			if (model.isFullScreen()) {
 

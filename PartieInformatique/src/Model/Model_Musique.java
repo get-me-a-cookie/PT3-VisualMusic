@@ -90,6 +90,9 @@ public class Model_Musique extends Observable implements Runnable {
 	public Model_Musique(Model m) {
 		
 		super();
+		
+		pause = true;
+		
 		this.addObserver(m);
 		
 	}
