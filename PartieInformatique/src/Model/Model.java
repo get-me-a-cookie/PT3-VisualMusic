@@ -248,16 +248,6 @@ public class Model extends Observable implements Observer {
 	}
 
 	/**
-	 * renvoie tous les parmetres ainsi que leur valeurs associé
-	 * @return the parametres
-	 */
-	public Map<String, Integer> getParametres() {
-
-		return parametres;
-
-	}
-
-	/**
 	 * permet de modifié un paramètre en donnant
 	 * sa valeur et le paramètre
 	 * @param textLabel		: le paramètre a modifié
@@ -331,7 +321,7 @@ public class Model extends Observable implements Observer {
 		this.printSettings = printSettings;
 
 		if (printSettings)
-			musique.setPause(true);
+			this.setPause(true);
 
 		this.setChanged();
 		this.notifyObservers();

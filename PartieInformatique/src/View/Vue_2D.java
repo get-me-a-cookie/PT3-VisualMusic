@@ -290,7 +290,7 @@ public class Vue_2D extends JPanel implements Observer {
 
 		if (sauvegarde_rationFrequence != null) {
 
-			for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+			for (int index = 0; index < sauvegarde_rationFrequence.length; index ++) {
 
 				ratioFrequence[index] = sauvegarde_rationFrequence[index];
 

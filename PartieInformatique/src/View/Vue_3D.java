@@ -138,7 +138,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 			else {
 
-				EPAISSEUR_RECTANGLE = model.getParametres().get("Epaisseur");
+				EPAISSEUR_RECTANGLE = model.getEpaisseur();
 				//ESPACEMENT = model.getParametres().get("Espacement");
 
 				if (model.isFileLoaded() 

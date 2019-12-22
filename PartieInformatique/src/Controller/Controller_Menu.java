@@ -48,9 +48,9 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 	public void actionPerformed(ActionEvent arg0) {
 
 		JMenuItem menuItem = (JMenuItem) arg0.getSource();		
-		
+
 		if (menuItem.getText().equals("Ouvrir un fichier...")) {
-			
+
 			model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
 			/*// TODO A décommenter ...
 			JFileChooser fc = new JFileChooser();
@@ -58,12 +58,12 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
-			*/
+			 */
 			/*if (model.isAutoplay()) {
-				
+
 				model.setPause(false);
 				model.lectureFichier();
-				
+
 			}*/
 		}
 
@@ -135,7 +135,7 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 			}
 
 			catch (NullPointerException e) {
-				
+
 				model.setErreur(e);
 				return;
 
@@ -145,22 +145,19 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 
 		}		
 	}
-	
-	
+
+
 	public void menuCanceled(MenuEvent arg0) {}
 	public void menuDeselected(MenuEvent arg0) {}
-	
+
 	public void menuSelected(MenuEvent arg0) {
-		
+
 		JMenu menu = (JMenu) arg0.getSource();
-		
+
 		if (menu.getText().equals("Paramètres")) {
-			System.out.println(model.isPrintSettings());
-			if (!model.isPrintSettings())
-				model.setPrintSettings(true);
-			
-			else model.setPrintSettings(false);
-			
+
+			model.setPrintSettings(true);
+
 		}
 	}
 }
