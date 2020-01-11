@@ -115,7 +115,7 @@ public class Model extends Observable implements Observer {
 		
 		changingDimension = false;
 		
-		volume = 100;
+		volume = 50;
 
 	}
 
@@ -728,13 +728,19 @@ public class Model extends Observable implements Observer {
 	 * @return the volume
 	 */
 	public int getVolume() {
+		
 		return volume;
+		
 	}
 
 	/**
 	 * @param volume the volume to set
 	 */
 	public void setVolume(int volume) {
+		
 		this.volume = volume;
+		
+		this.musique.setVol(volume / 100);
+		
 	}
 }

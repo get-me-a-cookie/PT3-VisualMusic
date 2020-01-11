@@ -362,7 +362,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		volume_slider.setPaintTicks(true);
 		volume_slider.setPaintLabels(true);
 
-		volume_slider.setEnabled(false);
+		//volume_slider.setEnabled(false);
 		volume_texte.setEnabled(false);	//Juste pour faire beau
 		bouton_pleinEcran.setEnabled(false);
 
