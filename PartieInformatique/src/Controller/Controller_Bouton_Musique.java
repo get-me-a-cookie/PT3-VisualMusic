@@ -9,7 +9,6 @@ import java.util.Set;
 import javax.swing.JButton;
 
 import Model.Model;
-import View.Vue_Ecran_Full;
 
 /**
  * 
@@ -95,7 +94,7 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 
 		}
 
-		if(bouton.getText().equals("Ecran")) {
+		if(bouton.getText().equals("Plein Ecran")) {
 
 			if (model.isFullScreen())
 				model.setFullScreen(false);
