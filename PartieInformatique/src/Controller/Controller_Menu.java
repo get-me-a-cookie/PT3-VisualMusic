@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Set;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -52,19 +53,15 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		if (menuItem.getText().equals("Ouvrir un fichier...")) {
 
 			model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
-			/*// TODO A décommenter ...
-			JFileChooser fc = new JFileChooser();
+			// TODO A décommenter ...
+			/*JFileChooser fc = new JFileChooser();
 			int valeur_de_retour = fc.showOpenDialog(null);
 
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
-			 */
-			/*if (model.isAutoplay()) {
-
-				model.setPause(false);
-				model.lectureFichier();
-
-			}*/
+			*/
+			return;
+			
 		}
 
 		if (menuItem.getText().equals("2D") && menuItem.isSelected()) {
@@ -104,6 +101,8 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 				return;
 
 			}
+			
+			return;
 		}
 
 		if (menuItem.getText().equals("3D") && menuItem.isSelected()) {
@@ -142,6 +141,8 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 			}
 
 			model.setIsThreeDimension(true);
+			
+			return;
 
 		}		
 	}
@@ -157,6 +158,8 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		if (menu.getText().equals("Paramètres")) {
 
 			model.setPrintSettings(true);
+			
+			return;
 
 		}
 	}

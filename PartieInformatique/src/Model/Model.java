@@ -95,8 +95,6 @@ public class Model extends Observable implements Observer {
 
 	public Model() {
 
-		musique = new Model_Musique(this);
-
 		erreur = null;
 
 		isThreeDimension = false;
@@ -137,13 +135,21 @@ public class Model extends Observable implements Observer {
 	 */
 	public void setFichier(File file) {
 
+		musique = new Model_Musique(this);
+		pause = true;
+		
+		if (musiqueThread != null)
+			musiqueThread.stop();
+		
+		musiqueThread = null;
+				
 		if (file.exists()) {
 
 			fichier = file;
 
 			if (autoplay) {
 
-				this.setPause(false);
+				pause = false;
 
 				this.lectureFichier();
 
