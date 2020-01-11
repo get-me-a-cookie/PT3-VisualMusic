@@ -18,9 +18,7 @@ import Model.Model;
  * 
  * @author
  * Goodwin
- * 	Création de la classe et refonte totale da la classe car erreurs
- * Perrin
- * 	Implémentation de la classe entière
+ * 	Création et implémentation de la classe entière
  */
 public class Controller_Clavier extends Controller implements KeyListener {
 
@@ -40,6 +38,7 @@ public class Controller_Clavier extends Controller implements KeyListener {
 	/**
 	 * Quand une touche est pressé fait l'action correpondante
 	 * Espace	: pause/lecture
+	 * Echap	: quitte l'application
 	 */
 	public void keyPressed(KeyEvent e) {
 
@@ -79,8 +78,16 @@ public class Controller_Clavier extends Controller implements KeyListener {
 		}
 	}
 
+	/**
+	 * Quand une touche est relacher
+	 * 	Non implémenter
+	 */
 	public void keyReleased(KeyEvent arg0) {}
 
+	/**
+	 * Quand une touche est taper
+	 * 	Non implémenter
+	 */
 	public void keyTyped(KeyEvent arg0) {}
 
 }
