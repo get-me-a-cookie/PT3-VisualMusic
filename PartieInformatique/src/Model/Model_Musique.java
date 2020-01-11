@@ -168,7 +168,10 @@ public class Model_Musique extends Observable implements Runnable {
 		} 		
 	} 
 	
-	
+	/**
+	 * Modifie le volume (gain) de la musique
+	 * @param volume
+	 */
 	public void setVol(float volume) {
 		
 		FloatControl control = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
@@ -192,7 +195,7 @@ public class Model_Musique extends Observable implements Runnable {
 			
 			line.open(audioFormat);
 			
-			this.setVol(model.getVolume());
+			model.setVolume(model.getVolume());
 			
 		} 
 		

@@ -100,9 +100,9 @@ public class Model extends Observable implements Observer {
 
 		erreur = null;
 
-		isThreeDimension = false;
-		printSettings = false;
-		fullScreen = false;
+		isThreeDimension 	= false;
+		printSettings 		= false;
+		fullScreen 			= false;
 
 		amplitude 			= 100;
 		epaisseur 			= 60;
@@ -740,7 +740,7 @@ public class Model extends Observable implements Observer {
 		
 		this.volume = volume;
 		
-		this.musique.setVol(volume / 100);
+		this.musique.setVol((float) volume / 100);
 		
 	}
 }
