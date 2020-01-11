@@ -33,12 +33,10 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 	 * Constructeur utilisant le Constructeur Parent
 	 * 
 	 * @param model   : Instanciant le Model
-	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller_Menu(Model model,
-			Set<Component> handler) {
+	public Controller_Menu(Model model) {
 
-		super(model, handler);
+		super(model);
 
 	}
 

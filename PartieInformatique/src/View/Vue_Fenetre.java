@@ -83,14 +83,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	private JButton bouton_pleinEcran;
 
 	/**
-	 * Adapteur entre les controller et l'interface graphique
-	 * 
-	 * Sert à retirer des éléments dans l'interface quand on 
-	 * clique sur un bouton, ect ...
-	 */
-	Set<Component> handler = new HashSet<Component>();
-
-	/**
 	 * Bandeau inférieur de l'IG
 	 * 
 	 * Contient les différents boutons de affectant la musique
@@ -237,16 +229,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		model.addObserver(vue_visualisateur3D);
 		model.addObserver(vue_erreur);
 		model.addObserver(this);
-
-
-		//Ajout dans l'Adapteur controller / IG
-			/* 
-			 * Sert à retirer et ajouter les visualiseurs 2D/3D 
-			 * quand on le demande dans le menu "affichage"
-			 */
-
-		handler.add(this);
-
+		
 
 		//Ajout de tous les éléments
 
@@ -271,7 +254,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 			}
 		});
 		
-		this.addKeyListener(new Controller_Clavier(model, handler));
+		this.addKeyListener(new Controller_Clavier(model));
 		
 		
 		//Paramètrage de la fenêtre
@@ -321,12 +304,12 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 		//Ajout des Controller
 		
-		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model, handler));
+		menu_fichier_ouvrir.addActionListener(new Controller_Menu(model));
 
-		menu_affichage_2D.addActionListener(new Controller_Menu(model, handler));
-		menu_affichage_3D.addActionListener(new Controller_Menu(model, handler));
+		menu_affichage_2D.addActionListener(new Controller_Menu(model));
+		menu_affichage_3D.addActionListener(new Controller_Menu(model));
 
-		menu_parametre.addMenuListener(new Controller_Menu(model, handler));
+		menu_parametre.addMenuListener(new Controller_Menu(model));
 		
 
 		//Ajout des éléments
@@ -384,19 +367,12 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		bouton_pleinEcran.setEnabled(false);
 
 		
-		//Ajout des Bouton dans le handler
-		
-		handler.add(bouton_playPause);
-		handler.add(bouton_stop);
-		handler.add(bouton_pleinEcran);
-
-		
 		//Ajout des Controller
 		
-		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model, handler));
-		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
-		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
-		volume_slider.addChangeListener(new Controller_Slider(model, handler));
+		bouton_playPause.addActionListener(new Controller_Bouton_Musique(model));
+		bouton_stop.addActionListener(new Controller_Bouton_Musique(model));
+		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model));
+		volume_slider.addChangeListener(new Controller_Slider(model));
 		
 		// Ajout des élément dans le panel
 		
@@ -437,12 +413,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		
 		vue_visualisateur2D.setPreferredSize(seizeNeuvieme);
 		vue_visualisateur3D.setSize(seizeNeuvieme); //Obligé de faire setSize pour un Canva
-
-		
-		//Ajout dans l'Adapteur controller / IG
-
-		handler.add(vue_visualisateur2D);
-		handler.add(vue_visualisateur3D);
 		
 	}
 	

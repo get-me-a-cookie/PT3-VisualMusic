@@ -23,12 +23,10 @@ public class Controller_Slider extends Controller implements ChangeListener {
 	 * Constructeur utilisant le Constructeur Parent
 	 * 
 	 * @param model   : Instanciant le Model
-	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller_Slider(Model model, 
-			Set<Component> handler) {
+	public Controller_Slider(Model model) {
 		
-		super(model, handler);
+		super(model);
 		
 	}
 	
