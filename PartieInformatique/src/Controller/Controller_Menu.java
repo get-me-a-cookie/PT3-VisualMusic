@@ -71,10 +71,6 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 
 		if (menuItem.getText().equals("2D") && menuItem.isSelected()) {
 
-			JFrame fenetre	= null;
-			Vue_2D twoD 	= null;
-			Vue_3D threeD 	= null;
-
 			model.setIsThreeDimension(false);
 			model.setChangingDimension(true);
 			
@@ -82,39 +78,6 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		}
 
 		if (menuItem.getText().equals("3D") && menuItem.isSelected()) {
-
-			JFrame fenetre	= null;
-			Vue_2D twoD 	= null;
-			Vue_3D threeD 	= null;
-
-			/*for (Component b : handler) {
-
-				if (b instanceof JFrame)
-					fenetre = (JFrame) b;
-
-				if (b instanceof Vue_2D)
-					twoD = (Vue_2D) b;
-
-				if (b instanceof Vue_3D)
-					threeD = (Vue_3D) b;
-
-			}
-
-			try {
-
-				fenetre.remove(twoD);
-				fenetre.add(threeD, BorderLayout.CENTER);
-				fenetre.revalidate();
-				fenetre.repaint();
-
-			}
-
-			catch (NullPointerException e) {
-
-				model.setErreur(e);
-				return;
-
-			}*/
 
 			model.setIsThreeDimension(true);
 			model.setChangingDimension(true);
@@ -124,10 +87,23 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		}		
 	}
 
-
+	/**
+	 * Quand un menu est annulé
+	 * 	Non implémenter
+	 */
 	public void menuCanceled(MenuEvent arg0) {}
+
+	/**
+	 * Quand un menu est dé-sélectionné
+	 * 	Non implémenter
+	 */
 	public void menuDeselected(MenuEvent arg0) {}
 
+	/**
+	 * Quand on selectionne un menu
+	 * 
+	 * Paramètre : affiche la fenêtre des paramètres
+	 */
 	public void menuSelected(MenuEvent arg0) {
 
 		JMenu menu = (JMenu) arg0.getSource();
