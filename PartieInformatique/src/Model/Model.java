@@ -89,6 +89,7 @@ public class Model extends Observable implements Observer {
 	 * false : il reste sur sa vue actuelle 
 	 */
 	private boolean isThreeDimension;
+	private boolean changingDimension;
 
 	private boolean printSettings;
 	private boolean pause;
@@ -109,6 +110,8 @@ public class Model extends Observable implements Observer {
 		couleur_3d_random	= true;
 
 		pause = true;
+		
+		changingDimension = false;
 
 	}
 
@@ -283,10 +286,7 @@ public class Model extends Observable implements Observer {
 	public void setIsThreeDimension(boolean vueChanged) {
 
 		this.isThreeDimension = vueChanged;
-
-		setChanged();
-		notifyObservers();
-
+		
 	}
 
 	/**
@@ -694,6 +694,29 @@ public class Model extends Observable implements Observer {
 
 		if (quit)
 			System.exit(0);
+		
+	}
+
+	/**
+	 * @return the changingDimension
+	 */
+	public boolean isChangingDimension() {
+		
+		return changingDimension;
+		
+	}
+
+	/**
+	 * @param changingDimension the changingDimension to set
+	 */
+	public void setChangingDimension(boolean changingDimension) {
+		
+		this.changingDimension = changingDimension;
+
+		this.setChanged();
+		this.notifyObservers();
+
+		this.changingDimension = false;
 		
 	}
 }

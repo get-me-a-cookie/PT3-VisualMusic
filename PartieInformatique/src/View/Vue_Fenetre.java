@@ -484,6 +484,22 @@ public class Vue_Fenetre extends JFrame implements Observer {
 			else
 				bouton_playPause.setText("Lecture");
 			
+			
+			if (model.isChangingDimension() && model.isThreeDimension()) {
+				
+				this.remove(vue_visualisateur2D);
+				this.add(vue_visualisateur3D, BorderLayout.CENTER);
+				
+			}
+			
+			if (model.isChangingDimension() && !model.isThreeDimension()) {
+
+				this.remove(vue_visualisateur3D);
+				this.add(vue_visualisateur2D, BorderLayout.CENTER);
+				
+			}
+			
+			
 			if (model.isFullScreen()) {
 
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH);

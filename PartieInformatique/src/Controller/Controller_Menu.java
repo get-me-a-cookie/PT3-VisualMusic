@@ -21,14 +21,17 @@ import View.Vue_3D;
 
 /**
  * 
- * Classe implémentant ActionListener
+ * Classe implémentant ActionListener et MenuListener
+ * Sert à gérer tous les actions de la barre de menu
  * 
- * @author goodw
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Controller_Menu extends Controller implements ActionListener, MenuListener  {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
+	 * 
 	 * @param model   : Instanciant le Model
 	 * @param handler : Instanciant l'adapteur
 	 */
@@ -42,9 +45,11 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 	/**
 	 * Méthode de l'interface parente ActionListener
 	 * 
-	 * Si on clique sur un JMenuItem "Ouvrir un fichier ...", création d'un 
-	 * 	FileChooser (permettant de choisir un fichier sur l'espace disque)
-	 * 	qui renvoi et ouvre le fichier choisit
+	 * Ouvrir un fichier ... : création d'un FileChooser (permettant de choisir 
+	 * 	un fichier sur l'espace disque) qui renvoi et ouvre le fichier choisit
+	 * 
+	 * 2D : affiche le visualiseur 2D
+	 * 3D : affiche le visualiseur 3D
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -71,36 +76,7 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 			Vue_3D threeD 	= null;
 
 			model.setIsThreeDimension(false);
-
-			for (Component b : handler) {
-
-				if (b instanceof JFrame)
-					fenetre = (JFrame) b;
-
-				if (b instanceof Vue_2D)
-					twoD = (Vue_2D) b;
-
-				if (b instanceof Vue_3D)
-					threeD = (Vue_3D) b;
-
-			}
-
-			try {
-
-				fenetre.remove(threeD);
-				fenetre.add(twoD, BorderLayout.CENTER);
-				fenetre.revalidate();
-				fenetre.repaint();
-
-			}
-
-			catch (NullPointerException e) {
-
-				//TODO message d'erreur
-				model.setErreur(e);
-				return;
-
-			}
+			model.setChangingDimension(true);
 			
 			return;
 		}
@@ -111,7 +87,7 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 			Vue_2D twoD 	= null;
 			Vue_3D threeD 	= null;
 
-			for (Component b : handler) {
+			/*for (Component b : handler) {
 
 				if (b instanceof JFrame)
 					fenetre = (JFrame) b;
@@ -138,9 +114,10 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 				model.setErreur(e);
 				return;
 
-			}
+			}*/
 
 			model.setIsThreeDimension(true);
+			model.setChangingDimension(true);
 			
 			return;
 

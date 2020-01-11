@@ -15,6 +15,7 @@ import Model.Model;
  * Classe implémentant KeyListener
  * Sert à mettre des racourcis clavier
  * 	Espace : pause/lecture
+ *	Echap	: quitte l'application
  * 
  * @author
  * Goodwin
