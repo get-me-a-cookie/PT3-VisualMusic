@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Set;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -20,30 +21,33 @@ import View.Vue_3D;
 
 /**
  * 
- * Classe implémentant ActionListener
+ * Classe implémentant ActionListener et MenuListener
+ * Sert à gérer tous les actions de la barre de menu
  * 
- * @author goodw
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Controller_Menu extends Controller implements ActionListener, MenuListener  {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
+	 * 
 	 * @param model   : Instanciant le Model
-	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller_Menu(Model model,
-			Set<Component> handler) {
+	public Controller_Menu(Model model) {
 
-		super(model, handler);
+		super(model);
 
 	}
 
 	/**
 	 * Méthode de l'interface parente ActionListener
 	 * 
-	 * Si on clique sur un JMenuItem "Ouvrir un fichier ...", création d'un 
-	 * 	FileChooser (permettant de choisir un fichier sur l'espace disque)
-	 * 	qui renvoi et ouvre le fichier choisit
+	 * Ouvrir un fichier ... : création d'un FileChooser (permettant de choisir 
+	 * 	un fichier sur l'espace disque) qui renvoi et ouvre le fichier choisit
+	 * 
+	 * 2D : affiche le visualiseur 2D
+	 * 3D : affiche le visualiseur 3D
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -52,104 +56,52 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		if (menuItem.getText().equals("Ouvrir un fichier...")) {
 
 			model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
-			/*// TODO A décommenter ...
-			JFileChooser fc = new JFileChooser();
+			// TODO A décommenter ...
+			/*JFileChooser fc = new JFileChooser();
 			int valeur_de_retour = fc.showOpenDialog(null);
 
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
-			 */
-			/*if (model.isAutoplay()) {
-
-				model.setPause(false);
-				model.lectureFichier();
-
-			}*/
+			*/
+			return;
+			
 		}
 
 		if (menuItem.getText().equals("2D") && menuItem.isSelected()) {
 
-			JFrame fenetre	= null;
-			Vue_2D twoD 	= null;
-			Vue_3D threeD 	= null;
-
 			model.setIsThreeDimension(false);
-
-			for (Component b : handler) {
-
-				if (b instanceof JFrame)
-					fenetre = (JFrame) b;
-
-				if (b instanceof Vue_2D)
-					twoD = (Vue_2D) b;
-
-				if (b instanceof Vue_3D)
-					threeD = (Vue_3D) b;
-
-			}
-
-			try {
-
-				fenetre.remove(threeD);
-				fenetre.add(twoD, BorderLayout.CENTER);
-				fenetre.revalidate();
-				fenetre.repaint();
-
-			}
-
-			catch (NullPointerException e) {
-
-				//TODO message d'erreur
-				model.setErreur(e);
-				return;
-
-			}
+			model.setChangingDimension(true);
+			
+			return;
 		}
 
 		if (menuItem.getText().equals("3D") && menuItem.isSelected()) {
 
-			JFrame fenetre	= null;
-			Vue_2D twoD 	= null;
-			Vue_3D threeD 	= null;
-
-			for (Component b : handler) {
-
-				if (b instanceof JFrame)
-					fenetre = (JFrame) b;
-
-				if (b instanceof Vue_2D)
-					twoD = (Vue_2D) b;
-
-				if (b instanceof Vue_3D)
-					threeD = (Vue_3D) b;
-
-			}
-
-			try {
-
-				fenetre.remove(twoD);
-				fenetre.add(threeD, BorderLayout.CENTER);
-				fenetre.revalidate();
-				fenetre.repaint();
-
-			}
-
-			catch (NullPointerException e) {
-
-				model.setErreur(e);
-				return;
-
-			}
-
 			model.setIsThreeDimension(true);
+			model.setChangingDimension(true);
+			
+			return;
 
 		}		
 	}
 
-
+	/**
+	 * Quand un menu est annulé
+	 * 	Non implémenter
+	 */
 	public void menuCanceled(MenuEvent arg0) {}
+
+	/**
+	 * Quand un menu est dé-sélectionné
+	 * 	Non implémenter
+	 */
 	public void menuDeselected(MenuEvent arg0) {}
 
+	/**
+	 * Quand on selectionne un menu
+	 * 
+	 * Paramètre : affiche la fenêtre des paramètres
+	 */
 	public void menuSelected(MenuEvent arg0) {
 
 		JMenu menu = (JMenu) arg0.getSource();
@@ -157,6 +109,8 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		if (menu.getText().equals("Paramètres")) {
 
 			model.setPrintSettings(true);
+			
+			return;
 
 		}
 	}

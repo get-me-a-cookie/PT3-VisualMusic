@@ -32,12 +32,13 @@ import flanagan.math.FourierTransform;
  * 
  * Hérite de Observable afin de pouvoir notifié les observer de Model
  * 	quand la fréquence change
+ * 	Concrètement, elle n'a qu'un observer, le model.
  * 
- * @author goodw
+ * @author 
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Model_Musique extends Observable implements Runnable {
-
-	//TODO voir pour pré-load la musique
 	
 	/**
 	 * Ligne permettant l'écoute audio
@@ -47,53 +48,72 @@ public class Model_Musique extends Observable implements Runnable {
 	
 	/**
 	 * Sert à transformer le fichier ouvert en 
-	 * fichier ouvert à la lecture multimédia
+	 * fichier avec lecture multimédia possible
 	 * 
 	 * Courant d'entrée audio
 	 */
 	private AudioInputStream audioInputStream;
 	
 	/**
-	 * Réfère tous les champs spécifique qu format audio
+	 * Réfère tous les champs spécifique au format audio
 	 */
-	private static AudioFormat audioFormat; 
+	private AudioFormat audioFormat; 
 	
 	/**
-	 * Stock les fréquences des octects lus lors 
-	 * de l'écoute de la musique
+	 * Fréquence transmise aux vues en prenant la 
+	 * fréquence maximale d'un son
+	 * 
+	 * Une FFT est réaliser préalablement pour obtenir 
+	 * toutes les fréquences d'un son
 	 */
 	private double frequence;
 	
 	/**
-	 * Tranformé rapide de Fourrier
+	 * Fast Fourier Tranformation / Tranformé rapide de Fourrier
+	 * 
 	 * Sert à passer du signal temporel de la musique
 	 * au spectre fréquentiel
 	 */
-	private static FourierTransform FFT = new FourierTransform();
+	private FourierTransform FFT;
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
+	 * 
 	 * true  : la lecture s'arrète
 	 * false : la lecture continue/commence
 	 */
-	private boolean pause = true;
+	private boolean pause;
 
 	/**
 	 * Définis si un fichier à été chargé (initialisé) et convertis en line
 	 */
-	private boolean load = false;
-	private int vol=30;
+	private boolean load;
+	
 	/**
-	 * ajoute le model en observer afin de pouvoir actualiser
-	 * l'affichage dès un changement de fréquence
+	 * Le model de l'application
+	 * 
+	 * Sert a pouvoir créé des erreurs et a pouvoir le donné en observer
+	 */
+	private Model model;
+	
+	/**
+	 * Constructeur de la classe
+	 * 
+	 * Ajoute le model en observer afin de pouvoir actualiser
+	 * l'affichage dès que la fréquence change
 	 */
 	public Model_Musique(Model m) {
 		
 		super();
 		
-		pause = true;
+		model = m;
 		
-		this.addObserver(m);
+		FFT = new FourierTransform();
+		
+		pause = true;
+		load = false;
+		
+		this.addObserver(model);
 		
 	}
 
@@ -102,10 +122,8 @@ public class Model_Musique extends Observable implements Runnable {
 	 * 	A éxécuter avant la méthode Thread.start(), sinon erreur
 	 * 
 	 * @param file : le fichier audio a ouvrir
-	 * @return un boolean, afin de voir si la préparation
-	 * 	c'est bien passé
 	 */
-	public boolean initialisation(File file){
+	public void initialisation(File file){
 
 		try {
 			
@@ -114,20 +132,19 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (UnsupportedAudioFileException e) {
-			//TODO message d'erreur
-			e.printStackTrace();
-			return false;
+			
+			model.setErreur(e);
+			return;
 			
 		} 
 		
 		catch (IOException e) {
-			//TODO message d'erreur
 			
-			e.printStackTrace();
-			return false;
+			model.setErreur(e);
+			return;
 			
 		}
-		//setVol(40,audioInputStream);
+		
 		audioFormat = audioInputStream.getFormat();
 
 		DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
@@ -140,21 +157,24 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (LineUnavailableException e) {
-
-			//TODO message d'erreur
-			e.printStackTrace();
-			return false;
 			
-		}
-		
-		return true;
-		
+			model.setErreur(e);
+			return;
+			
+		} 		
 	} 
-	private static void setVol(int vol,AudioInputStream audioInputStream ) {
-		FloatControl gain = (FloatControl) ((Line) audioFormat).getControl(FloatControl.Type.MASTER_GAIN);
-		float dB =(float) (Math.log(vol) / Math.log(10)*20);
-		gain.setValue(dB);
+	
+	/**
+	 * Modifie le volume (gain) de la musique
+	 * @param volume
+	 */
+	public void setVol(float volume) {
+		
+		FloatControl control = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+		control.setValue((float) (20 * Math.log10(volume)));
+		
 	}
+	
 	/**
 	 * Méthode de l'interface parente Runnable
 	 * 	permettant l'execution de la méthode Thread.start()
@@ -171,15 +191,16 @@ public class Model_Musique extends Observable implements Runnable {
 			
 			line.open(audioFormat);
 			
+			model.setVolume(model.getVolume());
+			
 		} 
 		
 		catch (LineUnavailableException e) {
-
-			//TODO message d'erreur
-			e.printStackTrace();
+			
+			model.setErreur(e);
 			return;
 			
-		}
+		} 	
 
 		line.start();
 
@@ -238,12 +259,11 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (IOException io) {
-
-			//TODO message d'erreur
-			io.printStackTrace();
+			
+			model.setErreur(io);
 			return;
 			
-		}
+		} 	
 	}
 	
 	/**
@@ -261,6 +281,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * Permet d'obtenir le format du fichier
+	 * 
 	 * @return le format du fichier
 	 */
 	public AudioFormat getAudioFormat() {
@@ -271,6 +292,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * Permet d'obtenir la fréquence actuelle du fichier audio
+	 * 
 	 * @return la fréquence de la musique 
 	 */
 	public double getFrequence() {
@@ -293,9 +315,10 @@ public class Model_Musique extends Observable implements Runnable {
 	}
 	
 	/**
-	 * @return the load
 	 * La méthode permet de connaitre
 	 * si la musique est chargé
+	 * 
+	 * @return
 	 * true : fichier chargé
 	 * false : fichier non chargé
 	 */

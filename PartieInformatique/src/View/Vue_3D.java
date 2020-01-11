@@ -109,7 +109,6 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 		super(capabilities);
 
-
 		cubes = new Forme_Cube();
 
 		this.addGLEventListener(cubes);

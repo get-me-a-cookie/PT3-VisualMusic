@@ -10,7 +10,9 @@ import Model.Model;
  * Définit un Model qui sera commun à tout les Controller
  * 	et un Constructeur initialisant ce model
  * 
- * @author goodw
+ * @author
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public abstract class Controller {
 
@@ -19,23 +21,17 @@ public abstract class Controller {
 	 * Sera partager par toute les classes filles
 	 */
 	protected Model model;
-	
-	/**
-	 * Adaptateur entre les composant graphique et les controlleur
-	 */
-	protected Set<Component> handler;
 
 	/**
 	 * Constructeur instanciant le Modèle permettant la 
 	 * 	structure MVC
+	 * 
 	 * @param model   : Instanciant le Model
-	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller(Model model,
-			Set<Component> handler) {
+	public Controller(Model model) {
 		
 		super();
-		this.handler = handler;
+		
 		this.model = model;
 		
 	}

@@ -3,6 +3,7 @@ package Controller;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -11,82 +12,81 @@ import javax.swing.JSlider;
 import Model.Model;
 
 /**
+ * Classe implémentant KeyListener
+ * Sert à mettre des racourcis clavier
+ * 	Espace : pause/lecture
+ *	Echap	: quitte l'application
  * 
- * @author goodw
- *
- * Classe implémentant KeyListener 
- * 
- * Instancié uniquement pour permettre de mettre des racourcis clavier
- * 	comme presser la touche ESPACE pour mettre en pause/lecture
+ * @author
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Controller_Clavier extends Controller implements KeyListener {
 
 	/**
 	 * Constructeur utilisant le Constructeur Parent
+	 * 
 	 * @param model   : Instanciant le Model
-	 * @param handler : Instanciant l'adapteur
 	 */
-	public Controller_Clavier(Model model,
-			Set<Component> handler) {
-		super(model, handler);
+	public Controller_Clavier(Model model) {
+
+		super(model);
+
 	}
 
+	/**
+	 * Quand une touche est pressé fait l'action correpondante
+	 * Espace	: pause/lecture
+	 * Echap	: quitte l'application
+	 */
 	public void keyPressed(KeyEvent e) {
-		
-		//Attribut
-		JButton bouton = (JButton) e.getSource();
-		JSlider slider = (JSlider) e.getSource();
-		int volume;
-		// TODO Auto-generated method stub
-		//fonctionne mais met du temps à se faire - touche espace pour
-		// play ou pause
-		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			if(model.isFileLoaded()) {
-				
-				
-				//Controle le bouton play
-				if (bouton.getText().equals("Play")) {
-					
-					bouton.setText("Pause");
-					model.lectureFichier();
-					
-					if (model.getMusique().isPause()) 
-						model.getMusique().setPause(false);
-					
-					return;
-					
-				}
-			}
-		}
-		/**
-		 * Volume :Flèche haut et bas
-		 */
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			volume = slider.getValue();
-			slider.setValue(volume);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			volume = slider.getValue();
-			slider.setValue(volume);
-		}
-		
-		
-		
-		//on appuye sur echap pour quitter -> vue s'affiche ?
-		/*if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+		//si touche ECHAP, quitte l'app
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+
+			model.setQuit(true);
+			
+			return;
 			
 		}
-		*/
+		
+		// si le fichier n'est pas lu alors on affiche une erreur
+		if (!model.isFileLoaded()) {
+
+			model.setErreur(new FileNotFoundException());
+			
+			return;
+
+		}
+		
+		//Si touche SPACE, pause/lecture
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+
+			if (model.isPause()) {
+
+				model.lectureFichier();
+				model.setPause(false); 
+
+			}
+
+			else 
+				model.setPause(true);
+			
+			return;
+
+		}
 	}
 
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * Quand une touche est relacher
+	 * 	Non implémenter
+	 */
+	public void keyReleased(KeyEvent arg0) {}
 
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**
+	 * Quand une touche est taper
+	 * 	Non implémenter
+	 */
+	public void keyTyped(KeyEvent arg0) {}
 
 }
