@@ -359,7 +359,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		volume_slider.setPreferredSize(new Dimension(100,50));
 		volume_slider.setMinimum(0);
 		volume_slider.setMaximum(200);
-		volume_slider.setMajorTickSpacing(50);
 		volume_slider.setPaintTicks(true);
 		volume_slider.setPaintLabels(true);
 
