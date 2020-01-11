@@ -10,28 +10,38 @@ import javax.swing.event.ChangeListener;
 import Model.Model;
 /**
  * Classe qui permettra de gèrer le son lorsque 
- * l'utilisateur va le changer
- * @author perri
+ * l'utilisateur le modifie sur le slider
+ * 
+ * @author
+ * Goodwin
+ *  Implémentation de la classe
  *
  */
 public class Controller_Slider extends Controller implements ChangeListener {
-	
+
+	/**
+	 * Constructeur utilisant le Constructeur Parent
+	 * 
+	 * @param model   : Instanciant le Model
+	 * @param handler : Instanciant l'adapteur
+	 */
 	public Controller_Slider(Model model, 
 			Set<Component> handler) {
 		
 		super(model, handler);
 		
 	}
-
-	/*
-	 * A implémenter pour que le "click" fait pour changer
-	 * le volume est ajoutée au slider
-	 * Sachant que la modification du nombre 
-	 * ne modifie pas pour le moment le volume
+	
+	/**
+	 * Métode de l'interface ChangeListener
+	 * 
+	 * Quand on modifie le slider, on modifie le son
 	 */
 	public void stateChanged(ChangeEvent arg0) {
 		
+		JSlider volume = (JSlider) arg0.getSource();
 		
-	        
+		model.setVolume(volume.getValue());
+		
 	}
 }

@@ -94,6 +94,8 @@ public class Model extends Observable implements Observer {
 	private boolean printSettings;
 	private boolean pause;
 
+	private int volume;
+	
 	public Model() {
 
 		erreur = null;
@@ -112,6 +114,8 @@ public class Model extends Observable implements Observer {
 		pause = true;
 		
 		changingDimension = false;
+		
+		volume = 100;
 
 	}
 
@@ -718,5 +722,19 @@ public class Model extends Observable implements Observer {
 
 		this.changingDimension = false;
 		
+	}
+
+	/**
+	 * @return the volume
+	 */
+	public int getVolume() {
+		return volume;
+	}
+
+	/**
+	 * @param volume the volume to set
+	 */
+	public void setVolume(int volume) {
+		this.volume = volume;
 	}
 }
