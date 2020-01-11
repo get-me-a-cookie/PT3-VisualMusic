@@ -78,6 +78,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * Définis si la lecture doit être en pause ou non
+	 * 
 	 * true  : la lecture s'arrète
 	 * false : la lecture continue/commence
 	 */
@@ -87,11 +88,6 @@ public class Model_Musique extends Observable implements Runnable {
 	 * Définis si un fichier à été chargé (initialisé) et convertis en line
 	 */
 	private boolean load;
-	
-	/**
-	 * Le niveau du son en pourcents entier
-	 */
-	private int vol = 50;
 	
 	/**
 	 * Le model de l'application
@@ -200,12 +196,11 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (LineUnavailableException e) {
-
-			//TODO message d'erreur
-			e.printStackTrace();
+			
+			model.setErreur(e);
 			return;
 			
-		}
+		} 	
 
 		line.start();
 
@@ -264,12 +259,11 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 		
 		catch (IOException io) {
-
-			//TODO message d'erreur
-			io.printStackTrace();
+			
+			model.setErreur(io);
 			return;
 			
-		}
+		} 	
 	}
 	
 	/**
@@ -287,6 +281,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * Permet d'obtenir le format du fichier
+	 * 
 	 * @return le format du fichier
 	 */
 	public AudioFormat getAudioFormat() {
@@ -297,6 +292,7 @@ public class Model_Musique extends Observable implements Runnable {
 
 	/**
 	 * Permet d'obtenir la fréquence actuelle du fichier audio
+	 * 
 	 * @return la fréquence de la musique 
 	 */
 	public double getFrequence() {
@@ -319,9 +315,10 @@ public class Model_Musique extends Observable implements Runnable {
 	}
 	
 	/**
-	 * @return the load
 	 * La méthode permet de connaitre
 	 * si la musique est chargé
+	 * 
+	 * @return
 	 * true : fichier chargé
 	 * false : fichier non chargé
 	 */
