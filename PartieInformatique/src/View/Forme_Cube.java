@@ -1,63 +1,177 @@
 package View;
 
-import java.awt.Color;
-import java.awt.DisplayMode;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-import Model.Model;
-//TODO JAVADOC
 /**
- * Classe qui permet de tracer des cubes 
- * en 3D
- * @author perri
- *
+ * Classe qui permet de tracer des cubes en 3D
+ * 
+ * @author
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Forme_Cube implements GLEventListener {
 
 	/**
-	 * Attribut qui prennent des couleurs randoms
-	 * tableau de double 
+	 * Tableau de N élément référençant le taux de couleur rouge
+	 * pour les N-Cubes à affiché
+	 * 
+	 * N étant le nombre de cubes à affiché
 	 */
 	private double[] couleur_red;
+	
+	/**
+	 * Tableau de N élément référençant le taux de couleur verte
+	 * pour les N-Cubes à affiché
+	 * 
+	 * N étant le nombre de cubes à affiché
+	 */
 	private double[] couleur_green;
+
+	/**
+	 * Tableau de N élément référençant le taux de couleur bleu
+	 * pour les N-Cubes à affiché
+	 * 
+	 * N étant le nombre de cubes à affiché
+	 */
 	private double[] couleur_blue;
 
-	private double[] ratioFrequence = {0.8,0.9,0.2,0.4};//new double[4];
+	/**
+	 * Tableau de N éléments référençant les fréquences des
+	 * N-Cubes à afficher
+	 */
+	private double[] ratioFrequence;
+	
+	/**
+	 * Largeur initiale des cubes
+	 * 
+	 * cube = (x, y, z)
+	 * ici, x
+	 */
+	private double 	 largeur;
+	
+	/**
+	 * Profondeur initiale des cubes
+	 * 
+	 * cube = (x, y, z)
+	 * ici, z
+	 */
+	private double 	 profondeur;
+	
+	/**
+	 * hauteur initiale des N-Cubes à afficher
+	 * 
+	 * cube = (x, y, z)
+	 * ici, y
+	 */
+	private double[] hauteur;
 
+	/**
+	 * position X du premier cube
+	 */
+	private double cube1_posX = 0;
 
-	private double 	 largeur 	= 1;
-	private double 	 profondeur	= 1;
-	private double[] hauteur 	= new double[4];
-
-	private double cube1_posX = -1;
+	/**
+	 * position Y du premier cube
+	 */
 	private double cube1_posY = -4;
-	private double cube1_posZ = -16;
 
-	private double cube2_posX =  1;
+	/**
+	 * position Z du premier cube
+	 */
+	private double cube1_posZ = -15;
+
+	/**
+	 * position X du deuxieme cube
+	 */
+	private double cube2_posX =  2;
+
+	/**
+	 * position Y du deuxieme cube
+	 */
 	private double cube2_posY = -4;
-	private double cube2_posZ = -16;
 
-	private double cube3_posX = -1;
+	/**
+	 * position Z du deuxieme cube
+	 */
+	private double cube2_posZ = -15;
+
+	/**
+	 * position X du troisieme cube
+	 */
+	private double cube3_posX = 0;
+
+	/**
+	 * position Y du troisieme cube
+	 */
 	private double cube3_posY = -4;
-	private double cube3_posZ = -14;
 
-	private double cube4_posX =  1;
-	private double cube4_posY = -4;
-	private double cube4_posZ = -14;
+	/**
+	 * position Z du troisieme cube
+	 */
+	private double cube3_posZ = -13;
 
+	/**
+	 * position X du quatrieme cube
+	 */
+	private double cube4_posX = 2.8284 / 2;
+
+	/**
+	 * position Y du quatrieme cube
+	 */
+	private double cube4_posY = -3;
+
+	/**
+	 * position Z du quatrieme cube
+	 */
+	private double cube4_posZ = -14 - cube4_posX;
+
+	/**
+	 * Numéro du premier cube
+	 */
 	private static int CUBE_ONE = 0;
+
+	/**
+	 * Numéro du deuxieme cube
+	 */
 	private static int CUBE_TWO = 1;
+
+	/**
+	 * Numéro du troisieme cube
+	 */
 	private static int CUBE_THREE = 2;
+
+	/**
+	 * Numéro du quatrieme cube
+	 */
 	private static int CUBE_FOUR = 3;
 
+	/**
+	 * Outils utilisé pour l'affichage en trois dimensions
+	 */
 	private GLU glu = new GLU();
 	
+	/**
+	 * Constructeur de la classe
+	 * 
+	 * Initialise les données non partagé entre la vue et 
+	 * les dessins des formes
+	 */
+	public Forme_Cube() {
+		
+		largeur 	= 1;
+		profondeur 	= 1;
+		hauteur 	= new double[4];
+		
+		ratioFrequence = new double[4];
+		
+	}
+	
+	/**
+	 * Methode qui permet d'afficher les cubes
+	 */
 	public void display(GLAutoDrawable drawable) {
 		
 		//TODO le rotate, modifie toutes les coordonnées
@@ -124,61 +238,6 @@ public class Forme_Cube implements GLEventListener {
 		
 		gl.glFlush();
 
-	}
-	
-	//Sauvegarde
-	//Premier affichage réussi obtenue
-	//affiche donc les 4 cubes (2devant, 2 derière)
-	private void paintFaceToFace(GL2 gl) {
-
-		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
-		
-		gl.glLoadIdentity();	//reset l'origine
-		gl.glTranslated(		//déplace l'origine
-				cube1_posX,
-				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
-				cube1_posZ);
-		gl.glColor3d(
-				couleur_red[Forme_Cube.CUBE_ONE],
-				couleur_green[Forme_Cube.CUBE_ONE],
-				couleur_blue[Forme_Cube.CUBE_ONE]);
-		this.paintCube(gl, Forme_Cube.CUBE_ONE);
-
-		gl.glLoadIdentity();
-		gl.glTranslated(
-				cube2_posX,
-				cube2_posY + hauteur[Forme_Cube.CUBE_TWO],
-				cube2_posZ);
-		gl.glColor3d(
-				couleur_red[Forme_Cube.CUBE_TWO],
-				couleur_green[Forme_Cube.CUBE_TWO],
-				couleur_blue[Forme_Cube.CUBE_TWO]);
-		this.paintCube(gl, Forme_Cube.CUBE_TWO);
-
-		gl.glLoadIdentity();
-		gl.glTranslated(
-				cube3_posX,
-				cube3_posY + hauteur[Forme_Cube.CUBE_THREE],
-				cube3_posZ);
-		gl.glColor3d(
-				couleur_red[Forme_Cube.CUBE_THREE],
-				couleur_green[Forme_Cube.CUBE_THREE],
-				couleur_blue[Forme_Cube.CUBE_THREE]);
-		this.paintCube(gl, Forme_Cube.CUBE_THREE);
-
-		gl.glLoadIdentity();
-		gl.glTranslated(
-				cube4_posX,
-				cube4_posY + hauteur[Forme_Cube.CUBE_FOUR],
-				cube4_posZ);
-		gl.glColor3d(
-				couleur_red[Forme_Cube.CUBE_FOUR],
-				couleur_green[Forme_Cube.CUBE_FOUR],
-				couleur_blue[Forme_Cube.CUBE_FOUR]);
-		this.paintCube(gl, Forme_Cube.CUBE_FOUR);
-		
-		gl.glFlush();
-		
 	}
 
 	private void paintCube(GL2 gl, int numeroCube) {
