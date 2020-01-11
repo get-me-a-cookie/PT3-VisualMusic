@@ -78,8 +78,12 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 
 			model.lectureFichier();
 
-			if (model.isPause())
+			if (model.isPause()) {
+				
+				model.lectureFichier();
 				model.setPause(false); 
+				
+			}
 
 			return;
 

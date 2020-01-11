@@ -29,6 +29,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
 
 import Controller.Controller_Bouton_Musique;
+import Controller.Controller_Clavier;
 import Controller.Controller_Menu;
 import Controller.Controller_Slider;
 import Model.Model;
@@ -254,8 +255,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		this.add(vue_visualisateur2D, BorderLayout.CENTER);
 
 
-		//Paramètrage de la fenêtre
-
+		//Ajout des controlleur
 		this.addWindowListener(new WindowAdapter() {
 			//Ajout d'un message de confirmation d'arret
 
@@ -270,6 +270,11 @@ public class Vue_Fenetre extends JFrame implements Observer {
 
 			}
 		});
+		
+		this.addKeyListener(new Controller_Clavier(model, handler));
+		
+		
+		//Paramètrage de la fenêtre
 
 		this.frameCenter();
 		this.setTitle("Visuals Music");
@@ -278,6 +283,7 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		this.setVisible(true);
 		this.pack();
 
+		this.requestFocus(); //car premier focus sur le premier bouton (Lecture)
 
 	}
 
@@ -391,7 +397,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 		bouton_stop.addActionListener(new Controller_Bouton_Musique(model, handler));
 		bouton_pleinEcran.addActionListener(new Controller_Bouton_Musique(model, handler));
 		volume_slider.addChangeListener(new Controller_Slider(model, handler));
-
 		
 		// Ajout des élément dans le panel
 		
@@ -468,6 +473,8 @@ public class Vue_Fenetre extends JFrame implements Observer {
 	 */
 	public void update(Observable m, Object o) {
 
+		this.requestFocus();
+		
 		Model model = (Model) m;
 
 		if (model.getErreur() == null) {
@@ -475,8 +482,8 @@ public class Vue_Fenetre extends JFrame implements Observer {
 			if (!model.isPause())
 				bouton_playPause.setText("Pause");
 			else
-				bouton_playPause.setText("Play");
-
+				bouton_playPause.setText("Lecture");
+			
 			if (model.isFullScreen()) {
 
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH);

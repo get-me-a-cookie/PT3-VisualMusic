@@ -50,7 +50,7 @@ public class Model extends Observable implements Observer {
 	private boolean autoplay;
 	private boolean couleur_2d_random;
 	private boolean couleur_3d_random;
-
+	
 	private boolean fullScreen;
 
 	/**
@@ -685,5 +685,15 @@ public class Model extends Observable implements Observer {
 
 		return this.pause;
 
+	}
+
+	/**
+	 * @param quit the quit to set
+	 */
+	public void setQuit(boolean quit) {
+
+		if (quit)
+			System.exit(0);
+		
 	}
 }
