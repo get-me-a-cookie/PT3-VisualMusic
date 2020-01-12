@@ -3,7 +3,6 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,10 +10,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
