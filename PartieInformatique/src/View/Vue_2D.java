@@ -170,7 +170,10 @@ public class Vue_2D extends JPanel implements Observer {
 		int j;
 		j = 0;
 
-		for (int i = taille_fenetre_x / 2 - (epaisseur_rectangle * nombre_rectangle / 2);
+		for (int i = taille_fenetre_x / 2 
+				- (epaisseur_rectangle * nombre_rectangle / 2)
+				- (nombre_rectangle - 1) / 2 * espacement
+				- espacement / 2;
 				j < nombre_rectangle;
 				i += epaisseur_rectangle + espacement) {
 
@@ -191,7 +194,9 @@ public class Vue_2D extends JPanel implements Observer {
 		int j;
 		j = 0;
 
-		for (int i = taille_fenetre_x / 2 - (epaisseur_rectangle * nombre_rectangle / 2);
+		for (int i = taille_fenetre_x / 2 
+				- (epaisseur_rectangle * nombre_rectangle / 2)
+				- (nombre_rectangle - 1) / 2 * espacement;
 				j < nombre_rectangle;
 				i += epaisseur_rectangle + espacement) {
 
@@ -279,6 +284,24 @@ public class Vue_2D extends JPanel implements Observer {
 						(taille_fenetre_x - 2 * margin_forme_fenetre)
 						- 2 * epaisseur_rectangle)
 						/ (epaisseur_rectangle);
+				
+				if (espacement != 0) {
+					
+					int plage = 
+							(taille_fenetre_x - 2 * margin_forme_fenetre)
+							- 2 * epaisseur_rectangle;
+					
+					int i  = nombre_rectangle * epaisseur_rectangle
+							+ (nombre_rectangle - 1 ) * espacement;
+					
+					while (i > plage) {
+						
+						i = i - epaisseur_rectangle - espacement;
+						
+						nombre_rectangle --;
+						
+					}
+				}
 
 				if (model.isCouleur_2d_random()) {
 
@@ -330,7 +353,11 @@ public class Vue_2D extends JPanel implements Observer {
 
 				if (sauvegarde_rationFrequence != null) {
 
-					for (int index = 0; index < sauvegarde_rationFrequence.length; index ++) {
+					int taille_min = 
+							sauvegarde_rationFrequence.length > ratioFrequence.length ? 
+									ratioFrequence.length : sauvegarde_rationFrequence.length;
+					
+					for (int index = 0; index < taille_min; index ++) {
 
 						ratioFrequence[index] = sauvegarde_rationFrequence[index];
 

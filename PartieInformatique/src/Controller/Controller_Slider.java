@@ -12,7 +12,6 @@ import Model.Model;
  * @author
  * Goodwin
  *  Implémentation de la classe
- *
  */
 public class Controller_Slider extends Controller implements ChangeListener {
 

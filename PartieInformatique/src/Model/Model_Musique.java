@@ -17,7 +17,6 @@ import flanagan.complex.Complex;
 import flanagan.math.FourierTransform;
 
 /** 
- *
  * Classe de type Model, connu uniquement par la Classe "Model"
  * 
  * Sert à faire du MultiThreading et ainsi permettre la lecture 
@@ -195,6 +194,13 @@ public class Model_Musique extends Observable implements Runnable {
 		} 
 
 		catch (LineUnavailableException e) {
+
+			model.setErreur(e);
+			return;
+
+		} 	
+		
+		catch (Exception e) {
 
 			model.setErreur(e);
 			return;

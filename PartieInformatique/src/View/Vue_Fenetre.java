@@ -481,7 +481,6 @@ public class Vue_Fenetre extends JFrame implements Observer {
 			else {
 
 				this.pack();
-				this.frameCenter();
 				//TODO mettre les taille des panels
 
 			}
