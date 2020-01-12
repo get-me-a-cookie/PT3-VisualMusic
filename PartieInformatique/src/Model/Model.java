@@ -2,16 +2,9 @@ package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-//TODO Javadoc, contenu
 /** 
  * Classe de type Model, permettant la structure MVC
  * 	Instancié uniquement dans le code principale

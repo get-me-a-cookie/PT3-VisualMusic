@@ -1,10 +1,8 @@
 package Controller;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.Set;
 
 import javax.swing.JButton;
 

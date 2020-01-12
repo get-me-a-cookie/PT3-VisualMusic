@@ -1,23 +1,16 @@
 package Controller;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Set;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import Model.Model;
-import View.Vue_2D;
-import View.Vue_3D;
 
 /**
  * 

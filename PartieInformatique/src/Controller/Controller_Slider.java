@@ -1,8 +1,5 @@
 package Controller;
 
-import java.awt.Component;
-import java.util.Set;
-
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
