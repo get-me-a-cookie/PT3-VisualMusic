@@ -74,8 +74,6 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 		//Controle le bouton Lecture
 		if (bouton.getText().equals("Lecture")) {
 
-			model.lectureFichier();
-
 			if (model.isPause()) {
 				
 				model.lectureFichier();
