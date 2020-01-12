@@ -1,115 +1,74 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
-import javax.media.opengl.glu.GLU;
-import javax.swing.JPanel;
 
-import com.jogamp.opengl.util.Animator;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import Model.Model;
 
 /**
  * Classe représentant le visualisateur de l'IG
- * Affiche des formes géométrique 2D en fonction de la musique écouté
+ * Affiche des formes géométrique 3D en fonction de la musique écouté
  * 
- * @author Goodwin
+ * @author
+ * Goodwin
+ * 	Création et implémentation de la classe entière
  */
 public class Vue_3D extends GLCanvas implements Observer {
 
 	/**
-	 * Taille Maximale de la fenètre de l'application
-	 * sur l'axe des abscisses (horizontal)
-	 */
-	private static int TAILLE_FENETRE_X = 800;
-
-	/**
-	 * Taille Maximale de la fenètre de l'application
-	 * sur l'axe des ordonnées (vertical)
-	 */
-	private static int TAILLE_FENETRE_Y = 450;
-
-	/**
-	 * Coordonnée sur l'axe des abscisses (horizontal)
-	 * du milieu de la @TAILLE_FENETRE_X
-	 */
-	private static int MILIEU_FENETRE_X = TAILLE_FENETRE_X / 2;
-
-	/**
-	 * Coordonnée sur l'axe des ordonnées (vertical)
-	 * du milieu de la @TAILLE_FENETRE_Y
-	 */
-	private static int MILIEU_FENETRE_Y = TAILLE_FENETRE_Y / 2;
-
-	/**
-	 * Epaisseur de chaqun des triangles
-	 */
-	private static int EPAISSEUR_RECTANGLE;	
-
-	/**
-	 * Distance en pixel entre les forme 
-	 * et les bords droits et gauche
-	 */
-	private static int MARGIN_FORME_FENETRE = 100;	
-
-	/**
-	 * Epaisseur de la ligne centrale
-	 */
-	private static int EPAISSEUR_LIGNE = 2;	
-
-	/**
 	 * Nombre de rectangle à afficher
 	 */
-	private static int NOMBRE_RECTANGLE = 4;
+	private int nombre_rectangle;
 
 	/**
-	 * Contient tout les ratios qui seront affiché (barres)
-	 * Taille définit dans méthode update
+	 * Contient tout les ratios qui seront affiché
 	 */
-	private double[] ratioFrequence = new double[4];
+	private double[] ratioFrequence;
 
 	/**
-	 * @return the ratioFrequence
+	 * Outils utilisé pour l'affichage 3D
 	 */
-	public double[] getRatioFrequence() {
-		return ratioFrequence;
-	}
+	private final static GLProfile PROFILE = GLProfile.get(GLProfile.GL2);
 
 	/**
-	 * Un tableau contenant un nombre de couleur egal
-	 * au nombre de rectangle
-	 */
-	private Color[] couleurs = new Color[NOMBRE_RECTANGLE];
+	 * Outils utilisé pour l'affichage 3D
+	 */	
+	private static GLCapabilities CAPABILITIES = new GLCapabilities(Vue_3D.PROFILE);
 
 	/**
-	 * L'espacement entre chaque rectangle, en pixel
+	 * Outils utilisé pour l'affichage 3D
+	 * 
+	 * Permet des changement d'affichage
+	 * 	par exemple quand la fréquence change
 	 */
-	private static int ESPACEMENT = 20;
-
-
-	final static GLProfile profile = GLProfile.get( GLProfile.GL2 );
-	static GLCapabilities capabilities = new GLCapabilities( profile );
-
 	final FPSAnimator animator = new FPSAnimator(this, 300, true);
 
+	/**
+	 * Les 4 cubes à affiché
+	 */
 	private Forme_Cube cubes;
 
+	/**
+	 * Constructeur de la classe
+	 * 
+	 * Initialise les donnés sensibles
+	 */
 	public Vue_3D() {
 
-		super(capabilities);
+		super(Vue_3D.CAPABILITIES);
 
-		cubes = new Forme_Cube();
+		this.nombre_rectangle = 4;
+		
+		this.ratioFrequence = new double[4];
+
+		this.cubes = new Forme_Cube();
 
 		this.addGLEventListener(cubes);
 
@@ -117,12 +76,11 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 	/**
 	 * Met à jour la vue
+	 * 
 	 * Importe la frequence du model et la stock dans le 
-	 * tableau ratioFrequence tout en décalant chaque
-	 * élément vers la gauche
+	 * tableau ratioFrequence
 	 */
 	public void update(Observable m, Object obj) {
-
 
 		Model model = (Model) m;
 
@@ -130,15 +88,14 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 			if (!model.isThreeDimension()) {
 
-				ratioFrequence = new double[Vue_3D.NOMBRE_RECTANGLE];
-				animator.stop();
+				if (animator.isAnimating())
+					animator.stop();
+				
+				return;
 
 			}
 
 			else {
-
-				EPAISSEUR_RECTANGLE = model.getEpaisseur();
-				//ESPACEMENT = model.getParametres().get("Espacement");
 
 				if (model.isFileLoaded() 
 						&& model.getMusique().isLoad()
@@ -201,7 +158,7 @@ public class Vue_3D extends GLCanvas implements Observer {
 
 					}
 
-					for (int index = 0; index < NOMBRE_RECTANGLE; index ++) {
+					for (int index = 0; index < nombre_rectangle; index ++) {
 
 						try {
 
@@ -224,4 +181,5 @@ public class Vue_3D extends GLCanvas implements Observer {
 	}
 
 	//https://www.tutorialspoint.com/jogl/jogl_quick_guide.htm
+	
 }
