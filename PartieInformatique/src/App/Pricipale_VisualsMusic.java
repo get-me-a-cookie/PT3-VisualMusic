@@ -1,8 +1,17 @@
 package App;
 
 import Model.Model;
+
 import View.Vue_Fenetre;
 import View.Vue_Parametre;
+
+/**
+ * Classe lançant l'application Visual's Music
+ * 
+ * @author
+ * Goodwin
+ * 	Création et implémentation de la classe entière
+ */
 
 public class Pricipale_VisualsMusic {
 

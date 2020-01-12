@@ -1,8 +1,5 @@
 package Controller;
 
-import java.awt.Component;
-import java.util.Set;
-
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -15,7 +12,6 @@ import Model.Model;
  * @author
  * Goodwin
  *  Implémentation de la classe
- *
  */
 public class Controller_Slider extends Controller implements ChangeListener {
 

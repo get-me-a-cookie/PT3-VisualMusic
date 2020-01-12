@@ -1,10 +1,8 @@
 package Controller;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.Set;
 
 import javax.swing.JButton;
 
@@ -40,7 +38,6 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 	 * Si on clique sur le bouton "Pause", musique mis en pause
 	 * Si on clique sur un bouton "Stop", arret de la musique et 
 	 *  réinitialisation de la musique qui était en cours de lecture
-	 * 
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -73,8 +70,6 @@ public class Controller_Bouton_Musique extends Controller implements ActionListe
 
 		//Controle le bouton Lecture
 		if (bouton.getText().equals("Lecture")) {
-
-			model.lectureFichier();
 
 			if (model.isPause()) {
 				

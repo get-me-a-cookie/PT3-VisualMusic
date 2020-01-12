@@ -1,26 +1,18 @@
 package Controller;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Set;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
 import Model.Model;
-import View.Vue_2D;
-import View.Vue_3D;
 
 /**
- * 
  * Classe implémentant ActionListener et MenuListener
  * Sert à gérer tous les actions de la barre de menu
  * 
@@ -54,15 +46,13 @@ public class Controller_Menu extends Controller implements ActionListener, MenuL
 		JMenuItem menuItem = (JMenuItem) arg0.getSource();		
 
 		if (menuItem.getText().equals("Ouvrir un fichier...")) {
-
-			model.setFichier(new File("res/auprintemps-44100-32.wav"));	//TODO A supprimer
-			// TODO A décommenter ...
-			/*JFileChooser fc = new JFileChooser();
+			
+			JFileChooser fc = new JFileChooser();
 			int valeur_de_retour = fc.showOpenDialog(null);
 
 			if (valeur_de_retour == JFileChooser.APPROVE_OPTION)
 				model.setFichier(fc.getSelectedFile());
-			*/
+			
 			return;
 			
 		}
