@@ -341,8 +341,8 @@ public class Model_Musique extends Observable implements Runnable {
 	public void reset() {
 
 		if(!pause) {
-
-			pause = true;
+			
+			model.setPause(true);	//modifie le bouton en fin de lecture
 			audioFormat = null;
 			audioInputStream = null;
 			line.close();
