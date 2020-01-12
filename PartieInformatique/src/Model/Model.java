@@ -38,7 +38,7 @@ public class Model extends Observable implements Observer {
 	 * 
 	 * Prend la valeur de base et multiplie par l'amplitude
 	 */
-	private double amplitude;
+	private int amplitude;
 	
 	/**
 	 * L'espacement entre deux formes 2D et 3D
@@ -538,7 +538,7 @@ public class Model extends Observable implements Observer {
 	/**
 	 * Renvoie l'amplitude
 	 */
-	public double getAmplitude() {
+	public int getAmplitude() {
 		
 		return amplitude;
 		
@@ -960,7 +960,8 @@ public class Model extends Observable implements Observer {
 
 		this.pause = b;
 
-		this.musique.setPause(b);
+		if (this.musique != null)
+			this.musique.setPause(b);
 
 		this.setChanged();
 		this.notifyObservers();

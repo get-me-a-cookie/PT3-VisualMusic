@@ -71,22 +71,22 @@ public class Forme_Cube implements GLEventListener {
 	/**
 	 * position X du premier cube
 	 */
-	private double cube1_posX = 0;
+	private double cube1_posX = -4;
 
 	/**
 	 * position Y du premier cube
 	 */
-	private double cube1_posY = -4;
+	private double cube1_posY = -5;
 
 	/**
 	 * position Z du premier cube
 	 */
-	private double cube1_posZ = -15;
+	private double cube1_posZ = -14;
 
 	/**
 	 * position X du deuxieme cube
 	 */
-	private double cube2_posX =  2;
+	private double cube2_posX =  -1.5;
 
 	/**
 	 * position Y du deuxieme cube
@@ -96,12 +96,12 @@ public class Forme_Cube implements GLEventListener {
 	/**
 	 * position Z du deuxieme cube
 	 */
-	private double cube2_posZ = -15;
+	private double cube2_posZ = -16;
 
 	/**
 	 * position X du troisieme cube
 	 */
-	private double cube3_posX = 0;
+	private double cube3_posX = 1.5;
 
 	/**
 	 * position Y du troisieme cube
@@ -111,22 +111,22 @@ public class Forme_Cube implements GLEventListener {
 	/**
 	 * position Z du troisieme cube
 	 */
-	private double cube3_posZ = -13;
+	private double cube3_posZ = -16;
 
 	/**
 	 * position X du quatrieme cube
 	 */
-	private double cube4_posX = 2.8284 / 2;
+	private double cube4_posX = 4;
 
 	/**
 	 * position Y du quatrieme cube
 	 */
-	private double cube4_posY = -3;
+	private double cube4_posY = -5;
 
 	/**
 	 * position Z du quatrieme cube
 	 */
-	private double cube4_posZ = -14 - cube4_posX;
+	private double cube4_posZ = -14;
 
 	/**
 	 * Numéro du premier cube
@@ -154,6 +154,15 @@ public class Forme_Cube implements GLEventListener {
 	private GLU glu = new GLU();
 	
 	/**
+	 * Amplitude initiale des formes
+	 * 
+	 * Valeur de défault : 5
+	 *  Permet d'avoir des formes relativement 
+	 *  grande dès le départ
+	 */
+	private double amplitude;
+	
+	/**
 	 * Constructeur de la classe
 	 * 
 	 * Initialise les données non partagé entre la vue et 
@@ -161,11 +170,24 @@ public class Forme_Cube implements GLEventListener {
 	 */
 	public Forme_Cube() {
 		
+		amplitude	= 5;
 		largeur 	= 1;
 		profondeur 	= 1;
 		hauteur 	= new double[4];
 		
 		ratioFrequence = new double[4];
+		
+		couleur_red   = new double[4];
+		couleur_green = new double[4];
+		couleur_blue  = new double[4];
+		
+		for (int i = 0; i < 4; i ++) {
+
+			couleur_red[i] = Math.random();
+			couleur_green[i] = Math.random();
+			couleur_blue[i] = Math.random();
+			
+		}
 		
 	}
 	
@@ -174,13 +196,11 @@ public class Forme_Cube implements GLEventListener {
 	 */
 	public void display(GLAutoDrawable drawable) {
 		
-		//TODO le rotate, modifie toutes les coordonnées
-		
 		for (int index = 0; 
 				index < ratioFrequence.length;
 				index ++) {
 
-			hauteur[index] = 5 * ratioFrequence[index];
+			hauteur[index] = amplitude * ratioFrequence[index];
 
 		}
 
@@ -191,7 +211,12 @@ public class Forme_Cube implements GLEventListener {
 		gl.glLoadIdentity();	//reset l'origine
 		gl.glTranslated(		//déplace l'origine
 				cube1_posX,
-				cube1_posY + hauteur[Forme_Cube.CUBE_ONE],
+				cube1_posY + hauteur[Forme_Cube.CUBE_ONE], 
+				/*
+				 * Evite que la forme augmente de taille des deux cotés
+				 * 
+				 * Ne fonctionne pas vraiment avec le rotated
+				 */
 				cube1_posZ);
 		gl.glRotated(45, 0.2, 0.5, 0.1);
 		gl.glColor3d(
@@ -240,6 +265,12 @@ public class Forme_Cube implements GLEventListener {
 
 	}
 
+	/**
+	 * Dessine un cube
+	 * 
+	 * @param gl outils pour pouvoir dessiner en 3D
+	 * @param numeroCube	le numéro du cube a affiché
+	 */
 	private void paintCube(GL2 gl, int numeroCube) {
 
 		gl.glBegin(GL2.GL_QUADS); // Start Drawing The Cube
@@ -278,12 +309,16 @@ public class Forme_Cube implements GLEventListener {
 
 	}
 
-	public void dispose( GLAutoDrawable drawable ) {
+	/**
+	 * Méthode de GLEventListener
+	 * 
+	 * Non implémenter
+	 */
+	public void dispose( GLAutoDrawable drawable ) {}
 
-
-
-	}
-
+	/**
+	 * Methoide appelé pour initialiser le Canva
+	 */
 	public void init( GLAutoDrawable drawable ) {
 
 		GL2 gl = drawable.getGL().getGL2();      // get the OpenGL graphics context
@@ -297,6 +332,9 @@ public class Forme_Cube implements GLEventListener {
 
 	}
 
+	/**
+	 * Méthode appelé quand on modifie les dessins
+	 */
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 
 		GL2 gl = drawable.getGL().getGL2();  // get the OpenGL 2 graphics context
@@ -317,72 +355,11 @@ public class Forme_Cube implements GLEventListener {
 		gl.glLoadIdentity(); // reset
 
 	}
-
 	/**
-	 * @return the largeur
-	 */
-	public double getLargeur() {
-
-		return largeur;
-
-	}
-
-	/**
-	 * @param largeur the largeur to set
-	 */
-	public void setLargeur(double largeur) {
-
-		this.largeur = largeur;
-
-	}
-
-	/**
-	 * @return the profondeur
-	 */
-	public double getProfondeur() {
-
-		return profondeur;
-
-	}
-
-	/**
-	 * @param profondeur the profondeur to set
-	 */
-	public void setProfondeur(double profondeur) {
-
-		this.profondeur = profondeur;
-
-	}
-
-	/**
-	 * @return the hauteur
-	 */
-	public double[] getHauteur() {
-
-		return hauteur;
-
-	}
-
-	/**
-	 * @param hauteur the hauteur to set
-	 */
-	public void setHauteur(double[] hauteur) {
-
-		this.hauteur = hauteur;
-
-	}
-
-	/**
-	 * @return the ratioFrequence
-	 */
-	public double[] getRatioFrequence() {
-
-		return ratioFrequence;
-
-	}
-
-	/**
-	 * @param ratioFrequence the ratioFrequence to set
+	 * Permet d'envoyer aux dessins les ratios de fréquence à afficher
+	 * 
+	 * ratioFrequence < 1
+	 * ratioFrequence * 
 	 */
 	public void setRatioFrequence(double[] ratioFrequence) {
 
@@ -390,18 +367,33 @@ public class Forme_Cube implements GLEventListener {
 
 	}
 	
+	/**
+	 * Permet de moidifié les taux de couleur rouge des forme
+	 * 
+	 * @param red < 1
+	 */
 	public void setCouleurR(double[] red) {
 		
 		couleur_red = red;
 		
 	}
 	
+	/**
+	 * Permet de moidifié les taux de couleur bleu des forme
+	 * 
+	 * @param blue < 1
+	 */
 	public void setCouleurB(double[] blue) {
 		
 		couleur_blue = blue;
 		
 	}
-	
+
+	/**
+	 * Permet de moidifié les taux de couleur verte des forme
+	 * 
+	 * @param green < 1
+	 */
 	public void setCouleurG(double[] green) {
 		
 		couleur_green = green;
