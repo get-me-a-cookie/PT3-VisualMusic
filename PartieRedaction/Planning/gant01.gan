@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="PT3" company="" webLink="http://" view-date="2019-10-21" view-index="0" gantt-divider-location="512" resource-divider-location="300" version="2.8.10" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="358" order="0"/>
+        <field id="tpd4" name="Date de début" width="75" order="1"/>
+        <field id="tpd5" name="Date de fin" width="75" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="48" name="Sprint 1" meeting="false" start="2019-10-21" duration="9" complete="0" expand="true">
+            <depend id="49" type="2" difference="0" hardness="Rubber"/>
+            <task id="51" name="Fabrication de l'Interface Graphique" color="#8cb6ce" meeting="false" start="2019-10-21" duration="9" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+            <task id="52" name="Mise en place d'algorithme simple" color="#8cb6ce" meeting="false" start="2019-10-21" duration="9" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="49" name="Présentation au tuteur 1" color="#8cb6ce" meeting="false" start="2019-11-01" duration="5" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true">
+            <depend id="1" type="2" difference="0" hardness="Rubber"/>
+        </task>
+        <task id="1" name="Sprint 2" color="#000000" meeting="false" start="2019-11-08" duration="10" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true">
+            <depend id="7" type="2" difference="0" hardness="Rubber"/>
+            <task id="3" name="Tâches définis au sprint précédent" color="#8cb6ce" meeting="false" start="2019-11-08" duration="10" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="7" name="Présentation au tuteur 2" color="#8cb6ce" meeting="false" start="2019-11-22" duration="5" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true">
+            <depend id="57" type="2" difference="0" hardness="Rubber"/>
+        </task>
+        <task id="57" name="Sprint 3" color="#000000" meeting="false" start="2019-11-29" duration="10" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true">
+            <depend id="61" type="2" difference="0" hardness="Rubber"/>
+            <task id="59" name="Copie_Tâches définis au sprint précédent" color="#8cb6ce" meeting="false" start="2019-11-29" duration="10" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="61" name="Présentation au tuteur 3" color="#8cb6ce" meeting="false" start="2019-12-13" duration="5" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+        <task id="66" name="Soutenance" color="#000000" meeting="false" start="2020-01-06" duration="7" complete="0" thirdDate="2020-01-14" thirdDate-constraint="0" expand="true">
+            <task id="65" name="Préparation Soutenance" color="#8cb6ce" meeting="false" start="2020-01-06" duration="6" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true">
+                <depend id="67" type="2" difference="0" hardness="Rubber"/>
+            </task>
+            <task id="67" name="Présentation" color="#8cb6ce" meeting="false" start="2020-01-14" duration="1" complete="0" thirdDate="2019-09-09" thirdDate-constraint="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
